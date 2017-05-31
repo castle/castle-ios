@@ -1,4 +1,6 @@
-![Castle: The easiest way to protect your users](http://fprimecapital.com/assets/2016/11/Castle-Logo-HiRez.png)
+# iOS SDK for Castle
+
+**[Castle](https://castle.io) adds real-time monitoring of your authentication stack, instantly notifying you and your users on potential account hijacks.**
 
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Castle.svg)](https://img.shields.io/cocoapods/v/Castle.svg)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
