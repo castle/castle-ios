@@ -1,0 +1,425 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B6B355E81ED71F9D00C2B817 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6B355E71ED71F9D00C2B817 /* Info.plist */; };
+		B6B356061ED71FAD00C2B817 /* CABatch.h in Headers */ = {isa = PBXBuildFile; fileRef = B6B355E91ED71FAD00C2B817 /* CABatch.h */; };
+		B6B356071ED71FAD00C2B817 /* CABatch.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B355EA1ED71FAD00C2B817 /* CABatch.m */; };
+		B6B356081ED71FAD00C2B817 /* CADevice.h in Headers */ = {isa = PBXBuildFile; fileRef = B6B355EB1ED71FAD00C2B817 /* CADevice.h */; };
+		B6B356091ED71FAD00C2B817 /* CADevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B355EC1ED71FAD00C2B817 /* CADevice.m */; };
+		B6B3560A1ED71FAD00C2B817 /* CAEventStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = B6B355ED1ED71FAD00C2B817 /* CAEventStorage.h */; };
+		B6B3560B1ED71FAD00C2B817 /* CAEventStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B355EE1ED71FAD00C2B817 /* CAEventStorage.m */; };
+		B6B3560C1ED71FAD00C2B817 /* CAIdentity.h in Headers */ = {isa = PBXBuildFile; fileRef = B6B355EF1ED71FAD00C2B817 /* CAIdentity.h */; };
+		B6B3560D1ED71FAD00C2B817 /* CAIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B355F01ED71FAD00C2B817 /* CAIdentity.m */; };
+		B6B3560E1ED71FAD00C2B817 /* CAModel.h in Headers */ = {isa = PBXBuildFile; fileRef = B6B355F11ED71FAD00C2B817 /* CAModel.h */; };
+		B6B3560F1ED71FAD00C2B817 /* CAModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B355F21ED71FAD00C2B817 /* CAModel.m */; };
+		B6B356101ED71FAD00C2B817 /* CARequestInterceptor.h in Headers */ = {isa = PBXBuildFile; fileRef = B6B355F31ED71FAD00C2B817 /* CARequestInterceptor.h */; };
+		B6B356111ED71FAD00C2B817 /* CARequestInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B355F41ED71FAD00C2B817 /* CARequestInterceptor.m */; };
+		B6B356121ED71FAD00C2B817 /* CAScreen.h in Headers */ = {isa = PBXBuildFile; fileRef = B6B355F51ED71FAD00C2B817 /* CAScreen.h */; };
+		B6B356131ED71FAD00C2B817 /* CAScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B355F61ED71FAD00C2B817 /* CAScreen.m */; };
+		B6B356141ED71FAD00C2B817 /* CAAPIClient.h in Headers */ = {isa = PBXBuildFile; fileRef = B6B355F81ED71FAD00C2B817 /* CAAPIClient.h */; };
+		B6B356151ED71FAD00C2B817 /* CAAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B355F91ED71FAD00C2B817 /* CAAPIClient.m */; };
+		B6B356161ED71FAD00C2B817 /* CAEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = B6B355FA1ED71FAD00C2B817 /* CAEvent.h */; };
+		B6B356171ED71FAD00C2B817 /* CAEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B355FB1ED71FAD00C2B817 /* CAEvent.m */; };
+		B6B356181ED71FAD00C2B817 /* Castle.h in Headers */ = {isa = PBXBuildFile; fileRef = B6B355FD1ED71FAD00C2B817 /* Castle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B6B356191ED71FAD00C2B817 /* Castle.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B355FE1ED71FAD00C2B817 /* Castle.m */; };
+		B6B3561A1ED71FAD00C2B817 /* CastleConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = B6B355FF1ED71FAD00C2B817 /* CastleConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B6B3561B1ED71FAD00C2B817 /* CastleConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B356001ED71FAD00C2B817 /* CastleConfiguration.m */; };
+		B6B3561C1ED71FAD00C2B817 /* UIViewController+CAScreen.h in Headers */ = {isa = PBXBuildFile; fileRef = B6B356011ED71FAD00C2B817 /* UIViewController+CAScreen.h */; };
+		B6B3561D1ED71FAD00C2B817 /* UIViewController+CAScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B356021ED71FAD00C2B817 /* UIViewController+CAScreen.m */; };
+		B6B3561E1ED71FAD00C2B817 /* CAUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = B6B356041ED71FAD00C2B817 /* CAUtils.h */; };
+		B6B3561F1ED71FAD00C2B817 /* CAUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B356051ED71FAD00C2B817 /* CAUtils.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B6B355DC1ED71D9700C2B817 /* Castle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Castle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6B355E71ED71F9D00C2B817 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B6B355E91ED71FAD00C2B817 /* CABatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CABatch.h; path = Classes/CABatch.h; sourceTree = "<group>"; };
+		B6B355EA1ED71FAD00C2B817 /* CABatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CABatch.m; path = Classes/CABatch.m; sourceTree = "<group>"; };
+		B6B355EB1ED71FAD00C2B817 /* CADevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CADevice.h; path = Classes/CADevice.h; sourceTree = "<group>"; };
+		B6B355EC1ED71FAD00C2B817 /* CADevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CADevice.m; path = Classes/CADevice.m; sourceTree = "<group>"; };
+		B6B355ED1ED71FAD00C2B817 /* CAEventStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAEventStorage.h; path = Classes/CAEventStorage.h; sourceTree = "<group>"; };
+		B6B355EE1ED71FAD00C2B817 /* CAEventStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CAEventStorage.m; path = Classes/CAEventStorage.m; sourceTree = "<group>"; };
+		B6B355EF1ED71FAD00C2B817 /* CAIdentity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAIdentity.h; path = Classes/CAIdentity.h; sourceTree = "<group>"; };
+		B6B355F01ED71FAD00C2B817 /* CAIdentity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CAIdentity.m; path = Classes/CAIdentity.m; sourceTree = "<group>"; };
+		B6B355F11ED71FAD00C2B817 /* CAModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAModel.h; path = Classes/CAModel.h; sourceTree = "<group>"; };
+		B6B355F21ED71FAD00C2B817 /* CAModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CAModel.m; path = Classes/CAModel.m; sourceTree = "<group>"; };
+		B6B355F31ED71FAD00C2B817 /* CARequestInterceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CARequestInterceptor.h; path = Classes/CARequestInterceptor.h; sourceTree = "<group>"; };
+		B6B355F41ED71FAD00C2B817 /* CARequestInterceptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CARequestInterceptor.m; path = Classes/CARequestInterceptor.m; sourceTree = "<group>"; };
+		B6B355F51ED71FAD00C2B817 /* CAScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAScreen.h; path = Classes/CAScreen.h; sourceTree = "<group>"; };
+		B6B355F61ED71FAD00C2B817 /* CAScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CAScreen.m; path = Classes/CAScreen.m; sourceTree = "<group>"; };
+		B6B355F81ED71FAD00C2B817 /* CAAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAAPIClient.h; sourceTree = "<group>"; };
+		B6B355F91ED71FAD00C2B817 /* CAAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAAPIClient.m; sourceTree = "<group>"; };
+		B6B355FA1ED71FAD00C2B817 /* CAEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAEvent.h; sourceTree = "<group>"; };
+		B6B355FB1ED71FAD00C2B817 /* CAEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAEvent.m; sourceTree = "<group>"; };
+		B6B355FD1ED71FAD00C2B817 /* Castle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Castle.h; sourceTree = "<group>"; };
+		B6B355FE1ED71FAD00C2B817 /* Castle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Castle.m; sourceTree = "<group>"; };
+		B6B355FF1ED71FAD00C2B817 /* CastleConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CastleConfiguration.h; sourceTree = "<group>"; };
+		B6B356001ED71FAD00C2B817 /* CastleConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CastleConfiguration.m; sourceTree = "<group>"; };
+		B6B356011ED71FAD00C2B817 /* UIViewController+CAScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+CAScreen.h"; path = "Classes/UIViewController+CAScreen.h"; sourceTree = "<group>"; };
+		B6B356021ED71FAD00C2B817 /* UIViewController+CAScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+CAScreen.m"; path = "Classes/UIViewController+CAScreen.m"; sourceTree = "<group>"; };
+		B6B356041ED71FAD00C2B817 /* CAUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAUtils.h; sourceTree = "<group>"; };
+		B6B356051ED71FAD00C2B817 /* CAUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAUtils.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B6B355D81ED71D9700C2B817 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B6B355D21ED71D9600C2B817 = {
+			isa = PBXGroup;
+			children = (
+				B6B355DE1ED71D9700C2B817 /* Castle */,
+				B6B355DD1ED71D9700C2B817 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B6B355DD1ED71D9700C2B817 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B6B355DC1ED71D9700C2B817 /* Castle.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B6B355DE1ED71D9700C2B817 /* Castle */ = {
+			isa = PBXGroup;
+			children = (
+				B6B355E91ED71FAD00C2B817 /* CABatch.h */,
+				B6B355EA1ED71FAD00C2B817 /* CABatch.m */,
+				B6B355EB1ED71FAD00C2B817 /* CADevice.h */,
+				B6B355EC1ED71FAD00C2B817 /* CADevice.m */,
+				B6B355ED1ED71FAD00C2B817 /* CAEventStorage.h */,
+				B6B355EE1ED71FAD00C2B817 /* CAEventStorage.m */,
+				B6B355EF1ED71FAD00C2B817 /* CAIdentity.h */,
+				B6B355F01ED71FAD00C2B817 /* CAIdentity.m */,
+				B6B355F11ED71FAD00C2B817 /* CAModel.h */,
+				B6B355F21ED71FAD00C2B817 /* CAModel.m */,
+				B6B355F31ED71FAD00C2B817 /* CARequestInterceptor.h */,
+				B6B355F41ED71FAD00C2B817 /* CARequestInterceptor.m */,
+				B6B355F51ED71FAD00C2B817 /* CAScreen.h */,
+				B6B355F61ED71FAD00C2B817 /* CAScreen.m */,
+				B6B355F71ED71FAD00C2B817 /* Client */,
+				B6B355FC1ED71FAD00C2B817 /* Public */,
+				B6B356011ED71FAD00C2B817 /* UIViewController+CAScreen.h */,
+				B6B356021ED71FAD00C2B817 /* UIViewController+CAScreen.m */,
+				B6B356031ED71FAD00C2B817 /* Util */,
+				B6B355E71ED71F9D00C2B817 /* Info.plist */,
+			);
+			path = Castle;
+			sourceTree = "<group>";
+		};
+		B6B355F71ED71FAD00C2B817 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				B6B355F81ED71FAD00C2B817 /* CAAPIClient.h */,
+				B6B355F91ED71FAD00C2B817 /* CAAPIClient.m */,
+				B6B355FA1ED71FAD00C2B817 /* CAEvent.h */,
+				B6B355FB1ED71FAD00C2B817 /* CAEvent.m */,
+			);
+			name = Client;
+			path = Classes/Client;
+			sourceTree = "<group>";
+		};
+		B6B355FC1ED71FAD00C2B817 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				B6B355FD1ED71FAD00C2B817 /* Castle.h */,
+				B6B355FE1ED71FAD00C2B817 /* Castle.m */,
+				B6B355FF1ED71FAD00C2B817 /* CastleConfiguration.h */,
+				B6B356001ED71FAD00C2B817 /* CastleConfiguration.m */,
+			);
+			name = Public;
+			path = Classes/Public;
+			sourceTree = "<group>";
+		};
+		B6B356031ED71FAD00C2B817 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				B6B356041ED71FAD00C2B817 /* CAUtils.h */,
+				B6B356051ED71FAD00C2B817 /* CAUtils.m */,
+			);
+			name = Util;
+			path = Classes/Util;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		B6B355D91ED71D9700C2B817 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B6B356181ED71FAD00C2B817 /* Castle.h in Headers */,
+				B6B3561A1ED71FAD00C2B817 /* CastleConfiguration.h in Headers */,
+				B6B3561E1ED71FAD00C2B817 /* CAUtils.h in Headers */,
+				B6B356141ED71FAD00C2B817 /* CAAPIClient.h in Headers */,
+				B6B356101ED71FAD00C2B817 /* CARequestInterceptor.h in Headers */,
+				B6B3560E1ED71FAD00C2B817 /* CAModel.h in Headers */,
+				B6B356161ED71FAD00C2B817 /* CAEvent.h in Headers */,
+				B6B3560C1ED71FAD00C2B817 /* CAIdentity.h in Headers */,
+				B6B356081ED71FAD00C2B817 /* CADevice.h in Headers */,
+				B6B356121ED71FAD00C2B817 /* CAScreen.h in Headers */,
+				B6B3561C1ED71FAD00C2B817 /* UIViewController+CAScreen.h in Headers */,
+				B6B356061ED71FAD00C2B817 /* CABatch.h in Headers */,
+				B6B3560A1ED71FAD00C2B817 /* CAEventStorage.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		B6B355DB1ED71D9700C2B817 /* Castle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B6B355E41ED71D9700C2B817 /* Build configuration list for PBXNativeTarget "Castle" */;
+			buildPhases = (
+				B6B355D71ED71D9700C2B817 /* Sources */,
+				B6B355D81ED71D9700C2B817 /* Frameworks */,
+				B6B355D91ED71D9700C2B817 /* Headers */,
+				B6B355DA1ED71D9700C2B817 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Castle;
+			productName = Castle;
+			productReference = B6B355DC1ED71D9700C2B817 /* Castle.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B6B355D31ED71D9600C2B817 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = Castle;
+				TargetAttributes = {
+					B6B355DB1ED71D9700C2B817 = {
+						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = B6B355D61ED71D9600C2B817 /* Build configuration list for PBXProject "Castle" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B6B355D21ED71D9600C2B817;
+			productRefGroup = B6B355DD1ED71D9700C2B817 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B6B355DB1ED71D9700C2B817 /* Castle */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B6B355DA1ED71D9700C2B817 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B6B355E81ED71F9D00C2B817 /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B6B355D71ED71D9700C2B817 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B6B3560F1ED71FAD00C2B817 /* CAModel.m in Sources */,
+				B6B356111ED71FAD00C2B817 /* CARequestInterceptor.m in Sources */,
+				B6B3560B1ED71FAD00C2B817 /* CAEventStorage.m in Sources */,
+				B6B356171ED71FAD00C2B817 /* CAEvent.m in Sources */,
+				B6B3561F1ED71FAD00C2B817 /* CAUtils.m in Sources */,
+				B6B3560D1ED71FAD00C2B817 /* CAIdentity.m in Sources */,
+				B6B356071ED71FAD00C2B817 /* CABatch.m in Sources */,
+				B6B3561D1ED71FAD00C2B817 /* UIViewController+CAScreen.m in Sources */,
+				B6B356151ED71FAD00C2B817 /* CAAPIClient.m in Sources */,
+				B6B356191ED71FAD00C2B817 /* Castle.m in Sources */,
+				B6B3561B1ED71FAD00C2B817 /* CastleConfiguration.m in Sources */,
+				B6B356131ED71FAD00C2B817 /* CAScreen.m in Sources */,
+				B6B356091ED71FAD00C2B817 /* CADevice.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B6B355E21ED71D9700C2B817 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B6B355E31ED71D9700C2B817 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B6B355E51ED71D9700C2B817 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Castle/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.castleio.Castle;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		B6B355E61ED71D9700C2B817 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Castle/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.castleio.Castle;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B6B355D61ED71D9600C2B817 /* Build configuration list for PBXProject "Castle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B6B355E21ED71D9700C2B817 /* Debug */,
+				B6B355E31ED71D9700C2B817 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B6B355E41ED71D9700C2B817 /* Build configuration list for PBXNativeTarget "Castle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B6B355E51ED71D9700C2B817 /* Debug */,
+				B6B355E61ED71D9700C2B817 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B6B355D31ED71D9600C2B817 /* Project object */;
+}
