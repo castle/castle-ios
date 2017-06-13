@@ -5,15 +5,15 @@
 //  Copyright (c) 2017 Castle. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "MainViewController.h"
 
 #import <Castle/Castle.h>
 
-@interface ViewController ()
+@interface MainViewController ()
 
 @end
 
-@implementation ViewController
+@implementation MainViewController
 
 - (IBAction)track:(id)sender {
     [Castle track:@"Button pressed"];
