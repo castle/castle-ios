@@ -18,11 +18,6 @@
 
 + (instancetype)identityWithUserId:(NSString *)userId traits:(NSDictionary *)traits
 {
-    if(!userId) {
-        CASLog(@"No user id provided");
-        return nil;
-    }
-    
     if(userId.length == 0) {
         CASLog(@"User id needs to be at least on character long");
         return nil;
