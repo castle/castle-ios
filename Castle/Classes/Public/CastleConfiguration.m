@@ -34,8 +34,7 @@
     for (NSURL *url in baseURLWhiteList) {
         if([url isKindOfClass:NSURL.class]) {
             // Only add the base URL discarding any other components of the provided URL
-            [whitelist addObject:url.baseURL != nil ? url.baseURL : url];
-            // if the  whitelistet url would be castle.io, would api.castle.io be whitelisted as well?
+            [whitelist addObject:[NSURL URLWithString:[NSString stringWithFormat:@"%@://%@/", url.scheme, url.host]]];
         }
     }
     _baseURLWhiteList = whitelist.copy;
