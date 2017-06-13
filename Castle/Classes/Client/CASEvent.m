@@ -114,12 +114,6 @@
         return NO;
     }
     
-    // Check if dictionary is actually an instance of the class NSDictionary
-    if(![dictionary isKindOfClass:NSDictionary.class]) {
-        CASLog(@"Properties dictionary is not a dictionary, got type: %@", NSStringFromClass(dictionary.class));
-        return NO;
-    }
-    
     // Iterate through the contents and make sure there's no unsupported data types
     for(id value in dictionary.allValues) {
         // If the value is a NSDictionary call the method recursively
@@ -132,7 +126,12 @@
         }
         
         // If the value if of any other type than NSNumber, NSString or NSNull: validation failed
-        if(!([value isKindOfClass:NSNumber.class] || [value isKindOfClass:NSString.class] || [value isKindOfClass:NSNull.class])) {
+        if(!([value isKindOfClass:NSNumber.class] ||
+             [value isKindOfClass:NSString.class] ||
+             [value isKindOfClass:NSNull.class] ||
+             [value isKindOfClass:NSDictionary.class] ||
+             [value isKindOfClass:NSArray.class]))
+        {
             CASLog(@"Properties dictionary contains invalid data. Fount object with type: %@", NSStringFromClass(dictionary.class));
             return NO;
         }

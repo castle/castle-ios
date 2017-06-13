@@ -154,10 +154,6 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
         return;
     }
 
-    if(!properties) {
-        properties = @{};
-    }
-
     Castle *castle = [Castle sharedInstance];
     CASEvent *event = [CASEvent eventWithName:eventName properties:properties];
     [castle queueEvent:event];
@@ -175,10 +171,6 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
         return;
     }
 
-    if(!properties) {
-        properties = @{};
-    }
-
     Castle *castle = [Castle sharedInstance];
     CASScreen *screen = [CASScreen eventWithName:screenName properties:properties];
     [castle queueEvent:screen];
@@ -194,10 +186,6 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
     if(!identifier || [identifier isEqualToString:@""]) {
         CASLog(@"No identifier provided. Will cancel identify operation.");
         return;
-    }
-
-    if(!traits) {
-        traits = @{};
     }
 
     Castle *castle = [Castle sharedInstance];
