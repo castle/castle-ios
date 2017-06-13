@@ -108,7 +108,7 @@ NSString *const CASAPIClientVersion = @"v1";
 - (NSURLSession *)session
 {
     if(!_session) {
-        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"castle"];
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         _session = [NSURLSession sessionWithConfiguration:configuration];
     }
     return _session;
