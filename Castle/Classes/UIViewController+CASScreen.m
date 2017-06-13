@@ -70,7 +70,7 @@
     NSString *identifier = [self ca_normalizedClassName];
 
     // Empty identifier string: default to Unknown
-    if(identifier.length == 0) {
+    if(identifier.length == 0 || [identifier isEqualToString:@"UI"]) {
         return @"Unknown";
     }
 
