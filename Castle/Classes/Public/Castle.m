@@ -318,11 +318,17 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
         CASLog(@"No app version was stored in settings: the application was just installed.");
         CASLog(@"Application life cycle event detected: Will track install event");
         [Castle track:@"Application installed"];
+        
+        // Flush the event queue when a application installed event is triggered
+        [Castle flush];
     } else if (![installedVersion isEqual:currentVersion]) {
         // App version changed since the application was last run: application was updated
         CASLog(@"App version stored in settings is different from current version string: the application was just updated.");
         CASLog(@"Application life cycle event detected: Will track update event");
         [Castle track:@"Application updated"];
+
+        // Flush the event queue when a application updated event is triggered
+        [Castle flush];
     }
 
     [defaults setObject:currentVersion forKey:CastleAppVersionKey];
@@ -335,18 +341,27 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
 {
     CASLog(@"Application life cycle event detected: Will track application did become active event");
     [Castle track:@"Application Did Become Active"];
+    
+    // Flush the event queue when a application did become active event is triggered
+    [Castle flush];
 }
 
 - (void)applicationDidEnterBackground:(NSNotification *)notification
 {
     CASLog(@"Application life cycle event detected: Will track application did enter background event");
     [Castle track:@"Application Did Enter Background"];
+    
+    // Flush the event queue when a application did enter background event is triggered
+    [Castle flush];
 }
 
 - (void)applicationWillTerminate:(NSNotificationCenter *)notification
 {
     CASLog(@"Application life cycle event detected: Will track application will terminate event");
     [Castle track:@"Application Will Terminate"];
+    
+    // Flush the event queue when a application will terminate event is triggered
+    [Castle flush];
 }
 
 #pragma mark - Metadata
