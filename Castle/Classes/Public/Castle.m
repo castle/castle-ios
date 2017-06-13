@@ -309,11 +309,6 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
 
 - (void)trackApplicationUpdated
 {
-    if(!self.configuration || ![self.configuration isLifecycleTrackingEnabled]) {
-        CASLog(@"Won't try to track application update/install because life cycle tracking is disabled");
-        return;
-    }
-
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *currentVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     NSString *installedVersion = [defaults objectForKey:CastleAppVersionKey];
@@ -321,12 +316,12 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
     if (installedVersion == nil) {
         // This means that the application was just installed.
         CASLog(@"No app version was stored in settings: the application was just installed.");
-        CASLog(@"Application life cycle events enabled: Will track install event");
+        CASLog(@"Application life cycle event detected: Will track install event");
         [Castle track:@"Application installed"];
     } else if (![installedVersion isEqual:currentVersion]) {
         // App version changed since the application was last run: application was updated
         CASLog(@"App version stored in settings is different from current version string: the application was just updated.");
-        CASLog(@"Application life cycle events enabled: Will track update event");
+        CASLog(@"Application life cycle event detected: Will track update event");
         [Castle track:@"Application updated"];
     }
 
@@ -338,30 +333,20 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
-    if([self.configuration isLifecycleTrackingEnabled]) {
-        CASLog(@"Application life cycle events enabled: Will track application did become active event");
-        [Castle track:@"Application Did Become Active"];
-    }
+    CASLog(@"Application life cycle event detected: Will track application did become active event");
+    [Castle track:@"Application Did Become Active"];
 }
 
 - (void)applicationDidEnterBackground:(NSNotification *)notification
 {
-    if([self.configuration isLifecycleTrackingEnabled]) {
-        CASLog(@"Application life cycle events enabled: Will track application did enter background event");
-        [Castle track:@"Application Did Enter Background"];
-    }
-
-    [self persistQueue];
+    CASLog(@"Application life cycle event detected: Will track application did enter background event");
+    [Castle track:@"Application Did Enter Background"];
 }
 
 - (void)applicationWillTerminate:(NSNotificationCenter *)notification
 {
-    if([self.configuration isLifecycleTrackingEnabled]) {
-        CASLog(@"Application life cycle events enabled: Will track application will terminate event");
-        [Castle track:@"Application Will Terminate"];
-    }
-
-    [self persistQueue];
+    CASLog(@"Application life cycle event detected: Will track application will terminate event");
+    [Castle track:@"Application Will Terminate"];
 }
 
 #pragma mark - Metadata

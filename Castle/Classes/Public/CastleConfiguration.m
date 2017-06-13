@@ -19,7 +19,6 @@
 
     CastleConfiguration *configuration = [[CastleConfiguration alloc] init];
     configuration.publishableKey = publishableKey;
-    configuration.lifecycleTrackingEnabled = YES;
     configuration.screenTrackingEnabled = YES;
     configuration.debugLoggingEnabled = NO;
     configuration.flushLimit = 20;
