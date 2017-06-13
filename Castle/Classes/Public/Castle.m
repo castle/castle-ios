@@ -313,7 +313,7 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
         
         // Flush the event queue when a application installed event is triggered
         [Castle flush];
-    } else if (![installedVersion isEqual:currentVersion]) {
+    } else if (![installedVersion isEqualToString:currentVersion]) {
         // App version changed since the application was last run: application was updated
         CASLog(@"App version stored in settings is different from current version string: the application was just updated.");
         CASLog(@"Application life cycle event detected: Will track update event");
