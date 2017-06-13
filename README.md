@@ -48,7 +48,6 @@ import Castle
 
 // Create configuration
 let configuration = CastleConfiguration(publishableKey: "pk_373428597387773")
-configuration.isLifecycleTrackingEnabled = true
 configuration.isScreenTrackingEnabled = true
 configuration.isDebugLoggingEnabled = true
 
@@ -61,7 +60,6 @@ Castle.setup(with: configuration)
 
 // Create configuration object
 CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_373428597387773"];
-configuration.lifecycleTrackingEnabled = YES;
 configuration.screenTrackingEnabled = YES;
 configuration.debugLoggingEnabled = YES;
 configuration.baseURLWhiteList = @[ [NSURL URLWithString:@"https://api.castle.io/"] ];
