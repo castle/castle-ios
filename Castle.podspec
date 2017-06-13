@@ -23,8 +23,6 @@ Castle for iOS provides a simple way to integrate Castle into your app.
   s.ios.deployment_target = '9.0'
 
   s.source_files = 'Castle/Classes/**/*'
-
-  s.public_header_files = 'Castle/Classes/Public/*.h'
 end
 
 
