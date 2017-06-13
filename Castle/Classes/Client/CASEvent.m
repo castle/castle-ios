@@ -105,7 +105,7 @@
     return @"event";
 }
 
-#pragma mark - Private
+#pragma mark - Util
 
 + (BOOL)propertiesContainValidData:(NSDictionary *)dictionary
 {

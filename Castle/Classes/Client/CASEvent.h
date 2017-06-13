@@ -19,4 +19,6 @@
 + (instancetype)eventWithName:(NSString *)name;
 + (instancetype)eventWithName:(NSString *)name properties:(NSDictionary *)properties;
 
++ (BOOL)propertiesContainValidData:(NSDictionary *)dictionary;
+
 @end
