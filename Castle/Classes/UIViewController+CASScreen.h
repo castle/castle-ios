@@ -11,4 +11,8 @@
 
 + (void)ca_swizzleViewDidAppear;
 
+- (void)ca_viewDidAppear:(BOOL)animated;
+- (NSString *)ca_viewIdentifier;
+- (NSString *)ca_normalizedClassName;
+
 @end
