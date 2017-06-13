@@ -259,9 +259,13 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
 
 + (BOOL)isWhitelistURL:(NSURL *)url
 {
+    if(url == nil) {
+        CASLog(@"Provided URL was nil");
+        return NO;
+    }
+    
     Castle *castle = [Castle sharedInstance];
-    NSURL *baseURL = url.baseURL != nil ? url.baseURL : url;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.host = %@ AND self.scheme = %@", baseURL.host, baseURL.scheme];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.host = %@ AND self.scheme = %@", url.host, url.scheme];
     return [castle.configuration.baseURLWhiteList filteredArrayUsingPredicate:predicate].count > 0;
 }
 
