@@ -154,10 +154,6 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
         return;
     }
 
-    if(!properties) {
-        properties = @{};
-    }
-
     Castle *castle = [Castle sharedInstance];
     CASEvent *event = [CASEvent eventWithName:eventName properties:properties];
     [castle queueEvent:event];
@@ -175,10 +171,6 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
         return;
     }
 
-    if(!properties) {
-        properties = @{};
-    }
-
     Castle *castle = [Castle sharedInstance];
     CASScreen *screen = [CASScreen eventWithName:screenName properties:properties];
     [castle queueEvent:screen];
@@ -194,10 +186,6 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
     if(!identifier || [identifier isEqualToString:@""]) {
         CASLog(@"No identifier provided. Will cancel identify operation.");
         return;
-    }
-
-    if(!traits) {
-        traits = @{};
     }
 
     Castle *castle = [Castle sharedInstance];
@@ -271,9 +259,13 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
 
 + (BOOL)isWhitelistURL:(NSURL *)url
 {
+    if(url == nil) {
+        CASLog(@"Provided URL was nil");
+        return NO;
+    }
+    
     Castle *castle = [Castle sharedInstance];
-    NSURL *baseURL = url.baseURL != nil ? url.baseURL : url;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.host = %@ AND self.scheme = %@", baseURL.host, baseURL.scheme];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.host = %@ AND self.scheme = %@", url.host, url.scheme];
     return [castle.configuration.baseURLWhiteList filteredArrayUsingPredicate:predicate].count > 0;
 }
 
@@ -309,11 +301,6 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
 
 - (void)trackApplicationUpdated
 {
-    if(!self.configuration || ![self.configuration isLifecycleTrackingEnabled]) {
-        CASLog(@"Won't try to track application update/install because life cycle tracking is disabled");
-        return;
-    }
-
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *currentVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     NSString *installedVersion = [defaults objectForKey:CastleAppVersionKey];
@@ -321,13 +308,19 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
     if (installedVersion == nil) {
         // This means that the application was just installed.
         CASLog(@"No app version was stored in settings: the application was just installed.");
-        CASLog(@"Application life cycle events enabled: Will track install event");
+        CASLog(@"Application life cycle event detected: Will track install event");
         [Castle track:@"Application installed"];
-    } else if (![installedVersion isEqual:currentVersion]) {
+        
+        // Flush the event queue when a application installed event is triggered
+        [Castle flush];
+    } else if (![installedVersion isEqualToString:currentVersion]) {
         // App version changed since the application was last run: application was updated
         CASLog(@"App version stored in settings is different from current version string: the application was just updated.");
-        CASLog(@"Application life cycle events enabled: Will track update event");
+        CASLog(@"Application life cycle event detected: Will track update event");
         [Castle track:@"Application updated"];
+
+        // Flush the event queue when a application updated event is triggered
+        [Castle flush];
     }
 
     [defaults setObject:currentVersion forKey:CastleAppVersionKey];
@@ -338,30 +331,29 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
-    if([self.configuration isLifecycleTrackingEnabled]) {
-        CASLog(@"Application life cycle events enabled: Will track application did become active event");
-        [Castle track:@"Application Did Become Active"];
-    }
+    CASLog(@"Application life cycle event detected: Will track application did become active event");
+    [Castle track:@"Application Did Become Active"];
+    
+    // Flush the event queue when a application did become active event is triggered
+    [Castle flush];
 }
 
 - (void)applicationDidEnterBackground:(NSNotification *)notification
 {
-    if([self.configuration isLifecycleTrackingEnabled]) {
-        CASLog(@"Application life cycle events enabled: Will track application did enter background event");
-        [Castle track:@"Application Did Enter Background"];
-    }
-
-    [self persistQueue];
+    CASLog(@"Application life cycle event detected: Will track application did enter background event");
+    [Castle track:@"Application Did Enter Background"];
+    
+    // Flush the event queue when a application did enter background event is triggered
+    [Castle flush];
 }
 
 - (void)applicationWillTerminate:(NSNotificationCenter *)notification
 {
-    if([self.configuration isLifecycleTrackingEnabled]) {
-        CASLog(@"Application life cycle events enabled: Will track application will terminate event");
-        [Castle track:@"Application Will Terminate"];
-    }
-
-    [self persistQueue];
+    CASLog(@"Application life cycle event detected: Will track application will terminate event");
+    [Castle track:@"Application Will Terminate"];
+    
+    // Flush the event queue when a application will terminate event is triggered
+    [Castle flush];
 }
 
 #pragma mark - Metadata

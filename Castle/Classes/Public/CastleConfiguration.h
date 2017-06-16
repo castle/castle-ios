@@ -11,7 +11,6 @@
 
 @property (nonatomic, copy, readonly) NSString * _Nonnull publishableKey;
 
-@property (nonatomic, assign, getter=isLifecycleTrackingEnabled) BOOL lifecycleTrackingEnabled;
 @property (nonatomic, assign, getter=isScreenTrackingEnabled) BOOL screenTrackingEnabled;
 @property (nonatomic, assign, getter=isDebugLoggingEnabled) BOOL debugLoggingEnabled;
 @property (nonatomic, assign, getter=isDeviceIDAutoForwardingEnabled) BOOL deviceIDAutoForwardingEnabled;

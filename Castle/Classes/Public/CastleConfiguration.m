@@ -19,7 +19,6 @@
 
     CastleConfiguration *configuration = [[CastleConfiguration alloc] init];
     configuration.publishableKey = publishableKey;
-    configuration.lifecycleTrackingEnabled = YES;
     configuration.screenTrackingEnabled = YES;
     configuration.debugLoggingEnabled = NO;
     configuration.flushLimit = 20;
@@ -35,8 +34,7 @@
     for (NSURL *url in baseURLWhiteList) {
         if([url isKindOfClass:NSURL.class]) {
             // Only add the base URL discarding any other components of the provided URL
-            [whitelist addObject:url.baseURL != nil ? url.baseURL : url];
-            // if the  whitelistet url would be castle.io, would api.castle.io be whitelisted as well?
+            [whitelist addObject:[NSURL URLWithString:[NSString stringWithFormat:@"%@://%@/", url.scheme, url.host]]];
         }
     }
     _baseURLWhiteList = whitelist.copy;

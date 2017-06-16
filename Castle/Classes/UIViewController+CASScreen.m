@@ -49,17 +49,17 @@
 {
     [self ca_viewDidAppear:animated];
 
-    NSString *normalizedClassName = [self normalizedClassName];
+    NSString *normalizedClassName = [self ca_normalizedClassName];
     if([normalizedClassName hasPrefix:@"UI"]) {
         return;
     }
 
-    NSString *identifier = [self viewIdentifier];
+    NSString *identifier = [self ca_viewIdentifier];
     CASLog(@"Will send automatic screen event for screen: %@", identifier);
     [Castle screen:identifier];
 }
 
-- (NSString *)viewIdentifier
+- (NSString *)ca_viewIdentifier
 {
     // Use the title string of the view controller if available
     if(self.title != nil && ![self.title isEqualToString:@""]) {
@@ -67,17 +67,17 @@
     }
 
     // Fallback to using the class name
-    NSString *identifier = [self normalizedClassName];
+    NSString *identifier = [self ca_normalizedClassName];
 
     // Empty identifier string: default to Unknown
-    if(identifier.length == 0) {
+    if(identifier.length == 0 || [identifier isEqualToString:@"UI"]) {
         return @"Unknown";
     }
 
     return identifier;
 }
 
-- (NSString *)normalizedClassName
+- (NSString *)ca_normalizedClassName
 {
     // Remove potential namespace (when using Swift)
     NSString *name = [NSStringFromClass(self.class) componentsSeparatedByString:@"."].lastObject;

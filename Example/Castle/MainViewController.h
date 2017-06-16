@@ -7,6 +7,6 @@
 
 @import UIKit;
 
-@interface ViewController : UIViewController
+@interface MainViewController : UIViewController
 
 @end

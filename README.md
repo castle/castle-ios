@@ -4,6 +4,8 @@
 
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Castle.svg)](https://img.shields.io/cocoapods/v/Castle.svg)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![codecov](https://codecov.io/gh/castle/castle-ios/branch/master/graph/badge.svg)](https://codecov.io/gh/aalekz/castle-ios)
+[![Build Status](https://travis-ci.org/castle/castle-ios.svg?branch=master)](https://travis-ci.org/aalekz/castle-ios)
 
 - [Features](#features)
 - [Requirements](#requirements)
@@ -48,7 +50,6 @@ import Castle
 
 // Create configuration
 let configuration = CastleConfiguration(publishableKey: "pk_373428597387773")
-configuration.isLifecycleTrackingEnabled = true
 configuration.isScreenTrackingEnabled = true
 configuration.isDebugLoggingEnabled = true
 
@@ -61,7 +62,6 @@ Castle.setup(with: configuration)
 
 // Create configuration object
 CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_373428597387773"];
-configuration.lifecycleTrackingEnabled = YES;
 configuration.screenTrackingEnabled = YES;
 configuration.debugLoggingEnabled = YES;
 configuration.baseURLWhiteList = @[ [NSURL URLWithString:@"https://api.castle.io/"] ];
