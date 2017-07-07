@@ -22,7 +22,7 @@
 NSString *const CastleUserIdentifierKey = @"CastleUserIdentifierKey";
 NSString *const CastleAppVersionKey = @"CastleAppVersionKey";
 
-static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Device-Id";
+static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Client-Id";
 
 @interface Castle ()
 @property (nonatomic, strong) CASAPIClient *client;

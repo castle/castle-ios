@@ -250,8 +250,8 @@
 {
     NSDictionary *headers = [Castle headers];
     XCTAssertNotNil(headers);
-    XCTAssertNotNil(headers[@"X-Castle-Device-Id"]);
-    XCTAssertTrue([headers[@"X-Castle-Device-Id"] isEqualToString:[Castle deviceIdentifier]]);
+    XCTAssertNotNil(headers[@"X-Castle-Client-Id"]);
+    XCTAssertTrue([headers[@"X-Castle-Client-Id"] isEqualToString:[Castle deviceIdentifier]]);
 }
 
 - (void)testRequestInterceptor
