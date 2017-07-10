@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Castle'
-  s.version          = '0.9.3'
+  s.version          = '0.9.4'
   s.summary          = 'Castle SDK for iOS'
 
   s.description      = <<-DESC
