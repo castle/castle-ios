@@ -22,7 +22,7 @@
 NSString *const CastleUserIdentifierKey = @"CastleUserIdentifierKey";
 NSString *const CastleAppVersionKey = @"CastleAppVersionKey";
 
-static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
+static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Client-Id";
 
 @interface Castle ()
 @property (nonatomic, strong) CASAPIClient *client;
@@ -249,10 +249,10 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
     // Cancel any running flush task
     [castle.task cancel];
     castle.task = nil;
-    
+
     // Flush queue
     [Castle flush];
-    
+
     // Reset cached identity
     castle.userIdentity = nil;
 }
@@ -263,7 +263,7 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
         CASLog(@"Provided URL was nil");
         return NO;
     }
-    
+
     Castle *castle = [Castle sharedInstance];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.host = %@ AND self.scheme = %@", url.host, url.scheme];
     return [castle.configuration.baseURLWhiteList filteredArrayUsingPredicate:predicate].count > 0;
@@ -310,7 +310,7 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
         CASLog(@"No app version was stored in settings: the application was just installed.");
         CASLog(@"Application life cycle event detected: Will track install event");
         [Castle track:@"Application installed"];
-        
+
         // Flush the event queue when a application installed event is triggered
         [Castle flush];
     } else if (![installedVersion isEqualToString:currentVersion]) {
@@ -333,7 +333,7 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
 {
     CASLog(@"Application life cycle event detected: Will track application did become active event");
     [Castle track:@"Application Did Become Active"];
-    
+
     // Flush the event queue when a application did become active event is triggered
     [Castle flush];
 }
@@ -342,7 +342,7 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
 {
     CASLog(@"Application life cycle event detected: Will track application did enter background event");
     [Castle track:@"Application Did Enter Background"];
-    
+
     // Flush the event queue when a application did enter background event is triggered
     [Castle flush];
 }
@@ -351,7 +351,7 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Mobile-Device-Id";
 {
     CASLog(@"Application life cycle event detected: Will track application will terminate event");
     [Castle track:@"Application Will Terminate"];
-    
+
     // Flush the event queue when a application will terminate event is triggered
     [Castle flush];
 }
