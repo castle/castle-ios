@@ -19,7 +19,7 @@ void CASLog(NSString *format, ...)
     if(CastleDebugLoggingEnabled) {
         va_list args;
         va_start(args, format);
-        format = [NSString stringWithFormat:@"[CASSTLE] %@", format];
+        format = [NSString stringWithFormat:@"[CASTLE] %@", format];
         NSLogv(format, args);
         va_end(args);
     }
