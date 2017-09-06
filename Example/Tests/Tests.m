@@ -209,7 +209,7 @@
 
     // Validate payload
     NSDictionary *payload = [event1 JSONPayload];
-    XCTAssertTrue([payload[@"name"] isEqualToString:@"testevent1"]);
+    XCTAssertTrue([payload[@"event"] isEqualToString:@"testevent1"]);
     XCTAssertNotNil(payload[@"properties"]);
     XCTAssertNotNil(payload[@"timestamp"]);
     XCTAssertNotNil(payload[@"context"]);
