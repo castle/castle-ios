@@ -32,18 +32,18 @@
         CASLog(@"Event name can't be nil.");
         return nil;
     }
-    
+
     if([name isEqualToString:@""]) {
         CASLog(@"Event names must be at least one (1) character long.");
         return nil;
     }
-    
+
     BOOL valid = [CASEvent propertiesContainValidData:properties];
     if(!valid) {
         CASLog(@"Traits dictionary contains invalid data. Supported types are: NSString, NSNumber, NSDictionary & NSNull");
         return nil;
     }
-    
+
     CASEvent *event = [[self alloc] init];
     event.name = name;
     event.properties = properties;
@@ -84,13 +84,13 @@
 {
     NSString *timestamp = [[CASModel timestampDateFormatter] stringFromDate:self.timestamp];
     NSDictionary *context = @{ @"device": [[CASDevice sharedDevice] JSONPayload] };
-    
+
     NSMutableDictionary *payload = @{ @"type": self.type,
-                                      @"name": self.name,
+                                      @"event": self.name,
                                       @"properties": self.properties,
                                       @"timestamp": timestamp,
                                       @"context": context }.mutableCopy;
-    
+
     NSString *identity = [Castle userIdentity];
     if(identity) {
         payload[@"user_id"] = identity;
@@ -102,7 +102,7 @@
 
 - (NSString *)type
 {
-    return @"event";
+    return @"track";
 }
 
 #pragma mark - Util
@@ -113,7 +113,7 @@
     if(!dictionary) {
         return NO;
     }
-    
+
     // Iterate through the contents and make sure there's no unsupported data types
     for(id value in dictionary.allValues) {
         // If the value is a NSDictionary call the method recursively
@@ -124,7 +124,7 @@
                 return NO;
             }
         }
-        
+
         // If the value if of any other type than NSNumber, NSString or NSNull: validation failed
         if(!([value isKindOfClass:NSNumber.class] ||
              [value isKindOfClass:NSString.class] ||
@@ -136,7 +136,7 @@
             return NO;
         }
     }
-    
+
     // No data in the traits dictionary was caught by the validation i.e. it's valid
     return YES;
 }
