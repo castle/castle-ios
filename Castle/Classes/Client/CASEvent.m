@@ -84,13 +84,21 @@
 {
     NSString *timestamp = [[CASModel timestampDateFormatter] stringFromDate:self.timestamp];
     NSDictionary *context = @{ @"device": [[CASDevice sharedDevice] JSONPayload] };
+    NSMutableDictionary *payload = nil;
 
-    NSMutableDictionary *payload = @{ @"type": self.type,
-                                      @"event": self.name,
-                                      @"properties": self.properties,
-                                      @"timestamp": timestamp,
-                                      @"context": context }.mutableCopy;
-
+    if ([self.type isEqualToString:@"screen"]) {
+        payload = @{ @"type": self.type,
+                     @"name": self.name,
+                     @"properties": self.properties,
+                     @"timestamp": timestamp,
+                     @"context": context }.mutableCopy;
+    } else {
+        payload = @{ @"type": self.type,
+                     @"event": self.name,
+                     @"properties": self.properties,
+                     @"timestamp": timestamp,
+                     @"context": context }.mutableCopy;
+    }
     NSString *identity = [Castle userIdentity];
     if(identity) {
         payload[@"user_id"] = identity;
