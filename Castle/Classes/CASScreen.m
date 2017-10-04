@@ -41,9 +41,9 @@
         return nil;
     }
     
-    BOOL valid = [CASEvent propertiesContainValidData:properties];
+    BOOL valid = [CASEvent dictionaryContainsValidData:properties];
     if(!valid) {
-        CASLog(@"Traits dictionary contains invalid data. Supported types are: NSString, NSNumber, NSDictionary & NSNull");
+        CASLog(@"Properties dictionary contains invalid data. Supported types are: NSString, NSNumber, NSDictionary & NSNull");
         return nil;
     }
     
