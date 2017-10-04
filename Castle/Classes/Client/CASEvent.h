@@ -13,12 +13,14 @@
 
 @property (nonatomic, copy, readonly) NSString *name;
 @property (nonatomic, copy, readonly) NSDictionary *properties;
+@property (nonatomic, copy, readonly) NSDictionary *traits;
 @property (nonatomic, copy, readonly) NSDate *timestamp;
 @property (nonatomic, copy, readonly) NSString *type;
 
 + (instancetype)eventWithName:(NSString *)name;
 + (instancetype)eventWithName:(NSString *)name properties:(NSDictionary *)properties;
++ (instancetype)eventWithName:(NSString *)name properties:(NSDictionary *)properties traits:(NSDictionary *)traits;
 
-+ (BOOL)propertiesContainValidData:(NSDictionary *)dictionary;
++ (BOOL)dictionaryContainsValidData:(NSDictionary *)dictionary;
 
 @end

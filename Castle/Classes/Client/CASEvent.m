@@ -14,6 +14,7 @@
 @interface CASEvent ()
 @property (nonatomic, copy, readwrite) NSString *name;
 @property (nonatomic, copy, readwrite) NSDictionary *properties;
+@property (nonatomic, copy, readwrite) NSDictionary *traits;
 @property (nonatomic, copy, readwrite) NSDate *timestamp;
 @end
 
@@ -28,6 +29,11 @@
 
 + (instancetype)eventWithName:(NSString *)name properties:(NSDictionary *)properties
 {
+    return [CASEvent eventWithName:name properties:properties traits:@{}];
+}
+
++ (instancetype)eventWithName:(NSString *)name properties:(NSDictionary *)properties traits:(NSDictionary *)traits
+{
     if(!name) {
         CASLog(@"Event name can't be nil.");
         return nil;
@@ -38,8 +44,14 @@
         return nil;
     }
 
-    BOOL valid = [CASEvent propertiesContainValidData:properties];
-    if(!valid) {
+    BOOL validProperties = [CASEvent dictionaryContainsValidData:properties];
+    if(!validProperties) {
+        CASLog(@"Properties dictionary contains invalid data. Supported types are: NSString, NSNumber, NSDictionary & NSNull");
+        return nil;
+    }
+    
+    BOOL validTraits = [CASEvent dictionaryContainsValidData:properties];
+    if(!validTraits) {
         CASLog(@"Traits dictionary contains invalid data. Supported types are: NSString, NSNumber, NSDictionary & NSNull");
         return nil;
     }
@@ -84,13 +96,22 @@
 {
     NSString *timestamp = [[CASModel timestampDateFormatter] stringFromDate:self.timestamp];
     NSDictionary *context = @{ @"device": [[CASDevice sharedDevice] JSONPayload] };
+    NSMutableDictionary *payload = nil;
 
-    NSMutableDictionary *payload = @{ @"type": self.type,
-                                      @"event": self.name,
-                                      @"properties": self.properties,
-                                      @"timestamp": timestamp,
-                                      @"context": context }.mutableCopy;
-
+    if ([self.type isEqualToString:@"screen"]) {
+        payload = @{ @"type": self.type,
+                     @"name": self.name,
+                     @"properties": self.properties,
+                     @"timestamp": timestamp,
+                     @"context": context }.mutableCopy;
+    } else {
+        payload = @{ @"type": self.type,
+                     @"event": self.name,
+                     @"properties": self.properties,
+                     @"traits": self.traits,
+                     @"timestamp": timestamp,
+                     @"context": context }.mutableCopy;
+    }
     NSString *identity = [Castle userIdentity];
     if(identity) {
         payload[@"user_id"] = identity;
@@ -107,7 +128,7 @@
 
 #pragma mark - Util
 
-+ (BOOL)propertiesContainValidData:(NSDictionary *)dictionary
++ (BOOL)dictionaryContainsValidData:(NSDictionary *)dictionary
 {
     // Check if dictionary is nil
     if(!dictionary) {
@@ -119,7 +140,7 @@
         // If the value is a NSDictionary call the method recursively
         if([value isKindOfClass:NSDictionary.class]) {
             // If the contents aren't valid we can return without continuing any futher
-            BOOL valid = [CASEvent propertiesContainValidData:value];
+            BOOL valid = [CASEvent dictionaryContainsValidData:value];
             if(!valid) {
                 return NO;
             }
@@ -132,12 +153,12 @@
              [value isKindOfClass:NSDictionary.class] ||
              [value isKindOfClass:NSArray.class]))
         {
-            CASLog(@"Properties dictionary contains invalid data. Fount object with type: %@", NSStringFromClass(dictionary.class));
+            CASLog(@"Dictionary contains invalid data. Fount object with type: %@", NSStringFromClass(dictionary.class));
             return NO;
         }
     }
 
-    // No data in the traits dictionary was caught by the validation i.e. it's valid
+    // No data in the dictionary was caught by the validation i.e. it's valid
     return YES;
 }
 
