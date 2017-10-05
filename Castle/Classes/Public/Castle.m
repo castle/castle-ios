@@ -235,7 +235,12 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Client-Id";
 
         castle.task = nil;
 
-        CASLog(@"Successfully flushed events");
+        CASLog(@"Successfully flushed events: %@", [batchModel JSONPayload]);
+        
+        if ([castle eventQueueExceedsFlushLimit] && castle.eventQueue.count > 0) {
+            CASLog(@"Current event queue still exceeds flush limit. Flush again");
+            [Castle flush];
+        }
     }];
 
     [castle.task resume];
@@ -270,6 +275,11 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Client-Id";
 }
 
 #pragma mark - Private
+
+- (BOOL)eventQueueExceedsFlushLimit
+{
+    return [self.eventQueue count] >= self.configuration.flushLimit;
+}
 
 - (void)queueEvent:(CASEvent *)event
 {
