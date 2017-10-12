@@ -8,6 +8,7 @@
 #import "CASScreen.h"
 
 #import "Castle.h"
+#import "CASDevice.h"
 #import "CASUtils.h"
 
 @interface CASScreen ()
@@ -52,6 +53,26 @@
     screen.properties = properties;
     screen.timestamp = [NSDate date];
     return screen;
+}
+
+#pragma mark - CASModel
+
+- (id)JSONPayload
+{
+    NSString *timestamp = [[CASModel timestampDateFormatter] stringFromDate:self.timestamp];
+    NSDictionary *context = @{ @"device": [[CASDevice sharedDevice] JSONPayload] };
+    
+    NSMutableDictionary *payload = @{ @"type": self.type,
+                                      @"name": self.name,
+                                      @"properties": self.properties,
+                                      @"timestamp": timestamp,
+                                      @"context": context }.mutableCopy;
+    
+    NSString *identity = [Castle userIdentity];
+    if(identity) {
+        payload[@"user_id"] = identity;
+    }
+    return payload.copy;
 }
 
 #pragma mark - Getters

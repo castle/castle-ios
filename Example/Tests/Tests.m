@@ -190,7 +190,38 @@
     XCTAssertTrue([CASEvent supportsSecureCoding]);
 }
 
-- (void)testObjectSerialization
+- (void)testObjectSerializationForScreen
+{
+    // create screen view
+    CASScreen *screen = [CASScreen eventWithName:@"Main"];
+    XCTAssertNotNil(screen);
+    XCTAssertTrue([screen.name isEqualToString:@"Main"]);
+    
+    // Validate payload
+    NSDictionary *payload = [screen JSONPayload];
+    XCTAssertTrue([payload[@"name"] isEqualToString:@"Main"]);
+    XCTAssertTrue([payload[@"type"] isEqualToString:@"screen"]);
+    XCTAssertNotNil(payload[@"properties"]);
+    XCTAssertNotNil(payload[@"timestamp"]);
+    XCTAssertNotNil(payload[@"context"]);
+}
+
+- (void)testObjectSerializationForIdentify
+{
+    // create user identity
+    NSDictionary *traits = @{ @"trait": @"value" };
+    CASIdentity *identity = [CASIdentity identityWithUserId:@"123" traits:traits];
+
+    // Validate payload
+    NSDictionary *payload = [identity JSONPayload];
+    XCTAssertTrue([payload[@"user_id"] isEqualToString:@"123"]);
+    XCTAssertTrue([payload[@"type"] isEqualToString:@"identify"]);
+    XCTAssertTrue([payload[@"traits"] isEqualToDictionary:traits]);
+    XCTAssertNotNil(payload[@"timestamp"]);
+    XCTAssertNotNil(payload[@"context"]);
+}
+
+- (void)testObjectSerializationForEvent
 {
     CASModel *model = [[CASModel alloc] init];
     XCTAssertNil(model.JSONPayload);
@@ -205,11 +236,12 @@
     // Validate simple factory method
     CASEvent *event2 = [CASEvent eventWithName:@"testevent2"];
     XCTAssertTrue([event2.name isEqualToString:@"testevent2"]);
-    XCTAssertNotNil(event1.properties);
+    XCTAssertNotNil(event2.properties);
 
     // Validate payload
     NSDictionary *payload = [event1 JSONPayload];
     XCTAssertTrue([payload[@"event"] isEqualToString:@"testevent1"]);
+    XCTAssertTrue([payload[@"type"] isEqualToString:@"track"]);
     XCTAssertNotNil(payload[@"properties"]);
     XCTAssertNotNil(payload[@"timestamp"]);
     XCTAssertNotNil(payload[@"context"]);
