@@ -20,6 +20,7 @@ FOUNDATION_EXPORT const unsigned char CastleVersionString[];
 #pragma mark - Configuration
     
 + (void)setupWithConfiguration:(CastleConfiguration *)configuration;
++ (NSURLSessionConfiguration *)urlSessionInterceptConfiguration;
 
 #pragma mark - Tracking
 

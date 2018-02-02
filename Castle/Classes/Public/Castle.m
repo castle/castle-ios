@@ -92,6 +92,13 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Client-Id";
     [castle trackApplicationUpdated];
 }
 
++ (NSURLSessionConfiguration *)urlSessionInterceptConfiguration
+{
+    NSURLSessionConfiguration *configuration = NSURLSessionConfiguration.defaultSessionConfiguration;
+    configuration.protocolClasses = @[[CASRequestInterceptor class]];
+    return configuration;
+}
+
 #pragma mark - Getters
 
 - (NSString *)deviceIdentifier
