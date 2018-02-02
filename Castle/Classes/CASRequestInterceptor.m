@@ -85,14 +85,17 @@ static NSString *CASRecursiveRequestFlagProperty = @"com.castle.CASRequestInterc
     }
 }
 
-- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(nullable NSError *)error
-{
-    if (error) {
-        [self.client URLProtocol:self didFailWithError:error];
-    } else {
-        [self.client URLProtocolDidFinishLoading:self];
-    }
+- (void)URLSession:(NSURLSession *)session dataTask:(nonnull NSURLSessionDataTask *)dataTask didReceiveData:(nonnull NSData *)data {
+    [self.client URLProtocol:self didLoadData:data];
 }
 
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(nullable NSError *)error
+{
+    if (task.response != nil) {
+        [self.client URLProtocol:self didReceiveResponse:task.response cacheStoragePolicy:NSURLCacheStorageNotAllowed];
+    }
+    
+    [self.client URLProtocolDidFinishLoading:self];
+}
 
 @end
