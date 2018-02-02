@@ -43,6 +43,9 @@ static NSString *CASRecursiveRequestFlagProperty = @"com.castle.CASRequestInterc
 
 - (void)startLoading
 {
+    // Always flush the queue when a request is intercepted
+    [Castle flush];
+    
     NSMutableURLRequest *newRequest = [self.request mutableCopy];
     [NSURLProtocol setProperty:@YES forKey:CASRecursiveRequestFlagProperty inRequest:newRequest];
     
