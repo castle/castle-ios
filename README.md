@@ -69,6 +69,24 @@ configuration.baseURLWhiteList = @[ [NSURL URLWithString:@"https://api.castle.io
 // Setup Castle SDK with provided configuration
 [Castle setupWithConfiguration:configuration];
 ```
+
+#### Device ID auto forwarding
+The device ID can be automatically forwarded by including your backend endpoint to the ```baseURLWhitelist``` array property and setting ```isDeviceIDAutoForwardingEnabled``` of your ```CastleConfiguration``` instance when configuring the Castle SDK. All requests made using the shared NSURLSession (```URLSession.shared / [NSURLSession sharedSession]```) matching any of the base URLs provided in the ```baseURLWhitelist``` array will be intercepted and the required headers will automatically be added.
+
+If you're setting up your own NSURLSession you can use get a configuration object with the auto-forwarding enabled like this.
+
+##### Swift
+```swift
+let configuration = Castle.urlSessionInterceptConfiguration()
+```
+
+##### Objective-C
+```objective-c
+NSURLSessionConfiguration *configuration = [Castle urlSessionInterceptConfiguration]
+```
+
+The configuration can then be modified or left as is and provided when initializing the NSURLSession instance.
+
 #### Identify
 
 The identify call lets you tie a user to their action and record traits about them. We recommend calling it once after the user successfully logged in. The user_id will be persisted locally so subsequent calls to track and screen will automatically be tied to that user.
