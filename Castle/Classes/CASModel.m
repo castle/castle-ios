@@ -26,6 +26,11 @@
         if(error != nil) {
             CASLog(@"Seralization of object (%@) failed with error: %@", NSStringFromClass(self.class), error);
         }
+        
+        NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"];
+        data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+        
         return data;
     }
     return nil;
