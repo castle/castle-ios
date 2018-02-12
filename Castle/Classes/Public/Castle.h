@@ -17,6 +17,8 @@ FOUNDATION_EXPORT const unsigned char CastleVersionString[];
 
 @interface Castle : NSObject
 
++ (NSString *)versionString;
+
 #pragma mark - Configuration
     
 + (void)setupWithConfiguration:(CastleConfiguration *)configuration;

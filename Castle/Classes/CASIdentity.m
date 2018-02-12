@@ -7,7 +7,7 @@
 
 #import "CASIdentity.h"
 
-#import "CASDevice.h"
+#import "CASContext.h"
 #import "CASUtils.h"
 
 @interface CASIdentity ()
@@ -51,7 +51,7 @@
 - (id)JSONPayload
 {
     NSString *timestamp = [[CASModel timestampDateFormatter] stringFromDate:self.timestamp];
-    NSDictionary *context = @{ @"device": [[CASDevice sharedDevice] JSONPayload] };
+    NSDictionary *context = [[CASContext sharedContext] JSONPayload];
 
     return @{ @"type": @"identify",
               @"user_id": self.userId,

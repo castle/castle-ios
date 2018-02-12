@@ -32,8 +32,6 @@
               @"manufacturer": @"Apple",
               @"id": [Castle deviceIdentifier],
               @"name": [[UIDevice currentDevice] name],
-              @"system": [[UIDevice currentDevice] systemName],
-              @"system_version": [[UIDevice currentDevice] systemVersion],
               @"type": UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? @"tablet" : @"phone" };
 }
 
