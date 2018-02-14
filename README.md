@@ -7,15 +7,6 @@
 [![codecov](https://codecov.io/gh/castle/castle-ios/branch/master/graph/badge.svg)](https://codecov.io/gh/castle/castle-ios)
 [![Build Status](https://travis-ci.org/castle/castle-ios.svg?branch=master)](https://travis-ci.org/castle/castle-ios)
 
-- [Features](#features)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Usage](#usage)
-	- [Configuration](#configuration)
-	- [Identify](#identify)
-	- [Track Events](#track-events)
-	- [Track Screen Views](#track-screen-views)
-
 ## Requirements
 
 - iOS 9.0+ / tvOS 9.0+ / watchOS 2.0+
@@ -37,130 +28,100 @@ pod "Castle", "0.9.2"
 github "castle/castle-ios"
 ```
 
-### Usage
+### Configuration
 
-#### Configuration
-
-Configurating Castle is easy. Add the following snippet to your app delegate's ```application:didFinishLaunchingWithOptions:``` method.
+Add the following snippet to your app delegate's `application:didFinishLaunchingWithOptions:` method.
 
 ##### Swift
 
 ```swift
 import Castle
 
-// Create configuration
 let configuration = CastleConfiguration(publishableKey: "pk_373428597387773")
-configuration.isScreenTrackingEnabled = true
-configuration.isDebugLoggingEnabled = true
 
+// The URL of your API
+configuration.baseURLWhiteList = [URL(string: "https://api.example.com/")!] // Default: []
+configuration.isDeviceIDAutoForwardingEnabled = true                        // Default: false
+
+// Optional configuration
+configuration.isScreenTrackingEnabled = true                                // Default: true
+configuration.isDebugLoggingEnabled = true                                  // Default: false
+        
 // Setup Castle SDK with provided configuration
 Castle.setup(with: configuration)
 ```
+
 ##### Objective-C
 ```objective-c
 #import <Castle/Castle.h>
 
 // Create configuration object
-CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_373428597387773"];
-configuration.screenTrackingEnabled = YES;
-configuration.debugLoggingEnabled = YES;
-configuration.baseURLWhiteList = @[ [NSURL URLWithString:@"https://api.castle.io/"] ];
+CastleConfiguration *configuration =
+  [CastleConfiguration configurationWithPublishableKey:@"pk_373428597387773"];
+
+// The URL of your API
+configuration.baseURLWhiteList =
+  @[[NSURL URLWithString:@"https://api.example.com/"]];  // Default: []
+configuration.isDeviceIDAutoForwardingEnabled = YES      // Default: NO
+
+// Optional configuration
+configuration.screenTrackingEnabled = YES;               // Default: YES
+configuration.debugLoggingEnabled = YES;                 // Default: NO
     
 // Setup Castle SDK with provided configuration
 [Castle setupWithConfiguration:configuration];
 ```
 
-#### Device ID auto forwarding
-The device ID can be automatically forwarded by including your backend endpoint to the ```baseURLWhitelist``` array property and setting ```isDeviceIDAutoForwardingEnabled``` of your ```CastleConfiguration``` instance when configuring the Castle SDK. All requests made using the shared NSURLSession (```URLSession.shared / [NSURLSession sharedSession]```) matching any of the base URLs provided in the ```baseURLWhitelist``` array will be intercepted and the required headers will automatically be added.
+#### Client ID auto-forwarding
 
-If you're setting up your own NSURLSession you can use get a configuration object with the auto-forwarding enabled like this.
+The Client ID can be automatically forwarded by including your backend endpoint to the `baseURLWhitelist` array property and setting `isDeviceIDAutoForwardingEnabled` of your `CastleConfiguration` instance when configuring the SDK. All requests made using the shared NSURLSession (`URLSession.shared / [NSURLSession sharedSession]`) matching any of the base URLs provided in the `baseURLWhitelist` array will be intercepted and the `X-Castle-Client-Id` will automatically be added and then picked up by the server-side SDK.
+
+If you're setting up your own `NSURLSession` you can use get a configuration object with the auto-forwarding enabled like this.
 
 ##### Swift
+
 ```swift
 let configuration = Castle.urlSessionInterceptConfiguration()
 ```
 
 ##### Objective-C
+
 ```objective-c
 NSURLSessionConfiguration *configuration = [Castle urlSessionInterceptConfiguration]
 ```
 
-The configuration can then be modified or left as is and provided when initializing the NSURLSession instance.
+The configuration can then be modified or left as is and provided when initializing the `NSURLSession` instance.
 
 #### Identify
 
-The identify call lets you tie a user to their action and record traits about them. We recommend calling it once after the user successfully logged in. The user_id will be persisted locally so subsequent calls to track and screen will automatically be tied to that user.
+The `identify` call lets you tie a user to their action and should be called right after the user logged in successfully. The `user_id` will be persisted locally so subsequent calls `screen` will automatically be tied to that user.
 
 ##### Swift
 
 ```swift
-// Identify user with a unique identifier
 Castle.identify("1245-3055")
-
-// OR
-
-// Identify user with a unique identifier including user traits
-Castle.identify("1245-3055", traits: [ "email": "laura@example.com" ] )
 ```
+
 ##### Objective-C
+
 ```objective-c
-// Track an event
 [Castle identify:@"1245-3055"];
-
-// OR
-
-// Identify user with unique identifier including user traits
-[Castle identify:@"1245-3055" traits:@{ @"email": @"laura@example.com" }];
 ```
 
-#### Track Events
+#### Manually tracking screen views
 
-Track lets you record any actions your users perform, along with properties that describe the action. It could look something like this:
+The default behavior is to let the SDK automatically track screen views, but you can always disable `isScreenTrackingEnabled` and instead call `screen` for each screen view.
+
+Track screen view and include some properties (optional):
 
 ##### Swift
 
 ```swift
-// Track an event
-Castle.track("loginFormSubmitted")
-
-// OR
-
-// Track an event and include some properties
-Castle.track("loginFormSubmitted", properties: ["username": "laura"])
+Castle.screen("Menu", properties: ["role": "Admin"])
 ```
+
 ##### Objective-C
+
 ```objective-c
-// Track an event
-[Castle track:@"loginFormSubmitted"];
-
-// OR
-
-// Track an event and include some properties
-[Castle track:@"loginFormSubmitted" properties:@{ @"username": @"laura" }];
-```
-
-#### Track Screen Views
-
-The screen call lets you record whenever a user sees a screen. It could look something like this:
-
-##### Swift
-
-```swift
-// Track a screen view
-Castle.screen("Menu")
-
-// OR
-
-// Track screen view and include some properties
-Castle.screen("Menu", properties: ["locale": "en_US"])
-```
-##### Objective-C
-```objective-c
-// Track a screen view
-[Castle screen:@"Menu"];
-
-// OR
-
-// Track a screen view and include some properties
-[Castle screen:@"Menu" properties:@{ @"locale": @"en_US" }];
+[Castle screen:@"Menu" properties:@{ @"role": @"Admin" }];
 ```
