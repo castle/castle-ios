@@ -53,7 +53,7 @@
     context[@"os"] = @{ @"name": [[UIDevice currentDevice] systemName],
                         @"version": [[UIDevice currentDevice] systemVersion] };
     
-    context[@"library"] = @{ @"name": @"Castle iOS",
+    context[@"library"] = @{ @"name": @"castle-ios",
                              @"version": [Castle versionString] };
     
     return context;
