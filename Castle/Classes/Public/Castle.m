@@ -144,12 +144,6 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return _userIdentity;
 }
 
-+ (NSDictionary <NSString *, id> *)headers
-{
-    Castle *castle = [Castle sharedInstance];
-    return @{ CASCastleDeviceIdHeaderKey: castle.deviceIdentifier };
-}
-
 + (BOOL)isWifiAvailable
 {
     return [Castle sharedInstance].reachability.isReachableViaWiFi;
