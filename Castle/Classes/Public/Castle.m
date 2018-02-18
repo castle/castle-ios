@@ -9,7 +9,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import <CoreTelephony/CTCarrier.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+
 #import "CASAPIClient.h"
+#import "CASReachability.h"
 #import "CASUtils.h"
 #import "CASEvent.h"
 #import "CASIdentity.h"
@@ -22,7 +26,9 @@
 NSString *const CastleUserIdentifierKey = @"CastleUserIdentifierKey";
 NSString *const CastleAppVersionKey = @"CastleAppVersionKey";
 
-static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Client-Id";
+NSString *const CASCastleDeviceIdHeaderKey = @"X-Castle-Client-Id";
+
+static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 @interface Castle ()
 @property (nonatomic, strong) CASAPIClient *client;
@@ -31,6 +37,7 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Client-Id";
 @property (nonatomic, strong) NSMutableArray *eventQueue;
 @property (nonatomic, copy, readwrite) NSString *userIdentity;
 @property (nonatomic, assign, readonly) NSUInteger maxBatchSize;
+@property (nonatomic, strong, readwrite) CASReachability *reachability;
 @end
 
 @implementation Castle
@@ -75,6 +82,9 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Client-Id";
     castle.client = [CASAPIClient clientWithConfiguration:configuration];
     castle.configuration = configuration;
 
+    castle.reachability = [CASReachability reachabilityWithHostname:@"google.com"];
+    [castle.reachability startNotifier];
+    
     // Initialize interceptor
     if(configuration.isDeviceIDAutoForwardingEnabled) {
         [NSURLProtocol registerClass:[CASRequestInterceptor class]];
@@ -100,6 +110,11 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Client-Id";
 }
 
 #pragma mark - Getters
+
++ (NSString *)versionString
+{
+    return @"0.9.7";
+}
 
 - (NSString *)deviceIdentifier
 {
@@ -129,10 +144,25 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Client-Id";
     return _userIdentity;
 }
 
-+ (NSDictionary <NSString *, id> *)headers
++ (BOOL)isWifiAvailable
 {
-    Castle *castle = [Castle sharedInstance];
-    return @{ CASCastleDeviceIdHeaderKey: castle.deviceIdentifier };
+    return [Castle sharedInstance].reachability.isReachableViaWiFi;
+}
+
++ (BOOL)isCellularAvailable
+{
+    return [Castle sharedInstance].reachability.isReachableViaWWAN;
+}
+
++ (NSString *)carrierName
+{
+    static dispatch_once_t networkInfoOnceToken;
+    dispatch_once(&networkInfoOnceToken, ^{
+        _telephonyNetworkInfo = [[CTTelephonyNetworkInfo alloc] init];
+    });
+    
+    CTCarrier *carrier = [_telephonyNetworkInfo subscriberCellularProvider];
+    return carrier.carrierName.length > 0 ? carrier.carrierName : @"unknown";
 }
 
 #pragma mark - Setters
@@ -251,6 +281,13 @@ static NSString *CASCastleDeviceIdHeaderKey = @"X-Castle-Client-Id";
     }];
 
     [castle.task resume];
+}
+
++ (void)flushIfNeeded:(NSURL *)url
+{
+    if([self isWhitelistURL:url]) {
+        [self flush];
+    }
 }
 
 + (void)reset

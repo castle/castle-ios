@@ -15,7 +15,11 @@ FOUNDATION_EXPORT const unsigned char CastleVersionString[];
 
 #import "CastleConfiguration.h"
 
+extern NSString *const CASCastleDeviceIdHeaderKey;
+
 @interface Castle : NSObject
+
++ (NSString *)versionString;
 
 #pragma mark - Configuration
     
@@ -34,6 +38,7 @@ FOUNDATION_EXPORT const unsigned char CastleVersionString[];
 + (void)screen:(NSString *)eventName properties:(NSDictionary *)properties;
 
 + (void)flush;
++ (void)flushIfNeeded:(NSURL *)url;
 + (void)reset;
 
 + (BOOL)isWhitelistURL:(NSURL *)url;
@@ -42,6 +47,5 @@ FOUNDATION_EXPORT const unsigned char CastleVersionString[];
     
 + (NSString *)deviceIdentifier;
 + (NSString *)userIdentity;
-+ (NSDictionary <NSString *, NSString *> *)headers;
     
 @end

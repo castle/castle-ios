@@ -8,7 +8,7 @@
 #import "CASEvent.h"
 
 #import "CASUtils.h"
-#import "CASDevice.h"
+#import "CASContext.h"
 #import "Castle.h"
 
 @interface CASEvent ()
@@ -83,7 +83,7 @@
 - (id)JSONPayload
 {
     NSString *timestamp = [[CASModel timestampDateFormatter] stringFromDate:self.timestamp];
-    NSDictionary *context = @{ @"device": [[CASDevice sharedDevice] JSONPayload] };
+    NSDictionary *context = [[CASContext sharedContext] JSONPayload];
 
     NSMutableDictionary *payload = @{ @"type": self.type,
                                       @"event": self.name,

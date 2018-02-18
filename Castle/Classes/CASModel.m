@@ -26,6 +26,11 @@
         if(error != nil) {
             CASLog(@"Seralization of object (%@) failed with error: %@", NSStringFromClass(self.class), error);
         }
+        
+        NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"];
+        data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+        
         return data;
     }
     return nil;
@@ -38,7 +43,7 @@
     dispatch_once(&onceToken, ^{
         _timestampDateFormatter = [[NSDateFormatter alloc] init];
         [_timestampDateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-        [_timestampDateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
+        [_timestampDateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
     });
     return _timestampDateFormatter;
 }

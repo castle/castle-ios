@@ -49,10 +49,8 @@ static NSString *CASRecursiveRequestFlagProperty = @"com.castle.CASRequestInterc
     NSMutableURLRequest *newRequest = [self.request mutableCopy];
     [NSURLProtocol setProperty:@YES forKey:CASRecursiveRequestFlagProperty inRequest:newRequest];
     
-    // Set custom headers
-    [[Castle headers] enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL* stop) {
-        [newRequest setValue:value forHTTPHeaderField:key];
-    }];
+    // Set custom header
+    [newRequest setValue:[Castle deviceIdentifier] forHTTPHeaderField:CASCastleDeviceIdHeaderKey];
     
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     config.protocolClasses = [config.protocolClasses arrayByAddingObject:self.class];
@@ -74,10 +72,8 @@ static NSString *CASRecursiveRequestFlagProperty = @"com.castle.CASRequestInterc
     if (response) {
         NSMutableURLRequest *redirectRequest = [newRequest mutableCopy];
         
-        // Set custom headers
-        [[Castle headers] enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL* stop) {
-            [redirectRequest setValue:value forHTTPHeaderField:key];
-        }];
+        // Set custom header
+        [redirectRequest setValue:[Castle deviceIdentifier] forHTTPHeaderField:CASCastleDeviceIdHeaderKey];
         
         [[self client] URLProtocol:self wasRedirectedToRequest:redirectRequest redirectResponse:response];
         
