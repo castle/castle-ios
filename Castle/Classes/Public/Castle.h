@@ -15,6 +15,8 @@ FOUNDATION_EXPORT const unsigned char CastleVersionString[];
 
 #import "CastleConfiguration.h"
 
+extern NSString *const CASCastleDeviceIdHeaderKey;
+
 @interface Castle : NSObject
 
 + (NSString *)versionString;
@@ -45,6 +47,5 @@ FOUNDATION_EXPORT const unsigned char CastleVersionString[];
     
 + (NSString *)deviceIdentifier;
 + (NSString *)userIdentity;
-+ (NSDictionary <NSString *, NSString *> *)headers;
     
 @end

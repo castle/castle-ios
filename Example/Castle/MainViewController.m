@@ -33,14 +33,14 @@
     NSURL *url = [NSURL URLWithString:@"https://google.com"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     
-    // Get required headers from the Castle SDK if you don't want to use the request interceptor
-    [Castle.headers enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull value, BOOL * _Nonnull stop) {
-        [request addValue:value forHTTPHeaderField:key];
-    }];
+    // Get required header from the Castle SDK if you don't want to use the request interceptor
+    [request setValue:[Castle deviceIdentifier] forHTTPHeaderField:CASCastleDeviceIdHeaderKey];
     
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSLog(@"Response: %@, Error: %@", response, error);
     }] resume];
+    
+    [Castle flushIfNeeded:url];
 }
 
 - (IBAction)flush:(id)sender {
