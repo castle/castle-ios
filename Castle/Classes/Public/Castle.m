@@ -289,6 +289,13 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     [castle.task resume];
 }
 
++ (void)flushIfNeeded:(NSURL *)url
+{
+    if([self isWhitelistURL:url]) {
+        [self flush];
+    }
+}
+
 + (void)reset
 {
     Castle *castle = [Castle sharedInstance];

@@ -36,6 +36,7 @@ FOUNDATION_EXPORT const unsigned char CastleVersionString[];
 + (void)screen:(NSString *)eventName properties:(NSDictionary *)properties;
 
 + (void)flush;
++ (void)flushIfNeeded:(NSURL *)url;
 + (void)reset;
 
 + (BOOL)isWhitelistURL:(NSURL *)url;
