@@ -19,7 +19,7 @@ Castle is available through [CocoaPods](http://cocoapods.org) and [Carthage](htt
 ### CocoaPods
 
 ```
-pod "Castle", "0.9.2"
+pod "Castle", "0.9.7"
 ```
 
 ### Carthage
@@ -91,6 +91,26 @@ NSURLSessionConfiguration *configuration = [Castle urlSessionInterceptConfigurat
 ```
 
 The configuration can then be modified or left as is and provided when initializing the `NSURLSession` instance.
+
+#### Manual Client ID forwarding
+
+If you don't want to use the auto forwarding functionality you can easily add the required header when creating your requests. When using NSURLRequest it can easily be added according to the following examples.
+
+##### Swift
+
+```swift
+request.setValue(Castle.deviceIdentifier, forHTTPHeaderField: CASCastleDeviceIdHeaderKey)
+```
+
+##### Objective-C
+
+```objective-c
+[request setValue:[Castle deviceIdentifier] forHTTPHeaderField:CASCastleDeviceIdHeaderKey];
+```
+
+##### Flushing
+
+Remember to flush the queue after starting a request. This can be done by calling the ```flushIfNeeded``` method. It takes the url as an argument and will automatically flush the queue if the url matches a base url in the whitelist.
 
 #### Identify
 
