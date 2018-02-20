@@ -75,7 +75,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 #pragma mark - Configuration
 
-+ (void)setupWithConfiguration:(CastleConfiguration *)configuration
++ (void)configure:(CastleConfiguration *)configuration
 {
     // Setup shared instance using provided configuration
     Castle *castle = [Castle sharedInstance];
@@ -412,7 +412,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 #pragma mark - Metadata
 
-+ (NSString *)deviceIdentifier
++ (NSString *)clientId
 {
     return [Castle sharedInstance].deviceIdentifier;
 }
