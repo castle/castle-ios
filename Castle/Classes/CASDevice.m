@@ -30,7 +30,7 @@
 {
     return @{ @"model": [CASDevice deviceModel],
               @"manufacturer": @"Apple",
-              @"id": [Castle deviceIdentifier],
+              @"id": [Castle clientId],
               @"name": [[UIDevice currentDevice] name],
               @"type": UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? @"tablet" : @"phone" };
 }
