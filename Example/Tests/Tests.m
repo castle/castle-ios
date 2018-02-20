@@ -69,7 +69,7 @@
     XCTAssertFalse([Castle isWhitelistURL:nil]);
 
     // Setup Castle SDK with provided configuration
-    [Castle setupWithConfiguration:configuration];
+    [Castle configure:configuration];
 
     // Set current app version to semething old
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -77,13 +77,13 @@
     [defaults synchronize];
 
     // Setup Castle SDK with provided configuration
-    [Castle setupWithConfiguration:configuration];
+    [Castle configure:configuration];
 }
 
 - (void)testDeviceIdentifier
 {
     // Check device ID
-    XCTAssertNotNil([Castle deviceIdentifier]);
+    XCTAssertNotNil([Castle clientId]);
 }
 
 - (void)testUserIdPersistance
@@ -280,10 +280,8 @@
 
 - (void)testDefaultHeaders
 {
-    NSDictionary *headers = [Castle headers];
-    XCTAssertNotNil(headers);
-    XCTAssertNotNil(headers[@"X-Castle-Client-Id"]);
-    XCTAssertTrue([headers[@"X-Castle-Client-Id"] isEqualToString:[Castle deviceIdentifier]]);
+    XCTAssertNotNil([Castle clientId]);
+    XCTAssertTrue([CastleClientIdHeaderName isEqualToString:@"X-Castle-Client-Id"]);
 }
 
 - (void)testRequestInterceptor
