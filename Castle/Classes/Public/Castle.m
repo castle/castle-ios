@@ -26,7 +26,7 @@
 NSString *const CastleUserIdentifierKey = @"CastleUserIdentifierKey";
 NSString *const CastleAppVersionKey = @"CastleAppVersionKey";
 
-NSString *const CASCastleDeviceIdHeaderKey = @"X-Castle-Client-Id";
+NSString *const CastleClientIdHeaderName = @"X-Castle-Client-Id";
 
 static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 

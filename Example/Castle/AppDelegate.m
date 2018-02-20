@@ -21,7 +21,7 @@
     configuration.baseURLWhiteList = @[ [NSURL URLWithString:@"https://google.com/"] ];
     
     // Setup Castle SDK with provided configuration
-    [Castle setupWithConfiguration:configuration];
+    [Castle configure:configuration];
     
     return YES;
 }

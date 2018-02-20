@@ -15,7 +15,7 @@ FOUNDATION_EXPORT const unsigned char CastleVersionString[];
 
 #import "CastleConfiguration.h"
 
-extern NSString *const CASCastleDeviceIdHeaderKey;
+extern NSString *const CastleClientIdHeaderName;
 
 @interface Castle : NSObject
 
@@ -23,7 +23,7 @@ extern NSString *const CASCastleDeviceIdHeaderKey;
 
 #pragma mark - Configuration
     
-+ (void)setupWithConfiguration:(CastleConfiguration *)configuration;
++ (void)configure:(CastleConfiguration *)configuration;
 + (NSURLSessionConfiguration *)urlSessionInterceptConfiguration;
 
 #pragma mark - Tracking
@@ -45,7 +45,7 @@ extern NSString *const CASCastleDeviceIdHeaderKey;
 
 #pragma mark - Metadata
     
-+ (NSString *)deviceIdentifier;
++ (NSString *)clientId;
 + (NSString *)userIdentity;
     
 @end
