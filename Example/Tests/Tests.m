@@ -70,6 +70,9 @@
 
     // Setup Castle SDK with provided configuration
     [Castle configure:configuration];
+    
+    // Setup Castle SDK with publishable key
+    [Castle configureWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
 
     // Set current app version to semething old
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

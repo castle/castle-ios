@@ -24,6 +24,7 @@ extern NSString *const CastleClientIdHeaderName;
 #pragma mark - Configuration
     
 + (void)configure:(CastleConfiguration *)configuration;
++ (void)configureWithPublishableKey:(NSString *)publishableKey;
 + (NSURLSessionConfiguration *)urlSessionInterceptConfiguration;
 
 #pragma mark - Tracking

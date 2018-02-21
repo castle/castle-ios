@@ -102,6 +102,12 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     [castle trackApplicationUpdated];
 }
 
++ (void)configureWithPublishableKey:(NSString *)publishableKey
+{
+    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:publishableKey];
+    [Castle configure:configuration];
+}
+
 + (NSURLSessionConfiguration *)urlSessionInterceptConfiguration
 {
     NSURLSessionConfiguration *configuration = NSURLSessionConfiguration.defaultSessionConfiguration;
