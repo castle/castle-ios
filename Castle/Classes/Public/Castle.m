@@ -119,7 +119,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 + (NSString *)versionString
 {
-    return @"0.9.7";
+    return @"0.9.9";
 }
 
 - (NSString *)deviceIdentifier
