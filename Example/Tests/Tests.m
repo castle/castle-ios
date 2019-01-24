@@ -298,6 +298,39 @@
     XCTAssertEqual([CASRequestInterceptor canonicalRequestForRequest:request2], request2);
 
     XCTAssertTrue([CASRequestInterceptor requestIsCacheEquivalent:request2 toRequest:request2]);
+    
+    NSURLSession *urlSession = [NSURLSession sessionWithConfiguration:[Castle urlSessionInterceptConfiguration]];
+    XCTAssertNotNil(urlSession);
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Test interceptor: google.com"];
+    
+    NSURL *url = [NSURL URLWithString:@"https://google.com"];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    
+    // Get required header from the Castle SDK if you don't want to use the request interceptor
+    [request setValue:[Castle clientId] forHTTPHeaderField:CastleClientIdHeaderName];
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        XCTAssertNil(error, "error should be nil");
+        
+        if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+            XCTAssertEqual(httpResponse.statusCode, 200, @"HTTP response status code should be 202");
+        } else {
+            XCTFail(@"Response was not NSHTTPURLResponse");
+        }
+
+        [expectation fulfill];
+    }];
+    [task resume];
+    
+    [self waitForExpectationsWithTimeout:task.originalRequest.timeoutInterval handler:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"Error: %@", error.localizedDescription);
+        }
+        [task cancel];
+    }];
 }
 
 - (void)testNetworking
