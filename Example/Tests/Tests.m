@@ -15,6 +15,9 @@
 #import <Castle/CASRequestInterceptor.h>
 #import <Castle/CASAPIClient.h>
 #import <Castle/UIViewController+CASScreen.h>
+#import <Castle/CASReachability.h>
+
+#include <arpa/inet.h>
 
 #import "MainViewController.h"
 
@@ -81,6 +84,74 @@
 
     // Setup Castle SDK with provided configuration
     [Castle configure:configuration];
+}
+
+- (void)testReachabilityInit
+{
+    CASReachability *reachability = [CASReachability reachabilityForLocalWiFi];
+    XCTAssertNotNil(reachability);
+    
+    reachability = [CASReachability reachabilityForInternetConnection];
+    XCTAssertNotNil(reachability);
+    
+    struct sockaddr_in address;
+    address.sin_len = sizeof(address);
+    address.sin_family = AF_INET;
+    address.sin_port = htons(8080);
+    address.sin_addr.s_addr = inet_addr("216.58.199.174"); // Google IP
+    reachability = [CASReachability reachabilityWithAddress:&address];
+    XCTAssertNotNil(reachability);
+}
+
+- (void)testReachabilityValidHostname
+{
+    // Test valid Host name
+    CASReachability *reachability = [CASReachability reachabilityWithHostName:@"google.com"];
+    XCTAssertNotNil(reachability);
+    
+    // Test reachable getters
+    XCTAssertTrue([reachability reachableOnWWAN]);
+    XCTAssertTrue([reachability isReachableViaWiFi]);
+    XCTAssertTrue([reachability isReachable]);
+    
+    XCTAssertFalse([reachability isConnectionRequired]);
+    XCTAssertFalse([reachability isConnectionOnDemand]);
+    XCTAssertFalse([reachability isInterventionRequired]);
+    
+    XCTAssertNotNil([reachability currentReachabilityString]);
+    XCTAssertNotNil([reachability currentReachabilityFlags]);
+    XCTAssertNotNil([reachability description]);
+    
+    XCTAssertTrue([reachability currentReachabilityStatus] != NotReachable);
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Reachable expectation"];
+    [reachability setReachableBlock:^(CASReachability *reachability) {
+        [expectation fulfill];
+    }];
+    
+    [reachability startNotifier];
+   
+    [self waitForExpectationsWithTimeout:5 handler:nil];
+    
+    [reachability stopNotifier];
+}
+
+- (void)testReachabilityInvalidHostname
+{
+    // Test invalid Host name
+    CASReachability *reachability = [CASReachability reachabilityWithHostName:@"invalidhost"];
+    XCTAssertNotNil(reachability);
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Unreachable expectation"];
+    [reachability setUnreachableBlock:^(CASReachability *reachability) {
+        [expectation fulfill];
+    }];
+    
+    [reachability startNotifier];
+    
+    [self waitForExpectationsWithTimeout:5 handler:nil];
+    
+    [reachability stopNotifier];
 }
 
 - (void)testDeviceIdentifier
@@ -324,6 +395,8 @@
         [expectation fulfill];
     }];
     [task resume];
+    
+    [Castle flushIfNeeded:url];
     
     [self waitForExpectationsWithTimeout:task.originalRequest.timeoutInterval handler:^(NSError *error) {
         if (error != nil) {
