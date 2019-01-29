@@ -84,12 +84,6 @@
 
     // Setup Castle SDK with publishable key
     [Castle configureWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
-
-    // Set current app version to semething old
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:@"0.1.1" forKey:@"CastleAppVersionKey"];
-    [defaults synchronize];
-
     
     // Configuration reset
     [Castle resetConfiguration];
@@ -484,5 +478,22 @@
     // The queue size should still be equal to maxQueueLimit
     XCTAssertTrue(configuration.maxQueueLimit == [Castle queueSize]);
 }
+
+- (void)testAppUpdateDetection
+{
+    // Set current app version to semething old
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"0.1.1" forKey:@"CastleAppVersionKey"];
+    [defaults synchronize];
+    
+    [Castle resetConfiguration];
+    [Castle configureWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    
+    // Check to see if the installed version was updated correctly i.e. the SDK detected an app update.
+    NSString *currentVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSString *installedVersion = [defaults objectForKey:@"CastleAppVersionKey"];
+    XCTAssertEqual(currentVersion, installedVersion);
+}
+
 @end
 
