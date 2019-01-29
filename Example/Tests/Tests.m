@@ -48,8 +48,20 @@
 {
     NSArray *baseURLWhiteList = @[ [NSURL URLWithString:@"https://google.com/"] ];
 
+    // Make sure to reset configuration
+    [Castle resetConfiguration];
+    
     // Create configuration object
     CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    
+    // Check that all default values are set correctly
+    XCTAssertEqual(configuration.screenTrackingEnabled, YES);
+    XCTAssertEqual(configuration.debugLoggingEnabled, NO);
+    XCTAssertEqual(configuration.flushLimit, 20);
+    XCTAssertEqual(configuration.maxQueueLimit, 1000);
+    XCTAssertNil(configuration.baseURLWhiteList);
+    
+    // Update configuration
     configuration.screenTrackingEnabled = YES;
     configuration.debugLoggingEnabled = YES;
     configuration.deviceIDAutoForwardingEnabled = YES;
@@ -68,12 +80,6 @@
     [configuration setBaseURLWhiteList:@[ [NSURL URLWithString:@"https://google.com/somethingelse"]]];
     XCTAssertFalse([configuration.baseURLWhiteList[0].absoluteString isEqualToString:@"https://google.com/somethingelse"]);
 
-    XCTAssertTrue([Castle isWhitelistURL:[NSURL URLWithString:@"https://google.com/somethingelse"]]);
-    XCTAssertFalse([Castle isWhitelistURL:nil]);
-
-    // Setup Castle SDK with provided configuration
-    [Castle configure:configuration];
-    
     // Setup Castle SDK with publishable key
     [Castle configureWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
 
@@ -82,8 +88,17 @@
     [defaults setObject:@"0.1.1" forKey:@"CastleAppVersionKey"];
     [defaults synchronize];
 
+    
+    // Configuration reset
+    [Castle resetConfiguration];
+    XCTAssertFalse([Castle isWhitelistURL:[NSURL URLWithString:@"https://google.com/somethingelse"]]);
+    
     // Setup Castle SDK with provided configuration
     [Castle configure:configuration];
+    
+    // Check whitelisting on configured instance
+    XCTAssertTrue([Castle isWhitelistURL:[NSURL URLWithString:@"https://google.com/somethingelse"]]);
+    XCTAssertFalse([Castle isWhitelistURL:nil]);
 }
 
 - (void)testReachabilityInit
