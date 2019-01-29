@@ -49,5 +49,6 @@ extern NSString *const CastleClientIdHeaderName;
     
 + (NSString *)clientId;
 + (NSString *)userIdentity;
++ (NSUInteger)queueSize;
     
 @end

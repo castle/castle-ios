@@ -464,4 +464,9 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return [Castle sharedInstance].userIdentity;
 }
 
++ (NSUInteger)queueSize
+{
+    return [Castle sharedInstance].eventQueue.count;
+}
+
 @end
