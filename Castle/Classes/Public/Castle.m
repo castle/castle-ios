@@ -338,6 +338,9 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         return;
     }
 
+    // Trim queue before adding element to make sure it never exceeds maxQueueLimit
+    [self trimQueue];
+    
     // Add event to the queue
     CASLog(@"Queing event: %@", event);
     [self.eventQueue addObject:event];
@@ -351,6 +354,22 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         CASLog(@"Event queue exceeded flush limit (%ld). Flushing events.", [Castle sharedInstance].configuration.flushLimit);
         [self.class flush];
     }
+}
+
+- (void)trimQueue
+{
+    // Trim queue to maxQueueLimit - 1. This method is only called when queuing an event
+    NSUInteger maxQueueLimit = self.configuration.maxQueueLimit - 1;
+    
+    // If the queue doesn't exceed maxQueueLimit just return
+    if(self.eventQueue.count < maxQueueLimit) {
+        return;
+    }
+    
+    // Remove the oldest excess events from the queue
+    NSRange trimRange = NSMakeRange(0, self.eventQueue.count - maxQueueLimit);
+    CASLog(@"Will trim %ld events from queue.", trimRange.length);
+    [self.eventQueue removeObjectsInRange:trimRange];
 }
 
 - (void)persistQueue
