@@ -339,7 +339,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     }
 
     // Add event to the queue
-    CASLog(@"Qeueing event: %@", event);
+    CASLog(@"Queing event: %@", event);
     [self.eventQueue addObject:event];
 
     // Persist queue to disk
@@ -347,7 +347,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
     // Flush queue if the number of events exceeds the flush limit
     if(self.eventQueue.count >= self.configuration.flushLimit) {
-        // very first event should be fired immidtaley
+        // very first event should be fired immediately
         CASLog(@"Event queue exceeded flush limit (%ld). Flushing events.", [Castle sharedInstance].configuration.flushLimit);
         [self.class flush];
     }
