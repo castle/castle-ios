@@ -108,6 +108,23 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     [Castle configure:configuration];
 }
 
++ (void)resetConfiguration
+{
+    Castle *castle = [Castle sharedInstance];
+    CastleConfiguration *configuration = castle.configuration;
+    
+    // Reset Castle shared instance properties
+    castle.client = nil;
+    castle.configuration = nil;
+    castle.reachability = nil;
+    CASEnableDebugLogging(NO);
+    
+    // Unregister request interceptor
+    if(configuration.isDeviceIDAutoForwardingEnabled) {
+        [NSURLProtocol unregisterClass:[CASRequestInterceptor class]];
+    }
+}
+
 + (NSURLSessionConfiguration *)urlSessionInterceptConfiguration
 {
     NSURLSessionConfiguration *configuration = NSURLSessionConfiguration.defaultSessionConfiguration;
