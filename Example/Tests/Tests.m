@@ -66,6 +66,7 @@
     configuration.debugLoggingEnabled = YES;
     configuration.deviceIDAutoForwardingEnabled = YES;
     configuration.flushLimit = 10;
+    configuration.maxQueueLimit = 20;
     configuration.baseURLWhiteList = baseURLWhiteList;
 
     // Check that all the configuration parameters where set correctly
@@ -74,6 +75,7 @@
     XCTAssertEqual(configuration.debugLoggingEnabled, YES);
     XCTAssertEqual(configuration.deviceIDAutoForwardingEnabled, YES);
     XCTAssertEqual(configuration.flushLimit, 10);
+    XCTAssertEqual(configuration.maxQueueLimit, 20);
     XCTAssertEqual(configuration.baseURLWhiteList.count, 1);
     XCTAssertTrue([configuration.baseURLWhiteList[0].absoluteString isEqualToString:@"https://google.com/"]);
 
@@ -456,5 +458,31 @@
     }];
 }
 
+- (void)testMaxQueueLength
+{
+    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    
+    // Update configuration and set max queue limit to less than the flush limit.
+    configuration.debugLoggingEnabled = YES;
+    configuration.flushLimit = 10;
+    configuration.maxQueueLimit = 8;
+    
+    [Castle configure:configuration];
+    
+    // Fill the queue
+    for (int i = 0; i < configuration.maxQueueLimit; i++) {
+        [Castle track:[NSString stringWithFormat:@"Event %d", i]];
+    }
+    
+    // The queue size should be equal to maxQueueLimit
+    XCTAssertTrue(configuration.maxQueueLimit == [Castle queueSize]);
+    
+    // Track a new event so the maxQueueLimit is reached
+    [Castle track:@"New event"];
+    
+    // Add one more event so the oldest event in the queue is evicted
+    // The queue size should still be equal to maxQueueLimit
+    XCTAssertTrue(configuration.maxQueueLimit == [Castle queueSize]);
+}
 @end
 
