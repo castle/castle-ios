@@ -371,6 +371,20 @@
 
 - (void)testRequestInterceptor
 {
+    // Create configuration object
+    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    
+    NSArray *baseURLWhiteList = @[ [NSURL URLWithString:@"https://google.com/"] ];
+    
+    // Update configuration
+    configuration.screenTrackingEnabled = YES;
+    configuration.debugLoggingEnabled = YES;
+    configuration.deviceIDAutoForwardingEnabled = YES;
+    configuration.flushLimit = 10;
+    configuration.baseURLWhiteList = baseURLWhiteList;
+    
+    [Castle configure:configuration];
+    
     NSURLRequest *request1 = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://google.com/"]];
     XCTAssertTrue([CASRequestInterceptor canInitWithRequest:request1]);
     XCTAssertEqual([CASRequestInterceptor canonicalRequestForRequest:request1], request1);
