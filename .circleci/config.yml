@@ -21,6 +21,11 @@ jobs:
             curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
             pod install --project-directory=Example
 
+      # Lint Podfile
+      - run:
+          name: Lint Podfile
+          command: pod lib lint --allow-warnings
+
       # Build the app and run tests
       - run:
           name: Build and run tests
