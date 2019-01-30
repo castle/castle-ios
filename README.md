@@ -5,7 +5,7 @@
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Castle.svg)](https://img.shields.io/cocoapods/v/Castle.svg)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![codecov](https://codecov.io/gh/castle/castle-ios/branch/master/graph/badge.svg)](https://codecov.io/gh/castle/castle-ios)
-[![Build Status](https://travis-ci.org/castle/castle-ios.svg?branch=master)](https://travis-ci.org/castle/castle-ios)
+[![CircleCI](https://circleci.com/gh/castle/castle-ios.svg?style=svg)](https://circleci.com/gh/castle/castle-ios)
 
 ## Requirements
 
