@@ -20,7 +20,7 @@ jobs:
       # Install CocoaPods
       - run:
           name: Install CocoaPods
-          command: pod install
+          command: pod install --project-directory=Example
 
       # Build the app and run tests
       - run:
