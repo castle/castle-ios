@@ -11,7 +11,7 @@ jobs:
     # Specify the Xcode version to use
     macos:
       xcode: "8.3.3"
-      working_directory: /Users/distiller/project
+    working_directory: /Users/distiller/project
     environment:
       FL_OUTPUT_DIR: output
 
@@ -45,5 +45,5 @@ jobs:
           path: output
 
       - codecov/upload:
-          file: output/
+          file: output/report.junit
 
