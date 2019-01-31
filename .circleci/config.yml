@@ -12,8 +12,6 @@ jobs:
     macos:
       xcode: "8.3.3"
     working_directory: /Users/distiller/project
-    environment:
-      FL_OUTPUT_DIR: output
 
     steps:
       - checkout
@@ -39,11 +37,11 @@ jobs:
             SCAN_SCHEME: Castle-Example
 
       - store_test_results:
-          path: output/scan
+          path: test_output/scan
 
       - store_artifacts:
-          path: output
+          path: test_output
 
       - codecov/upload:
-          file: output/report.junit
+          file: test_output/report.junit
 
