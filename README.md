@@ -4,6 +4,7 @@
 
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Castle.svg)](https://img.shields.io/cocoapods/v/Castle.svg)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![License](https://img.shields.io/cocoapods/l/Castle.svg?style=flat)](http://cocoapods.org/pods/Castle)
 [![codecov](https://codecov.io/gh/castle/castle-ios/branch/master/graph/badge.svg)](https://codecov.io/gh/castle/castle-ios)
 [![CircleCI](https://circleci.com/gh/castle/castle-ios.svg?style=svg)](https://circleci.com/gh/castle/castle-ios)
 
