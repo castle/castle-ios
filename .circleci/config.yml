@@ -1,16 +1,11 @@
-# iOS CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/ios-migrating-from-1-2/ for more details
-#
-version: 2.1
-orbs:
-  codecov: codecov/codecov@1.0.3
+version: 2.0
+
 jobs:
   build:
 
     # Specify the Xcode version to use
     macos:
-      xcode: "8.3.3"
+      xcode: "10.1.0"
     working_directory: /Users/distiller/project
 
     steps:
@@ -36,12 +31,21 @@ jobs:
             SCAN_DEVICE: iPhone 6
             SCAN_SCHEME: Castle-Example
 
+      # Upload code coverage results to codecov.io
+      - run: 
+          name: Upload code coverage results
+          command: bash <(curl -s https://codecov.io/bash)
+
+      # Store artifacts
       - store_test_results:
-          path: test_output/scan
+          path: test_output
 
       - store_artifacts:
           path: test_output
+          destination: test-output
 
-      - codecov/upload:
-          file: test_output/report.junit
+      - store_artifacts:
+          path: ~/Library/Logs/scan
+          destination: scan-logs
+
 
