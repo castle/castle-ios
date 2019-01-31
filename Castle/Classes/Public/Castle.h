@@ -25,6 +25,7 @@ extern NSString *const CastleClientIdHeaderName;
     
 + (void)configure:(CastleConfiguration *)configuration;
 + (void)configureWithPublishableKey:(NSString *)publishableKey;
++ (void)resetConfiguration;
 + (NSURLSessionConfiguration *)urlSessionInterceptConfiguration;
 
 #pragma mark - Tracking
@@ -48,5 +49,6 @@ extern NSString *const CastleClientIdHeaderName;
     
 + (NSString *)clientId;
 + (NSString *)userIdentity;
++ (NSUInteger)queueSize;
     
 @end
