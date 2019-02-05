@@ -275,12 +275,14 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         CASLog(@"Identify called without secure mode signature set. If secure mode is enabled in Castle and identify is called before secure, the identify event will be discarded.");
     }
     
-    [castle setUserId:userId];
     CASIdentity *identity = [CASIdentity identityWithUserId:userId traits:traits];
-    [castle queueEvent:identity];
-
-    // Identify call will always flush
-    [Castle flush];
+    if(identity != nil) {
+        [castle setUserId:userId];
+        [castle queueEvent:identity];
+        
+        // Identify call will always flush
+        [Castle flush];
+    }
 }
 
 + (void)secure:(NSString *)signature
