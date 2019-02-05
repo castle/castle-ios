@@ -95,7 +95,13 @@
     if(identity) {
         payload[@"user_id"] = identity;
     }
-    return payload.copy;
+    
+    NSString *signature = [Castle signature];
+    if(signature != nil) {
+        payload[@"signature"] = signature;
+    }
+    
+    return [payload copy];
 }
 
 #pragma mark - Getters

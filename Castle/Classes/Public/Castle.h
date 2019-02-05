@@ -103,6 +103,16 @@ extern NSString *const CastleClientIdHeaderName;
  @endcode
  */
 + (void)identify:(NSString *)identifier traits:(NSDictionary *)traits;
+/**
+ Set signature and enable secure mode. Signature will be included in all events after it has been set and will be persisted.
+ A stored signature will be removed when the signature or reset methods are called.
+ 
+ @param signature Signature (SHA-256 HMAC in hex format)
+ @code // Add signature
+ [Castle signature:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
+ @endcode
+ */
++ (void)secure:(NSString *)signature;
 
 /**
  Track event with a specified name
@@ -190,6 +200,12 @@ extern NSString *const CastleClientIdHeaderName;
  */
 + (NSString *)userIdentity;
 
+/**
+ Get stored signature from secure call, returns nil if not set
+ 
+ @return Signature
+ */
++ (NSString *)signature;
 
 /**
  Get the current size of the event queue
