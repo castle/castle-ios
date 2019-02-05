@@ -52,9 +52,13 @@
 {
     NSMutableDictionary *payload = ((NSDictionary *) [super JSONPayload]).mutableCopy;
 
+    // Remove unneccessary data from payload
+    [payload removeObjectForKey:@"event"];
+    [payload removeObjectForKey:@"properties"];
+    
     // Add user_id to payload and remove event property
     [payload setObject:self.userId forKey:@"user_id"];
-    [payload removeObjectForKey:@"event"];
+    [payload setObject:self.properties forKey:@"traits"];
     
     return [payload copy];
 }
