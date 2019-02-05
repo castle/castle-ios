@@ -189,6 +189,13 @@ extern NSString *const CastleClientIdHeaderName;
  @return User identity
  */
 + (NSString *)userIdentity;
+
+
+/**
+ Get the current size of the event queue
+
+ @return return The current size of the event queue
+ */
 + (NSUInteger)queueSize;
     
 @end
