@@ -1,0 +1,12 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/aLxx/Documents/Documents - Alexander’s MacBook Pro/iphone-dev/castle-ios-github/Castle/Classes/Public/Castle.h",
+      "line": 192,
+      "symbol": "Castle.+queueSize",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/aLxx/Documents/Documents - Alexander’s MacBook Pro/iphone-dev/castle-ios-github"
+}
