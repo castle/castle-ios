@@ -177,7 +177,7 @@
     [Castle identify:@"thisisatestuser"];
 
     // Check that the stored identity is the same as the identity we tracked
-    XCTAssertEqual([Castle userIdentity], @"thisisatestuser");
+    XCTAssertEqual([Castle userId], @"thisisatestuser");
 }
 
 - (void)testReset
@@ -185,7 +185,7 @@
     [Castle reset];
 
     // Check to see if the user identity was cleared on reset
-    XCTAssertNil([Castle userIdentity]);
+    XCTAssertNil([Castle userId]);
 }
 
 - (void)testTracking
