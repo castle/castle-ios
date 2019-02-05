@@ -2,23 +2,9 @@
   "warnings": [
     {
       "file": "/Users/aLxx/Documents/Documents - Alexander’s MacBook Pro/iphone-dev/castle-ios-github/Castle/Classes/Public/Castle.h",
-      "line": 11,
-      "symbol": "CastleVersionNumber",
-      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/aLxx/Documents/Documents - Alexander’s MacBook Pro/iphone-dev/castle-ios-github/Castle/Classes/Public/Castle.h",
-      "line": 14,
-      "symbol": "CastleVersionString",
-      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/aLxx/Documents/Documents - Alexander’s MacBook Pro/iphone-dev/castle-ios-github/Castle/Classes/Public/Castle.h",
-      "line": 18,
-      "symbol": "CastleClientIdHeaderName",
-      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "line": 192,
+      "symbol": "Castle.+queueSize",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.class",
       "warning": "undocumented"
     }
   ],
