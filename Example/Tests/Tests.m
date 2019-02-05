@@ -200,6 +200,8 @@
 
 - (void)testTracking
 {
+    [Castle reset];
+    
     // This should lead to no event being tracked since empty string isn't a valid name
     NSUInteger count = [CASEventStorage storedQueue].count;
     [Castle track:@""];
@@ -222,13 +224,15 @@
     count = [CASEventStorage storedQueue].count;
     [Castle identify:@""];
     newCount = [CASEventStorage storedQueue].count;
-    XCTAssertTrue(count == newCount);
+    XCTAssertTrue(count == newCount); // Count should be unchanced
+    XCTAssertNil([Castle userId]); // User id should be nil
 
     // This should lead to no event being tracked properties can't be nil
     count = [CASEventStorage storedQueue].count;
     [Castle identify:@"testuser1" traits:nil];
     newCount = [CASEventStorage storedQueue].count;
-    XCTAssertTrue(count == newCount);
+    XCTAssertTrue(count == newCount); // Count should be unchanced
+    XCTAssertNil([Castle userId]); // User id should be nil
 
     CASScreen *screen = [CASScreen eventWithName:@"Main"];
     XCTAssertNotNil(screen);
