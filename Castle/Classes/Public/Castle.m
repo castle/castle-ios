@@ -44,7 +44,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 @implementation Castle
 
-@synthesize userId = userId;
+@synthesize userId = _userId;
 @synthesize signature = _signature;
 
 + (instancetype)sharedInstance {
@@ -269,14 +269,14 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         CASLog(@"No user id provided. Will cancel identify operation.");
         return;
     }
-    
-    if(![self secureModeEnabled]) {
-        CASLog(@"Identify called without secure mode signature set. If secure mode is enabled in Castle and identify is called before secure, the identify event will be discarded.");
-    }
 
     Castle *castle = [Castle sharedInstance];
-    [castle setUserId:identifier];
-    CASIdentity *identity = [CASIdentity identityWithUserId:identifier traits:traits];
+    if(![castle secureModeEnabled]) {
+        CASLog(@"Identify called without secure mode signature set. If secure mode is enabled in Castle and identify is called before secure, the identify event will be discarded.");
+    }
+    
+    [castle setUserId:userId];
+    CASIdentity *identity = [CASIdentity identityWithUserId:userId traits:traits];
     [castle queueEvent:identity];
 
     // Identify call will always flush
