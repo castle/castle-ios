@@ -7,14 +7,18 @@
 
 #import <Foundation/Foundation.h>
 
-//! Project version number for Castle.
+/**
+ Project version number for Castle. */
 FOUNDATION_EXPORT double CastleVersionNumber;
 
-//! Project version string for Castle.
+/**
+ Project version string for Castle. */
 FOUNDATION_EXPORT const unsigned char CastleVersionString[];
 
 #import "CastleConfiguration.h"
 
+/**
+ Castle client id header name */
 extern NSString *const CastleClientIdHeaderName;
 
 /**
