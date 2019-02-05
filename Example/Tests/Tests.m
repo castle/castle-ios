@@ -48,12 +48,25 @@
 {
     NSArray *baseURLWhiteList = @[ [NSURL URLWithString:@"https://google.com/"] ];
 
+    // Make sure to reset configuration
+    [Castle resetConfiguration];
+    
     // Create configuration object
     CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    
+    // Check that all default values are set correctly
+    XCTAssertEqual(configuration.screenTrackingEnabled, YES);
+    XCTAssertEqual(configuration.debugLoggingEnabled, NO);
+    XCTAssertEqual(configuration.flushLimit, 20);
+    XCTAssertEqual(configuration.maxQueueLimit, 1000);
+    XCTAssertNil(configuration.baseURLWhiteList);
+    
+    // Update configuration
     configuration.screenTrackingEnabled = YES;
     configuration.debugLoggingEnabled = YES;
     configuration.deviceIDAutoForwardingEnabled = YES;
     configuration.flushLimit = 10;
+    configuration.maxQueueLimit = 20;
     configuration.baseURLWhiteList = baseURLWhiteList;
 
     // Check that all the configuration parameters where set correctly
@@ -62,28 +75,26 @@
     XCTAssertEqual(configuration.debugLoggingEnabled, YES);
     XCTAssertEqual(configuration.deviceIDAutoForwardingEnabled, YES);
     XCTAssertEqual(configuration.flushLimit, 10);
+    XCTAssertEqual(configuration.maxQueueLimit, 20);
     XCTAssertEqual(configuration.baseURLWhiteList.count, 1);
     XCTAssertTrue([configuration.baseURLWhiteList[0].absoluteString isEqualToString:@"https://google.com/"]);
 
     [configuration setBaseURLWhiteList:@[ [NSURL URLWithString:@"https://google.com/somethingelse"]]];
     XCTAssertFalse([configuration.baseURLWhiteList[0].absoluteString isEqualToString:@"https://google.com/somethingelse"]);
 
-    XCTAssertTrue([Castle isWhitelistURL:[NSURL URLWithString:@"https://google.com/somethingelse"]]);
-    XCTAssertFalse([Castle isWhitelistURL:nil]);
-
+    // Setup Castle SDK with publishable key
+    [Castle configureWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    
+    // Configuration reset
+    [Castle resetConfiguration];
+    XCTAssertFalse([Castle isWhitelistURL:[NSURL URLWithString:@"https://google.com/somethingelse"]]);
+    
     // Setup Castle SDK with provided configuration
     [Castle configure:configuration];
     
-    // Setup Castle SDK with publishable key
-    [Castle configureWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
-
-    // Set current app version to semething old
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:@"0.1.1" forKey:@"CastleAppVersionKey"];
-    [defaults synchronize];
-
-    // Setup Castle SDK with provided configuration
-    [Castle configure:configuration];
+    // Check whitelisting on configured instance
+    XCTAssertTrue([Castle isWhitelistURL:[NSURL URLWithString:@"https://google.com/somethingelse"]]);
+    XCTAssertFalse([Castle isWhitelistURL:nil]);
 }
 
 - (void)testReachabilityInit
@@ -360,6 +371,20 @@
 
 - (void)testRequestInterceptor
 {
+    // Create configuration object
+    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    
+    NSArray *baseURLWhiteList = @[ [NSURL URLWithString:@"https://google.com/"] ];
+    
+    // Update configuration
+    configuration.screenTrackingEnabled = YES;
+    configuration.debugLoggingEnabled = YES;
+    configuration.deviceIDAutoForwardingEnabled = YES;
+    configuration.flushLimit = 10;
+    configuration.baseURLWhiteList = baseURLWhiteList;
+    
+    [Castle configure:configuration];
+    
     NSURLRequest *request1 = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://google.com/"]];
     XCTAssertTrue([CASRequestInterceptor canInitWithRequest:request1]);
     XCTAssertEqual([CASRequestInterceptor canonicalRequestForRequest:request1], request1);
@@ -439,6 +464,49 @@
         }
         [task cancel];
     }];
+}
+
+- (void)testMaxQueueLength
+{
+    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    
+    // Update configuration and set max queue limit to less than the flush limit.
+    configuration.debugLoggingEnabled = YES;
+    configuration.flushLimit = 10;
+    configuration.maxQueueLimit = 8;
+    
+    [Castle configure:configuration];
+    
+    // Fill the queue
+    for (int i = 0; i < configuration.maxQueueLimit; i++) {
+        [Castle track:[NSString stringWithFormat:@"Event %d", i]];
+    }
+    
+    // The queue size should be equal to maxQueueLimit
+    XCTAssertTrue(configuration.maxQueueLimit == [Castle queueSize]);
+    
+    // Track a new event so the maxQueueLimit is reached
+    [Castle track:@"New event"];
+    
+    // Add one more event so the oldest event in the queue is evicted
+    // The queue size should still be equal to maxQueueLimit
+    XCTAssertTrue(configuration.maxQueueLimit == [Castle queueSize]);
+}
+
+- (void)testAppUpdateDetection
+{
+    // Set current app version to semething old
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"0.1.1" forKey:@"CastleAppVersionKey"];
+    [defaults synchronize];
+    
+    [Castle resetConfiguration];
+    [Castle configureWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    
+    // Check to see if the installed version was updated correctly i.e. the SDK detected an app update.
+    NSString *currentVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSString *installedVersion = [defaults objectForKey:@"CastleAppVersionKey"];
+    XCTAssertEqual(currentVersion, installedVersion);
 }
 
 @end

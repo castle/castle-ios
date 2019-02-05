@@ -108,6 +108,23 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     [Castle configure:configuration];
 }
 
++ (void)resetConfiguration
+{
+    Castle *castle = [Castle sharedInstance];
+    CastleConfiguration *configuration = castle.configuration;
+    
+    // Reset Castle shared instance properties
+    castle.client = nil;
+    castle.configuration = nil;
+    castle.reachability = nil;
+    CASEnableDebugLogging(NO);
+    
+    // Unregister request interceptor
+    if(configuration.isDeviceIDAutoForwardingEnabled) {
+        [NSURLProtocol unregisterClass:[CASRequestInterceptor class]];
+    }
+}
+
 + (NSURLSessionConfiguration *)urlSessionInterceptConfiguration
 {
     NSURLSessionConfiguration *configuration = NSURLSessionConfiguration.defaultSessionConfiguration;
@@ -338,8 +355,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         return;
     }
 
+    // Trim queue before adding element to make sure it never exceeds maxQueueLimit
+    [self trimQueue];
+    
     // Add event to the queue
-    CASLog(@"Qeueing event: %@", event);
+    CASLog(@"Queing event: %@", event);
     [self.eventQueue addObject:event];
 
     // Persist queue to disk
@@ -347,10 +367,26 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
     // Flush queue if the number of events exceeds the flush limit
     if(self.eventQueue.count >= self.configuration.flushLimit) {
-        // very first event should be fired immidtaley
+        // very first event should be fired immediately
         CASLog(@"Event queue exceeded flush limit (%ld). Flushing events.", [Castle sharedInstance].configuration.flushLimit);
         [self.class flush];
     }
+}
+
+- (void)trimQueue
+{
+    // Trim queue to maxQueueLimit - 1. This method is only called when queuing an event
+    NSUInteger maxQueueLimit = self.configuration.maxQueueLimit - 1;
+    
+    // If the queue doesn't exceed maxQueueLimit just return
+    if(self.eventQueue.count < maxQueueLimit) {
+        return;
+    }
+    
+    // Remove the oldest excess events from the queue
+    NSRange trimRange = NSMakeRange(0, self.eventQueue.count - maxQueueLimit);
+    CASLog(@"Will trim %ld events from queue.", trimRange.length);
+    [self.eventQueue removeObjectsInRange:trimRange];
 }
 
 - (void)persistQueue
@@ -426,6 +462,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 + (NSString *)userIdentity
 {
     return [Castle sharedInstance].userIdentity;
+}
+
++ (NSUInteger)queueSize
+{
+    return [Castle sharedInstance].eventQueue.count;
 }
 
 @end

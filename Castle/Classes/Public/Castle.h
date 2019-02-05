@@ -69,6 +69,8 @@ extern NSString *const CastleClientIdHeaderName;
  */
 + (NSURLSessionConfiguration *)urlSessionInterceptConfiguration;
 
++ (void)resetConfiguration;
+
 #pragma mark - Tracking
 
 /**
@@ -178,5 +180,6 @@ extern NSString *const CastleClientIdHeaderName;
  @return User identity
  */
 + (NSString *)userIdentity;
++ (NSUInteger)queueSize;
     
 @end
