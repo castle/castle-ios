@@ -69,6 +69,15 @@ extern NSString *const CastleClientIdHeaderName;
  */
 + (NSURLSessionConfiguration *)urlSessionInterceptConfiguration;
 
+
+/**
+ Reset current configuration. Will disable logging, request interception (if enabled).
+ Once reset the shared Castle instance can be re-configured.
+ 
+ @code // Reset configuration
+ [Castle resetConfiguration];
+ @endcode
+ */
 + (void)resetConfiguration;
 
 #pragma mark - Tracking
