@@ -180,12 +180,22 @@
     XCTAssertEqual([Castle userId], @"thisisatestuser");
 }
 
+- (void)testSignaturePersistance
+{
+    // Call secure to save the signature
+    [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
+    
+    // Check that the stored signature is the same as the signature we provided
+    XCTAssertEqual([Castle signature], @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52");
+}
+
 - (void)testReset
 {
     [Castle reset];
 
-    // Check to see if the user identity was cleared on reset
+    // Check to see if the user id and signature was cleared on reset
     XCTAssertNil([Castle userId]);
+    XCTAssertNil([Castle signature]);
 }
 
 - (void)testTracking
@@ -275,9 +285,26 @@
     XCTAssertTrue([CASEvent supportsSecureCoding]);
 }
 
+- (void)testSecureMode
+{
+    // Calling secure with a nil signature should not store or replace any previous signature
+    [Castle secure:nil];
+    XCTAssertNil([Castle signature]);
+    
+    // Signature should be stored
+    [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
+    XCTAssertEqual([Castle signature], @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52");
+    
+    // Calling secure again should override previously stored signature
+    [Castle secure:@"844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
+    XCTAssertEqual([Castle signature], @"844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52");
+}
+
 - (void)testObjectSerializationForScreen
 {
-    // create screen view
+    [Castle reset];
+    
+    // Create screen view
     CASScreen *screen = [CASScreen eventWithName:@"Main"];
     XCTAssertNotNil(screen);
     XCTAssertTrue([screen.name isEqualToString:@"Main"]);
@@ -289,11 +316,22 @@
     XCTAssertNotNil(payload[@"properties"]);
     XCTAssertNotNil(payload[@"timestamp"]);
     XCTAssertNotNil(payload[@"context"]);
+    XCTAssertNil(payload[@"signature"]);
+    
+    // Payload should not include these parameters
+    XCTAssertNil(payload[@"event"]);
+    
+    // Check to see that signature is included after secure mode is enabled
+    [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
+    payload = [screen JSONPayload];
+    XCTAssertNotNil(payload[@"signature"]);
 }
 
 - (void)testObjectSerializationForIdentify
 {
-    // create user identity
+    [Castle reset];
+    
+    // Create user identity
     NSDictionary *traits = @{ @"trait": @"value" };
     CASIdentity *identity = [CASIdentity identityWithUserId:@"123" traits:traits];
 
@@ -304,10 +342,22 @@
     XCTAssertTrue([payload[@"traits"] isEqualToDictionary:traits]);
     XCTAssertNotNil(payload[@"timestamp"]);
     XCTAssertNotNil(payload[@"context"]);
+    XCTAssertNil(payload[@"signature"]);
+    
+    // Payload should not include these parameters
+    XCTAssertNil(payload[@"properties"]);
+    XCTAssertNil(payload[@"event"]);
+    
+    // Check to see that signature is included after secure mode is enabled
+    [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
+    payload = [identity JSONPayload];
+    XCTAssertNotNil(payload[@"signature"]);
 }
 
 - (void)testObjectSerializationForEvent
 {
+    [Castle reset];
+    
     CASModel *model = [[CASModel alloc] init];
     XCTAssertNil(model.JSONPayload);
     XCTAssertNil(model.JSONData);
@@ -330,6 +380,7 @@
     XCTAssertNotNil(payload[@"properties"]);
     XCTAssertNotNil(payload[@"timestamp"]);
     XCTAssertNotNil(payload[@"context"]);
+    XCTAssertNil(payload[@"signature"]);
 
     // Validate JSON Serialization success
     XCTAssertNotNil(event1.JSONData);
@@ -339,6 +390,11 @@
 
     CASEvent *invalidEvent2 = [CASEvent eventWithName:@"testevent2" properties:@{ @"invalidParamContainer": @{ @"invalidParam": [[NSObject alloc] init] } }];
     XCTAssertNil(invalidEvent2);
+    
+    // Check to see that signature is included after secure mode is enabled
+    [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
+    payload = [event1 JSONPayload];
+    XCTAssertNotNil(payload[@"signature"]);
 }
 
 - (void)testPersistance
