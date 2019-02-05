@@ -136,7 +136,7 @@ extern NSString *const CastleClientIdHeaderName;
 + (void)screen:(NSString *)screenName;
 
 /**
- Track screen event with a specified name
+ Track screen event with a specified name and provided properties
 
  @param screenName Screen name
  @param properties Screen properties
