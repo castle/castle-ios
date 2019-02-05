@@ -50,14 +50,20 @@
 
 - (id)JSONPayload
 {
-    NSString *timestamp = [[CASModel timestampDateFormatter] stringFromDate:self.timestamp];
-    NSDictionary *context = [[CASContext sharedContext] JSONPayload];
+    NSMutableDictionary *payload = ((NSDictionary *) [super JSONPayload]).mutableCopy;
 
-    return @{ @"type": @"identify",
-              @"user_id": self.userId,
-              @"traits": self.properties,
-              @"timestamp": timestamp,
-              @"context": context };
+    // Add user_id to payload and remove event property
+    [payload setObject:self.userId forKey:@"user_id"];
+    [payload removeObjectForKey:@"event"];
+    
+    return [payload copy];
+}
+
+#pragma mark - Getters
+
+- (NSString *)type
+{
+    return @"identify";
 }
 
 @end

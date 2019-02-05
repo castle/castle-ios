@@ -103,6 +103,7 @@ extern NSString *const CastleClientIdHeaderName;
  @endcode
  */
 + (void)identify:(NSString *)identifier traits:(NSDictionary *)traits;
+
 /**
  Set signature and enable secure mode. Signature will be included in all events after it has been set and will be persisted.
  A stored signature will be removed when the signature or reset methods are called.
