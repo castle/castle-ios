@@ -320,7 +320,7 @@
     XCTAssertNotNil(payload[@"properties"]);
     XCTAssertNotNil(payload[@"timestamp"]);
     XCTAssertNotNil(payload[@"context"]);
-    XCTAssertNil(payload[@"signature"]);
+    XCTAssertNil(payload[@"user_signature"]);
     
     // Payload should not include these parameters
     XCTAssertNil(payload[@"event"]);
@@ -328,7 +328,7 @@
     // Check to see that user signature is included after secure mode is enabled
     [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
     payload = [screen JSONPayload];
-    XCTAssertNotNil(payload[@"signature"]);
+    XCTAssertNotNil(payload[@"user_signature"]);
 }
 
 - (void)testObjectSerializationForIdentify
@@ -346,7 +346,7 @@
     XCTAssertTrue([payload[@"traits"] isEqualToDictionary:traits]);
     XCTAssertNotNil(payload[@"timestamp"]);
     XCTAssertNotNil(payload[@"context"]);
-    XCTAssertNil(payload[@"signature"]);
+    XCTAssertNil(payload[@"user_signature"]);
     
     // Payload should not include these parameters
     XCTAssertNil(payload[@"properties"]);
@@ -355,7 +355,7 @@
     // Check to see that user signature is included after secure mode is enabled
     [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
     payload = [identity JSONPayload];
-    XCTAssertNotNil(payload[@"signature"]);
+    XCTAssertNotNil(payload[@"user_signature"]);
 }
 
 - (void)testObjectSerializationForEvent
@@ -384,7 +384,7 @@
     XCTAssertNotNil(payload[@"properties"]);
     XCTAssertNotNil(payload[@"timestamp"]);
     XCTAssertNotNil(payload[@"context"]);
-    XCTAssertNil(payload[@"signature"]);
+    XCTAssertNil(payload[@"user_signature"]);
 
     // Validate JSON Serialization success
     XCTAssertNotNil(event1.JSONData);
@@ -398,7 +398,7 @@
     // Check to see that user signature is included after secure mode is enabled
     [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
     payload = [event1 JSONPayload];
-    XCTAssertNotNil(payload[@"signature"]);
+    XCTAssertNotNil(payload[@"user_signature"]);
 }
 
 - (void)testPersistance
