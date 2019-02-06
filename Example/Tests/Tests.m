@@ -185,17 +185,17 @@
     // Call secure to save the signature
     [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
     
-    // Check that the stored signature is the same as the signature we provided
-    XCTAssertEqual([Castle signature], @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52");
+    // Check that the stored user signature is the same as the user signature we provided
+    XCTAssertEqual([Castle userSignature], @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52");
 }
 
 - (void)testReset
 {
     [Castle reset];
 
-    // Check to see if the user id and signature was cleared on reset
+    // Check to see if the user id and user signature was cleared on reset
     XCTAssertNil([Castle userId]);
-    XCTAssertNil([Castle signature]);
+    XCTAssertNil([Castle userSignature]);
 }
 
 - (void)testTracking
@@ -291,17 +291,17 @@
 
 - (void)testSecureMode
 {
-    // Calling secure with a nil signature should not store or replace any previous signature
+    // Calling secure with a nil user signature should not store or replace any previous signature
     [Castle secure:nil];
-    XCTAssertNil([Castle signature]);
+    XCTAssertNil([Castle userSignature]);
     
-    // Signature should be stored
+    // User signature should be stored
     [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
-    XCTAssertEqual([Castle signature], @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52");
+    XCTAssertEqual([Castle userSignature], @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52");
     
     // Calling secure again should override previously stored signature
     [Castle secure:@"844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
-    XCTAssertEqual([Castle signature], @"844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52");
+    XCTAssertEqual([Castle userSignature], @"844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52");
 }
 
 - (void)testObjectSerializationForScreen
@@ -325,7 +325,7 @@
     // Payload should not include these parameters
     XCTAssertNil(payload[@"event"]);
     
-    // Check to see that signature is included after secure mode is enabled
+    // Check to see that user signature is included after secure mode is enabled
     [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
     payload = [screen JSONPayload];
     XCTAssertNotNil(payload[@"signature"]);
@@ -352,7 +352,7 @@
     XCTAssertNil(payload[@"properties"]);
     XCTAssertNil(payload[@"event"]);
     
-    // Check to see that signature is included after secure mode is enabled
+    // Check to see that user signature is included after secure mode is enabled
     [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
     payload = [identity JSONPayload];
     XCTAssertNotNil(payload[@"signature"]);
@@ -395,7 +395,7 @@
     CASEvent *invalidEvent2 = [CASEvent eventWithName:@"testevent2" properties:@{ @"invalidParamContainer": @{ @"invalidParam": [[NSObject alloc] init] } }];
     XCTAssertNil(invalidEvent2);
     
-    // Check to see that signature is included after secure mode is enabled
+    // Check to see that user signature is included after secure mode is enabled
     [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
     payload = [event1 JSONPayload];
     XCTAssertNotNil(payload[@"signature"]);

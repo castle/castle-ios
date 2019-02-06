@@ -96,9 +96,9 @@
         payload[@"user_id"] = identity;
     }
     
-    NSString *signature = [Castle signature];
-    if(signature != nil) {
-        payload[@"signature"] = signature;
+    NSString *userSignature = [Castle userSignature];
+    if(userSignature != nil) {
+        payload[@"signature"] = userSignature;
     }
     
     return [payload copy];

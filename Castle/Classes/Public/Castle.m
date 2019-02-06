@@ -37,7 +37,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 @property (nonatomic, strong) NSURLSessionDataTask *task;
 @property (nonatomic, strong) NSMutableArray *eventQueue;
 @property (nonatomic, copy, readwrite) NSString *userId;
-@property (nonatomic, copy, readwrite) NSString *signature;
+@property (nonatomic, copy, readwrite) NSString *userSignature;
 @property (nonatomic, assign, readonly) NSUInteger maxBatchSize;
 @property (nonatomic, strong, readwrite) CASReachability *reachability;
 @end
@@ -45,7 +45,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 @implementation Castle
 
 @synthesize userId = _userId;
-@synthesize signature = _signature;
+@synthesize userSignature = _userSignature;
 
 + (instancetype)sharedInstance {
     static Castle *_sharedClient = nil;
@@ -170,13 +170,13 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return _userId;
 }
 
-- (NSString *)signature
+- (NSString *)userSignature
 {
-    // If there's no signature: try fetching it from settings
-    if(!_signature) {
-        _signature = [[NSUserDefaults standardUserDefaults] objectForKey:CastleSecureSignatureKey];
+    // If there's no user signature: try fetching it from settings
+    if(!_userSignature) {
+        _userSignature = [[NSUserDefaults standardUserDefaults] objectForKey:CastleSecureSignatureKey];
     }
-    return _signature;
+    return _userSignature;
 }
 
 + (BOOL)isWifiAvailable
@@ -212,13 +212,13 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     [defaults synchronize];
 }
     
-- (void)setSignature:(NSString *)signature
+- (void)setUserSignature:(NSString *)userSignature
 {
-    _signature = signature;
+    _userSignature = userSignature;
     
-    // Store signature in user defaults
+    // Store user signature in user defaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:signature forKey:CastleSecureSignatureKey];
+    [defaults setObject:userSignature forKey:CastleSecureSignatureKey];
     [defaults synchronize];
 }
 
@@ -272,7 +272,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
     Castle *castle = [Castle sharedInstance];
     if(![castle secureModeEnabled]) {
-        CASLog(@"Identify called without secure mode signature set. If secure mode is enabled in Castle and identify is called before secure, the identify event will be discarded.");
+        CASLog(@"Identify called without secure mode user signature set. If secure mode is enabled in Castle and identify is called before secure, the identify event will be discarded.");
     }
     
     CASIdentity *identity = [CASIdentity identityWithUserId:userId traits:traits];
@@ -285,15 +285,15 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     }
 }
 
-+ (void)secure:(NSString *)signature
++ (void)secure:(NSString *)userSignature
 {
-    if(!signature || [signature isEqualToString:@""]) {
-        CASLog(@"No signature provided. Will cancel secure operation.");
+    if(!userSignature || [userSignature isEqualToString:@""]) {
+        CASLog(@"No user signature provided. Will cancel secure operation.");
         return;
     }
     
     Castle *castle = [Castle sharedInstance];
-    [castle setSignature:signature];
+    [castle setUserSignature:userSignature];
 }
 
 + (void)flush
@@ -368,7 +368,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     castle.userId = nil;
     
     // Reset cached signature
-    castle.signature = nil;
+    castle.userSignature = nil;
 }
 
 + (BOOL)isWhitelistURL:(NSURL *)url
@@ -467,7 +467,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 - (BOOL)secureModeEnabled
 {
-    return self.signature != nil;
+    return self.userSignature != nil;
 }
 
 #pragma mark - Application Lifecycle
@@ -511,9 +511,9 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return [Castle sharedInstance].userId;
 }
     
-+ (NSString *)signature
++ (NSString *)userSignature
 {
-    return [Castle sharedInstance].signature;
+    return [Castle sharedInstance].userSignature;
 }
 
 + (NSUInteger)queueSize
