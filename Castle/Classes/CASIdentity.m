@@ -56,7 +56,7 @@
     [payload removeObjectForKey:@"event"];
     [payload removeObjectForKey:@"properties"];
     
-    // Add user_id to payload and remove event property
+    // Override user_id property with the new userId and set properties for key traits
     [payload setObject:self.userId forKey:@"user_id"];
     [payload setObject:self.properties forKey:@"traits"];
     
