@@ -25,3 +25,4 @@ comment:
 
 ignore:
   - Example/Pods
+  - Castle/Classes/Reachability
