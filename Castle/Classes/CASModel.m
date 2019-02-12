@@ -43,6 +43,7 @@
     dispatch_once(&onceToken, ^{
         _timestampDateFormatter = [[NSDateFormatter alloc] init];
         [_timestampDateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+        [_timestampDateFormatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US"]];
         [_timestampDateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
     });
     return _timestampDateFormatter;
