@@ -15,6 +15,8 @@
 @property (nonatomic, copy, readwrite) NSString *name;
 @property (nonatomic, copy, readwrite) NSDictionary *properties;
 @property (nonatomic, copy, readwrite) NSDate *timestamp;
+@property (nonatomic, copy, readwrite) NSString *userId;
+@property (nonatomic, copy, readwrite) NSString *userSignature;
 @end
 
 @implementation CASEvent
@@ -47,8 +49,20 @@
     CASEvent *event = [[self alloc] init];
     event.name = name;
     event.properties = properties;
-    event.timestamp = [NSDate date];
     return event;
+}
+
+#pragma mark - Init
+
+- (instancetype)init
+{
+    self = [super init];
+    if(self) {
+        self.timestamp = [NSDate date];
+        self.userId = [Castle userId];
+        self.userSignature = [Castle userSignature];
+    }
+    return self;
 }
 
 #pragma mark - NSCoding
@@ -60,6 +74,9 @@
         self.name = [decoder decodeObjectOfClass:NSString.class forKey:@"name"];
         self.properties = [decoder decodeObjectOfClass:NSDictionary.class forKey:@"properties"];
         self.timestamp = [decoder decodeObjectOfClass:NSDate.class forKey:@"timestamp"];
+        self.userId = [decoder decodeObjectOfClass:NSString.class forKey:@"user_id"];
+        self.userSignature = [decoder decodeObjectOfClass:NSString.class forKey:@"user_signature"];
+        
     }
     return self;
 }
@@ -69,6 +86,8 @@
     [encoder encodeObject:self.name forKey:@"name"];
     [encoder encodeObject:self.properties forKey:@"properties"];
     [encoder encodeObject:self.timestamp forKey:@"timestamp"];
+    [encoder encodeObject:self.userId forKey:@"user_id"];
+    [encoder encodeObject:self.userSignature forKey:@"user_signature"];
 }
 
 #pragma mark - NSSecureCoding
@@ -91,14 +110,12 @@
                                       @"timestamp": timestamp,
                                       @"context": context }.mutableCopy;
 
-    NSString *identity = [Castle userId];
-    if(identity) {
-        payload[@"user_id"] = identity;
+    if(self.userId != nil) {
+        payload[@"user_id"] = self.userId;
     }
     
-    NSString *userSignature = [Castle userSignature];
-    if(userSignature != nil) {
-        payload[@"user_signature"] = userSignature;
+    if(self.userSignature != nil) {
+        payload[@"user_signature"] = self.userSignature;
     }
     
     return [payload copy];
