@@ -83,14 +83,14 @@ extern NSString *const CastleClientIdHeaderName;
 #pragma mark - Tracking
 
 /**
- Track identify event with specified user identity. User identity will be persisted. A call to identify or reset will clear the stored user identity.
+ Track identify event with specified user id. User identity will be persisted. A call to identify or reset will clear the stored user identity.
 
- @param identifier user id
- @code // Identify user with unique identifier
+ @param userId User Id
+ @code // Identify User with unique identifier
  [Castle identify:@"1245-3055"];
  @endcode
  */
-+ (void)identify:(NSString *)identifier;
++ (void)identify:(NSString *)userId;
 
 /**
  Track identify event with specified user identity. User identity will be persisted. A call to identify or reset will clear the stored user identity.
@@ -103,6 +103,17 @@ extern NSString *const CastleClientIdHeaderName;
  @endcode
  */
 + (void)identify:(NSString *)identifier traits:(NSDictionary *)traits;
+
+/**
+ Set user signature and enable secure mode. User signature will be included in all events after it has been set and will be persisted.
+ A stored user signature will be removed when the user signature or reset methods are called.
+ 
+ @param signature User signature (SHA-256 HMAC in hex format)
+ @code // Add user signature
+ [Castle signature:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
+ @endcode
+ */
++ (void)secure:(NSString *)signature;
 
 /**
  Track event with a specified name
@@ -184,12 +195,18 @@ extern NSString *const CastleClientIdHeaderName;
 + (NSString *)clientId;
 
 /**
- Get stored user identity from last identify call, returns nil if not set
+ Get stored user id from last identify call, returns nil if not set
 
- @return User identity
+ @return User Id
  */
-+ (NSString *)userIdentity;
++ (NSString *)userId;
 
+/**
+ Get stored signature from secure call, returns nil if not set
+ 
+ @return Signature
+ */
++ (NSString *)userSignature;
 
 /**
  Get the current size of the event queue

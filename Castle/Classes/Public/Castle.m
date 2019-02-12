@@ -24,6 +24,7 @@
 #import "UIViewController+CASScreen.h"
 
 NSString *const CastleUserIdentifierKey = @"CastleUserIdentifierKey";
+NSString *const CastleSecureSignatureKey = @"CastleSecureSignatureKey";
 NSString *const CastleAppVersionKey = @"CastleAppVersionKey";
 
 NSString *const CastleClientIdHeaderName = @"X-Castle-Client-Id";
@@ -35,14 +36,16 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 @property (nonatomic, strong) CastleConfiguration *configuration;
 @property (nonatomic, strong) NSURLSessionDataTask *task;
 @property (nonatomic, strong) NSMutableArray *eventQueue;
-@property (nonatomic, copy, readwrite) NSString *userIdentity;
+@property (nonatomic, copy, readwrite) NSString *userId;
+@property (nonatomic, copy, readwrite) NSString *userSignature;
 @property (nonatomic, assign, readonly) NSUInteger maxBatchSize;
 @property (nonatomic, strong, readwrite) CASReachability *reachability;
 @end
 
 @implementation Castle
 
-@synthesize userIdentity = _userIdentity;
+@synthesize userId = _userId;
+@synthesize userSignature = _userSignature;
 
 + (instancetype)sharedInstance {
     static Castle *_sharedClient = nil;
@@ -158,13 +161,22 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return 100;
 }
 
-- (NSString *)userIdentity
+- (NSString *)userId
 {
-    // If there's no user identity: try fetching it from settings
-    if(!_userIdentity) {
-        _userIdentity = [[NSUserDefaults standardUserDefaults] objectForKey:CastleUserIdentifierKey];
+    // If there's no user id: try fetching it from settings
+    if(!_userId) {
+        _userId = [[NSUserDefaults standardUserDefaults] objectForKey:CastleUserIdentifierKey];
     }
-    return _userIdentity;
+    return _userId;
+}
+
+- (NSString *)userSignature
+{
+    // If there's no user signature: try fetching it from settings
+    if(!_userSignature) {
+        _userSignature = [[NSUserDefaults standardUserDefaults] objectForKey:CastleSecureSignatureKey];
+    }
+    return _userSignature;
 }
 
 + (BOOL)isWifiAvailable
@@ -190,13 +202,23 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 #pragma mark - Setters
 
-- (void)setUserIdentity:(NSString *)userIdentity
+- (void)setUserId:(NSString *)userId
 {
-    _userIdentity = userIdentity;
+    _userId = userId;
 
     // Store user identity in user defaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:userIdentity forKey:CastleUserIdentifierKey];
+    [defaults setObject:userId forKey:CastleUserIdentifierKey];
+    [defaults synchronize];
+}
+    
+- (void)setUserSignature:(NSString *)userSignature
+{
+    _userSignature = userSignature;
+    
+    // Store user signature in user defaults
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:userSignature forKey:CastleSecureSignatureKey];
     [defaults synchronize];
 }
 
@@ -236,25 +258,42 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     [castle queueEvent:screen];
 }
 
-+ (void)identify:(NSString *)identifier
++ (void)identify:(NSString *)userId
 {
-    [Castle identify:identifier traits:@{}];
+    [Castle identify:userId traits:@{}];
 }
 
-+ (void)identify:(NSString *)identifier traits:(NSDictionary *)traits
++ (void)identify:(NSString *)userId traits:(NSDictionary *)traits
 {
-    if(!identifier || [identifier isEqualToString:@""]) {
-        CASLog(@"No identifier provided. Will cancel identify operation.");
+    if(!userId || [userId isEqualToString:@""]) {
+        CASLog(@"No user id provided. Will cancel identify operation.");
         return;
     }
 
     Castle *castle = [Castle sharedInstance];
-    [castle setUserIdentity:identifier];
-    CASIdentity *identity = [CASIdentity identityWithUserId:identifier traits:traits];
-    [castle queueEvent:identity];
+    if(![castle secureModeEnabled]) {
+        CASLog(@"Identify called without secure mode user signature set. If secure mode is enabled in Castle and identify is called before secure, the identify event will be discarded.");
+    }
+    
+    CASIdentity *identity = [CASIdentity identityWithUserId:userId traits:traits];
+    if(identity != nil) {
+        [castle setUserId:userId];
+        [castle queueEvent:identity];
+        
+        // Identify call will always flush
+        [Castle flush];
+    }
+}
 
-    // Identify call will always flush
-    [Castle flush];
++ (void)secure:(NSString *)userSignature
+{
+    if(!userSignature || [userSignature isEqualToString:@""]) {
+        CASLog(@"No user signature provided. Will cancel secure operation.");
+        return;
+    }
+    
+    Castle *castle = [Castle sharedInstance];
+    [castle setUserSignature:userSignature];
 }
 
 + (void)flush
@@ -325,8 +364,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     // Flush queue
     [Castle flush];
 
-    // Reset cached identity
-    castle.userIdentity = nil;
+    // Reset cached user id
+    castle.userId = nil;
+    
+    // Reset cached signature
+    castle.userSignature = nil;
 }
 
 + (BOOL)isWhitelistURL:(NSURL *)url
@@ -423,6 +465,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     [defaults synchronize];
 }
 
+- (BOOL)secureModeEnabled
+{
+    return self.userSignature != nil;
+}
+
 #pragma mark - Application Lifecycle
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification
@@ -459,9 +506,14 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return [Castle sharedInstance].deviceIdentifier;
 }
 
-+ (NSString *)userIdentity
++ (NSString *)userId
 {
-    return [Castle sharedInstance].userIdentity;
+    return [Castle sharedInstance].userId;
+}
+    
++ (NSString *)userSignature
+{
+    return [Castle sharedInstance].userSignature;
 }
 
 + (NSUInteger)queueSize

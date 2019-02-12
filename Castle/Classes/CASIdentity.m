@@ -19,7 +19,7 @@
 + (instancetype)identityWithUserId:(NSString *)userId traits:(NSDictionary *)traits
 {
     if(userId.length == 0) {
-        CASLog(@"User id needs to be at least on character long");
+        CASLog(@"User id needs to be at least one character long");
         return nil;
     }
     
@@ -50,14 +50,24 @@
 
 - (id)JSONPayload
 {
-    NSString *timestamp = [[CASModel timestampDateFormatter] stringFromDate:self.timestamp];
-    NSDictionary *context = [[CASContext sharedContext] JSONPayload];
+    NSMutableDictionary *payload = ((NSDictionary *) [super JSONPayload]).mutableCopy;
 
-    return @{ @"type": @"identify",
-              @"user_id": self.userId,
-              @"traits": self.properties,
-              @"timestamp": timestamp,
-              @"context": context };
+    // Remove unneccessary data from payload
+    [payload removeObjectForKey:@"event"];
+    [payload removeObjectForKey:@"properties"];
+    
+    // Override user_id property with the new userId and set properties for key traits
+    [payload setObject:self.userId forKey:@"user_id"];
+    [payload setObject:self.properties forKey:@"traits"];
+    
+    return [payload copy];
+}
+
+#pragma mark - Getters
+
+- (NSString *)type
+{
+    return @"identify";
 }
 
 @end

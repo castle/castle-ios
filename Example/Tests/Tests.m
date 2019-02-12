@@ -177,19 +177,31 @@
     [Castle identify:@"thisisatestuser"];
 
     // Check that the stored identity is the same as the identity we tracked
-    XCTAssertEqual([Castle userIdentity], @"thisisatestuser");
+    XCTAssertEqual([Castle userId], @"thisisatestuser");
+}
+
+- (void)testSignaturePersistance
+{
+    // Call secure to save the signature
+    [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
+    
+    // Check that the stored user signature is the same as the user signature we provided
+    XCTAssertEqual([Castle userSignature], @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52");
 }
 
 - (void)testReset
 {
     [Castle reset];
 
-    // Check to see if the user identity was cleared on reset
-    XCTAssertNil([Castle userIdentity]);
+    // Check to see if the user id and user signature was cleared on reset
+    XCTAssertNil([Castle userId]);
+    XCTAssertNil([Castle userSignature]);
 }
 
 - (void)testTracking
 {
+    [Castle reset];
+    
     // This should lead to no event being tracked since empty string isn't a valid name
     NSUInteger count = [CASEventStorage storedQueue].count;
     [Castle track:@""];
@@ -212,13 +224,15 @@
     count = [CASEventStorage storedQueue].count;
     [Castle identify:@""];
     newCount = [CASEventStorage storedQueue].count;
-    XCTAssertTrue(count == newCount);
+    XCTAssertTrue(count == newCount); // Count should be unchanced
+    XCTAssertNil([Castle userId]); // User id should be nil
 
     // This should lead to no event being tracked properties can't be nil
     count = [CASEventStorage storedQueue].count;
     [Castle identify:@"testuser1" traits:nil];
     newCount = [CASEventStorage storedQueue].count;
-    XCTAssertTrue(count == newCount);
+    XCTAssertTrue(count == newCount); // Count should be unchanced
+    XCTAssertNil([Castle userId]); // User id should be nil
 
     CASScreen *screen = [CASScreen eventWithName:@"Main"];
     XCTAssertNotNil(screen);
@@ -275,9 +289,26 @@
     XCTAssertTrue([CASEvent supportsSecureCoding]);
 }
 
+- (void)testSecureMode
+{
+    // Calling secure with a nil user signature should not store or replace any previous signature
+    [Castle secure:nil];
+    XCTAssertNil([Castle userSignature]);
+    
+    // User signature should be stored
+    [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
+    XCTAssertEqual([Castle userSignature], @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52");
+    
+    // Calling secure again should override previously stored signature
+    [Castle secure:@"844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
+    XCTAssertEqual([Castle userSignature], @"844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52");
+}
+
 - (void)testObjectSerializationForScreen
 {
-    // create screen view
+    [Castle reset];
+    
+    // Create screen view
     CASScreen *screen = [CASScreen eventWithName:@"Main"];
     XCTAssertNotNil(screen);
     XCTAssertTrue([screen.name isEqualToString:@"Main"]);
@@ -289,11 +320,22 @@
     XCTAssertNotNil(payload[@"properties"]);
     XCTAssertNotNil(payload[@"timestamp"]);
     XCTAssertNotNil(payload[@"context"]);
+    XCTAssertNil(payload[@"user_signature"]);
+    
+    // Payload should not include these parameters
+    XCTAssertNil(payload[@"event"]);
+    
+    // Check to see that user signature is included after secure mode is enabled
+    [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
+    payload = [screen JSONPayload];
+    XCTAssertNotNil(payload[@"user_signature"]);
 }
 
 - (void)testObjectSerializationForIdentify
 {
-    // create user identity
+    [Castle reset];
+    
+    // Create user identity
     NSDictionary *traits = @{ @"trait": @"value" };
     CASIdentity *identity = [CASIdentity identityWithUserId:@"123" traits:traits];
 
@@ -304,10 +346,22 @@
     XCTAssertTrue([payload[@"traits"] isEqualToDictionary:traits]);
     XCTAssertNotNil(payload[@"timestamp"]);
     XCTAssertNotNil(payload[@"context"]);
+    XCTAssertNil(payload[@"user_signature"]);
+    
+    // Payload should not include these parameters
+    XCTAssertNil(payload[@"properties"]);
+    XCTAssertNil(payload[@"event"]);
+    
+    // Check to see that user signature is included after secure mode is enabled
+    [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
+    payload = [identity JSONPayload];
+    XCTAssertNotNil(payload[@"user_signature"]);
 }
 
 - (void)testObjectSerializationForEvent
 {
+    [Castle reset];
+    
     CASModel *model = [[CASModel alloc] init];
     XCTAssertNil(model.JSONPayload);
     XCTAssertNil(model.JSONData);
@@ -330,6 +384,7 @@
     XCTAssertNotNil(payload[@"properties"]);
     XCTAssertNotNil(payload[@"timestamp"]);
     XCTAssertNotNil(payload[@"context"]);
+    XCTAssertNil(payload[@"user_signature"]);
 
     // Validate JSON Serialization success
     XCTAssertNotNil(event1.JSONData);
@@ -339,6 +394,11 @@
 
     CASEvent *invalidEvent2 = [CASEvent eventWithName:@"testevent2" properties:@{ @"invalidParamContainer": @{ @"invalidParam": [[NSObject alloc] init] } }];
     XCTAssertNil(invalidEvent2);
+    
+    // Check to see that user signature is included after secure mode is enabled
+    [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
+    payload = [event1 JSONPayload];
+    XCTAssertNotNil(payload[@"user_signature"]);
 }
 
 - (void)testPersistance

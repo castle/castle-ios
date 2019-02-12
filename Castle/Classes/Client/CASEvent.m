@@ -91,11 +91,17 @@
                                       @"timestamp": timestamp,
                                       @"context": context }.mutableCopy;
 
-    NSString *identity = [Castle userIdentity];
+    NSString *identity = [Castle userId];
     if(identity) {
         payload[@"user_id"] = identity;
     }
-    return payload.copy;
+    
+    NSString *userSignature = [Castle userSignature];
+    if(userSignature != nil) {
+        payload[@"user_signature"] = userSignature;
+    }
+    
+    return [payload copy];
 }
 
 #pragma mark - Getters
