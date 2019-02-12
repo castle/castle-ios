@@ -24,4 +24,5 @@ comment:
   behavior: default  # update if exists else create new
 
 ignore:
-  - Example/Pods
+  - Castle/Classes/Reachability
+  - Example
