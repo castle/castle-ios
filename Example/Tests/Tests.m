@@ -307,14 +307,15 @@
 - (void)testObjectSerializationForScreen
 {
     [Castle reset];
+    [Castle identify:@"thisisatestuser1"];
     
     // Create screen view
-    CASScreen *screen = [CASScreen eventWithName:@"Main"];
-    XCTAssertNotNil(screen);
-    XCTAssertTrue([screen.name isEqualToString:@"Main"]);
+    CASEvent *event = [CASScreen eventWithName:@"Main"];
+    XCTAssertNotNil(event);
+    XCTAssertTrue([event.name isEqualToString:@"Main"]);
     
     // Validate payload
-    NSDictionary *payload = [screen JSONPayload];
+    NSDictionary *payload = [event JSONPayload];
     XCTAssertTrue([payload[@"name"] isEqualToString:@"Main"]);
     XCTAssertTrue([payload[@"type"] isEqualToString:@"screen"]);
     XCTAssertNotNil(payload[@"properties"]);
@@ -325,22 +326,53 @@
     // Payload should not include these parameters
     XCTAssertNil(payload[@"event"]);
     
-    // Check to see that user signature is included after secure mode is enabled
-    [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
-    payload = [screen JSONPayload];
-    XCTAssertNotNil(payload[@"user_signature"]);
+    // Enable secure mode
+    NSString *signature = @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
+    [Castle secure:signature];
+    
+    // The user signature should be included in any new event objects
+    CASEvent *event2 =  [CASScreen eventWithName:@"Second"];
+    XCTAssertEqualObjects(event2.userId, @"thisisatestuser1");
+    XCTAssertEqualObjects(event2.userSignature, signature);
+    
+    // Archive identity object
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:event2];
+    CASEvent *event3 = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    XCTAssertEqualObjects(event2.userId, event3.userId);
+    XCTAssertEqualObjects(event2.userSignature, event3.userSignature);
+    
+    // Update user identity
+    [Castle identify:@"thisisatestuser2"];
+    
+    // Update user signature
+    NSString *signature2 = @"844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
+    [Castle secure:signature2];
+    
+    // Verify that the user id and token are the same after archiving and unarchiving after updating the user id and signature
+    data = [NSKeyedArchiver archivedDataWithRootObject:event2];
+    event3 = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    XCTAssertEqualObjects(event3.userId, @"thisisatestuser1");
+    XCTAssertEqualObjects(event3.userSignature, signature);
+    
+    // Create a new event that should have the new updated user id and signature
+    CASEvent *event4 = [CASScreen eventWithName:@"Third"];
+    data = [NSKeyedArchiver archivedDataWithRootObject:event4];
+    CASEvent *event5 = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    XCTAssertEqualObjects(event5.userId, @"thisisatestuser2");
+    XCTAssertEqualObjects(event5.userSignature, signature2);
 }
 
 - (void)testObjectSerializationForIdentify
 {
     [Castle reset];
+    [Castle identify:@"thisisatestuser1"];
     
     // Create user identity
     NSDictionary *traits = @{ @"trait": @"value" };
-    CASIdentity *identity = [CASIdentity identityWithUserId:@"123" traits:traits];
+    CASIdentity *event = [CASIdentity identityWithUserId:@"123" traits:traits];
 
     // Validate payload
-    NSDictionary *payload = [identity JSONPayload];
+    NSDictionary *payload = [event JSONPayload];
     XCTAssertTrue([payload[@"user_id"] isEqualToString:@"123"]);
     XCTAssertTrue([payload[@"type"] isEqualToString:@"identify"]);
     XCTAssertTrue([payload[@"traits"] isEqualToDictionary:traits]);
@@ -352,33 +384,64 @@
     XCTAssertNil(payload[@"properties"]);
     XCTAssertNil(payload[@"event"]);
     
-    // Check to see that user signature is included after secure mode is enabled
-    [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
-    payload = [identity JSONPayload];
-    XCTAssertNotNil(payload[@"user_signature"]);
+    // Enable secure mode
+    NSString *signature = @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
+    [Castle secure:signature];
+    
+    // The user signature should be included in any new event objects
+    CASEvent *event2 =  [CASIdentity identityWithUserId:@"456" traits:traits];
+    XCTAssertEqualObjects(event2.userId, @"456");
+    XCTAssertEqualObjects(event2.userSignature, signature);
+    
+    // Archive identity object
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:event2];
+    CASEvent *event3 = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    XCTAssertEqualObjects(event2.userId, event3.userId);
+    XCTAssertEqualObjects(event2.userSignature, event3.userSignature);
+    
+    // Update user identity
+    [Castle identify:@"thisisatestuser2"];
+    
+    // Update user signature
+    NSString *signature2 = @"844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
+    [Castle secure:signature2];
+    
+    // Verify that the user id and token are the same after archiving and unarchiving after updating the user id and signature
+    data = [NSKeyedArchiver archivedDataWithRootObject:event2];
+    event3 = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    XCTAssertEqualObjects(event3.userId, event2.userId);
+    XCTAssertEqualObjects(event3.userSignature, signature);
+    
+    // Create a new event that should have the new updated user id and signature
+    CASEvent *event4 = [CASIdentity identityWithUserId:@"789" traits:traits];
+    data = [NSKeyedArchiver archivedDataWithRootObject:event4];
+    CASEvent *event5 = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    XCTAssertEqualObjects(event5.userId, @"789");
+    XCTAssertEqualObjects(event5.userSignature, signature2);
 }
 
 - (void)testObjectSerializationForEvent
 {
     [Castle reset];
+    [Castle identify:@"thisisatestuser1"];
     
     CASModel *model = [[CASModel alloc] init];
     XCTAssertNil(model.JSONPayload);
     XCTAssertNil(model.JSONData);
 
     // Create basic event with valid data
-    CASEvent *event1 = [CASEvent eventWithName:@"testevent1" properties:@{ @"param1": @"value1", @"param2": @{ @"param3": @(2) } }];
-    XCTAssertNotNil(event1);
-    XCTAssertTrue([event1.name isEqualToString:@"testevent1"]);
-    XCTAssertNotNil(event1.properties);
+    CASEvent *event = [CASEvent eventWithName:@"testevent1" properties:@{ @"param1": @"value1", @"param2": @{ @"param3": @(2) } }];
+    XCTAssertNotNil(event);
+    XCTAssertTrue([event.name isEqualToString:@"testevent1"]);
+    XCTAssertNotNil(event.properties);
 
     // Validate simple factory method
-    CASEvent *event2 = [CASEvent eventWithName:@"testevent2"];
-    XCTAssertTrue([event2.name isEqualToString:@"testevent2"]);
-    XCTAssertNotNil(event2.properties);
+    CASEvent *event1 = [CASEvent eventWithName:@"testevent2"];
+    XCTAssertTrue([event1.name isEqualToString:@"testevent2"]);
+    XCTAssertNotNil(event1.properties);
 
     // Validate payload
-    NSDictionary *payload = [event1 JSONPayload];
+    NSDictionary *payload = [event JSONPayload];
     XCTAssertTrue([payload[@"event"] isEqualToString:@"testevent1"]);
     XCTAssertTrue([payload[@"type"] isEqualToString:@"track"]);
     XCTAssertNotNil(payload[@"properties"]);
@@ -387,7 +450,7 @@
     XCTAssertNil(payload[@"user_signature"]);
 
     // Validate JSON Serialization success
-    XCTAssertNotNil(event1.JSONData);
+    XCTAssertNotNil(event.JSONData);
 
     CASEvent *invalidEvent1 = [CASEvent eventWithName:@"testevent2" properties:@{ @"invalidparam": [[NSObject alloc] init] }];
     XCTAssertNil(invalidEvent1);
@@ -395,10 +458,40 @@
     CASEvent *invalidEvent2 = [CASEvent eventWithName:@"testevent2" properties:@{ @"invalidParamContainer": @{ @"invalidParam": [[NSObject alloc] init] } }];
     XCTAssertNil(invalidEvent2);
     
-    // Check to see that user signature is included after secure mode is enabled
-    [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
-    payload = [event1 JSONPayload];
-    XCTAssertNotNil(payload[@"user_signature"]);
+    // Enable secure mode
+    NSString *signature = @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
+    [Castle secure:signature];
+    
+    // The user signature should be included in any new event objects
+    CASEvent *event2 =  [CASEvent eventWithName:@"event2"];
+    XCTAssertEqualObjects(event2.userId, @"thisisatestuser1");
+    XCTAssertEqualObjects(event2.userSignature, signature);
+    
+    // Archive identity object
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:event2];
+    CASEvent *event3 = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    XCTAssertEqualObjects(event2.userId, event3.userId);
+    XCTAssertEqualObjects(event2.userSignature, event3.userSignature);
+    
+    // Update user identity
+    [Castle identify:@"thisisatestuser2"];
+    
+    // Update user signature
+    NSString *signature2 = @"844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
+    [Castle secure:signature2];
+    
+    // Verify that the user id and token are the same after archiving and unarchiving after updating the user id and signature
+    data = [NSKeyedArchiver archivedDataWithRootObject:event2];
+    event3 = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    XCTAssertEqualObjects(event3.userId, @"thisisatestuser1");
+    XCTAssertEqualObjects(event3.userSignature, signature);
+    
+    // Create a new event that should have the new updated user id and signature
+    CASEvent *event4 = [CASEvent eventWithName:@"event4"];
+    data = [NSKeyedArchiver archivedDataWithRootObject:event4];
+    CASEvent *event5 = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    XCTAssertEqualObjects(event5.userId, @"thisisatestuser2");
+    XCTAssertEqualObjects(event5.userSignature, signature2);
 }
 
 - (void)testPersistance

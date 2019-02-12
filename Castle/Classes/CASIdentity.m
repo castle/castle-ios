@@ -16,6 +16,8 @@
 
 @implementation CASIdentity
 
+@synthesize userId = _userId;
+
 + (instancetype)identityWithUserId:(NSString *)userId traits:(NSDictionary *)traits
 {
     if(userId.length == 0) {
@@ -26,24 +28,6 @@
     CASIdentity *identity = (CASIdentity *) [super eventWithName:@"identify" properties:traits];
     identity.userId = userId;
     return identity;
-}
-
-#pragma mark - NSCoding
-
-- (id)initWithCoder:(NSCoder *)decoder
-{
-    self = [super initWithCoder:decoder];
-    if(self) {
-        self.userId = [decoder decodeObjectOfClass:NSString.class forKey:@"userId"];
-    }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)encoder
-{
-    [super encodeWithCoder:encoder];
-    
-    [encoder encodeObject:self.userId forKey:@"userId"];
 }
 
 #pragma mark - CASModel

@@ -9,8 +9,6 @@
 
 @interface CASIdentity : CASEvent
 
-@property (nonatomic, copy, readonly) NSString * _Nonnull userId;
-
 + (instancetype _Nullable)identityWithUserId:(NSString * _Nonnull)userId traits:(NSDictionary * _Nonnull)traits;
 
 @end

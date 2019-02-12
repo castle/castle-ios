@@ -48,10 +48,7 @@
         return nil;
     }
     
-    CASScreen *screen = [[self alloc] init];
-    screen.name = name;
-    screen.properties = properties;
-    screen.timestamp = [NSDate date];
+    CASScreen *screen = (CASScreen *) [super eventWithName:name properties:properties];
     return screen;
 }
 

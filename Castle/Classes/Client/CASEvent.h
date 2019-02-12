@@ -15,6 +15,8 @@
 @property (nonatomic, copy, readonly) NSDictionary *properties;
 @property (nonatomic, copy, readonly) NSDate *timestamp;
 @property (nonatomic, copy, readonly) NSString *type;
+@property (nonatomic, copy, readonly) NSString *userId;
+@property (nonatomic, copy, readonly) NSString *userSignature;
 
 + (instancetype)eventWithName:(NSString *)name;
 + (instancetype)eventWithName:(NSString *)name properties:(NSDictionary *)properties;
