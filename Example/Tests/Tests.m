@@ -28,11 +28,12 @@
 {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-
-    // Clear current app version
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults removeObjectForKey:@"CastleAppVersionKey"];
-    [defaults synchronize];
+    
+    NSArray *baseURLWhiteList = @[ [NSURL URLWithString:@"https://google.com/"] ];
+    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    configuration.baseURLWhiteList = baseURLWhiteList;
+    
+    [Castle configure:configuration];
 }
 
 - (void)tearDown
@@ -55,11 +56,6 @@
 - (void)testConfiguration
 {
     NSArray *baseURLWhiteList = @[ [NSURL URLWithString:@"https://google.com/"] ];
-
-    // Make sure to reset configuration
-    [Castle resetConfiguration];
-    
-    // Create configuration object
     CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
     
     // Check that all default values are set correctly
