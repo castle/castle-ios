@@ -334,7 +334,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
         castle.task = nil;
 
-        CASLog(@"Successfully flushed events: %@", [batchModel JSONPayload]);
+        CASLog(@"Successfully flushed (%ld) events: %@", batchModel.events.count, [batchModel JSONPayload]);
         
         if ([castle eventQueueExceedsFlushLimit] && castle.eventQueue.count > 0) {
             CASLog(@"Current event queue still exceeds flush limit. Flush again");
@@ -374,7 +374,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 + (BOOL)isWhitelistURL:(NSURL *)url
 {
     if(url == nil) {
-        CASLog(@"Provided URL was nil");
+        CASLog(@"Provided whitelist URL was nil");
         return NO;
     }
 
@@ -427,7 +427,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     
     // Remove the oldest excess events from the queue
     NSRange trimRange = NSMakeRange(0, self.eventQueue.count - maxQueueLimit);
-    CASLog(@"Will trim %ld events from queue.", trimRange.length);
+    CASLog(@"Queue (size %ld) will exceed maxQueueLimit (%ld). Will trim %ld events from queue.", self.eventQueue.count, self.configuration.maxQueueLimit, trimRange.length);
     [self.eventQueue removeObjectsInRange:trimRange];
 }
 
