@@ -30,6 +30,12 @@
     } else {
         CASLog(@"WARNING! Event queue couldn't be persisted (%@)", self.storagePath);
     }
+    
+    NSError *error = nil;
+    NSURL *fileURL = [NSURL fileURLWithPath:self.storagePath];
+    if(![fileURL setResourceValue:@YES forKey:NSURLIsExcludedFromBackupKey error:&error]) {
+        CASLog(@"Failed to exclude event queue data (%@) from iCloud backup. Error: %@", self.storagePath, error);
+    }
 }
 
 #pragma mark - Private
