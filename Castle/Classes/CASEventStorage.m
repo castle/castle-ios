@@ -23,8 +23,13 @@
 + (void)persistQueue:(NSArray *)queue
 {
     [self.class createStoragePathIfNeccessary];
-    [NSKeyedArchiver archiveRootObject:queue toFile:self.storagePath];
-    CASLog(@"Queue persisted");
+    BOOL persisted = [NSKeyedArchiver archiveRootObject:queue toFile:self.storagePath];
+    
+    if(persisted) {
+        CASLog(@"%ld events written to: %@", queue.count, self.storagePath);
+    } else {
+        CASLog(@"WARNING! Event queue couldn't be persisted (%@)", self.storagePath);
+    }
 }
 
 #pragma mark - Private
@@ -32,7 +37,7 @@
 + (void)createStoragePathIfNeccessary
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *storagePath = [self.class storagePath];
+    NSString *storagePath = [self.class storageDirectory];
     if (![fileManager fileExistsAtPath:storagePath isDirectory:NULL]) {
         NSError *error = nil;
         [fileManager createDirectoryAtPath:storagePath withIntermediateDirectories:YES attributes:nil error:&error];
@@ -42,9 +47,14 @@
     }
 }
 
++ (NSString *)storageDirectory
+{
+    return [[self documentsDirectory] stringByAppendingString:@"/castle/"];
+}
+
 + (NSString *)storagePath
 {
-    return [[self documentsDirectory] stringByAppendingString:@"/castle/events.data"];
+    return [[self storageDirectory] stringByAppendingString:@"events"];
 }
 
 + (NSString *)documentsDirectory
