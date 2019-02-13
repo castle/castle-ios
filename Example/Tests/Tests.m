@@ -28,17 +28,29 @@
 {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-
-    // Clear current app version
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults removeObjectForKey:@"CastleAppVersionKey"];
-    [defaults synchronize];
+    
+    NSArray *baseURLWhiteList = @[ [NSURL URLWithString:@"https://google.com/"] ];
+    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    configuration.baseURLWhiteList = baseURLWhiteList;
+    
+    [Castle configure:configuration];
 }
 
 - (void)tearDown
 {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [paths.firstObject stringByAppendingString:@"/castle/events"];
+    
+    // Remove event queue data file
+    NSError *error = nil;
+    if([fileManager fileExistsAtPath:path]) {
+        [fileManager removeItemAtPath:path error:&error];
+        XCTAssertNil(error);
+    }
 }
 
 - (void)testDateFormatter
@@ -66,11 +78,6 @@
 - (void)testConfiguration
 {
     NSArray *baseURLWhiteList = @[ [NSURL URLWithString:@"https://google.com/"] ];
-
-    // Make sure to reset configuration
-    [Castle resetConfiguration];
-    
-    // Create configuration object
     CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
     
     // Check that all default values are set correctly
@@ -449,7 +456,7 @@
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [paths.firstObject stringByAppendingString:@"/castle/events.data"];
+    NSString *path = [paths.firstObject stringByAppendingString:@"/castle/events"];
 
     // Track a single event to trigger the persistance
     [Castle track:@"example event"];
@@ -465,6 +472,17 @@
     // Track a single event to trigger the persistance
     [Castle track:@"example event"];
     XCTAssertTrue([fileManager fileExistsAtPath:path]);
+    
+    NSUInteger currentQueueSize = [Castle queueSize];
+    
+    // Unarchive stored event queue and check that the queue count is the same as the current size of the in memory queue
+    NSArray *queue = [CASEventStorage storedQueue];
+    XCTAssertEqual(currentQueueSize, queue.count);
+    
+    // Tracking a new event should increase queue size by one
+    [Castle track:@"example event"];
+    queue = [CASEventStorage storedQueue];
+    XCTAssertTrue(queue.count == currentQueueSize+1);
 }
 
 - (void)testDefaultHeaders
