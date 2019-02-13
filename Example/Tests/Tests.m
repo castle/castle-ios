@@ -39,6 +39,17 @@
 {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [paths.firstObject stringByAppendingString:@"/castle/events"];
+    
+    // Remove event queue data file
+    NSError *error = nil;
+    if([fileManager fileExistsAtPath:path]) {
+        [fileManager removeItemAtPath:path error:&error];
+        XCTAssertNil(error);
+    }
 }
 
 - (void)testConfiguration
@@ -427,7 +438,7 @@
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [paths.firstObject stringByAppendingString:@"/castle/events.data"];
+    NSString *path = [paths.firstObject stringByAppendingString:@"/castle/events"];
 
     // Track a single event to trigger the persistance
     [Castle track:@"example event"];
@@ -443,6 +454,17 @@
     // Track a single event to trigger the persistance
     [Castle track:@"example event"];
     XCTAssertTrue([fileManager fileExistsAtPath:path]);
+    
+    NSUInteger currentQueueSize = [Castle queueSize];
+    
+    // Unarchive stored event queue and check that the queue count is the same as the current size of the in memory queue
+    NSArray *queue = [CASEventStorage storedQueue];
+    XCTAssertEqual(currentQueueSize, queue.count);
+    
+    // Tracking a new event should increase queue size by one
+    [Castle track:@"example event"];
+    queue = [CASEventStorage storedQueue];
+    XCTAssertTrue(queue.count == currentQueueSize+1);
 }
 
 - (void)testDefaultHeaders
