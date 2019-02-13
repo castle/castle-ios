@@ -41,6 +41,28 @@
     [super tearDown];
 }
 
+- (void)testDateFormatter
+{
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:0];
+    NSString *formattedDateString = [[CASModel timestampDateFormatter] stringFromDate:date];
+    XCTAssertEqualObjects(formattedDateString, @"1970-01-01T00:00:00.000Z");
+    
+    NSCalendar *calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    components.year = 1984;
+    components.month = 5;
+    components.day = 27;
+    components.hour = 12;
+    components.minute = 45;
+    components.second = 45;
+    components.nanosecond = 455000000;
+    calendar.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:1*60*60];
+    date = [calendar dateFromComponents:components];
+    
+    formattedDateString = [[CASModel timestampDateFormatter] stringFromDate:date];
+    XCTAssertEqualObjects(formattedDateString, @"1984-05-27T11:45:45.455Z");
+}
+
 - (void)testConfiguration
 {
     NSArray *baseURLWhiteList = @[ [NSURL URLWithString:@"https://google.com/"] ];
