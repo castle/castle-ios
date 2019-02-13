@@ -10,7 +10,7 @@
 
 ## Requirements
 
-- iOS 9.0+ / tvOS 9.0+ / watchOS 2.0+
+- iOS 9.0+
 - Xcode 8.2+
 
 ## Installation
