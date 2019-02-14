@@ -23,7 +23,17 @@
 + (void)persistQueue:(NSArray *)queue
 {
     [self.class createStoragePathIfNeccessary];
-    BOOL persisted = [NSKeyedArchiver archiveRootObject:queue toFile:self.storagePath];
+    
+    BOOL persisted = NO;
+    if (@available(iOS 11.0, *)) {
+        NSError *error = nil;
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:queue requiringSecureCoding:YES error:&error];
+        if(data != nil && error == nil) {
+            persisted = [data writeToFile:self.storagePath atomically:YES];
+        }
+    } else {
+        persisted = [NSKeyedArchiver archiveRootObject:queue toFile:self.storagePath];
+    }
     
     if(persisted) {
         CASLog(@"%ld events written to: %@", queue.count, self.storagePath);
