@@ -9,6 +9,7 @@
 
 #import <UIKit/UIKit.h>
 
+#import "Castle.h"
 #import "CastleConfiguration.h"
 #import "CASUtils.h"
 #import "CASEvent.h"
@@ -25,6 +26,8 @@ NSString *const CASAPIClientVersion = @"v1";
 - (NSURLSessionDataTask *)dataTaskWithPath:(NSString *)path
                                   postData:(NSData *)data
                                 completion:(void (^)(id responseObject,  NSURLResponse * __nullable response, NSError * __nullable error))completion;
+
+- (NSString *)userAgent;
 
 @end
 
@@ -131,12 +134,34 @@ NSString *const CASAPIClientVersion = @"v1";
     // Set HTTP method
     request.HTTPMethod = method;
     
+    // Set custom User Agent
+    [request setValue:[self userAgent] forHTTPHeaderField:@"User-Agent"];
+    
     // Authentication
     NSString *authStr = [NSString stringWithFormat:@":%@", self.configuration.publishableKey];
     NSData *authData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
     [request setValue:[NSString stringWithFormat:@"Basic %@", [authData base64EncodedStringWithOptions:0]] forHTTPHeaderField:@"Authorization"];
     
     return request;
+}
+
+#pragma mark - Private
+
+- (NSString *)userAgent
+{
+    // Get host app version information from the main bundle
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *name = [bundle objectForInfoDictionaryKey:@"CFBundleName"];
+    NSString *version = [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSString *build = [bundle objectForInfoDictionaryKey:@"CFBundleVersion"];
+    
+    // Gather device information
+    UIDevice *device = [UIDevice currentDevice];
+    NSString *deviceName = [device name];
+    NSString *system = [device systemName];
+    NSString *systemVersion = [device systemVersion];
+    
+    return [NSString stringWithFormat:@"%@/%@ (%@) (%@; %@ %@; Castle %@)", name, version, build, deviceName, system, systemVersion, [Castle versionString]];
 }
 
 @end
