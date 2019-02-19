@@ -9,9 +9,33 @@
 
 @interface Castle (Util)
 
+/**
+ Get current connection state for Wifi
+
+ @return Wifi is available
+ */
 + (BOOL)isWifiAvailable;
+
+/**
+ Get current connection state for Cellular
+
+ @return Cellular is available
+ */
 + (BOOL)isCellularAvailable;
+
+/**
+ Get the name of the current carrier, only applicable when a cellular connection is available
+
+ @return Carrier name
+ */
 + (NSString *)carrierName;
+
+/**
+ Get the User Agent for used in all requests to the Castle API.
+ User agent will have the following format: App Name/x.x (xxxx) (iPhone XR; iOS xx.x; Castle x.x.x)
+
+ @return User Agent
+ */
 + (NSString *)userAgent;
 
 @end
