@@ -22,7 +22,7 @@ Castle for iOS provides a simple way to integrate Castle into your app.
   s.social_media_url = 'https://twitter.com/castle_io'
 
   s.ios.deployment_target = '8.0'
-  s.ios.frameworks = 'Security'
+  s.ios.frameworks = 'Security', 'CoreTelephony', 'UIKit', 'SystemConfiguration'
 
   s.source_files = 'Castle/Classes/**/*'
 end
