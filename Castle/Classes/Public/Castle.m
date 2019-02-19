@@ -179,6 +179,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return _userSignature;
 }
 
++ (NSString *)userAgent
+{
+    return CASUserAgent();
+}
+
 + (BOOL)isWifiAvailable
 {
     return [Castle sharedInstance].reachability.isReachableViaWiFi;
@@ -198,11 +203,6 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     
     CTCarrier *carrier = [_telephonyNetworkInfo subscriberCellularProvider];
     return carrier.carrierName.length > 0 ? carrier.carrierName : @"unknown";
-}
-
-+ (NSString *)userAgent
-{
-    return CASUserAgent();
 }
 
 #pragma mark - Setters
