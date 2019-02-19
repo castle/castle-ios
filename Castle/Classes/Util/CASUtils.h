@@ -10,3 +10,6 @@
 // Logging
 void CASEnableDebugLogging(BOOL enabled);
 void CASLog(NSString *format, ...);
+
+// User Agent
+NSString *CASUserAgent(void);

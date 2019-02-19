@@ -12,5 +12,6 @@
 + (BOOL)isWifiAvailable;
 + (BOOL)isCellularAvailable;
 + (NSString *)carrierName;
++ (NSString *)userAgent;
 
 @end

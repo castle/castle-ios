@@ -200,6 +200,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return carrier.carrierName.length > 0 ? carrier.carrierName : @"unknown";
 }
 
++ (NSString *)userAgent
+{
+    return CASUserAgent();
+}
+
 #pragma mark - Setters
 
 - (void)setUserId:(NSString *)userId
