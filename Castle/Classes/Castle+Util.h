@@ -9,8 +9,25 @@
 
 @interface Castle (Util)
 
+/**
+ Get current connection state for Wifi
+
+ @return Wifi is available
+ */
 + (BOOL)isWifiAvailable;
+
+/**
+ Get current connection state for Cellular
+
+ @return Cellular is available
+ */
 + (BOOL)isCellularAvailable;
+
+/**
+ Get the name of the current carrier, only applicable when a cellular connection is available
+
+ @return Carrier name
+ */
 + (NSString *)carrierName;
 
 @end

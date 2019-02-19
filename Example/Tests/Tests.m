@@ -75,6 +75,18 @@
     XCTAssertEqualObjects(formattedDateString, @"1984-05-27T11:45:45.455Z");
 }
 
+- (void)testUserAgent
+{
+    NSString *userAgent = [Castle userAgent];
+    NSString *pattern = @"[a-zA-Z0-9\\s_-]+\\/[0-9]+\\.[0-9]+ \\([a-zA-Z0-9-_.]+\\) \\([a-zA-Z0-9\\s]+; iOS [0-9]+\\.[0-9]+; Castle [0-9]+\\.[0-9]+\\.[0-9]+\\)";
+    NSError *error = nil;
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:&error];
+    NSUInteger matches = [regex numberOfMatchesInString:userAgent options:0 range:NSMakeRange(0, userAgent.length)];
+    XCTAssertNil(error, @"Failed to create regular expression for User Agent format validation");
+    XCTAssert(matches == 1);
+}
+
 - (void)testConfiguration
 {
     NSArray *baseURLWhiteList = @[ [NSURL URLWithString:@"https://google.com/"] ];

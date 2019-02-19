@@ -9,6 +9,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "Castle.h"
+#import "Castle+Util.h"
 #import "CastleConfiguration.h"
 #import "CASUtils.h"
 #import "CASEvent.h"
@@ -130,6 +132,9 @@ NSString *const CASAPIClientVersion = @"v1";
     
     // Set HTTP method
     request.HTTPMethod = method;
+    
+    // Set custom User Agent
+    [request setValue:[Castle userAgent] forHTTPHeaderField:@"User-Agent"];
     
     // Authentication
     NSString *authStr = [NSString stringWithFormat:@":%@", self.configuration.publishableKey];

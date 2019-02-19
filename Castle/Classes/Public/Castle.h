@@ -209,6 +209,14 @@ extern NSString *const CastleClientIdHeaderName;
 + (NSString *)userSignature;
 
 /**
+ Get the User Agent for used in all requests to the Castle API.
+ User agent will have the following format: App Name/x.x (xxxx) (iPhone XR; iOS xx.x; Castle x.x.x)
+ 
+ @return User Agent
+ */
++ (NSString *)userAgent;
+
+/**
  Get the current size of the event queue
 
  @return return The current size of the event queue

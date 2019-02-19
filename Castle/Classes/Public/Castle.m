@@ -179,6 +179,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return _userSignature;
 }
 
++ (NSString *)userAgent
+{
+    return CASUserAgent();
+}
+
 + (BOOL)isWifiAvailable
 {
     return [Castle sharedInstance].reachability.isReachableViaWiFi;

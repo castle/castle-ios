@@ -54,7 +54,8 @@
                         @"version": [[UIDevice currentDevice] systemVersion] };
     
     context[@"library"] = @{ @"name": @"castle-ios",
-                             @"version": [Castle versionString] };
+                             @"version": [Castle versionString],
+                             @"user_agent": [Castle userAgent] };
     
     return context;
 }
