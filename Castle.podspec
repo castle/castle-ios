@@ -17,7 +17,7 @@ Castle for iOS provides a simple way to integrate Castle into your app.
 
   s.homepage         = 'https://castle.io'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Timo Engelhardt' => 'timo@castle.io' }
+  s.author           = { 'Castle Intelligence' => 'team@castle.io' }
   s.source           = { :git => 'https://github.com/castle/castle-ios.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
