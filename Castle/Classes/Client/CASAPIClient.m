@@ -136,6 +136,9 @@ NSString *const CASAPIClientVersion = @"v1";
     // Set custom User Agent
     [request setValue:[Castle userAgent] forHTTPHeaderField:@"User-Agent"];
     
+    // Set timeout
+    [request setTimeoutInterval:10.0f];
+    
     // Authentication
     NSString *authStr = [NSString stringWithFormat:@":%@", self.configuration.publishableKey];
     NSData *authData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
