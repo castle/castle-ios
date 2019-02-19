@@ -293,6 +293,9 @@
     XCTAssertNotNil(payload[@"context"]);
     XCTAssertNil(payload[@"user_signature"]);
     
+    // Device name should not be included
+    XCTAssertNil(payload[@"device"][@"name"]);
+    
     // Payload should not include these parameters
     XCTAssertNil(payload[@"event"]);
     
