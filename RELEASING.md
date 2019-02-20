@@ -5,11 +5,12 @@ This document describes the tasks to perform for tagging and releasing a new ver
 ## Prepare for release
 
  1. Update the version in `Castle.m`, `Castle.podspec` and `README.md`.
- 2. Update documentation by running `jazzy` in the project root.
- 3. Update the `CHANGELOG.md` for the impending release.
- 4. `git commit -am "Prepare for release X.Y.Z."` (where X.Y.Z is the new version).
- 5. `git tag -a X.Y.Z -m "Version X.Y.Z"` (where X.Y.Z is the new version).
- 6. `git push && git push --tags`.
+ 2. Update `github_file_prefix` in jazzy.yaml to point to the new release tag 
+ 3. Update documentation by running `jazzy` in the project root.
+ 4. Update the `CHANGELOG.md` for the impending release.
+ 5. `git commit -am "Prepare for release X.Y.Z."` (where X.Y.Z is the new version).
+ 6. `git tag -a X.Y.Z -m "Version X.Y.Z"` (where X.Y.Z is the new version).
+ 7. `git push && git push --tags`.
  
 ## Publish to CocoaPods
 
