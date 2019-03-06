@@ -28,8 +28,6 @@
 {
     NSMutableDictionary *context = [NSMutableDictionary dictionaryWithObject:[[CASDevice sharedDevice] JSONPayload] forKey:@"device"];
     
-    context[@"timezone"] = [NSTimeZone systemTimeZone].name;
-    
     NSLocale *locale = [NSLocale currentLocale];
     context[@"locale"] = [NSString stringWithFormat:@"%@-%@", [locale objectForKey:NSLocaleLanguageCode], [locale objectForKey:NSLocaleCountryCode]];
     
