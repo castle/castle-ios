@@ -37,7 +37,7 @@ NSString *CASUserAgent(void)
     
     // Gather device information
     UIDevice *device = [UIDevice currentDevice];
-    NSString *model = [device name];
+    NSString *model = [device model];
     NSString *system = [device systemName];
     NSString *systemVersion = [device systemVersion];
     
