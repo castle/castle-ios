@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.1 (2019-03-12)
+
+- Fix: [#32](https://github.com/castle/castle-ios/pull/32) User agent should include device model not device name
+
 ## 1.0.0 (2019-02-19)
 
 - Improvement: [#30](https://github.com/castle/castle-ios/pull/30) Podspec improvements and fixes
