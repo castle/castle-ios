@@ -30,4 +30,11 @@
  */
 + (NSString *)carrierName;
 
+/**
+  Get the UIApplication instance if available
+ 
+ @return UIApplication instance
+ */
++ (UIApplication *)sharedUIApplication;
+
 @end
