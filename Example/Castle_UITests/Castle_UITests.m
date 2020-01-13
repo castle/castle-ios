@@ -29,42 +29,52 @@
     XCUIApplication *app = [[XCUIApplication alloc] init];
 
     [app.buttons[@"reset"] tap];
-    XCTAssertTrue(app.staticTexts[@"Queue size: 1"].exists);
+    sleep(1);
 
     // Tap screen track button
     [app.buttons[@"trackScreen"] tap];
-    XCTAssertTrue(app.staticTexts[@"Queue size: 1"].exists);
+    BOOL exists = [app.staticTexts[@"Queue size: 1"] waitForExistenceWithTimeout:10];
+    XCTAssertTrue(exists);
     
     [app.buttons[@"push"] tap];
-    XCTAssertTrue(app.staticTexts[@"Queue size: 2"].exists);
+    exists = [app.staticTexts[@"Queue size: 2"] waitForExistenceWithTimeout:10];
+    XCTAssertTrue(exists);
     
     [app.buttons[@"push"] tap];
-    XCTAssertTrue(app.staticTexts[@"Queue size: 3"].exists);
+    exists = [app.staticTexts[@"Queue size: 3"] waitForExistenceWithTimeout:10];
+    XCTAssertTrue(exists);
     
     [app.buttons[@"push"] tap];
-    XCTAssertTrue(app.staticTexts[@"Queue size: 4"].exists);
+    exists = [app.staticTexts[@"Queue size: 4"] waitForExistenceWithTimeout:10];
+    XCTAssertTrue(exists);
     
     [app.buttons[@"push"] tap];
-    XCTAssertTrue(app.staticTexts[@"Queue size: 5"].exists);
+    exists = [app.staticTexts[@"Queue size: 5"] waitForExistenceWithTimeout:10];
+    XCTAssertTrue(exists);
     
     [app.navigationBars[@"View Controller 4"].buttons[@"View Controller 3"] tap];
-    XCTAssertTrue(app.staticTexts[@"Queue size: 6"].exists);
+    exists = [app.staticTexts[@"Queue size: 6"] waitForExistenceWithTimeout:10];
+    XCTAssertTrue(exists);
     
     [app.navigationBars[@"View Controller 3"].buttons[@"View Controller 2"] tap];
-    XCTAssertTrue(app.staticTexts[@"Queue size: 7"].exists);
+    exists = [app.staticTexts[@"Queue size: 7"] waitForExistenceWithTimeout:10];
+    XCTAssertTrue(exists);
     
     [app.navigationBars[@"View Controller 2"].buttons[@"View Controller 1"] tap];
-    XCTAssertTrue(app.staticTexts[@"Queue size: 8"].exists);
+    exists = [app.staticTexts[@"Queue size: 8"] waitForExistenceWithTimeout:10];
+    XCTAssertTrue(exists);
     
     [app.navigationBars[@"View Controller 1"].buttons[@"Example"] tap];
-    XCTAssertTrue(app.staticTexts[@"Queue size: 9"].exists);
+    exists = [app.staticTexts[@"Queue size: 9"] waitForExistenceWithTimeout:10];
+    XCTAssertTrue(exists);
     
     [app/*@START_MENU_TOKEN@*/.buttons[@"pushEmbedded"]/*[[".buttons[@\"Push Embedded View Controller\"]",".buttons[@\"pushEmbedded\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/ tap];
 
     [app.tabBars.buttons[@"Item 2"] tap];
     
     [app.navigationBars[@"UITabBar"].buttons[@"Example"] tap];
-    XCTAssertTrue(app.staticTexts[@"Queue size: 12"].exists);
+    exists = [app.staticTexts[@"Queue size: 12"] waitForExistenceWithTimeout:10];
+    XCTAssertTrue(exists);
 }
 
 @end
