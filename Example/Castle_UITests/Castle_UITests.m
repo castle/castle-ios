@@ -17,7 +17,7 @@
 @implementation Castle_UITests
 
 - (void)setUp {
-    self.continueAfterFailure = YES;
+    self.continueAfterFailure = NO;
     [[[XCUIApplication alloc] init] launch];
 }
 
