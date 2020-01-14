@@ -205,6 +205,14 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return carrier.carrierName.length > 0 ? carrier.carrierName : @"unknown";
 }
 
++ (UIApplication *)sharedUIApplication
+{
+    if ([[UIApplication class] respondsToSelector:@selector(sharedApplication)]) {
+        return [[UIApplication class] performSelector:@selector(sharedApplication)];
+    }
+    return nil;
+}
+
 #pragma mark - Setters
 
 - (void)setUserId:(NSString *)userId
