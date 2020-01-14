@@ -1,9 +1,8 @@
 //
 //  DemoViewController.m
-//  Castle_Example
+//  Castle
 //
-//  Created by Alexander Simson on 2020-01-10.
-//  Copyright © 2020 Alexander Simson. All rights reserved.
+//  Copyright © 2020 Castle. All rights reserved.
 //
 
 #import "DemoViewController.h"

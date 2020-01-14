@@ -2,8 +2,7 @@
 //  AutmaticScreenViewEvents.m
 //  Castle_UITests
 //
-//  Created by Alexander Simson on 2020-01-10.
-//  Copyright © 2020 Alexander Simson. All rights reserved.
+//  Copyright (c) 2020 Castle. All rights reserved.
 //
 
 @import XCTest;

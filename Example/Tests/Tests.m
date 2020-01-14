@@ -1,6 +1,6 @@
 //
-//  CastleTests.m
-//  CastleTests
+//  Tests.m
+//  Castle_Tests
 //
 //  Copyright (c) 2017 Castle. All rights reserved.
 //

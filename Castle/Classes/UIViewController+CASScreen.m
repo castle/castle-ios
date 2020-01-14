@@ -80,7 +80,7 @@
 
 + (UIViewController *)ca_visibleViewController:(UIViewController *)rootViewController
 {
-    // Deterrmine the currently visible controller using rootViewController as a starting point
+    // Determine the currently visible controller using rootViewController as a starting point
     if (rootViewController.presentedViewController != nil) {
         // Get presented view controller (if there is one)
         return [self ca_visibleViewController:rootViewController.presentedViewController];
