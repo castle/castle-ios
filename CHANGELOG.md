@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.2 (2020-01-13)
+
+- Fix: [#33](https://github.com/castle/castle-ios/pull/33) Reduce the number of screen events produced by the automatic screen tracking
+
 ## 1.0.1 (2019-03-12)
 
 - Fix: [#32](https://github.com/castle/castle-ios/pull/32) User agent should include device model not device name
