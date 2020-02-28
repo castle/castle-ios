@@ -93,18 +93,6 @@ extern NSString *const CastleClientIdHeaderName;
 + (void)identify:(NSString *)userId;
 
 /**
- Track identify event with specified user identity. User identity will be persisted. A call to identify or reset will clear the stored user identity.
- Provided user traits will be included in the identify event sent to the Castle API.
-
- @param identifier user id
- @param traits user traits
- @code // Identify user with unique identifier including user traits
- [Castle identify:@"1245-3055" traits:@{ @"email": @"laura@example.com" }];
- @endcode
- */
-+ (void)identify:(NSString *)identifier traits:(NSDictionary *)traits;
-
-/**
  Set user signature and enable secure mode. User signature will be included in all events after it has been set and will be persisted.
  A stored user signature will be removed when the user signature or reset methods are called.
  
@@ -126,17 +114,6 @@ extern NSString *const CastleClientIdHeaderName;
 + (void)track:(NSString *)eventName;
 
 /**
- Track event with a specified name and provided properties
- 
- @param eventName event name
- @param properties event properties
- @code // Track an event and include some properties
- [Castle track:@"loginFormSubmitted" properties:@{ @"username": @"laura" }];
- @endcode
- */
-+ (void)track:(NSString *)eventName properties:(NSDictionary *)properties;
-
-/**
  Track screen event with a specified name
 
  @param screenName Screen name
@@ -145,17 +122,6 @@ extern NSString *const CastleClientIdHeaderName;
  @endcode
  */
 + (void)screen:(NSString *)screenName;
-
-/**
- Track screen event with a specified name and provided properties
-
- @param screenName Screen name
- @param properties Screen properties
- @code // Track a screen view and include some properties
- [Castle screen:@"Menu" properties:@{ @"locale": @"en_US" }];
- @endcode
- */
-+ (void)screen:(NSString *)screenName properties:(NSDictionary *)properties;
 
 /**
  Force a flush of the batch event queue, even if the flush limit hasn't been reached

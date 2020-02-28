@@ -13,24 +13,17 @@
 
 @interface CASScreen ()
 @property (nonatomic, copy, readwrite) NSString *name;
-@property (nonatomic, copy, readwrite) NSDictionary *properties;
 @property (nonatomic, copy, readwrite) NSDate *timestamp;
 @end
 
 @implementation CASScreen
 
 @synthesize name = _name;
-@synthesize properties = _properties;
 @synthesize timestamp = _timestamp;
 
 #pragma mark - Factory
 
 + (instancetype)eventWithName:(NSString *)name
-{
-    return [CASScreen eventWithName:name properties:@{}];
-}
-
-+ (instancetype)eventWithName:(NSString *)name properties:(NSDictionary *)properties
 {
     if(!name) {
         CASLog(@"Screen name can't be nil.");
@@ -42,13 +35,7 @@
         return nil;
     }
     
-    BOOL valid = [CASEvent propertiesContainValidData:properties];
-    if(!valid) {
-        CASLog(@"Traits dictionary contains invalid data. Supported types are: NSString, NSNumber, NSDictionary & NSNull");
-        return nil;
-    }
-    
-    CASScreen *screen = (CASScreen *) [super eventWithName:name properties:properties];
+    CASScreen *screen = (CASScreen *) [super eventWithName:name];
     return screen;
 }
 

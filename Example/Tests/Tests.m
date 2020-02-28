@@ -184,22 +184,9 @@
     newCount = [CASEventStorage storedQueue].count;
     XCTAssertTrue(count == newCount);
 
-    // This should lead to no event being tracked properties can't be nil
-    count = [CASEventStorage storedQueue].count;
-    [Castle screen:@"Screen" properties:nil];
-    newCount = [CASEventStorage storedQueue].count;
-    XCTAssertTrue(count == newCount);
-
     // This should lead to no event being tracked since identity can't be an empty string
     count = [CASEventStorage storedQueue].count;
     [Castle identify:@""];
-    newCount = [CASEventStorage storedQueue].count;
-    XCTAssertTrue(count == newCount); // Count should be unchanced
-    XCTAssertNil([Castle userId]); // User id should be nil
-
-    // This should lead to no event being tracked properties can't be nil
-    count = [CASEventStorage storedQueue].count;
-    [Castle identify:@"testuser1" traits:nil];
     newCount = [CASEventStorage storedQueue].count;
     XCTAssertTrue(count == newCount); // Count should be unchanced
     XCTAssertNil([Castle userId]); // User id should be nil
@@ -245,10 +232,10 @@
     CASScreen *screen2 = [CASScreen eventWithName:@""];
     XCTAssertNil(screen2);
 
-    CASIdentity *identity1 = [CASIdentity identityWithUserId:@"" traits:@{}];
+    CASIdentity *identity1 = [CASIdentity identityWithUserId:@""];
     XCTAssertNil(identity1);
 
-    CASIdentity *identity2 = [CASIdentity identityWithUserId:@"testuser" traits:@{}];
+    CASIdentity *identity2 = [CASIdentity identityWithUserId:@"testuser"];
 
     NSData *identity2Data = [NSKeyedArchiver archivedDataWithRootObject:identity2];
     XCTAssertNotNil(identity2Data);
@@ -288,7 +275,6 @@
     NSDictionary *payload = [event JSONPayload];
     XCTAssertTrue([payload[@"name"] isEqualToString:@"Main"]);
     XCTAssertTrue([payload[@"type"] isEqualToString:@"screen"]);
-    XCTAssertNotNil(payload[@"properties"]);
     XCTAssertNotNil(payload[@"timestamp"]);
     XCTAssertNotNil(payload[@"context"]);
     XCTAssertNil(payload[@"user_signature"]);
@@ -341,14 +327,12 @@
     [Castle identify:@"thisisatestuser1"];
     
     // Create user identity
-    NSDictionary *traits = @{ @"trait": @"value" };
-    CASIdentity *event = [CASIdentity identityWithUserId:@"123" traits:traits];
+    CASIdentity *event = [CASIdentity identityWithUserId:@"123"];
 
     // Validate payload
     NSDictionary *payload = [event JSONPayload];
     XCTAssertTrue([payload[@"user_id"] isEqualToString:@"123"]);
     XCTAssertTrue([payload[@"type"] isEqualToString:@"identify"]);
-    XCTAssertTrue([payload[@"traits"] isEqualToDictionary:traits]);
     XCTAssertNotNil(payload[@"timestamp"]);
     XCTAssertNotNil(payload[@"context"]);
     XCTAssertNil(payload[@"user_signature"]);
@@ -362,7 +346,7 @@
     [Castle secure:signature];
     
     // The user signature should be included in any new event objects
-    CASEvent *event2 =  [CASIdentity identityWithUserId:@"456" traits:traits];
+    CASEvent *event2 =  [CASIdentity identityWithUserId:@"456"];
     XCTAssertEqualObjects(event2.userId, @"456");
     XCTAssertEqualObjects(event2.userSignature, signature);
     
@@ -386,7 +370,7 @@
     XCTAssertEqualObjects(event3.userSignature, signature);
     
     // Create a new event that should have the new updated user id and signature
-    CASEvent *event4 = [CASIdentity identityWithUserId:@"789" traits:traits];
+    CASEvent *event4 = [CASIdentity identityWithUserId:@"789"];
     data = [NSKeyedArchiver archivedDataWithRootObject:event4];
     CASEvent *event5 = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     XCTAssertEqualObjects(event5.userId, @"789");
@@ -403,21 +387,18 @@
     XCTAssertNil(model.JSONData);
 
     // Create basic event with valid data
-    CASEvent *event = [CASEvent eventWithName:@"testevent1" properties:@{ @"param1": @"value1", @"param2": @{ @"param3": @(2) } }];
+    CASEvent *event = [CASEvent eventWithName:@"testevent1"];
     XCTAssertNotNil(event);
     XCTAssertTrue([event.name isEqualToString:@"testevent1"]);
-    XCTAssertNotNil(event.properties);
 
     // Validate simple factory method
     CASEvent *event1 = [CASEvent eventWithName:@"testevent2"];
     XCTAssertTrue([event1.name isEqualToString:@"testevent2"]);
-    XCTAssertNotNil(event1.properties);
 
     // Validate payload
     NSDictionary *payload = [event JSONPayload];
     XCTAssertTrue([payload[@"event"] isEqualToString:@"testevent1"]);
     XCTAssertTrue([payload[@"type"] isEqualToString:@"track"]);
-    XCTAssertNotNil(payload[@"properties"]);
     XCTAssertNotNil(payload[@"timestamp"]);
     XCTAssertNotNil(payload[@"context"]);
     XCTAssertNil(payload[@"user_signature"]);
@@ -425,10 +406,10 @@
     // Validate JSON Serialization success
     XCTAssertNotNil(event.JSONData);
 
-    CASEvent *invalidEvent1 = [CASEvent eventWithName:@"testevent2" properties:@{ @"invalidparam": [[NSObject alloc] init] }];
+    CASEvent *invalidEvent1 = [CASEvent eventWithName:@""];
     XCTAssertNil(invalidEvent1);
 
-    CASEvent *invalidEvent2 = [CASEvent eventWithName:@"testevent2" properties:@{ @"invalidParamContainer": @{ @"invalidParam": [[NSObject alloc] init] } }];
+    CASEvent *invalidEvent2 = [CASEvent eventWithName:nil];
     XCTAssertNil(invalidEvent2);
     
     // Enable secure mode

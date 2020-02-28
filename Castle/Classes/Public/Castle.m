@@ -239,27 +239,17 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 + (void)track:(NSString *)eventName
 {
-    [Castle track:eventName properties:@{}];
-}
-
-+ (void)track:(NSString *)eventName properties:(NSDictionary *)properties
-{
     if(!eventName || [eventName isEqualToString:@""]) {
         CASLog(@"No event name provided. Will cancel track event operation.");
         return;
     }
 
     Castle *castle = [Castle sharedInstance];
-    CASEvent *event = [CASEvent eventWithName:eventName properties:properties];
+    CASEvent *event = [CASEvent eventWithName:eventName];
     [castle queueEvent:event];
 }
 
 + (void)screen:(NSString *)screenName
-{
-    [Castle screen:screenName properties:@{}];
-}
-
-+ (void)screen:(NSString *)screenName properties:(NSDictionary *)properties
 {
     if(!screenName || [screenName isEqualToString:@""]) {
         CASLog(@"No screen name provided. Will cancel track event operation.");
@@ -267,16 +257,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     }
 
     Castle *castle = [Castle sharedInstance];
-    CASScreen *screen = [CASScreen eventWithName:screenName properties:properties];
+    CASScreen *screen = [CASScreen eventWithName:screenName];
     [castle queueEvent:screen];
 }
 
 + (void)identify:(NSString *)userId
-{
-    [Castle identify:userId traits:@{}];
-}
-
-+ (void)identify:(NSString *)userId traits:(NSDictionary *)traits
 {
     if(!userId || [userId isEqualToString:@""]) {
         CASLog(@"No user id provided. Will cancel identify operation.");
@@ -288,7 +273,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         CASLog(@"Identify called without secure mode user signature set. If secure mode is enabled in Castle and identify is called before secure, the identify event will be discarded.");
     }
     
-    CASIdentity *identity = [CASIdentity identityWithUserId:userId traits:traits];
+    CASIdentity *identity = [CASIdentity identityWithUserId:userId];
     if(identity != nil) {
         [castle setUserId:userId];
         [castle queueEvent:identity];
