@@ -9,6 +9,6 @@
 
 @interface CASIdentity : CASEvent
 
-+ (instancetype _Nullable)identityWithUserId:(NSString * _Nonnull)userId;
++ (instancetype _Nullable)identityWithUserId:(NSString * _Nonnull)userId traits:(NSDictionary * _Nonnull)traits;
 
 @end

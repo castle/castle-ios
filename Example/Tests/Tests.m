@@ -191,6 +191,13 @@
     XCTAssertTrue(count == newCount); // Count should be unchanced
     XCTAssertNil([Castle userId]); // User id should be nil
 
+    // This should lead to no event being tracked properties can't be nil
+    count = [CASEventStorage storedQueue].count;
+    [Castle identify:@"testuser1" traits:nil];
+    newCount = [CASEventStorage storedQueue].count;
+    XCTAssertTrue(count == newCount); // Count should be unchanced
+    XCTAssertNil([Castle userId]); // User id should be nil
+
     CASScreen *screen = [CASScreen eventWithName:@"Main"];
     XCTAssertNotNil(screen);
     XCTAssertTrue([screen.type isEqualToString:@"screen"]);
@@ -232,10 +239,10 @@
     CASScreen *screen2 = [CASScreen eventWithName:@""];
     XCTAssertNil(screen2);
 
-    CASIdentity *identity1 = [CASIdentity identityWithUserId:@""];
+    CASIdentity *identity1 = [CASIdentity identityWithUserId:@"" traits:@{}];
     XCTAssertNil(identity1);
 
-    CASIdentity *identity2 = [CASIdentity identityWithUserId:@"testuser"];
+    CASIdentity *identity2 = [CASIdentity identityWithUserId:@"testuser" traits:@{}];
 
     NSData *identity2Data = [NSKeyedArchiver archivedDataWithRootObject:identity2];
     XCTAssertNotNil(identity2Data);
@@ -327,12 +334,14 @@
     [Castle identify:@"thisisatestuser1"];
     
     // Create user identity
-    CASIdentity *event = [CASIdentity identityWithUserId:@"123"];
+    NSDictionary *traits = @{ @"trait": @"value" };
+    CASIdentity *event = [CASIdentity identityWithUserId:@"123" traits:traits];
 
     // Validate payload
     NSDictionary *payload = [event JSONPayload];
     XCTAssertTrue([payload[@"user_id"] isEqualToString:@"123"]);
     XCTAssertTrue([payload[@"type"] isEqualToString:@"identify"]);
+    XCTAssertTrue([payload[@"traits"] isEqualToDictionary:traits]);
     XCTAssertNotNil(payload[@"timestamp"]);
     XCTAssertNotNil(payload[@"context"]);
     XCTAssertNil(payload[@"user_signature"]);
@@ -346,7 +355,7 @@
     [Castle secure:signature];
     
     // The user signature should be included in any new event objects
-    CASEvent *event2 =  [CASIdentity identityWithUserId:@"456"];
+    CASEvent *event2 =  [CASIdentity identityWithUserId:@"456" traits:traits];
     XCTAssertEqualObjects(event2.userId, @"456");
     XCTAssertEqualObjects(event2.userSignature, signature);
     
@@ -370,7 +379,7 @@
     XCTAssertEqualObjects(event3.userSignature, signature);
     
     // Create a new event that should have the new updated user id and signature
-    CASEvent *event4 = [CASIdentity identityWithUserId:@"789"];
+    CASEvent *event4 = [CASIdentity identityWithUserId:@"789" traits:traits];
     data = [NSKeyedArchiver archivedDataWithRootObject:event4];
     CASEvent *event5 = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     XCTAssertEqualObjects(event5.userId, @"789");

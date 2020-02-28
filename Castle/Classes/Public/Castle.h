@@ -93,6 +93,18 @@ extern NSString *const CastleClientIdHeaderName;
 + (void)identify:(NSString *)userId;
 
 /**
+ Track identify event with specified user identity. User identity will be persisted. A call to identify or reset will clear the stored user identity.
+ Provided user traits will be included in the identify event sent to the Castle API.
+
+ @param identifier user id
+ @param traits user traits
+ @code // Identify user with unique identifier including user traits
+ [Castle identify:@"1245-3055" traits:@{ @"email": @"laura@example.com" }];
+ @endcode
+ */
++ (void)identify:(NSString *)identifier traits:(NSDictionary *)traits;
+
+/**
  Set user signature and enable secure mode. User signature will be included in all events after it has been set and will be persisted.
  A stored user signature will be removed when the user signature or reset methods are called.
  

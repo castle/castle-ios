@@ -263,6 +263,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 + (void)identify:(NSString *)userId
 {
+    [Castle identify:userId traits:@{}];
+}
+
++ (void)identify:(NSString *)userId traits:(NSDictionary *)traits
+{
     if(!userId || [userId isEqualToString:@""]) {
         CASLog(@"No user id provided. Will cancel identify operation.");
         return;
@@ -273,7 +278,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         CASLog(@"Identify called without secure mode user signature set. If secure mode is enabled in Castle and identify is called before secure, the identify event will be discarded.");
     }
     
-    CASIdentity *identity = [CASIdentity identityWithUserId:userId];
+    CASIdentity *identity = [CASIdentity identityWithUserId:userId traits:traits];
     if(identity != nil) {
         [castle setUserId:userId];
         [castle queueEvent:identity];
