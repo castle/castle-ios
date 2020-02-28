@@ -171,17 +171,11 @@
 - (void)testTracking
 {
     [Castle reset];
-    
-    // This should lead to no event being tracked since empty string isn't a valid name
-    NSUInteger count = [CASEventStorage storedQueue].count;
-    [Castle track:@""];
-    NSUInteger newCount = [CASEventStorage storedQueue].count;
-    XCTAssertTrue(count == newCount);
 
     // This should lead to no event being tracked since empty string isn't a valid name
-    count = [CASEventStorage storedQueue].count;
+    NSUInteger count = [CASEventStorage storedQueue].count;
     [Castle screen:@""];
-    newCount = [CASEventStorage storedQueue].count;
+    NSUInteger newCount = [CASEventStorage storedQueue].count;
     XCTAssertTrue(count == newCount);
 
     // This should lead to no event being tracked properties can't be nil
@@ -474,8 +468,7 @@
     NSString *path = [paths.firstObject stringByAppendingString:@"/castle/events"];
 
     // Track a single event to trigger the persistance
-    [Castle track:@"example event"];
-
+    [Castle screen:@"example screen"];
     XCTAssertTrue([fileManager fileExistsAtPath:path]);
 
     // Remove event queue data file and verify
@@ -485,7 +478,7 @@
     XCTAssertFalse([fileManager fileExistsAtPath:path]);
 
     // Track a single event to trigger the persistance
-    [Castle track:@"example event"];
+    [Castle screen:@"example screen"];
     XCTAssertTrue([fileManager fileExistsAtPath:path]);
     
     NSUInteger currentQueueSize = [Castle queueSize];
@@ -495,7 +488,7 @@
     XCTAssertEqual(currentQueueSize, queue.count);
     
     // Tracking a new event should increase queue size by one
-    [Castle track:@"example event"];
+    [Castle screen:@"example screen"];
     queue = [CASEventStorage storedQueue];
     XCTAssertTrue(queue.count == currentQueueSize+1);
 }
@@ -616,14 +609,14 @@
     
     // Fill the queue
     for (int i = 0; i < configuration.maxQueueLimit; i++) {
-        [Castle track:[NSString stringWithFormat:@"Event %d", i]];
+        [Castle screen:[NSString stringWithFormat:@"Screen %d", i]];
     }
     
     // The queue size should be equal to maxQueueLimit
     XCTAssertTrue(configuration.maxQueueLimit == [Castle queueSize]);
     
     // Track a new event so the maxQueueLimit is reached
-    [Castle track:@"New event"];
+    [Castle screen:@"Screen"];
     
     // Add one more event so the oldest event in the queue is evicted
     // The queue size should still be equal to maxQueueLimit
