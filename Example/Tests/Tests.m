@@ -396,13 +396,15 @@
     XCTAssertNil(model.JSONData);
 
     // Create basic event with valid data
-    CASEvent *event = [CASEvent eventWithName:@"testevent1"];
+    CASEvent *event = [CASEvent eventWithName:@"testevent1" properties:@{ @"param1": @"value1", @"param2": @{ @"param3": @(2) } }];
     XCTAssertNotNil(event);
     XCTAssertTrue([event.name isEqualToString:@"testevent1"]);
+    XCTAssertNotNil(event.properties);
 
     // Validate simple factory method
     CASEvent *event1 = [CASEvent eventWithName:@"testevent2"];
     XCTAssertTrue([event1.name isEqualToString:@"testevent2"]);
+    XCTAssertNotNil(event1.properties);
 
     // Validate payload
     NSDictionary *payload = [event JSONPayload];
@@ -415,10 +417,10 @@
     // Validate JSON Serialization success
     XCTAssertNotNil(event.JSONData);
 
-    CASEvent *invalidEvent1 = [CASEvent eventWithName:@""];
+    CASEvent *invalidEvent1 = [CASEvent eventWithName:@"testevent2" properties:@{ @"invalidparam": [[NSObject alloc] init] }];
     XCTAssertNil(invalidEvent1);
 
-    CASEvent *invalidEvent2 = [CASEvent eventWithName:nil];
+    CASEvent *invalidEvent2 = [CASEvent eventWithName:@"testevent2" properties:@{ @"invalidParamContainer": @{ @"invalidParam": [[NSObject alloc] init] } }];
     XCTAssertNil(invalidEvent2);
     
     // Enable secure mode

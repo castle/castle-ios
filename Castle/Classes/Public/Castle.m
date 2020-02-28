@@ -239,17 +239,27 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 + (void)track:(NSString *)eventName
 {
+    [Castle track:eventName properties:@{}];
+}
+
++ (void)track:(NSString *)eventName properties:(NSDictionary *)properties
+{
     if(!eventName || [eventName isEqualToString:@""]) {
         CASLog(@"No event name provided. Will cancel track event operation.");
         return;
     }
 
     Castle *castle = [Castle sharedInstance];
-    CASEvent *event = [CASEvent eventWithName:eventName];
+    CASEvent *event = [CASEvent eventWithName:eventName properties:properties];
     [castle queueEvent:event];
 }
 
 + (void)screen:(NSString *)screenName
+{
+    [Castle screen:screenName properties:@{}];
+}
+
++ (void)screen:(NSString *)screenName properties:(NSDictionary *)properties
 {
     if(!screenName || [screenName isEqualToString:@""]) {
         CASLog(@"No screen name provided. Will cancel track event operation.");
@@ -257,7 +267,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     }
 
     Castle *castle = [Castle sharedInstance];
-    CASScreen *screen = [CASScreen eventWithName:screenName];
+    CASScreen *screen = [CASScreen eventWithName:screenName properties:properties];
     [castle queueEvent:screen];
 }
 
