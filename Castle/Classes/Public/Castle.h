@@ -116,27 +116,6 @@ extern NSString *const CastleClientIdHeaderName;
 + (void)secure:(NSString *)signature;
 
 /**
- Track event with a specified name
-
- @param eventName event name
- @code // Track an event
- [Castle track:@"loginFormSubmitted"];
- @endcode
- */
-+ (void)track:(NSString *)eventName;
-
-/**
- Track event with a specified name and provided properties
- 
- @param eventName event name
- @param properties event properties
- @code // Track an event and include some properties
- [Castle track:@"loginFormSubmitted" properties:@{ @"username": @"laura" }];
- @endcode
- */
-+ (void)track:(NSString *)eventName properties:(NSDictionary *)properties;
-
-/**
  Track screen event with a specified name
 
  @param screenName Screen name
