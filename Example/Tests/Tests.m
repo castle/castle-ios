@@ -282,6 +282,7 @@
     NSDictionary *payload = [event JSONPayload];
     XCTAssertTrue([payload[@"name"] isEqualToString:@"Main"]);
     XCTAssertTrue([payload[@"type"] isEqualToString:@"screen"]);
+    XCTAssertNil(payload[@"properties"]);
     XCTAssertNotNil(payload[@"timestamp"]);
     XCTAssertNotNil(payload[@"context"]);
     XCTAssertNil(payload[@"user_signature"]);
@@ -410,6 +411,7 @@
     NSDictionary *payload = [event JSONPayload];
     XCTAssertTrue([payload[@"event"] isEqualToString:@"testevent1"]);
     XCTAssertTrue([payload[@"type"] isEqualToString:@"track"]);
+    XCTAssertNil(payload[@"properties"]);
     XCTAssertNotNil(payload[@"timestamp"]);
     XCTAssertNotNil(payload[@"context"]);
     XCTAssertNil(payload[@"user_signature"]);
