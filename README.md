@@ -31,3 +31,7 @@ github "castle/castle-ios"
 ## Usage
 
 Please see the [Mobile Integration Guide](https://castle.io/docs/mobile).
+
+## Library size
+
+Library size is approximately **74kb** and was calculated using the [cocoapods-size](https://github.com/google/cocoapods-size) tool from Google.
