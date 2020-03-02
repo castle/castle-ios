@@ -126,17 +126,6 @@ extern NSString *const CastleClientIdHeaderName;
 + (void)track:(NSString *)eventName;
 
 /**
- Track event with a specified name and provided properties
- 
- @param eventName event name
- @param properties event properties
- @code // Track an event and include some properties
- [Castle track:@"loginFormSubmitted" properties:@{ @"username": @"laura" }];
- @endcode
- */
-+ (void)track:(NSString *)eventName properties:(NSDictionary *)properties;
-
-/**
  Track screen event with a specified name
 
  @param screenName Screen name
@@ -145,17 +134,6 @@ extern NSString *const CastleClientIdHeaderName;
  @endcode
  */
 + (void)screen:(NSString *)screenName;
-
-/**
- Track screen event with a specified name and provided properties
-
- @param screenName Screen name
- @param properties Screen properties
- @code // Track a screen view and include some properties
- [Castle screen:@"Menu" properties:@{ @"locale": @"en_US" }];
- @endcode
- */
-+ (void)screen:(NSString *)screenName properties:(NSDictionary *)properties;
 
 /**
  Force a flush of the batch event queue, even if the flush limit hasn't been reached
