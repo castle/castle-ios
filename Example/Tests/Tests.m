@@ -15,6 +15,7 @@
 #import <Castle/CASRequestInterceptor.h>
 #import <Castle/CASAPIClient.h>
 #import <Castle/UIViewController+CASScreen.h>
+#import <Castle/CASReachability.h>
 
 #import "MainViewController.h"
 
@@ -178,12 +179,6 @@
     NSUInteger newCount = [CASEventStorage storedQueue].count;
     XCTAssertTrue(count == newCount);
 
-    // This should lead to no event being tracked properties can't be nil
-    count = [CASEventStorage storedQueue].count;
-    [Castle screen:@"Screen" properties:nil];
-    newCount = [CASEventStorage storedQueue].count;
-    XCTAssertTrue(count == newCount);
-
     // This should lead to no event being tracked since identity can't be an empty string
     count = [CASEventStorage storedQueue].count;
     [Castle identify:@""];
@@ -282,7 +277,7 @@
     NSDictionary *payload = [event JSONPayload];
     XCTAssertTrue([payload[@"name"] isEqualToString:@"Main"]);
     XCTAssertTrue([payload[@"type"] isEqualToString:@"screen"]);
-    XCTAssertNotNil(payload[@"properties"]);
+    XCTAssertNil(payload[@"properties"]);
     XCTAssertNotNil(payload[@"timestamp"]);
     XCTAssertNotNil(payload[@"context"]);
     XCTAssertNil(payload[@"user_signature"]);
@@ -411,7 +406,7 @@
     NSDictionary *payload = [event JSONPayload];
     XCTAssertTrue([payload[@"event"] isEqualToString:@"testevent1"]);
     XCTAssertTrue([payload[@"type"] isEqualToString:@"track"]);
-    XCTAssertNotNil(payload[@"properties"]);
+    XCTAssertNil(payload[@"properties"]);
     XCTAssertNotNil(payload[@"timestamp"]);
     XCTAssertNotNil(payload[@"context"]);
     XCTAssertNil(payload[@"user_signature"]);
@@ -637,6 +632,66 @@
     NSString *currentVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     NSString *installedVersion = [defaults objectForKey:@"CastleAppVersionKey"];
     XCTAssertEqual(currentVersion, installedVersion);
+}
+
+- (void)testReachabilityValidHost
+{
+    NSString *validHostName = @"google.com";
+    
+    CASReachability *reachability = [CASReachability reachabilityWithHostname:validHostName];
+    
+    if (reachability == nil) {
+        XCTFail(@"Unable to create reachability");
+    }
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Check valid host"];
+    [reachability setReachableBlock:^(CASReachability *reachability) {
+        NSLog(@"Pass: %@ is reachable - %@", validHostName, reachability);
+        [expectation fulfill];
+    }];
+    
+    [reachability setUnreachableBlock:^(CASReachability *reachability) {
+        NSLog(@"%@ is initially unreachable - %@", validHostName, reachability);
+    }];
+    
+    @try {
+        [reachability startNotifier];
+    } @catch (NSException *exception) {
+        return XCTFail(@"Unable to start notifier");
+    }
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
+    [reachability stopNotifier];
+}
+
+- (void)testReachabilityInvalidHost
+{
+    NSString *validHostName = @"invalidhost";
+    
+    CASReachability *reachability = [CASReachability reachabilityWithHostname:validHostName];
+    
+    if (reachability == nil) {
+        XCTFail(@"Unable to create reachability");
+    }
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Check invalid host"];
+    [reachability setReachableBlock:^(CASReachability *reachability) {
+        NSLog(@"Pass: %@ is reachable - %@", validHostName, reachability);
+    }];
+    
+    [reachability setUnreachableBlock:^(CASReachability *reachability) {
+        NSLog(@"%@ is initially unreachable - %@", validHostName, reachability);
+        [expectation fulfill];
+    }];
+    
+    @try {
+        [reachability startNotifier];
+    } @catch (NSException *exception) {
+        return XCTFail(@"Unable to start notifier");
+    }
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
+    [reachability stopNotifier];
 }
 
 @end

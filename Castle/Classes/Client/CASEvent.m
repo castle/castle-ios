@@ -76,7 +76,6 @@
         self.timestamp = [decoder decodeObjectOfClass:NSDate.class forKey:@"timestamp"];
         self.userId = [decoder decodeObjectOfClass:NSString.class forKey:@"user_id"];
         self.userSignature = [decoder decodeObjectOfClass:NSString.class forKey:@"user_signature"];
-        
     }
     return self;
 }
@@ -106,7 +105,6 @@
 
     NSMutableDictionary *payload = @{ @"type": self.type,
                                       @"event": self.name,
-                                      @"properties": self.properties,
                                       @"timestamp": timestamp,
                                       @"context": context }.mutableCopy;
 

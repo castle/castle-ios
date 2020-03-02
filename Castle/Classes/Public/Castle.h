@@ -126,17 +126,6 @@ extern NSString *const CastleClientIdHeaderName;
 + (void)screen:(NSString *)screenName;
 
 /**
- Track screen event with a specified name and provided properties
-
- @param screenName Screen name
- @param properties Screen properties
- @code // Track a screen view and include some properties
- [Castle screen:@"Menu" properties:@{ @"locale": @"en_US" }];
- @endcode
- */
-+ (void)screen:(NSString *)screenName properties:(NSDictionary *)properties;
-
-/**
  Force a flush of the batch event queue, even if the flush limit hasn't been reached
  */
 + (void)flush;
