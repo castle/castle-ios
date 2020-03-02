@@ -116,16 +116,6 @@ extern NSString *const CastleClientIdHeaderName;
 + (void)secure:(NSString *)signature;
 
 /**
- Track event with a specified name
-
- @param eventName event name
- @code // Track an event
- [Castle track:@"loginFormSubmitted"];
- @endcode
- */
-+ (void)track:(NSString *)eventName;
-
-/**
  Track screen event with a specified name
 
  @param screenName Screen name

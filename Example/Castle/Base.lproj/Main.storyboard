@@ -35,16 +35,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="41c-63-tHz">
-                                <rect key="frame" x="147.5" y="104" width="80" height="30"/>
-                                <accessibility key="accessibilityConfiguration" identifier="trackEvent"/>
-                                <state key="normal" title="Track event"/>
-                                <connections>
-                                    <action selector="track:" destination="whP-gf-Uak" eventType="touchUpInside" id="MMV-79-HiR"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f0z-NL-OGW">
-                                <rect key="frame" x="125.5" y="150" width="124" height="30"/>
+                                <rect key="frame" x="125.5" y="84" width="124" height="30"/>
                                 <accessibility key="accessibilityConfiguration" identifier="trackScreen"/>
                                 <state key="normal" title="Track screen view"/>
                                 <connections>
@@ -52,7 +44,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vcv-5m-r5B">
-                                <rect key="frame" x="161.5" y="196" width="52" height="30"/>
+                                <rect key="frame" x="161.5" y="130" width="52" height="30"/>
                                 <accessibility key="accessibilityConfiguration" identifier="identify"/>
                                 <state key="normal" title="Identify"/>
                                 <connections>
@@ -60,7 +52,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZV1-Ng-YNN">
-                                <rect key="frame" x="169" y="288" width="37" height="30"/>
+                                <rect key="frame" x="169" y="222" width="37" height="30"/>
                                 <accessibility key="accessibilityConfiguration" identifier="flush"/>
                                 <state key="normal" title="Flush"/>
                                 <connections>
@@ -68,7 +60,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mhv-hk-P2s">
-                                <rect key="frame" x="168" y="334" width="39" height="30"/>
+                                <rect key="frame" x="168" y="268" width="39" height="30"/>
                                 <accessibility key="accessibilityConfiguration" identifier="reset"/>
                                 <state key="normal" title="Reset"/>
                                 <connections>
@@ -76,7 +68,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="clh-S7-8li">
-                                <rect key="frame" x="102" y="242" width="171" height="30"/>
+                                <rect key="frame" x="102" y="176" width="171" height="30"/>
                                 <accessibility key="accessibilityConfiguration" identifier="testRequestInterceptor"/>
                                 <state key="normal" title="Test request interception"/>
                                 <connections>
@@ -84,7 +76,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lgd-rF-hoZ">
-                                <rect key="frame" x="118" y="380" width="139" height="30"/>
+                                <rect key="frame" x="118" y="314" width="139" height="30"/>
                                 <accessibility key="accessibilityConfiguration" identifier="push"/>
                                 <state key="normal" title="Push view controller"/>
                                 <connections>
@@ -92,7 +84,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZNs-3u-1fT">
-                                <rect key="frame" x="77" y="426" width="221" height="30"/>
+                                <rect key="frame" x="77" y="360" width="221" height="30"/>
                                 <accessibility key="accessibilityConfiguration" identifier="pushEmbedded"/>
                                 <state key="normal" title="Push Embedded View Controller"/>
                                 <connections>
@@ -110,19 +102,17 @@
                         <constraints>
                             <constraint firstItem="Mhv-hk-P2s" firstAttribute="top" secondItem="ZV1-Ng-YNN" secondAttribute="bottom" constant="16" id="43Q-Wl-I9P"/>
                             <constraint firstItem="clh-S7-8li" firstAttribute="top" secondItem="vcv-5m-r5B" secondAttribute="bottom" constant="16" id="4IP-P2-PV8"/>
+                            <constraint firstItem="f0z-NL-OGW" firstAttribute="top" secondItem="uEw-UM-LJ8" secondAttribute="bottom" constant="40" id="5nh-fB-PEA"/>
                             <constraint firstItem="Lgd-rF-hoZ" firstAttribute="top" secondItem="Mhv-hk-P2s" secondAttribute="bottom" constant="16" id="67g-Yx-GBt"/>
                             <constraint firstItem="Mvr-aV-6Um" firstAttribute="top" secondItem="Q9n-Tl-yO4" secondAttribute="bottom" constant="16" id="AV6-J7-o4E"/>
                             <constraint firstItem="ZV1-Ng-YNN" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="BeO-Bk-2dw"/>
-                            <constraint firstItem="41c-63-tHz" firstAttribute="top" secondItem="uEw-UM-LJ8" secondAttribute="bottom" constant="60" id="GO3-K9-q3q"/>
                             <constraint firstItem="vcv-5m-r5B" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="O4T-Dl-Anr"/>
                             <constraint firstItem="Q9n-Tl-yO4" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="XOa-Qe-Cwd"/>
                             <constraint firstItem="clh-S7-8li" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="YmG-nO-J6S"/>
                             <constraint firstItem="f0z-NL-OGW" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="dL4-FY-7g7"/>
                             <constraint firstItem="Lgd-rF-hoZ" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="iMQ-Gg-Oej"/>
                             <constraint firstItem="ZNs-3u-1fT" firstAttribute="top" secondItem="Lgd-rF-hoZ" secondAttribute="bottom" constant="16" id="jpQ-RX-Ncu"/>
-                            <constraint firstItem="f0z-NL-OGW" firstAttribute="top" secondItem="41c-63-tHz" secondAttribute="bottom" constant="16" id="mK2-Ij-6z9"/>
                             <constraint firstItem="Mhv-hk-P2s" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="mWO-tZ-EBO"/>
-                            <constraint firstItem="41c-63-tHz" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="p1y-J5-MHY"/>
                             <constraint firstItem="vcv-5m-r5B" firstAttribute="top" secondItem="f0z-NL-OGW" secondAttribute="bottom" constant="16" id="sb8-1p-nQB"/>
                             <constraint firstItem="ZNs-3u-1fT" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="w3x-1n-PQ0"/>
                             <constraint firstItem="ZV1-Ng-YNN" firstAttribute="top" secondItem="clh-S7-8li" secondAttribute="bottom" constant="16" id="xlx-HD-9ez"/>

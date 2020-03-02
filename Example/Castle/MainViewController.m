@@ -24,11 +24,6 @@
     [self updateQueueCountLabel];
 }
 
-- (IBAction)track:(id)sender {
-    [Castle track:@"Button pressed"];
-    [self updateQueueCountLabel];
-}
-
 - (IBAction)screen:(id)sender {
     [Castle screen:@"Main Screen"];
     [self updateQueueCountLabel];
