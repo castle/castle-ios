@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.0.3 (2020-03-03)
+
+- [#34](https://github.com/castle/castle-ios/pull/34) Remove custom event tracking.
+- [#35](https://github.com/castle/castle-ios/pull/35) Remove ability to add custom properties on events.
+- 
 ## 1.0.2 (2020-01-13)
 
 - Fix: [#33](https://github.com/castle/castle-ios/pull/33) Reduce the number of screen events produced by the automatic screen tracking
