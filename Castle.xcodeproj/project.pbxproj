@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B612D061242BD012005B41B7 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B612D060242BD012005B41B7 /* CoreTelephony.framework */; };
 		B63E94BE242BCCD1001993B7 /* CASContext.h in Headers */ = {isa = PBXBuildFile; fileRef = B63E94BC242BCCD1001993B7 /* CASContext.h */; };
 		B63E94BF242BCCD1001993B7 /* CASContext.m in Sources */ = {isa = PBXBuildFile; fileRef = B63E94BD242BCCD1001993B7 /* CASContext.m */; };
 		B63E94C3242BCCE6001993B7 /* CASReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = B63E94C1242BCCE6001993B7 /* CASReachability.h */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B612D060242BD012005B41B7 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
 		B63E94BC242BCCD1001993B7 /* CASContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASContext.h; path = Classes/CASContext.h; sourceTree = "<group>"; };
 		B63E94BD242BCCD1001993B7 /* CASContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CASContext.m; path = Classes/CASContext.m; sourceTree = "<group>"; };
 		B63E94C1242BCCE6001993B7 /* CASReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CASReachability.h; sourceTree = "<group>"; };
@@ -79,12 +81,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B612D061242BD012005B41B7 /* CoreTelephony.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B612D05F242BD012005B41B7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B612D060242BD012005B41B7 /* CoreTelephony.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B63E94C0242BCCE6001993B7 /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +111,7 @@
 			children = (
 				B6B355DE1ED71D9700C2B817 /* Castle */,
 				B6B355DD1ED71D9700C2B817 /* Products */,
+				B612D05F242BD012005B41B7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
