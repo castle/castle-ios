@@ -5,8 +5,9 @@
 //  Copyright © 2017 Castle. All rights reserved.
 //
 
-#import "CASUtils.h"
+#import <UIKit/UIKit.h>
 
+#import "CASUtils.h"
 #import "Castle.h"
 
 static BOOL CastleDebugLoggingEnabled = NO;
