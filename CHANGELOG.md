@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.4 (2020-03-28)
+
+- [#37](https://github.com/castle/castle-ios/pull/37) Fix Carthage build.
+
 ## 1.0.3 (2020-03-03)
 
 - [#34](https://github.com/castle/castle-ios/pull/34) Remove custom event tracking.
