@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1010"
+   LastUpgradeVersion = "1200"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -41,7 +41,7 @@
       <CodeCoverageTargets>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BC93A66E2D500676F2DC7DD449C2C5E4"
+            BlueprintIdentifier = "889BC4E2460DCC1D33CDF2005C36A2B9"
             BuildableName = "Castle.framework"
             BlueprintName = "Castle"
             ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -62,7 +62,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B6C4775E23C8D78A004C8546"
+               BlueprintIdentifier = "B6A923FA23C8EF0E004D3AB0"
                BuildableName = "Castle_UITests.xctest"
                BlueprintName = "Castle_UITests"
                ReferencedContainer = "container:Castle.xcodeproj">
