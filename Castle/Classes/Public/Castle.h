@@ -153,6 +153,14 @@ extern NSString *const CastleClientIdHeaderName;
  */
 + (BOOL)isWhitelistURL:(NSURL *)url;
 
+
+/**
+ Get base url
+ 
+ @return return Base URL
+ */
++ (NSURL *)baseURL;
+
 #pragma mark - Metadata
 
 /**

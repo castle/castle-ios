@@ -117,6 +117,8 @@
     XCTAssertEqual(configuration.maxQueueLimit, 20);
     XCTAssertEqual(configuration.baseURLWhiteList.count, 1);
     XCTAssertTrue([configuration.baseURLWhiteList[0].absoluteString isEqualToString:@"https://google.com/"]);
+    XCTAssertFalse(configuration.useCloudflareApp);
+    XCTAssertTrue([configuration.baseURL.absoluteString isEqualToString:@"https://api.castle.io/v1/"]);
 
     [configuration setBaseURLWhiteList:@[ [NSURL URLWithString:@"https://google.com/somethingelse"]]];
     XCTAssertFalse([configuration.baseURLWhiteList[0].absoluteString isEqualToString:@"https://google.com/somethingelse"]);
@@ -134,6 +136,40 @@
     // Check whitelisting on configured instance
     XCTAssertTrue([Castle isWhitelistURL:[NSURL URLWithString:@"https://google.com/somethingelse"]]);
     XCTAssertFalse([Castle isWhitelistURL:nil]);
+    
+    [Castle resetConfiguration];
+
+    // Test cloudflare logic
+    configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    XCTAssertThrows(configuration.useCloudflareApp = YES, "");
+
+    configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    configuration.apiDomain = @"example.com";
+    configuration.useCloudflareApp = YES;
+    
+    XCTAssertTrue(configuration.useCloudflareApp);
+    XCTAssertTrue([configuration.apiDomain isEqualToString:@"example.com"]);
+    XCTAssertTrue([configuration.apiPath isEqualToString:@"v1/c/mobile/"]);
+    XCTAssertTrue([configuration.baseURL.absoluteString isEqualToString:@"https://example.com/v1/c/mobile/"]);
+    
+    [Castle configure:configuration];
+    
+    XCTAssertTrue([Castle.baseURL.absoluteString isEqualToString:@"https://example.com/v1/c/mobile/"]);
+
+    [Castle resetConfiguration];
+    
+    configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    configuration.apiDomain = @"example.com";
+    configuration.apiPath = @"v1/test/";
+    configuration.useCloudflareApp = YES;
+    
+    XCTAssertTrue(configuration.useCloudflareApp);
+    XCTAssertTrue([configuration.apiDomain isEqualToString:@"example.com"]);
+    XCTAssertTrue([configuration.baseURL.absoluteString isEqualToString:@"https://example.com/v1/test/"]);
+    
+    [Castle resetConfiguration];
+    
+    [Castle configureWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
 }
 
 - (void)testDeviceIdentifier

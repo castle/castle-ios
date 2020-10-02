@@ -396,6 +396,12 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return [castle.configuration.baseURLWhiteList filteredArrayUsingPredicate:predicate].count > 0;
 }
 
++ (NSURL *)baseURL
+{
+    Castle *castle = [Castle sharedInstance];
+    return castle.configuration.baseURL;
+}
+
 #pragma mark - Private
 
 - (BOOL)eventQueueExceedsFlushLimit
