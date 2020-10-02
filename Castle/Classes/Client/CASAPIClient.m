@@ -14,9 +14,6 @@
 #import "CASUtils.h"
 #import "CASEvent.h"
 
-NSString *const CASAPIClientHostName = @"api.castle.io";
-NSString *const CASAPIClientVersion = @"v1";
-
 @interface CASAPIClient ()
 
 @property (nonatomic, copy, readonly) NSURL *baseURL;
@@ -117,8 +114,7 @@ NSString *const CASAPIClientVersion = @"v1";
 
 - (NSURL *)baseURL
 {
-    NSString *urlString = [NSString stringWithFormat:@"https://%@/%@/", CASAPIClientHostName, CASAPIClientVersion];
-    return [NSURL URLWithString:urlString];
+    return self.configuration.baseURL;
 }
 
 #pragma mark - NSURLRequest

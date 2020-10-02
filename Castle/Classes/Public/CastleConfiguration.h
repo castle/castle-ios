@@ -48,6 +48,25 @@
  */
 @property (nonatomic, strong, readwrite) NSArray<NSURL *> * _Nonnull baseURLWhiteList;
 
+/**
+ Cloudflare proxying enabled
+ */
+@property (nonatomic, assign) BOOL useCloudflareApp;
+
+/**
+ Get base url
+ */
+@property (nonatomic, copy, readonly, getter=baseURL) NSURL * _Nonnull baseURL;
+
+/**
+ Get API domain
+ */
+@property (nonatomic, copy) NSString * _Nonnull apiDomain;
+
+/**
+ Get API path
+ */
+@property (nonatomic, copy) NSString * _Nullable apiPath;
 
 /**
  Default configuration with provided publishable key
