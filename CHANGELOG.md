@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.0.5 (2020-10-05)
+
+- [#40](https://github.com/castle/castle-ios/pull/40) Fix Carthage build.
+- [#39](https://github.com/castle/castle-ios/pull/39) Add ability to enable Cloudflare app proxy usage
+
 ## 1.0.4 (2020-03-28)
 
 - [#37](https://github.com/castle/castle-ios/pull/37) Fix Carthage build.

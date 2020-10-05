@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Castle'
-  s.version          = '1.0.4'
+  s.version          = '1.0.5'
   s.summary          = 'Castle SDK for iOS'
 
   s.description      = <<-DESC
@@ -21,7 +21,7 @@ Castle for iOS provides a simple way to integrate Castle into your app.
   s.source           = { :git => 'https://github.com/castle/castle-ios.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/castle_io'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
   s.ios.frameworks = 'Security', 'CoreTelephony', 'UIKit', 'SystemConfiguration'
 
   s.source_files = 'Castle/Classes/**/*'
