@@ -5,7 +5,7 @@
 //  Copyright © 2017 Castle. All rights reserved.
 //
 
-#import <CASModel.h>
+#import <Castle/CASModel.h>
 
 @interface CASBatch : CASModel
 
