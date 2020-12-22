@@ -5,7 +5,7 @@
 //  Copyright © 2017 Castle. All rights reserved.
 //
 
-#import "CASModel.h"
+#import <CASModel.h>
 
 @interface CASDevice : CASModel
 
