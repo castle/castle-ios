@@ -5,7 +5,7 @@
 //  Copyright © 2017 Castle. All rights reserved.
 //
 
-#import "CASEvent.h"
+#import <CASEvent.h>
 
 @interface CASIdentity : CASEvent
 
