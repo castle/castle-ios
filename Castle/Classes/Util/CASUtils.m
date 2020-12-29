@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <sys/utsname.h>
 
 #import "CASUtils.h"
 #import "Castle.h"
@@ -28,6 +29,17 @@ void CASLog(NSString *format, ...)
     }
 }
 
+NSString *CASDeviceModel(void)
+{
+#if TARGET_OS_SIMULATOR
+    return [[NSProcessInfo processInfo] environment][@"SIMULATOR_MODEL_IDENTIFIER"];
+#else
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    return [NSString stringWithCString: systemInfo.machine encoding: NSUTF8StringEncoding];
+#endif
+}
+
 NSString *CASUserAgent(void)
 {
     // Get host app version information from the main bundle
@@ -38,7 +50,7 @@ NSString *CASUserAgent(void)
     
     // Gather device information
     UIDevice *device = [UIDevice currentDevice];
-    NSString *model = [device model];
+    NSString *model = CASDeviceModel();
     NSString *system = [device systemName];
     NSString *systemVersion = [device systemVersion];
     
