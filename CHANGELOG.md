@@ -1,19 +1,24 @@
 # Change Log
 
+## 1.0.6 (2021-01-05)
+
+- Improvement: [#42](https://github.com/castle/castle-ios/pull/40) Include model version in user agent string.
+- Fix: [#41](https://github.com/castle/castle-ios/pull/40) Upgrade example project for Xcode 12.
+
 ## 1.0.5 (2020-10-05)
 
-- [#40](https://github.com/castle/castle-ios/pull/40) Fix Carthage build.
-- [#39](https://github.com/castle/castle-ios/pull/39) Add ability to enable Cloudflare app proxy usage
+- Fix: [#40](https://github.com/castle/castle-ios/pull/40) Upgrade example project for Xcode 12.
+- Improvement: [#39](https://github.com/castle/castle-ios/pull/39) Add ability to enable Cloudflare app proxy usage.
 
 ## 1.0.4 (2020-03-28)
 
-- [#37](https://github.com/castle/castle-ios/pull/37) Fix Carthage build.
+- Fix: [#37](https://github.com/castle/castle-ios/pull/37) Fix Carthage build.
 
 ## 1.0.3 (2020-03-03)
 
 - [#34](https://github.com/castle/castle-ios/pull/34) Remove custom event tracking.
 - [#35](https://github.com/castle/castle-ios/pull/35) Remove ability to add custom properties on events.
-- 
+ 
 ## 1.0.2 (2020-01-13)
 
 - Fix: [#33](https://github.com/castle/castle-ios/pull/33) Reduce the number of screen events produced by the automatic screen tracking
