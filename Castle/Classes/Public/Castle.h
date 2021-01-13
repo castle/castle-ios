@@ -17,9 +17,11 @@ FOUNDATION_EXPORT const unsigned char CastleVersionString[];
 
 #import <Castle/CastleConfiguration.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  Castle client id header name */
-extern NSString *const CastleClientIdHeaderName;
+extern NSString * const CastleClientIdHeaderName;
 
 /**
  This class is the main entry point for using the Castle SDK and provides methods
@@ -90,7 +92,7 @@ extern NSString *const CastleClientIdHeaderName;
  [Castle identify:@"1245-3055"];
  @endcode
  */
-+ (void)identify:(NSString *)userId;
++ (void)identify:(nullable NSString *)userId;
 
 /**
  Track identify event with specified user identity. User identity will be persisted. A call to identify or reset will clear the stored user identity.
@@ -102,7 +104,7 @@ extern NSString *const CastleClientIdHeaderName;
  [Castle identify:@"1245-3055" traits:@{ @"email": @"laura@example.com" }];
  @endcode
  */
-+ (void)identify:(NSString *)identifier traits:(NSDictionary *)traits;
++ (void)identify:(NSString *)identifier traits:(nullable NSDictionary *)traits;
 
 /**
  Set user signature and enable secure mode. User signature will be included in all events after it has been set and will be persisted.
@@ -113,7 +115,7 @@ extern NSString *const CastleClientIdHeaderName;
  [Castle signature:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
  @endcode
  */
-+ (void)secure:(NSString *)signature;
++ (void)secure:(nullable NSString *)signature;
 
 /**
  Track screen event with a specified name
@@ -138,7 +140,7 @@ extern NSString *const CastleClientIdHeaderName;
  [Castle flushIfNeeded:[NSURL urlWithString:@"https://google.com/foobar"];
  @endcode
  */
-+ (void)flushIfNeeded:(NSURL *)url;
++ (void)flushIfNeeded:(nonnull NSURL *)url;
 
 /**
  Reset any stored user information and flush the event queue
@@ -151,7 +153,7 @@ extern NSString *const CastleClientIdHeaderName;
  @param url url
  @return return url whitelist status
  */
-+ (BOOL)isWhitelistURL:(NSURL *)url;
++ (BOOL)isWhitelistURL:(nullable NSURL *)url;
 
 
 /**
@@ -168,21 +170,21 @@ extern NSString *const CastleClientIdHeaderName;
 
  @return client identifier
  */
-+ (NSString *)clientId;
++ (nullable NSString *)clientId;
 
 /**
  Get stored user id from last identify call, returns nil if not set
 
  @return User Id
  */
-+ (NSString *)userId;
++ (nullable NSString *)userId;
 
 /**
  Get stored signature from secure call, returns nil if not set
  
  @return Signature
  */
-+ (NSString *)userSignature;
++ (nullable NSString *)userSignature;
 
 /**
  Get the User Agent for used in all requests to the Castle API.
@@ -200,3 +202,5 @@ extern NSString *const CastleClientIdHeaderName;
 + (NSUInteger)queueSize;
     
 @end
+
+NS_ASSUME_NONNULL_END

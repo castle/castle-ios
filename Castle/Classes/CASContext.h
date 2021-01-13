@@ -7,8 +7,12 @@
 
 #import <Castle/CASDevice.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface CASContext : CASModel
 
 + (instancetype)sharedContext;
 
 @end
+
+NS_ASSUME_NONNULL_END

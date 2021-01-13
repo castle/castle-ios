@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CastleConfiguration;
 
 @interface CASAPIClient : NSObject
@@ -15,6 +17,8 @@
 
 - (NSURLSessionDataTask *)dataTaskWithPath:(NSString *)path
                                   postData:(NSData *)data
-                                completion:(void (^)(id responseObject, NSURLResponse *response, NSError *error))completion;
+                                completion:(void (^)(id _Nullable responseObject, NSURLResponse * _Nullable response, NSError * _Nullable error))completion;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -46,7 +46,7 @@
 /**
  Base url whitelist
  */
-@property (nonatomic, strong, readwrite) NSArray<NSURL *> * _Nonnull baseURLWhiteList;
+@property (nonatomic, strong, readwrite, nullable) NSArray<NSURL *> *baseURLWhiteList;
 
 /**
  Cloudflare proxying enabled
@@ -56,7 +56,7 @@
 /**
  Get base url
  */
-@property (nonatomic, copy, readonly, getter=baseURL) NSURL * _Nonnull baseURL;
+@property (nonatomic, copy, readonly, getter=baseURL, nonnull) NSURL * baseURL;
 
 /**
  Get API domain

@@ -36,7 +36,7 @@
 
 #pragma mark - CASModel
 
-- (id)JSONPayload
+- (NSDictionary *)JSONPayload
 {
     NSString *timestamp = [[CASModel timestampDateFormatter] stringFromDate:[NSDate date]];
     return @{ @"batch": [self.events valueForKey:@"JSONPayload"],

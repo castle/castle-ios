@@ -17,6 +17,10 @@
 {
     NSArray *queue = [NSKeyedUnarchiver unarchiveObjectWithFile:self.storagePath];
     CASLog(@"%ld events read from: %@", queue.count, self.storagePath);
+    if (queue == nil) {
+        queue = @[];
+        [self persistQueue:queue];
+    }
     return queue;
 }
 
