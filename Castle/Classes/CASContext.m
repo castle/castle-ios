@@ -25,7 +25,7 @@
 
 #pragma mark - CASModel
 
-- (id)JSONPayload
+- (NSDictionary *)JSONPayload
 {
     NSMutableDictionary *context = [NSMutableDictionary dictionaryWithObject:[[CASDevice sharedDevice] JSONPayload] forKey:@"device"];
     

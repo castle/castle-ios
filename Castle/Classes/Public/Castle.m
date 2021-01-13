@@ -35,9 +35,9 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 @property (nonatomic, strong) CASAPIClient *client;
 @property (nonatomic, strong) CastleConfiguration *configuration;
 @property (nonatomic, strong) NSURLSessionDataTask *task;
-@property (nonatomic, strong) NSMutableArray *eventQueue;
-@property (nonatomic, copy, readwrite) NSString *userId;
-@property (nonatomic, copy, readwrite) NSString *userSignature;
+@property (nonatomic, strong, nonnull) NSMutableArray *eventQueue;
+@property (nonatomic, copy, readwrite, nullable) NSString *userId;
+@property (nonatomic, copy, readwrite, nullable) NSString *userSignature;
 @property (nonatomic, assign, readonly) NSUInteger maxBatchSize;
 @property (nonatomic, strong, readwrite) CASReachability *reachability;
 @end
