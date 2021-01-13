@@ -573,7 +573,7 @@
         
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-            XCTAssertEqual(httpResponse.statusCode, 200, @"HTTP response status code should be 202");
+            XCTAssertEqual(httpResponse.statusCode, 200, @"HTTP response status code should be 200");
         } else {
             XCTFail(@"Response was not NSHTTPURLResponse");
         }
