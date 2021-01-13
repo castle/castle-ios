@@ -26,7 +26,7 @@
 
 #pragma mark - CASModel
 
-- (id)JSONPayload
+- (NSDictionary *)JSONPayload
 {
     return @{ @"model": [CASDevice deviceModel],
               @"manufacturer": @"Apple",

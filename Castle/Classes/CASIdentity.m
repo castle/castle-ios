@@ -32,7 +32,7 @@
 
 #pragma mark - CASModel
 
-- (id)JSONPayload
+- (NSDictionary *)JSONPayload
 {
     NSMutableDictionary *payload = ((NSDictionary *) [super JSONPayload]).mutableCopy;
 
