@@ -11,8 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CASModel : NSObject
 
-- (id)JSONPayload;
-- (NSData *)JSONData;
+- (nullable NSDictionary *)JSONPayload;
+- (nullable NSData *)JSONData;
 
 + (NSDateFormatter *)timestampDateFormatter;
 

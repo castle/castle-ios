@@ -98,7 +98,7 @@
 
 #pragma mark - CASModel
 
-- (id)JSONPayload
+- (NSDictionary *)JSONPayload
 {
     NSString *timestamp = [[CASModel timestampDateFormatter] stringFromDate:self.timestamp];
     NSDictionary *context = [[CASContext sharedContext] JSONPayload];

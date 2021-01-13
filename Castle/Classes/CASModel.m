@@ -11,7 +11,7 @@
 
 @implementation CASModel
 
-- (id)JSONPayload
+- (NSDictionary *)JSONPayload
 {
     CASLog(@"JSONPayload method should be overridden in subclass: %@", NSStringFromClass(self.class));
     return nil;
