@@ -15,19 +15,31 @@
 
 ## Installation
 
-Castle is available through [CocoaPods](http://cocoapods.org) and [Carthage](https://github.com/Carthage/Carthage).
+Castle is available through [CocoaPods](https://cocoapods.org), [Carthage](https://github.com/Carthage/Carthage) and [Switft Package Manager](https://swift.org/package-manager/).
 
 ### CocoaPods
+Add Castle as a dependency by including it in your `Podfile`.
 
 ```
 pod "Castle", "1.0.10"
 ```
 
 ### Carthage
+Add Castle as a dependency by including it in your `Cartfile`.
 
 ```
 github "castle/castle-ios"
 ```
+
+### Swift Package Manager
+Add Castle as a dependency by adding it to the `dependencies` value of your `Package.swift`.
+
+```
+dependencies: [
+    .package(url: "https://github.com/castle/castle-ios.git", .upToNextMajor(from: "1.0.6"))
+]
+```
+
 ## Usage
 
 Please see the [Mobile Integration Guide](https://docs.castle.io).
