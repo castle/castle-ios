@@ -24,7 +24,7 @@ Castle for iOS provides a simple way to integrate Castle into your app.
   s.ios.deployment_target = '9.0'
   s.ios.frameworks = 'Security', 'CoreTelephony', 'UIKit', 'SystemConfiguration'
 
-  s.source_files = 'Castle/Classes/**/*'
+  s.source_files = 'Castle/**/*{h,m}'
 end
 
 
