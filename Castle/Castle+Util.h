@@ -5,7 +5,7 @@
 //  Created by Alexander Simson on 2018-02-12.
 //
 
-#import <Castle/Castle.h>
+#import "Castle.h"
 
 @interface Castle (Util)
 
