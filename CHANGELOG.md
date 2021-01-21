@@ -1,9 +1,13 @@
 # Change Log
 
+## 1.0.7 (2021-01-21)
+
+- Improvement: [#43](https://github.com/castle/castle-ios/pull/43) Proper handling of nullable properties/functions.
+
 ## 1.0.6 (2021-01-05)
 
-- Improvement: [#42](https://github.com/castle/castle-ios/pull/40) Include model version in user agent string.
-- Fix: [#41](https://github.com/castle/castle-ios/pull/40) Upgrade example project for Xcode 12.
+- Improvement: [#42](https://github.com/castle/castle-ios/pull/42) Include model version in user agent string.
+- Fix: [#41](https://github.com/castle/castle-ios/pull/41) Upgrade example project for Xcode 12.
 
 ## 1.0.5 (2020-10-05)
 

@@ -20,7 +20,7 @@ Castle is available through [CocoaPods](http://cocoapods.org) and [Carthage](htt
 ### CocoaPods
 
 ```
-pod "Castle", "1.0.6"
+pod "Castle", "1.0.7"
 ```
 
 ### Carthage
