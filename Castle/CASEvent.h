@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Castle/CASModel.h>
+#import "CASModel.h"
 
 @interface CASEvent : CASModel <NSSecureCoding>
 

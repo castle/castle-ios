@@ -5,7 +5,7 @@
 //  Created by Alexander Simson on 2018-02-12.
 //
 
-#import <Castle/CASDevice.h>
+#import "CASDevice.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
