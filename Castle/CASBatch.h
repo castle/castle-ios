@@ -5,7 +5,7 @@
 //  Copyright © 2017 Castle. All rights reserved.
 //
 
-#import <Castle/CASModel.h>
+#import "CASModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
