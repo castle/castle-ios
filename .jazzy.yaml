@@ -1,7 +1,7 @@
 # Ordered by output of `jazzy --help config`
 
 objc: true
-umbrella_header: Castle/Classes/Public/Castle.h
+umbrella_header: Castle/Classes/Castle.h
 author: Castle
 author_url: https://castle.io
 module: Castle
