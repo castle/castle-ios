@@ -200,8 +200,17 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     dispatch_once(&networkInfoOnceToken, ^{
         _telephonyNetworkInfo = [[CTTelephonyNetworkInfo alloc] init];
     });
-
-    CTCarrier *carrier = [_telephonyNetworkInfo subscriberCellularProvider];
+    
+    CTCarrier *carrier = nil;
+    if (@available(iOS 12.0, *)) {
+        carrier = _telephonyNetworkInfo.serviceSubscriberCellularProviders.allValues.firstObject;
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        carrier = _telephonyNetworkInfo.subscriberCellularProvider;
+#pragma clang diagnostic pop
+    }
+    
     return carrier.carrierName.length > 0 ? carrier.carrierName : @"unknown";
 }
 
