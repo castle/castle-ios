@@ -239,10 +239,10 @@ class SwiftTests: XCTestCase {
 
         let identity2 = CASIdentity(userId:"testuser", traits: [:])
 
-        let identity2Data = NSKeyedArchiver.archivedData(withRootObject: identity2)
+        let identity2Data = try! NSKeyedArchiver.archivedData(withRootObject: identity2 as Any, requiringSecureCoding: true)
         XCTAssertNotNil(identity2Data)
 
-        let identity3 = NSKeyedUnarchiver.unarchiveObject(with: identity2Data)
+        let identity3 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASIdentity.self, from: identity2Data)
         XCTAssertNotNil(identity3)
 
         XCTAssertTrue(CASEvent.supportsSecureCoding)
@@ -298,10 +298,10 @@ class SwiftTests: XCTestCase {
         XCTAssertTrue(event2.userSignature == signature)
         
         // Archive identity object
-        var data = NSKeyedArchiver.archivedData(withRootObject:event2)
-        var event3 = NSKeyedUnarchiver.unarchiveObject(with: data) as! CASScreen
-        XCTAssertTrue(event2.userId == event3.userId)
-        XCTAssertTrue(event2.userSignature == event3.userSignature)
+        var data = try! NSKeyedArchiver.archivedData(withRootObject:event2 as Any, requiringSecureCoding: true)
+        var event3 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASScreen.self, from: data)
+        XCTAssertTrue(event2.userId == event3!.userId)
+        XCTAssertTrue(event2.userSignature == event3!.userSignature)
         
         // Update user identity
         Castle.identify("thisisatestuser2")
@@ -311,17 +311,17 @@ class SwiftTests: XCTestCase {
         Castle.secure(signature2)
         
         // Verify that the user id and token are the same after archiving and unarchiving after updating the user id and signature
-        data = NSKeyedArchiver.archivedData(withRootObject: event2)
-        event3 = NSKeyedUnarchiver.unarchiveObject(with: data) as! CASScreen
-        XCTAssertTrue(event3.userId == "thisisatestuser1");
-        XCTAssertTrue(event3.userSignature == signature);
+        data = try! NSKeyedArchiver.archivedData(withRootObject: event2, requiringSecureCoding: true)
+        event3 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASScreen.self, from: data)
+        XCTAssertTrue(event3?.userId == "thisisatestuser1");
+        XCTAssertTrue(event3?.userSignature == signature);
         
         // Create a new event that should have the new updated user id and signature
         let event4 = CASScreen(name: "Third")!
-        data = NSKeyedArchiver.archivedData(withRootObject: event4)
-        let event5 = NSKeyedUnarchiver.unarchiveObject(with: data) as! CASScreen
-        XCTAssertTrue(event5.userId == "thisisatestuser2")
-        XCTAssertTrue(event5.userSignature == signature2)
+        data = try! NSKeyedArchiver.archivedData(withRootObject: event4, requiringSecureCoding: true)
+        let event5 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASScreen.self, from: data)
+        XCTAssertTrue(event5?.userId == "thisisatestuser2")
+        XCTAssertTrue(event5?.userSignature == signature2)
     }
 
     func testObjectSerializationForIdentify() {
@@ -355,10 +355,10 @@ class SwiftTests: XCTestCase {
         XCTAssertTrue(event2.userSignature == signature);
         
         // Archive identity object
-        var data = NSKeyedArchiver.archivedData(withRootObject: event2)
-        var event3 = NSKeyedUnarchiver.unarchiveObject(with: data) as! CASIdentity
-        XCTAssertTrue(event2.userId == event3.userId)
-        XCTAssertTrue(event2.userSignature == event3.userSignature)
+        var data = try! NSKeyedArchiver.archivedData(withRootObject: event2, requiringSecureCoding: true)
+        var event3 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASIdentity.self, from: data)
+        XCTAssertTrue(event2.userId == event3?.userId)
+        XCTAssertTrue(event2.userSignature == event3?.userSignature)
         
         // Update user identity
         Castle.identify("thisisatestuser2")
@@ -368,17 +368,17 @@ class SwiftTests: XCTestCase {
         Castle.secure(signature2)
         
         // Verify that the user id and token are the same after archiving and unarchiving after updating the user id and signature
-        data = NSKeyedArchiver.archivedData(withRootObject: event2)
-        event3 = NSKeyedUnarchiver.unarchiveObject(with: data) as! CASIdentity
-        XCTAssertTrue(event3.userId == event2.userId);
-        XCTAssertTrue(event3.userSignature == signature);
+        data = try! NSKeyedArchiver.archivedData(withRootObject: event2, requiringSecureCoding: true)
+        event3 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASIdentity.self, from: data)
+        XCTAssertTrue(event3?.userId == event2.userId);
+        XCTAssertTrue(event3?.userSignature == signature);
         
         // Create a new event that should have the new updated user id and signature
         let event4 = CASIdentity(userId:"789", traits:traits)!
-        data = NSKeyedArchiver.archivedData(withRootObject: event4)
-        let event5 = NSKeyedUnarchiver.unarchiveObject(with: data) as! CASIdentity
-        XCTAssertTrue(event5.userId == "789");
-        XCTAssertTrue(event5.userSignature == signature2);
+        data = try! NSKeyedArchiver.archivedData(withRootObject: event4, requiringSecureCoding: true)
+        let event5 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASIdentity.self, from: data)
+        XCTAssertTrue(event5?.userId == "789");
+        XCTAssertTrue(event5?.userSignature == signature2);
     }
 
     func testObjectSerializationForEvent() {
@@ -428,10 +428,10 @@ class SwiftTests: XCTestCase {
         XCTAssertTrue(event2.userSignature == signature);
 
         // Archive identity object
-        var data = NSKeyedArchiver.archivedData(withRootObject: event2)
-        var event3 = NSKeyedUnarchiver.unarchiveObject(with: data) as! CASEvent
-        XCTAssertTrue(event2.userId == event3.userId);
-        XCTAssertTrue(event2.userSignature == event3.userSignature);
+        var data = try! NSKeyedArchiver.archivedData(withRootObject: event2, requiringSecureCoding: true)
+        var event3 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASEvent.self, from: data)
+        XCTAssertTrue(event2.userId == event3?.userId);
+        XCTAssertTrue(event2.userSignature == event3?.userSignature);
 
         // Update user identity
         Castle.identify("thisisatestuser2")
@@ -441,17 +441,17 @@ class SwiftTests: XCTestCase {
         Castle.secure(signature2)
 
         // Verify that the user id and token are the same after archiving and unarchiving after updating the user id and signature
-        data = NSKeyedArchiver.archivedData(withRootObject: event2)
-        event3 = NSKeyedUnarchiver.unarchiveObject(with: data) as! CASEvent
-        XCTAssertTrue(event3.userId == "thisisatestuser1")
-        XCTAssertTrue(event3.userSignature == signature)
+        data = try! NSKeyedArchiver.archivedData(withRootObject: event2, requiringSecureCoding: true)
+        event3 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASEvent.self, from: data)
+        XCTAssertTrue(event3?.userId == "thisisatestuser1")
+        XCTAssertTrue(event3?.userSignature == signature)
 
         // Create a new event that should have the new updated user id and signature
         let event4 = CASEvent(name: "event4")!
-        data = NSKeyedArchiver.archivedData(withRootObject: event4)
-        let event5 = NSKeyedUnarchiver.unarchiveObject(with: data) as! CASEvent
-        XCTAssertTrue(event5.userId == "thisisatestuser2")
-        XCTAssertTrue(event5.userSignature == signature2)
+        data = try! NSKeyedArchiver.archivedData(withRootObject: event4, requiringSecureCoding: true)
+        let event5 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASEvent.self, from: data)
+        XCTAssertTrue(event5?.userId == "thisisatestuser2")
+        XCTAssertTrue(event5?.userSignature == signature2)
     }
 
     func testPersistance() throws {
