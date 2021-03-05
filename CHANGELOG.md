@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.8 (2021-03-05)
+
+- Fix: [#45](https://github.com/castle/castle-ios/pull/45) Use [NSNull null] if clientId is nil.
+
 ## 1.0.7 (2021-01-21)
 
 - Improvement: [#43](https://github.com/castle/castle-ios/pull/43) Proper handling of nullable properties/functions.
