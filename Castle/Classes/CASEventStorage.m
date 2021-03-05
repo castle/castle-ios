@@ -36,7 +36,10 @@
             persisted = [data writeToFile:self.storagePath atomically:YES];
         }
     } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         persisted = [NSKeyedArchiver archiveRootObject:queue toFile:self.storagePath];
+#pragma clang diagnostic pop
     }
     
     if(persisted) {
