@@ -202,8 +202,8 @@ class SwiftTests: XCTestCase {
 
     func testViewControllerSwizzle() throws {
         // Check to see if UIViewController responds to ca_viewDidAppear
-        let viewController = UIViewController()
-        XCTAssertTrue(viewController.responds(to: Selector("ca_viewDidAppear:")))
+        var viewController = UIViewController()
+        XCTAssertTrue(viewController.responds(to: #selector(UIViewController.ca_viewDidAppear(_:))))
 
         // Check if view identifier is working correctly
         XCTAssertTrue(viewController.ca_viewIdentifier() == "Unknown");
@@ -211,8 +211,8 @@ class SwiftTests: XCTestCase {
         viewController.title = "Test View Controller";
         XCTAssertTrue(viewController.ca_viewIdentifier() == viewController.ca_viewIdentifier());
 
-//        viewController = MainViewController()
-//        XCTAssertTrue(viewController.ca_viewIdentifier() == "Main");
+        viewController = MainViewController()
+        XCTAssertTrue(viewController.ca_viewIdentifier() == "Main");
     }
 
     func testModels() throws {
@@ -281,7 +281,9 @@ class SwiftTests: XCTestCase {
         XCTAssertNil(payload["user_signature"])
         
         // Device name should not be included
-//        XCTAssertNil(payload["device"]["name"]!);
+        let context = payload["context"] as! [AnyHashable:Any]
+        let device = context["device"] as! [AnyHashable:Any]
+        XCTAssertNil(device["name"]);
         
         // Payload should not include these parameters
         XCTAssertNil(payload["event"])
