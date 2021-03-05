@@ -311,7 +311,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = CA;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Alexander Simson";
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
@@ -644,6 +644,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
