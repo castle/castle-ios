@@ -30,9 +30,9 @@
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
     
-    NSArray *baseURLWhiteList = @[ [NSURL URLWithString:@"https://google.com/"] ];
+    NSArray *baseURLAllowList = @[ [NSURL URLWithString:@"https://google.com/"] ];
     CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
-    configuration.baseURLWhiteList = baseURLWhiteList;
+    configuration.baseURLAllowList = baseURLAllowList;
     
     [Castle configure:configuration];
 }
@@ -90,7 +90,7 @@
 
 - (void)testConfiguration
 {
-    NSArray *baseURLWhiteList = @[ [NSURL URLWithString:@"https://google.com/"] ];
+    NSArray *baseURLAllowList = @[ [NSURL URLWithString:@"https://google.com/"] ];
     CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
     
     // Check that all default values are set correctly
@@ -98,7 +98,7 @@
     XCTAssertEqual(configuration.debugLoggingEnabled, NO);
     XCTAssertEqual(configuration.flushLimit, 20);
     XCTAssertEqual(configuration.maxQueueLimit, 1000);
-    XCTAssertNil(configuration.baseURLWhiteList);
+    XCTAssertNil(configuration.baseURLAllowList);
     
     // Update configuration
     configuration.screenTrackingEnabled = YES;
@@ -106,7 +106,7 @@
     configuration.deviceIDAutoForwardingEnabled = YES;
     configuration.flushLimit = 10;
     configuration.maxQueueLimit = 20;
-    configuration.baseURLWhiteList = baseURLWhiteList;
+    configuration.baseURLAllowList = baseURLAllowList;
 
     // Check that all the configuration parameters where set correctly
     XCTAssertTrue([configuration.publishableKey isEqualToString:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"]);
@@ -115,27 +115,27 @@
     XCTAssertEqual(configuration.deviceIDAutoForwardingEnabled, YES);
     XCTAssertEqual(configuration.flushLimit, 10);
     XCTAssertEqual(configuration.maxQueueLimit, 20);
-    XCTAssertEqual(configuration.baseURLWhiteList.count, 1);
-    XCTAssertTrue([configuration.baseURLWhiteList[0].absoluteString isEqualToString:@"https://google.com/"]);
+    XCTAssertEqual(configuration.baseURLAllowList.count, 1);
+    XCTAssertTrue([configuration.baseURLAllowList[0].absoluteString isEqualToString:@"https://google.com/"]);
     XCTAssertFalse(configuration.useCloudflareApp);
     XCTAssertTrue([configuration.baseURL.absoluteString isEqualToString:@"https://api.castle.io/v1/"]);
 
-    [configuration setBaseURLWhiteList:@[ [NSURL URLWithString:@"https://google.com/somethingelse"]]];
-    XCTAssertFalse([configuration.baseURLWhiteList[0].absoluteString isEqualToString:@"https://google.com/somethingelse"]);
+    [configuration setBaseURLAllowList:@[ [NSURL URLWithString:@"https://google.com/somethingelse"]]];
+    XCTAssertFalse([configuration.baseURLAllowList[0].absoluteString isEqualToString:@"https://google.com/somethingelse"]);
 
     // Setup Castle SDK with publishable key
     [Castle configureWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
     
     // Configuration reset
     [Castle resetConfiguration];
-    XCTAssertFalse([Castle isWhitelistURL:[NSURL URLWithString:@"https://google.com/somethingelse"]]);
+    XCTAssertFalse([Castle isAllowlistURL:[NSURL URLWithString:@"https://google.com/somethingelse"]]);
     
     // Setup Castle SDK with provided configuration
     [Castle configure:configuration];
     
-    // Check whitelisting on configured instance
-    XCTAssertTrue([Castle isWhitelistURL:[NSURL URLWithString:@"https://google.com/somethingelse"]]);
-    XCTAssertFalse([Castle isWhitelistURL:nil]);
+    // Check allowlisting on configured instance
+    XCTAssertTrue([Castle isAllowlistURL:[NSURL URLWithString:@"https://google.com/somethingelse"]]);
+    XCTAssertFalse([Castle isAllowlistURL:nil]);
     
     [Castle resetConfiguration];
 
@@ -535,14 +535,14 @@
     // Create configuration object
     CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
     
-    NSArray *baseURLWhiteList = @[ [NSURL URLWithString:@"https://google.com/"] ];
+    NSArray *baseURLAllowList = @[ [NSURL URLWithString:@"https://google.com/"] ];
     
     // Update configuration
     configuration.screenTrackingEnabled = YES;
     configuration.debugLoggingEnabled = YES;
     configuration.deviceIDAutoForwardingEnabled = YES;
     configuration.flushLimit = 10;
-    configuration.baseURLWhiteList = baseURLWhiteList;
+    configuration.baseURLAllowList = baseURLAllowList;
     
     [Castle configure:configuration];
     

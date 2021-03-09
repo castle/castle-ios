@@ -20,7 +20,7 @@ static NSString *CastleConfigurationCloudflareAPIPath = @"v1/c/mobile/";
 + (instancetype _Nonnull)configurationWithPublishableKey:(NSString * _Nonnull)publishableKey
 {
     NSAssert([publishableKey hasPrefix:@"pk_"], @"You must provide a valid Castle publishable key when initializing the SDK.");
-    
+
     CastleConfiguration *configuration = [[CastleConfiguration alloc] init];
     configuration.publishableKey = publishableKey;
     configuration.screenTrackingEnabled = YES;
@@ -35,16 +35,16 @@ static NSString *CastleConfigurationCloudflareAPIPath = @"v1/c/mobile/";
 
 #pragma mark - Setters
 
-- (void)setBaseURLWhiteList:(NSArray *)baseURLWhiteList
+- (void)setBaseURLAllowList:(NSArray *)baseURLAllowList
 {
-    NSMutableArray *whitelist = @[].mutableCopy;
-    for (NSURL *url in baseURLWhiteList) {
+    NSMutableArray *allowlist = @[].mutableCopy;
+    for (NSURL *url in baseURLAllowList) {
         if([url isKindOfClass:NSURL.class]) {
             // Only add the base URL discarding any other components of the provided URL
-            [whitelist addObject:[NSURL URLWithString:[NSString stringWithFormat:@"%@://%@/", url.scheme, url.host]]];
+            [allowlist addObject:[NSURL URLWithString:[NSString stringWithFormat:@"%@://%@/", url.scheme, url.host]]];
         }
     }
-    _baseURLWhiteList = whitelist.copy;
+    _baseURLAllowList = allowlist.copy;
 }
 
 - (void)setUseCloudflareApp:(BOOL)useCloudflareApp

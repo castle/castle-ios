@@ -87,7 +87,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
     castle.reachability = [CASReachability reachabilityWithHostname:@"google.com"];
     [castle.reachability startNotifier];
-    
+
     // Initialize interceptor
     if(configuration.isDeviceIDAutoForwardingEnabled) {
         [NSURLProtocol registerClass:[CASRequestInterceptor class]];
@@ -115,13 +115,13 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 {
     Castle *castle = [Castle sharedInstance];
     CastleConfiguration *configuration = castle.configuration;
-    
+
     // Reset Castle shared instance properties
     castle.client = nil;
     castle.configuration = nil;
     castle.reachability = nil;
     CASEnableDebugLogging(NO);
-    
+
     // Unregister request interceptor
     if(configuration.isDeviceIDAutoForwardingEnabled) {
         [NSURLProtocol unregisterClass:[CASRequestInterceptor class]];
@@ -200,7 +200,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     dispatch_once(&networkInfoOnceToken, ^{
         _telephonyNetworkInfo = [[CTTelephonyNetworkInfo alloc] init];
     });
-    
+
     CTCarrier *carrier = [_telephonyNetworkInfo subscriberCellularProvider];
     return carrier.carrierName.length > 0 ? carrier.carrierName : @"unknown";
 }
@@ -224,11 +224,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     [defaults setObject:userId forKey:CastleUserIdentifierKey];
     [defaults synchronize];
 }
-    
+
 - (void)setUserSignature:(NSString *)userSignature
 {
     _userSignature = userSignature;
-    
+
     // Store user signature in user defaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:userSignature forKey:CastleSecureSignatureKey];
@@ -287,12 +287,12 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     if(![castle secureModeEnabled]) {
         CASLog(@"Identify called without secure mode user signature set. If secure mode is enabled in Castle and identify is called before secure, the identify event will be discarded.");
     }
-    
+
     CASIdentity *identity = [CASIdentity identityWithUserId:userId traits:traits];
     if(identity != nil) {
         [castle setUserId:userId];
         [castle queueEvent:identity];
-        
+
         // Identify call will always flush
         [Castle flush];
     }
@@ -304,7 +304,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         CASLog(@"No user signature provided. Will cancel secure operation.");
         return;
     }
-    
+
     Castle *castle = [Castle sharedInstance];
     [castle setUserSignature:userSignature];
 }
@@ -348,7 +348,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         castle.task = nil;
 
         CASLog(@"Successfully flushed (%ld) events: %@", batchModel.events.count, [batchModel JSONPayload]);
-        
+
         if ([castle eventQueueExceedsFlushLimit] && castle.eventQueue.count > 0) {
             CASLog(@"Current event queue still exceeds flush limit. Flush again");
             [Castle flush];
@@ -360,7 +360,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 + (void)flushIfNeeded:(NSURL *)url
 {
-    if([self isWhitelistURL:url]) {
+    if([self isAllowlistURL:url]) {
         [self flush];
     }
 }
@@ -379,21 +379,21 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
     // Reset cached user id
     castle.userId = nil;
-    
+
     // Reset cached signature
     castle.userSignature = nil;
 }
 
-+ (BOOL)isWhitelistURL:(NSURL *)url
++ (BOOL)isAllowlistURL:(NSURL *)url
 {
     if(url == nil) {
-        CASLog(@"Provided whitelist URL was nil");
+        CASLog(@"Provided allowlist URL was nil");
         return NO;
     }
 
     Castle *castle = [Castle sharedInstance];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.host = %@ AND self.scheme = %@", url.host, url.scheme];
-    return [castle.configuration.baseURLWhiteList filteredArrayUsingPredicate:predicate].count > 0;
+    return [castle.configuration.baseURLAllowList filteredArrayUsingPredicate:predicate].count > 0;
 }
 
 + (NSURL *)baseURL
@@ -418,7 +418,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
     // Trim queue before adding element to make sure it never exceeds maxQueueLimit
     [self trimQueue];
-    
+
     // Add event to the queue
     CASLog(@"Queing event: %@", event);
     [self.eventQueue addObject:event];
@@ -438,12 +438,12 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 {
     // Trim queue to maxQueueLimit - 1. This method is only called when queuing an event
     NSUInteger maxQueueLimit = self.configuration.maxQueueLimit - 1;
-    
+
     // If the queue doesn't exceed maxQueueLimit just return
     if(self.eventQueue.count < maxQueueLimit) {
         return;
     }
-    
+
     // Remove the oldest excess events from the queue
     NSRange trimRange = NSMakeRange(0, self.eventQueue.count - maxQueueLimit);
     CASLog(@"Queue (size %ld) will exceed maxQueueLimit (%ld). Will trim %ld events from queue.", self.eventQueue.count, self.configuration.maxQueueLimit, trimRange.length);
@@ -529,7 +529,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 {
     return [Castle sharedInstance].userId;
 }
-    
+
 + (NSString *)userSignature
 {
     return [Castle sharedInstance].userSignature;
