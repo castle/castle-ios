@@ -28,7 +28,7 @@ jobs:
           name: Run tests
           command: fastlane scan --workspace "Example/Castle.xcworkspace" --code_coverage
           environment:
-            SCAN_DEVICE: iPhone 6
+            SCAN_DEVICE: iPhone 12 Pro Max
             SCAN_SCHEME: Castle-Example
 
       # Upload code coverage results to codecov.io
