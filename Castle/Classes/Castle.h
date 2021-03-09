@@ -25,7 +25,7 @@ extern NSString * const CastleClientIdHeaderName;
 
 /**
  This class is the main entry point for using the Castle SDK and provides methods
- for tracking events, screen views, manual flushing of the event queue, whitelisting behaviour and resetting. */
+ for tracking events, screen views, manual flushing of the event queue, allowlisting behaviour and resetting. */
 @interface Castle : NSObject
 
 /**
@@ -58,11 +58,11 @@ extern NSString * const CastleClientIdHeaderName;
 /**
  Session configuration used to enable the Castle request interceptor.
  All requests created with the NSURLSession using the configuration will be intercepted if the URL is
- whitelisted and the client identifier will be added as a header 'X-Castle-Client-Id'.
- 
+ allowlisted and the client identifier will be added as a header 'X-Castle-Client-Id'.
+
  This can be used to enable the request interceptor on a specific NSURLSession for more
  control instead of setting deviceIDAutoForwardingEnabled on your CastleConfiguration instance to YES.
- 
+
  @return NSURLSessionConfiguration with the Castle interceptor enabled
  @code // Initialize an NSURLSession instance with the request interceptor enabled
  NSURLSessionConfiguration *configuration = [Castle urlSessionInterceptConfiguration];
@@ -75,7 +75,7 @@ extern NSString * const CastleClientIdHeaderName;
 /**
  Reset current configuration. Will disable logging, request interception (if enabled).
  Once reset the shared Castle instance can be re-configured.
- 
+
  @code // Reset configuration
  [Castle resetConfiguration];
  @endcode
@@ -109,7 +109,7 @@ extern NSString * const CastleClientIdHeaderName;
 /**
  Set user signature and enable secure mode. User signature will be included in all events after it has been set and will be persisted.
  A stored user signature will be removed when the user signature or reset methods are called.
- 
+
  @param signature User signature (SHA-256 HMAC in hex format)
  @code // Add user signature
  [Castle signature:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
@@ -133,10 +133,10 @@ extern NSString * const CastleClientIdHeaderName;
 + (void)flush;
 
 /**
- Force a flush if needed for a specific url, flushes if url is whitelisted
+ Force a flush if needed for a specific url, flushes if url is allowlisted
 
- @param url Whitelist url
- @code // Flush if the provided url matches a whitelisted base url
+ @param url Allowlist url
+ @code // Flush if the provided url matches an allowlisted base url
  [Castle flushIfNeeded:[NSURL urlWithString:@"https://google.com/foobar"];
  @endcode
  */
@@ -148,17 +148,17 @@ extern NSString * const CastleClientIdHeaderName;
 + (void)reset;
 
 /**
- Determine if a given url is whitelisted
+ Determine if a given url is allowlisted
 
  @param url url
- @return return url whitelist status
+ @return return url allowlist status
  */
-+ (BOOL)isWhitelistURL:(nullable NSURL *)url;
++ (BOOL)isAllowlistURL:(nullable NSURL *)url;
 
 
 /**
  Get base url
- 
+
  @return return Base URL
  */
 + (NSURL *)baseURL;
@@ -181,7 +181,7 @@ extern NSString * const CastleClientIdHeaderName;
 
 /**
  Get stored signature from secure call, returns nil if not set
- 
+
  @return Signature
  */
 + (nullable NSString *)userSignature;
@@ -189,7 +189,7 @@ extern NSString * const CastleClientIdHeaderName;
 /**
  Get the User Agent for used in all requests to the Castle API.
  User agent will have the following format: App Name/x.x (xxxx) (iPhone XR; iOS xx.x; Castle x.x.x)
- 
+
  @return User Agent
  */
 + (NSString *)userAgent;
@@ -200,7 +200,7 @@ extern NSString * const CastleClientIdHeaderName;
  @return return The current size of the event queue
  */
 + (NSUInteger)queueSize;
-    
+
 @end
 
 NS_ASSUME_NONNULL_END

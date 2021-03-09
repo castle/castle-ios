@@ -15,9 +15,9 @@ class SwiftTests: XCTestCase {
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
-        let baseURLWhiteList = [URL(string: "https://google.com/")!]
+        let baseURLAllowList = [URL(string: "https://google.com/")!]
         let configuration = CastleConfiguration(publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
-        configuration.baseURLWhiteList = baseURLWhiteList
+        configuration.baseURLAllowList = baseURLAllowList
         
         Castle.configure(configuration)
     }
@@ -65,7 +65,7 @@ class SwiftTests: XCTestCase {
     }
 
     func testConfiguration() throws {
-        let baseURLWhiteList = [URL(string:"https://google.com/")!];
+        let baseURLAllowList = [URL(string:"https://google.com/")!];
         var configuration = CastleConfiguration(publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
 
         // Check that all default values are set correctly
@@ -73,7 +73,7 @@ class SwiftTests: XCTestCase {
         XCTAssertEqual(configuration.isDebugLoggingEnabled, false);
         XCTAssertEqual(configuration.flushLimit, 20);
         XCTAssertEqual(configuration.maxQueueLimit, 1000);
-        XCTAssertNil(configuration.baseURLWhiteList);
+        XCTAssertNil(configuration.baseURLAllowList);
 
         // Update configuration
         configuration.isScreenTrackingEnabled = true;
@@ -81,7 +81,7 @@ class SwiftTests: XCTestCase {
         configuration.isDeviceIDAutoForwardingEnabled = true;
         configuration.flushLimit = 10;
         configuration.maxQueueLimit = 20;
-        configuration.baseURLWhiteList = baseURLWhiteList;
+        configuration.baseURLAllowList = baseURLAllowList;
 
         // Check that all the configuration parameters where set correctly
         XCTAssertTrue(configuration.publishableKey == "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
@@ -90,27 +90,27 @@ class SwiftTests: XCTestCase {
         XCTAssertEqual(configuration.isDeviceIDAutoForwardingEnabled, true)
         XCTAssertEqual(configuration.flushLimit, 10)
         XCTAssertEqual(configuration.maxQueueLimit, 20)
-        XCTAssertEqual(configuration.baseURLWhiteList!.count, 1)
-        XCTAssertTrue(configuration.baseURLWhiteList![0].absoluteString == "https://google.com/")
+        XCTAssertEqual(configuration.baseURLAllowList!.count, 1)
+        XCTAssertTrue(configuration.baseURLAllowList![0].absoluteString == "https://google.com/")
         XCTAssertFalse(configuration.useCloudflareApp)
         XCTAssertTrue(configuration.baseURL.absoluteString == "https://api.castle.io/v1/")
 
-        configuration.baseURLWhiteList = [URL(string: "https://google.com/somethingelse")!]
-        XCTAssertFalse(configuration.baseURLWhiteList![0].absoluteString  == "https://google.com/somethingelse")
+        configuration.baseURLAllowList = [URL(string: "https://google.com/somethingelse")!]
+        XCTAssertFalse(configuration.baseURLAllowList![0].absoluteString  == "https://google.com/somethingelse")
 
         // Setup Castle SDK with publishable key
         Castle.configure(withPublishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
 
         // Configuration reset
         Castle.resetConfiguration()
-        XCTAssertFalse(Castle.isWhitelistURL(URL(string:"https://google.com/somethingelse")!))
+        XCTAssertFalse(Castle.isAllowlistURL(URL(string:"https://google.com/somethingelse")!))
 
         // Setup Castle SDK with provided configuration
         Castle.configure(configuration)
 
-        // Check whitelisting on configured instance
-        XCTAssertTrue(Castle.isWhitelistURL(URL(string:"https://google.com/somethingelse")!))
-        XCTAssertFalse(Castle.isWhitelistURL(nil))
+        // Check allowlisting on configured instance
+        XCTAssertTrue(Castle.isAllowlistURL(URL(string:"https://google.com/somethingelse")!))
+        XCTAssertFalse(Castle.isAllowlistURL(nil))
 
         Castle.resetConfiguration()
 
@@ -490,14 +490,14 @@ class SwiftTests: XCTestCase {
         // Create configuration object
         let configuration = CastleConfiguration(publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
         
-        let baseURLWhiteList = [URL(string: "https://google.com/")!]
+        let baseURLAllowList = [URL(string: "https://google.com/")!]
 
         // Update configuration
         configuration.isScreenTrackingEnabled = true
         configuration.isDebugLoggingEnabled = true
         configuration.isDeviceIDAutoForwardingEnabled = true
         configuration.flushLimit = 10
-        configuration.baseURLWhiteList = baseURLWhiteList
+        configuration.baseURLAllowList = baseURLAllowList
 
         Castle.configure(configuration)
 

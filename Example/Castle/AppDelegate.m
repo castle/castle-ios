@@ -18,7 +18,7 @@
     configuration.debugLoggingEnabled = YES;
     configuration.deviceIDAutoForwardingEnabled = YES;
     configuration.flushLimit = 20;
-    configuration.baseURLWhiteList = @[ [NSURL URLWithString:@"https://google.com/"] ];
+    configuration.baseURLAllowList = @[ [NSURL URLWithString:@"https://google.com/"] ];
     
     // Setup Castle SDK with provided configuration
     [Castle configure:configuration];

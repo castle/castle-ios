@@ -44,9 +44,9 @@
 @property (nonatomic, assign) NSUInteger flushLimit;
 
 /**
- Base url whitelist
+ Base url allowlist
  */
-@property (nonatomic, strong, readwrite, nullable) NSArray<NSURL *> *baseURLWhiteList;
+@property (nonatomic, strong, readwrite, nullable) NSArray<NSURL *> *baseURLAllowList;
 
 /**
  Cloudflare proxying enabled
@@ -78,5 +78,5 @@
  @endcode
  */
 + (instancetype _Nonnull)configurationWithPublishableKey:(NSString * _Nonnull)publishableKey;
-    
+
 @end

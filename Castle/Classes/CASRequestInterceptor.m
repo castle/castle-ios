@@ -24,7 +24,7 @@ static NSString *CASRecursiveRequestFlagProperty = @"com.castle.CASRequestInterc
         return NO;
     }
     
-    BOOL shouldIntercept = [Castle isWhitelistURL:request.URL];
+    BOOL shouldIntercept = [Castle isAllowlistURL:request.URL];
     if(shouldIntercept) {
         CASLog(@"Will intercept request with URL: %@", request.URL.absoluteString);
     }
