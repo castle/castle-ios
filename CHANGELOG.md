@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.0.9 (2021-03-09)
+
+- Fix: [#47](https://github.com/castle/castle-ios/pull/47) NSKeyedUnarchiver deprecated tests.
+- Fix: [#46](https://github.com/castle/castle-ios/pull/46) Use allowlist.
+
 ## 1.0.8 (2021-03-05)
 
 - Fix: [#45](https://github.com/castle/castle-ios/pull/45) Use [NSNull null] if clientId is nil.
