@@ -30,7 +30,7 @@ github "castle/castle-ios"
 ```
 ## Usage
 
-Please see the [Mobile Integration Guide](https://castle.io/docs/mobile).
+Please see the [Mobile Integration Guide](https://docs.castle.io).
 
 ## Library size
 
