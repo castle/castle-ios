@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.0.10 (2021-03-19)
+- Fix: [#50](https://github.com/castle/castle-ios/pull/50) Carthage build.
+- Fix: [#48](https://github.com/castle/castle-ios/pull/48) Link to correct docs.
+
 ## 1.0.9 (2021-03-09)
 
 - Fix: [#47](https://github.com/castle/castle-ios/pull/47) NSKeyedUnarchiver deprecated tests.
