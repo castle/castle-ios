@@ -16,7 +16,13 @@ let package = Package(
     targets: [
         .target(
             name: "Castle",
-            path: "Castle",
-            publicHeadersPath: "")
+            path: "Castle/",
+            exclude: ["SwiftSources"],
+            publicHeadersPath: "Public",
+            cSettings: [
+                .headerSearchPath("Public"),
+                .headerSearchPath("Internal")
+            ]
+        )
     ]
 )
