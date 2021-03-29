@@ -15,7 +15,7 @@ FOUNDATION_EXPORT double CastleVersionNumber;
  Project version string for Castle. */
 FOUNDATION_EXPORT const unsigned char CastleVersionString[];
 
-#import "CastleConfiguration.h"
+#import <CastleConfiguration.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
