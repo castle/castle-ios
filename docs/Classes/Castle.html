@@ -69,8 +69,13 @@
             <h1>Castle</h1>
               <div class="declaration">
                 <div class="language">
-                  
+                  <p class="aside-title">Objective-C</p>
                   <pre class="highlight objective_c"><code><span class="k">@interface</span> <span class="nc">Castle</span> <span class="p">:</span> <span class="nc">NSObject</span></code></pre>
+
+                </div>
+                <div class="language">
+                  <p class="aside-title">Swift</p>
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">Castle</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
 
                 </div>
               </div>
@@ -78,7 +83,7 @@
 for tracking events, screen views, manual flushing of the event queue, allowlisting behaviour and resetting.</p>
 
               <div class="slightly-smaller">
-                <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Classes/Castle.h#L29-L204">Show on GitHub</a>
+                <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Public/Castle.h#L29-L204">Show on GitHub</a>
               </div>
           </section>
           <section class="section task-group-section">
@@ -107,13 +112,18 @@ for tracking events, screen views, manual flushing of the event queue, allowlist
                           <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="n">nonnull</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">versionString</span><span class="p">;</span></code></pre>
 
                         </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">versionString</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
                       </div>
                       <div>
                         <h4>Return Value</h4>
                         <p>Version string</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Classes/Castle.h#L36">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Public/Castle.h#L36">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -154,6 +164,11 @@ for tracking events, screen views, manual flushing of the event queue, allowlist
                           <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">configure</span><span class="p">:(</span><span class="n">nonnull</span> <span class="n"><a href="../Classes/CastleConfiguration.html">CastleConfiguration</a></span> <span class="o">*</span><span class="p">)</span><span class="nv">configuration</span><span class="p">;</span></code></pre>
 
                         </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="n">_</span> <span class="nv">configuration</span><span class="p">:</span> <span class="kt"><a href="../Classes/CastleConfiguration.html">CastleConfiguration</a></span><span class="p">)</span></code></pre>
+
+                        </div>
                       </div>
                       <div>
                         <h4>Parameters</h4>
@@ -178,7 +193,7 @@ for tracking events, screen views, manual flushing of the event queue, allowlist
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Classes/Castle.h#L48">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Public/Castle.h#L48">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -206,6 +221,11 @@ for tracking events, screen views, manual flushing of the event queue, allowlist
                           <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">configureWithPublishableKey</span><span class="p">:(</span><span class="n">nonnull</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">publishableKey</span><span class="p">;</span></code></pre>
 
                         </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="n">withPublishableKey</span> <span class="nv">publishableKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
                       </div>
                       <div>
                         <h4>Parameters</h4>
@@ -228,7 +248,7 @@ for tracking events, screen views, manual flushing of the event queue, allowlist
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Classes/Castle.h#L56">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Public/Castle.h#L56">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -261,6 +281,11 @@ control instead of setting deviceIDAutoForwardingEnabled on your CastleConfigura
                           <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="n">nonnull</span> <span class="n">NSURLSessionConfiguration</span> <span class="o">*</span><span class="p">)</span><span class="n">urlSessionInterceptConfiguration</span><span class="p">;</span></code></pre>
 
                         </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">urlSessionInterceptConfiguration</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">URLSessionConfiguration</span></code></pre>
+
+                        </div>
                       </div>
                       <div>
                         <h4>Return Value</h4>
@@ -271,7 +296,7 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
 </code></p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Classes/Castle.h#L72">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Public/Castle.h#L72">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -304,9 +329,14 @@ Once reset the shared Castle instance can be re-configured.</p>
                           <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">resetConfiguration</span><span class="p">;</span></code></pre>
 
                         </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">resetConfiguration</span><span class="p">()</span></code></pre>
+
+                        </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Classes/Castle.h#L83">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Public/Castle.h#L83">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -347,6 +377,11 @@ Once reset the shared Castle instance can be re-configured.</p>
                           <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">identify</span><span class="p">:(</span><span class="n">nullable</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">userId</span><span class="p">;</span></code></pre>
 
                         </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">identify</span><span class="p">(</span><span class="n">_</span> <span class="nv">userId</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span></code></pre>
+
+                        </div>
                       </div>
                       <div>
                         <h4>Parameters</h4>
@@ -371,7 +406,7 @@ Once reset the shared Castle instance can be re-configured.</p>
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Classes/Castle.h#L95">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Public/Castle.h#L95">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -399,6 +434,11 @@ Provided user traits will be included in the identify event sent to the Castle A
                           <p class="aside-title">Objective-C</p>
                           <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">identify</span><span class="p">:(</span><span class="n">nonnull</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">identifier</span>
           <span class="nf">traits</span><span class="p">:(</span><span class="n">nullable</span> <span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="nv">traits</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">identify</span><span class="p">(</span><span class="n">_</span> <span class="nv">identifier</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">traits</span><span class="p">:</span> <span class="p">[</span><span class="kt">AnyHashable</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span></code></pre>
 
                         </div>
                       </div>
@@ -437,7 +477,7 @@ Provided user traits will be included in the identify event sent to the Castle A
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Classes/Castle.h#L107">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Public/Castle.h#L107">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -466,6 +506,11 @@ A stored user signature will be removed when the user signature or reset methods
                           <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">secure</span><span class="p">:(</span><span class="n">nullable</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">signature</span><span class="p">;</span></code></pre>
 
                         </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">secure</span><span class="p">(</span><span class="n">_</span> <span class="nv">signature</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span></code></pre>
+
+                        </div>
                       </div>
                       <div>
                         <h4>Parameters</h4>
@@ -490,7 +535,7 @@ A stored user signature will be removed when the user signature or reset methods
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Classes/Castle.h#L118">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Public/Castle.h#L118">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -518,6 +563,11 @@ A stored user signature will be removed when the user signature or reset methods
                           <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">screen</span><span class="p">:(</span><span class="n">nonnull</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">screenName</span><span class="p">;</span></code></pre>
 
                         </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">screen</span><span class="p">(</span><span class="n">_</span> <span class="nv">screenName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
                       </div>
                       <div>
                         <h4>Parameters</h4>
@@ -542,7 +592,7 @@ A stored user signature will be removed when the user signature or reset methods
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Classes/Castle.h#L128">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Public/Castle.h#L128">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -570,9 +620,14 @@ A stored user signature will be removed when the user signature or reset methods
                           <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">flush</span><span class="p">;</span></code></pre>
 
                         </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">flush</span><span class="p">()</span></code></pre>
+
+                        </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Classes/Castle.h#L133">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Public/Castle.h#L133">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -600,6 +655,11 @@ A stored user signature will be removed when the user signature or reset methods
                           <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">flushIfNeeded</span><span class="p">:(</span><span class="n">nonnull</span> <span class="n">NSURL</span> <span class="o">*</span><span class="p">)</span><span class="nv">url</span><span class="p">;</span></code></pre>
 
                         </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">flushIfNeeded</span><span class="p">(</span><span class="n">_</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span></code></pre>
+
+                        </div>
                       </div>
                       <div>
                         <h4>Parameters</h4>
@@ -624,7 +684,7 @@ A stored user signature will be removed when the user signature or reset methods
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Classes/Castle.h#L143">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Public/Castle.h#L143">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -652,9 +712,14 @@ A stored user signature will be removed when the user signature or reset methods
                           <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">reset</span><span class="p">;</span></code></pre>
 
                         </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">reset</span><span class="p">()</span></code></pre>
+
+                        </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Classes/Castle.h#L148">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Public/Castle.h#L148">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -682,6 +747,11 @@ A stored user signature will be removed when the user signature or reset methods
                           <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="n">BOOL</span><span class="p">)</span><span class="nf">isAllowlistURL</span><span class="p">:(</span><span class="n">nullable</span> <span class="n">NSURL</span> <span class="o">*</span><span class="p">)</span><span class="nv">url</span><span class="p">;</span></code></pre>
 
                         </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">isAllowlistURL</span><span class="p">(</span><span class="n">_</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
                       </div>
                       <div>
                         <h4>Parameters</h4>
@@ -707,7 +777,7 @@ A stored user signature will be removed when the user signature or reset methods
                         <p>return url allowlist status</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Classes/Castle.h#L156">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Public/Castle.h#L156">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -735,13 +805,18 @@ A stored user signature will be removed when the user signature or reset methods
                           <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="n">nonnull</span> <span class="n">NSURL</span> <span class="o">*</span><span class="p">)</span><span class="n">baseURL</span><span class="p">;</span></code></pre>
 
                         </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">baseURL</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">URL</span></code></pre>
+
+                        </div>
                       </div>
                       <div>
                         <h4>Return Value</h4>
                         <p>return Base URL</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Classes/Castle.h#L164">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Public/Castle.h#L164">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -782,13 +857,18 @@ A stored user signature will be removed when the user signature or reset methods
                           <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="n">nullable</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">clientId</span><span class="p">;</span></code></pre>
 
                         </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">clientId</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
                       </div>
                       <div>
                         <h4>Return Value</h4>
                         <p>client identifier</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Classes/Castle.h#L173">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Public/Castle.h#L173">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -816,13 +896,18 @@ A stored user signature will be removed when the user signature or reset methods
                           <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="n">nullable</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">userId</span><span class="p">;</span></code></pre>
 
                         </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">userId</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
                       </div>
                       <div>
                         <h4>Return Value</h4>
                         <p>User Id</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Classes/Castle.h#L180">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Public/Castle.h#L180">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -850,13 +935,18 @@ A stored user signature will be removed when the user signature or reset methods
                           <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="n">nullable</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">userSignature</span><span class="p">;</span></code></pre>
 
                         </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">userSignature</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
                       </div>
                       <div>
                         <h4>Return Value</h4>
                         <p>Signature</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Classes/Castle.h#L187">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Public/Castle.h#L187">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -885,13 +975,18 @@ User agent will have the following format: App Name/x.x (xxxx) (iPhone XR; iOS x
                           <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="n">nonnull</span> <span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">userAgent</span><span class="p">;</span></code></pre>
 
                         </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">userAgent</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
                       </div>
                       <div>
                         <h4>Return Value</h4>
                         <p>User Agent</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Classes/Castle.h#L195">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Public/Castle.h#L195">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -919,13 +1014,18 @@ User agent will have the following format: App Name/x.x (xxxx) (iPhone XR; iOS x
                           <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="n">NSUInteger</span><span class="p">)</span><span class="n">queueSize</span><span class="p">;</span></code></pre>
 
                         </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">queueSize</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UInt</span></code></pre>
+
+                        </div>
                       </div>
                       <div>
                         <h4>Return Value</h4>
                         <p>return The current size of the event queue</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Classes/Castle.h#L202">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/1.0.10/Castle/Public/Castle.h#L202">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -935,7 +1035,7 @@ User agent will have the following format: App Name/x.x (xxxx) (iPhone XR; iOS x
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="https://castle.io" target="_blank" rel="external">Castle</a>. All rights reserved. (Last updated: 2021-03-19)</p>
+          <p>&copy; 2021 <a class="link" href="https://castle.io" target="_blank" rel="external">Castle</a>. All rights reserved. (Last updated: 2021-03-30)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
