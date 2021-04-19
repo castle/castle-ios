@@ -17,6 +17,7 @@
 @property (nonatomic, copy, readwrite) NSDate *timestamp;
 @property (nonatomic, copy, readwrite) NSString *userId;
 @property (nonatomic, copy, readwrite) NSString *userSignature;
+@property (nonatomic, copy, readwrite) CASContext *context;
 @end
 
 @implementation CASEvent
@@ -101,12 +102,11 @@
 - (NSDictionary *)JSONPayload
 {
     NSString *timestamp = [[CASModel timestampDateFormatter] stringFromDate:self.timestamp];
-    NSDictionary *context = [[CASContext sharedContext] JSONPayload];
 
     NSMutableDictionary *payload = @{ @"type": self.type,
                                       @"event": self.name,
                                       @"timestamp": timestamp,
-                                      @"context": context }.mutableCopy;
+                                      @"context": self.context.JSONPayload }.mutableCopy;
 
     if(self.userId != nil) {
         payload[@"user_id"] = self.userId;
@@ -124,6 +124,16 @@
 - (NSString *)type
 {
     return @"track";
+}
+
+- (CASContext *)context
+{
+    // Get a context snapshot object if there isn't already a context.
+    // Note: this should only happen when upgrading from 1.0.x to 1.2.0 which changes how the context is used.
+    if(!_context) {
+        _context = [CASContext snapshotContext];
+    }
+    return _context;
 }
 
 #pragma mark - Util

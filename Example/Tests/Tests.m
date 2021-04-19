@@ -284,6 +284,20 @@
     XCTAssertTrue([CASEvent supportsSecureCoding]);
 }
 
+- (void)testModelInvalidData
+{
+    NSData *data = [[NSData alloc] init];
+    NSDictionary *properties = @{ @"key": data };
+    CASEvent *event = [CASEvent eventWithName:@"event" properties:properties];
+    XCTAssertNil(event);
+    
+    event = [CASScreen eventWithName:@"screen" properties:properties];
+    XCTAssertNil(event);
+    
+    event = [CASIdentity eventWithName:@"identity" properties:properties];
+    XCTAssertNil(event);
+}
+
 - (void)testSecureMode
 {
     // Calling secure with a nil user signature should not store or replace any previous signature
@@ -318,8 +332,8 @@
     XCTAssertNotNil(payload[@"context"]);
     XCTAssertNil(payload[@"user_signature"]);
     
-    // Device name should not be included
-    XCTAssertNil(payload[@"context"][@"device"][@"name"]);
+    // Client id should be set
+    XCTAssertNotNil(payload[@"context"][@"client_id"]);
     
     // Payload should not include these parameters
     XCTAssertNil(payload[@"event"]);

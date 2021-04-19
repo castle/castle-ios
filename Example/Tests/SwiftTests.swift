@@ -280,10 +280,10 @@ class SwiftTests: XCTestCase {
         XCTAssertNotNil(payload["context"]!)
         XCTAssertNil(payload["user_signature"])
         
-        // Device name should not be included
+        // Client id should be set
         let context = payload["context"] as! [AnyHashable:Any]
-        let device = context["device"] as! [AnyHashable:Any]
-        XCTAssertNil(device["name"]);
+        let clientId = context["client_id"] as! String
+        XCTAssertNotNil(clientId);
         
         // Payload should not include these parameters
         XCTAssertNil(payload["event"])

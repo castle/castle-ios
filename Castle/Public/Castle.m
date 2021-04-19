@@ -23,6 +23,8 @@
 #import "CASRequestInterceptor.h"
 #import "UIViewController+CASScreen.h"
 
+@import Highwind;
+
 NSString *const CastleUserIdentifierKey = @"CastleUserIdentifierKey";
 NSString *const CastleSecureSignatureKey = @"CastleSecureSignatureKey";
 NSString *const CastleAppVersionKey = @"CastleAppVersionKey";
@@ -40,6 +42,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 @property (nonatomic, copy, readwrite, nullable) NSString *userSignature;
 @property (nonatomic, assign, readonly) NSUInteger maxBatchSize;
 @property (nonatomic, strong, readwrite) CASReachability *reachability;
+@property (nonatomic, strong, readwrite) Highwind *highwind;
 @end
 
 @implementation Castle
@@ -85,6 +88,9 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     castle.client = [CASAPIClient clientWithConfiguration:configuration];
     castle.configuration = configuration;
 
+    // Highwind
+    castle.highwind = [[Highwind alloc] initWithVersion:Castle.versionString uuid:castle.deviceIdentifier userAgent: CASUserAgent()];
+    
     castle.reachability = [CASReachability reachabilityWithHostname:@"google.com"];
     [castle.reachability startNotifier];
 
@@ -182,36 +188,6 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 + (NSString *)userAgent
 {
     return CASUserAgent();
-}
-
-+ (BOOL)isWifiAvailable
-{
-    return [Castle sharedInstance].reachability.isReachableViaWiFi;
-}
-
-+ (BOOL)isCellularAvailable
-{
-    return [Castle sharedInstance].reachability.isReachableViaWWAN;
-}
-
-+ (NSString *)carrierName
-{
-    static dispatch_once_t networkInfoOnceToken;
-    dispatch_once(&networkInfoOnceToken, ^{
-        _telephonyNetworkInfo = [[CTTelephonyNetworkInfo alloc] init];
-    });
-    
-    CTCarrier *carrier = nil;
-    if (@available(iOS 12.0, *)) {
-        carrier = _telephonyNetworkInfo.serviceSubscriberCellularProviders.allValues.firstObject;
-    } else {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        carrier = _telephonyNetworkInfo.subscriberCellularProvider;
-#pragma clang diagnostic pop
-    }
-    
-    return carrier.carrierName.length > 0 ? carrier.carrierName : @"unknown";
 }
 
 + (UIApplication *)sharedUIApplication
@@ -531,7 +507,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 + (NSString *)clientId
 {
-    return [Castle sharedInstance].deviceIdentifier;
+    return [[Castle sharedInstance].highwind token];
 }
 
 + (NSString *)userId
