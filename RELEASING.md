@@ -5,12 +5,14 @@ This document describes the tasks to perform for tagging and releasing a new ver
 ## Prepare for release
 
  1. Update the version in `Castle.m`, `Castle.podspec` and `README.md`.
- 2. Update `github_file_prefix` in jazzy.yaml to point to the new release tag 
- 3. Update documentation by running `scripts/generate_docs.sh` in the project root.
- 4. Update the `CHANGELOG.md` for the impending release.
- 5. `git commit -am "Prepare for release X.Y.Z."` (where X.Y.Z is the new version).
- 6. `git tag -a X.Y.Z -m "Version X.Y.Z"` (where X.Y.Z is the new version).
- 7. `git push && git push --tags`.
+ 2. Update `GeoZip.xcframwork` and `Highwind.xcframework`
+ 3. Update `github_file_prefix` in jazzy.yaml to point to the new release tag 
+ 4. Update documentation by running `scripts/generate_docs.sh` in the project root.
+ 5. Update the `CHANGELOG.md` for the impending release.
+ 6. `git commit -am "Prepare for release X.Y.Z."` (where X.Y.Z is the new version).
+ 7. `git tag -a X.Y.Z -m "Version X.Y.Z"` (where X.Y.Z is the new version).
+ 8. `git push && git push --tags`.
+ 9. Create a new version of `Castle.xcframwork` by running `fastlane ios xcframework` 
  
 ## Publish to CocoaPods
 
@@ -19,3 +21,4 @@ In order to publish a new version to CocoaPods run the following command from th
 ## Create a new release on Github
 1. Create a new Github release at https://github.com/castle/castle-ios/releases
      * Add latest version information from `CHANGELOG.md`
+     * Add a zip archive including `Castle.xcframework`, `GeoZip.xcframwork` and `Highwind.xcframework`

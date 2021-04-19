@@ -5,13 +5,13 @@
 //  Created by Alexander Simson on 2018-02-12.
 //
 
-#import "CASDevice.h"
+#import "CASModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CASContext : CASModel
 
-+ (instancetype)sharedContext;
++ (instancetype)snapshotContext;
 
 @end
 

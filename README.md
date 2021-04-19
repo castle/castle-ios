@@ -25,10 +25,12 @@ pod "Castle", "1.0.10"
 ```
 
 ### Carthage
+We have started to include internal dependencies (as xcframeworks) that Carthage currently doesn't support. Therefore we are (temporarily) not supporting Carthage until they add support for adding xcframework dependencies. You can still continue using version `1.0.10` or add the dependency using `CocoaPods` or `Swift Package Manager`.
+
 Add Castle as a dependency by including it in your `Cartfile`.
 
 ```
-github "castle/castle-ios"
+github "castle/castle-ios" "1.0.10"
 ```
 
 ### Swift Package Manager
@@ -39,6 +41,9 @@ dependencies: [
     .package(url: "https://github.com/castle/castle-ios.git", .upToNextMajor(from: "1.0.10"))
 ]
 ```
+
+### Manually
+Download the zip file from the github release, unzip and drag `GeoZip.xcframework`, `Highwind.xcframework` and `Castle.xcframework` to the **Frameworks, Libraries and Embedded Content** section of the target. They should all be set to **Embed & Sign**
 
 ## Usage
 

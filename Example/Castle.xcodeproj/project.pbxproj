@@ -444,10 +444,14 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Castle_Example/Pods-Castle_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Castle/Castle.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Highwind/Highwind.framework/Highwind",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/GeoZip/GeoZip.framework/GeoZip",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Castle.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highwind.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GeoZip.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -462,10 +466,14 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Castle_UITests/Pods-Castle_UITests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Castle/Castle.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Highwind/Highwind.framework/Highwind",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/GeoZip/GeoZip.framework/GeoZip",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Castle.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highwind.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GeoZip.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

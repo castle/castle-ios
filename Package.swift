@@ -10,7 +10,7 @@ let package = Package(
     products: [
         .library(
             name: "Castle",
-            targets: ["Castle"]),
+            targets: ["Castle", "Highwind", "GeoZip"]),
     ],
     dependencies: [],
     targets: [
@@ -23,6 +23,14 @@ let package = Package(
                 .headerSearchPath("Public"),
                 .headerSearchPath("Internal")
             ]
+        ),
+        .binaryTarget(
+            name: "Highwind",
+            path: "Castle/Highwind.xcframework"
+        ),
+        .binaryTarget(
+            name: "GeoZip",
+            path: "Castle/GeoZip.xcframework"
         )
     ]
 )

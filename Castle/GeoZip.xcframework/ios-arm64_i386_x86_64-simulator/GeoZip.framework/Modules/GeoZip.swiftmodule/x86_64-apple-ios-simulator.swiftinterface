@@ -1,0 +1,41 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-module-flags: -target x86_64-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name GeoZip
+import CoreLocation
+import Foundation
+@_exported import GeoZip
+import Swift
+public enum GeoZipError : Swift.Error {
+  case accuracyNotRepresentable
+  case invalidFormat
+  public static func == (a: GeoZip.GeoZipError, b: GeoZip.GeoZipError) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public func decode(encoded: Swift.String, encoding: GeoZip.Encoding = Encoding.Base64) throws -> GeoZip.Location
+public func encode(location: GeoZip.Location, precision: Swift.UInt8 = Coordinate.DEFAULT_PRECISION, encoding: GeoZip.Encoding = Encoding.Base64) throws -> Swift.String
+public enum Encoding : Swift.UInt {
+  case Binary
+  case Base64
+  public typealias RawValue = Swift.UInt
+  public init?(rawValue: Swift.UInt)
+  public var rawValue: Swift.UInt {
+    get
+  }
+}
+public class Location {
+  convenience public init(location: CoreLocation.CLLocation)
+  public init(lat: Swift.Double, lon: Swift.Double, accuracy: Swift.Int32? = nil, provider: Swift.UInt8? = nil)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class Coordinate {
+  public static let DEFAULT_PRECISION: Swift.UInt8
+  @objc deinit
+}
+extension GeoZip.GeoZipError : Swift.Equatable {}
+extension GeoZip.GeoZipError : Swift.Hashable {}
+extension GeoZip.Encoding : Swift.Equatable {}
+extension GeoZip.Encoding : Swift.Hashable {}
+extension GeoZip.Encoding : Swift.RawRepresentable {}
