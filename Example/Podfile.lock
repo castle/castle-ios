@@ -1,5 +1,5 @@
 PODS:
-  - Castle (1.0.10)
+  - Castle (2.0.0)
 
 DEPENDENCIES:
   - Castle (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Castle: 3d8e64aaaf2b06b394de376fdbeff238864bd00d
+  Castle: f2fcd1213ffa641af9ea887e03364937a1bc7e98
 
 PODFILE CHECKSUM: fd779497087cf3c675d35358fb1be87dabb6269c
 
