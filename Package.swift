@@ -17,7 +17,7 @@ let package = Package(
         .target(
             name: "Castle",
             path: "Castle/",
-            exclude: ["SwiftSources"],
+            exclude: ["SwiftSources", "Info.plist", "Highwind.xcframework", "GeoZip.xcframework"],
             publicHeadersPath: "Public",
             cSettings: [
                 .headerSearchPath("Public"),

@@ -15,10 +15,10 @@ FOUNDATION_EXPORT double CastleVersionNumber;
  Project version string for Castle. */
 FOUNDATION_EXPORT const unsigned char CastleVersionString[];
 
-#if SWIFT_PACKAGE
-#import <CastleConfiguration.h>
-#else
+#if COCOAPODS
 #import <Castle/CastleConfiguration.h>
+#else
+#import <CastleConfiguration.h>
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
