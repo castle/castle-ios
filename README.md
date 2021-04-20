@@ -21,7 +21,7 @@ Castle is available through [CocoaPods](https://cocoapods.org), [Carthage](https
 Add Castle as a dependency by including it in your `Podfile`.
 
 ```
-pod "Castle", "1.0.10"
+pod "Castle", "2.0.0"
 ```
 
 ### Carthage
@@ -38,7 +38,7 @@ Add Castle as a dependency by adding it to the `dependencies` value of your `Pac
 
 ```
 dependencies: [
-    .package(url: "https://github.com/castle/castle-ios.git", .upToNextMajor(from: "1.0.10"))
+    .package(url: "https://github.com/castle/castle-ios.git", .upToNextMajor(from: "2.0.0"))
 ]
 ```
 

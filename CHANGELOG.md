@@ -1,5 +1,8 @@
 # Change Log
 
+## 2.0.0 (2021-04-20)
+- Fix: [#52](https://github.com/castle/castle-ios/pull/52) Add Highwind.
+
 ## 1.0.10 (2021-03-19)
 - Fix: [#50](https://github.com/castle/castle-ios/pull/50) Carthage build.
 - Fix: [#48](https://github.com/castle/castle-ios/pull/48) Link to correct docs.
