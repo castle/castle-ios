@@ -1,7 +1,7 @@
-# Change Log
+# Changelog
 
 ## 2.0.0 (2021-04-20)
-- Fix: [#52](https://github.com/castle/castle-ios/pull/52) Add Highwind.
+- Feature: [#52](https://github.com/castle/castle-ios/pull/52) Extended and improved device parameter collection.
 
 ## 1.0.10 (2021-03-19)
 - Fix: [#50](https://github.com/castle/castle-ios/pull/50) Carthage build.
