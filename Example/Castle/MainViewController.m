@@ -40,7 +40,7 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     
     // Get required header from the Castle SDK if you don't want to use the request interceptor
-    [request setValue:[Castle createRequestToken] forHTTPHeaderField:CastleRequestTokenHeaderName];
+    [request setValue:[Castle createRequestToken] forHTTPHeaderField:CastleClientIdHeaderName];
     
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSLog(@"Response: %@, Error: %@", response, error);
