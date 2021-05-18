@@ -26,12 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Castle client id header name
  */
-extern NSString * const CastleClientIdHeaderName __deprecated_msg("Use CastleRequestTokenHeaderName instead");
-
-/**
- Castle request token header name
- */
-extern NSString * const CastleRequestTokenHeaderName;
+extern NSString * const CastleClientIdHeaderName;
 
 /**
  This class is the main entry point for using the Castle SDK and provides methods

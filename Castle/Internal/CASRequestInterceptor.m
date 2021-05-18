@@ -53,7 +53,7 @@ static NSString *CASRecursiveRequestFlagProperty = @"com.castle.CASRequestInterc
     
     dispatch_sync(dispatch_get_main_queue(), ^{
         // Set custom header
-        [newRequest setValue:[Castle createRequestToken] forHTTPHeaderField:CastleRequestTokenHeaderName];
+        [newRequest setValue:[Castle createRequestToken] forHTTPHeaderField:CastleClientIdHeaderName];
     });
     
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -78,7 +78,7 @@ static NSString *CASRecursiveRequestFlagProperty = @"com.castle.CASRequestInterc
         
         dispatch_sync(dispatch_get_main_queue(), ^{
             // Set custom header
-            [redirectRequest setValue:[Castle createRequestToken] forHTTPHeaderField:CastleRequestTokenHeaderName];
+            [redirectRequest setValue:[Castle createRequestToken] forHTTPHeaderField:CastleClientIdHeaderName];
         });
         
         [[self client] URLProtocol:self wasRedirectedToRequest:redirectRequest redirectResponse:response];
