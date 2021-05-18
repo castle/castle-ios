@@ -28,7 +28,7 @@
 
 - (NSDictionary *)JSONPayload
 {
-    return @{ @"client_id": self.clientID };
+    return @{ @"client_id": self.clientID ?: [NSNull null] };
 }
 
 @end
