@@ -485,7 +485,7 @@ class SwiftTests: XCTestCase {
 
     func testDefaultHeaders() throws {
         XCTAssertNotNil(Castle.createRequestToken());
-        XCTAssertTrue(CastleRequestTokenHeaderName == "X-Castle-Request-Token");
+        XCTAssertTrue(CastleRequestTokenHeaderName == "X-Castle-Client-Id");
     }
 
     func testRequestInterceptor() throws {

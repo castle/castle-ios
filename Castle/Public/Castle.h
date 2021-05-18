@@ -68,7 +68,7 @@ extern NSString * const CastleRequestTokenHeaderName;
 /**
  Session configuration used to enable the Castle request interceptor.
  All requests created with the NSURLSession using the configuration will be intercepted if the URL is
- allowlisted and the client identifier will be added as a header 'X-Castle-Request-Token'.
+ allowlisted and the client identifier will be added as a header 'X-Castle-Client-Id'.
 
  This can be used to enable the request interceptor on a specific NSURLSession for more
  control instead of setting deviceIDAutoForwardingEnabled on your CastleConfiguration instance to YES.
