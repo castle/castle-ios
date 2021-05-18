@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.0.1 (2021-05-18)
+- Fix: [#57](https://github.com/castle/castle-ios/pull/57) Add NSNull null fallback in CASContext.JSONPayload.
+
 ## 2.0.0 (2021-04-20)
 - Feature: [#52](https://github.com/castle/castle-ios/pull/52) Extended and improved device parameter collection.
 
