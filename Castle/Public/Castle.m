@@ -29,7 +29,8 @@ NSString *const CastleUserIdentifierKey = @"CastleUserIdentifierKey";
 NSString *const CastleSecureSignatureKey = @"CastleSecureSignatureKey";
 NSString *const CastleAppVersionKey = @"CastleAppVersionKey";
 
-NSString *const CastleClientIdHeaderName = @"X-Castle-Client-Id";
+NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
+NSString *const CastleClientIdHeaderName = CastleRequestTokenHeaderName;
 
 static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
@@ -506,6 +507,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 #pragma mark - Metadata
 
 + (NSString *)clientId
+{
+    return [[Castle sharedInstance].highwind token];
+}
+
++ (NSString *)createRequestToken
 {
     return [[Castle sharedInstance].highwind token];
 }

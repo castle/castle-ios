@@ -540,8 +540,8 @@
 
 - (void)testDefaultHeaders
 {
-    XCTAssertNotNil([Castle clientId]);
-    XCTAssertTrue([CastleClientIdHeaderName isEqualToString:@"X-Castle-Client-Id"]);
+    XCTAssertNotNil([Castle createRequestToken]);
+    XCTAssertTrue([CastleClientIdHeaderName isEqualToString:@"X-Castle-Request-Token"]);
 }
 
 - (void)testRequestInterceptor
@@ -579,7 +579,7 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     
     // Get required header from the Castle SDK if you don't want to use the request interceptor
-    [request setValue:[Castle clientId] forHTTPHeaderField:CastleClientIdHeaderName];
+    [request setValue:[Castle createRequestToken] forHTTPHeaderField:CastleRequestTokenHeaderName];
     
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
