@@ -541,7 +541,7 @@
 - (void)testDefaultHeaders
 {
     XCTAssertNotNil([Castle createRequestToken]);
-    XCTAssertTrue([CastleClientIdHeaderName isEqualToString:@"X-Castle-Request-Token"]);
+    XCTAssertTrue([CastleClientIdHeaderName isEqualToString:@"X-Castle-Client-Id"]);
 }
 
 - (void)testRequestInterceptor
