@@ -24,8 +24,14 @@ FOUNDATION_EXPORT const unsigned char CastleVersionString[];
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- Castle client id header name */
-extern NSString * const CastleClientIdHeaderName;
+ Castle client id header name
+ */
+extern NSString * const CastleClientIdHeaderName __deprecated_msg("Use CastleRequestTokenHeaderName instead");
+
+/**
+ Castle request token header name
+ */
+extern NSString * const CastleRequestTokenHeaderName;
 
 /**
  This class is the main entry point for using the Castle SDK and provides methods
@@ -62,7 +68,7 @@ extern NSString * const CastleClientIdHeaderName;
 /**
  Session configuration used to enable the Castle request interceptor.
  All requests created with the NSURLSession using the configuration will be intercepted if the URL is
- allowlisted and the client identifier will be added as a header 'X-Castle-Client-Id'.
+ allowlisted and the client identifier will be added as a header 'X-Castle-Request-Token'.
 
  This can be used to enable the request interceptor on a specific NSURLSession for more
  control instead of setting deviceIDAutoForwardingEnabled on your CastleConfiguration instance to YES.
@@ -174,7 +180,14 @@ extern NSString * const CastleClientIdHeaderName;
 
  @return client identifier
  */
-+ (nullable NSString *)clientId;
++ (nullable NSString *)clientId __deprecated_msg("Use +createRequestToken instead");
+
+/**
+ Get request token
+
+ @return request token
+ */
++ (nonnull NSString *)createRequestToken;
 
 /**
  Get stored user id from last identify call, returns nil if not set

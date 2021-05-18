@@ -20,7 +20,7 @@
 + (instancetype)snapshotContext
 {
     CASContext *context = [[CASContext alloc] init];
-    context.clientID = [Castle clientId];
+    context.clientID = [Castle createRequestToken];
     return context;
 }
 

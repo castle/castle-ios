@@ -145,7 +145,7 @@ class SwiftTests: XCTestCase {
 
     func testDeviceIdentifier() throws {
         // Check device ID
-        XCTAssertNotNil(Castle.clientId())
+        XCTAssertNotNil(Castle.createRequestToken())
     }
 
     func testUserIdPersistance() throws {
@@ -484,8 +484,8 @@ class SwiftTests: XCTestCase {
     }
 
     func testDefaultHeaders() throws {
-        XCTAssertNotNil(Castle.clientId());
-        XCTAssertTrue(CastleClientIdHeaderName == "X-Castle-Client-Id");
+        XCTAssertNotNil(Castle.createRequestToken());
+        XCTAssertTrue(CastleRequestTokenHeaderName == "X-Castle-Request-Token");
     }
 
     func testRequestInterceptor() throws {
@@ -522,7 +522,7 @@ class SwiftTests: XCTestCase {
         var request = URLRequest(url: url)
 
         // Get required header from the Castle SDK if you don't want to use the request interceptor
-        request.setValue(Castle.clientId(), forHTTPHeaderField: CastleClientIdHeaderName)
+        request.setValue(Castle.createRequestToken(), forHTTPHeaderField: CastleRequestTokenHeaderName)
 
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
