@@ -175,7 +175,7 @@
 - (void)testDeviceIdentifier
 {
     // Check device ID
-    XCTAssertNotNil([Castle clientId]);
+    XCTAssertNotNil([Castle createRequestToken]);
 }
 
 - (void)testUserIdPersistance
