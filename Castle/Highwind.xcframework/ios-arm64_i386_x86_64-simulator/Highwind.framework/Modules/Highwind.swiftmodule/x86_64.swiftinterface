@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)
 // swift-module-flags: -target x86_64-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Highwind
 import CoreLocation
 import CoreMotion
@@ -32,10 +32,10 @@ public class Reachability {
       get
     }
     public static func == (a: Highwind.Reachability.NetworkStatus, b: Highwind.Reachability.NetworkStatus) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   public enum Connection : Swift.CustomStringConvertible {
     case none, wifi, cellular
@@ -43,10 +43,10 @@ public class Reachability {
       get
     }
     public static func == (a: Highwind.Reachability.Connection, b: Highwind.Reachability.Connection) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   public var whenReachable: Highwind.Reachability.NetworkReachable?
   public var whenUnreachable: Highwind.Reachability.NetworkUnreachable?
@@ -92,8 +92,8 @@ extension Reachability {
 @objc public class Highwind : ObjectiveC.NSObject {
   @objc public init(version: Swift.String, uuid: Swift.String, userAgent: Swift.String)
   @objc public func token() -> Swift.String
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @available(*, unavailable, renamed: "Connection")
 extension Highwind.Reachability.NetworkStatus : Swift.Equatable {}
