@@ -23,7 +23,7 @@ static NSString *CastleConfigurationCloudflareAPIPath = @"v1/c/mobile/";
 
     CastleConfiguration *configuration = [[CastleConfiguration alloc] init];
     configuration.publishableKey = publishableKey;
-    configuration.screenTrackingEnabled = YES;
+    configuration.screenTrackingEnabled = NO;
     configuration.debugLoggingEnabled = NO;
     configuration.flushLimit = 20;
     configuration.maxQueueLimit = 1000;
