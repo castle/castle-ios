@@ -94,7 +94,7 @@
     CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
     
     // Check that all default values are set correctly
-    XCTAssertEqual(configuration.screenTrackingEnabled, YES);
+    XCTAssertEqual(configuration.screenTrackingEnabled, NO);
     XCTAssertEqual(configuration.debugLoggingEnabled, NO);
     XCTAssertEqual(configuration.flushLimit, 20);
     XCTAssertEqual(configuration.maxQueueLimit, 1000);
