@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.0 (2021-06-03)
+- Fix: [#60](https://github.com/castle/castle-ios/pull/60) Failing tests when automated screen tracking is off by default
+- Fix: [#59](https://github.com/castle/castle-ios/pull/59) Potential crash in fingerpringting when called on another thread.
+
 ## 2.0.1 (2021-05-18)
 - Fix: [#57](https://github.com/castle/castle-ios/pull/57) Add NSNull null fallback in CASContext.JSONPayload.
 
