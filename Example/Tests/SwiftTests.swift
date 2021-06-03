@@ -69,7 +69,7 @@ class SwiftTests: XCTestCase {
         var configuration = CastleConfiguration(publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
 
         // Check that all default values are set correctly
-        XCTAssertEqual(configuration.isScreenTrackingEnabled, true);
+        XCTAssertEqual(configuration.isScreenTrackingEnabled, false);
         XCTAssertEqual(configuration.isDebugLoggingEnabled, false);
         XCTAssertEqual(configuration.flushLimit, 20);
         XCTAssertEqual(configuration.maxQueueLimit, 1000);
