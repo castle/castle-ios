@@ -29,6 +29,11 @@ NS_ASSUME_NONNULL_BEGIN
 extern NSString * const CastleClientIdHeaderName;
 
 /**
+ Castle request token header name
+ */
+extern NSString * const CastleRequestTokenHeaderName;
+
+/**
  This class is the main entry point for using the Castle SDK and provides methods
  for tracking events, screen views, manual flushing of the event queue, allowlisting behaviour and resetting. */
 @interface Castle : NSObject
