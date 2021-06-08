@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/GeoZip-Swift.h</key>
 		<data>
-		XcdeKt2/EmASBys+RjG9hp9jZn0=
+		T8XLKkgW9TbaFesGSMe6Ncv9WHw=
 		</data>
 		<key>Headers/GeoZip.h</key>
 		<data>
@@ -14,79 +14,79 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		CTK5BMIDQ5m5mII6f+0SMz+/lxo=
+		7l2tSARr6B7mytd08W4lWUhu8nI=
 		</data>
 		<key>Modules/GeoZip.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		x2Sr1ywVVJvrqPLNTCfIcX6NaU8=
+		0CbuAY5Z+FxtHEK6Jk0R9Vx/mXg=
 		</data>
 		<key>Modules/GeoZip.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		pG2z0ABftFTJ4NIGa6apmkamc+I=
+		aHRRiYLUIywZprYy4edReVfhiXo=
 		</data>
 		<key>Modules/GeoZip.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		FS6+0L2H1KkoDpzl1zKf1nANJFo=
+		R3lgJ7HFF3LpyAuTKyKy5BhK7NA=
 		</data>
 		<key>Modules/GeoZip.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		x2Sr1ywVVJvrqPLNTCfIcX6NaU8=
+		0CbuAY5Z+FxtHEK6Jk0R9Vx/mXg=
 		</data>
 		<key>Modules/GeoZip.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		pG2z0ABftFTJ4NIGa6apmkamc+I=
+		aHRRiYLUIywZprYy4edReVfhiXo=
 		</data>
 		<key>Modules/GeoZip.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		FS6+0L2H1KkoDpzl1zKf1nANJFo=
+		R3lgJ7HFF3LpyAuTKyKy5BhK7NA=
 		</data>
 		<key>Modules/GeoZip.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<data>
-		ZRZ++bESaM1RuZhu87sUAgvBR60=
+		Z1rjAEVG06eIZ2gGGdqaAyklMQg=
 		</data>
 		<key>Modules/GeoZip.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
 		<data>
-		LpfJbicm+U/SSNVM0YfMWBDLnow=
+		j6ng2/iIqhAUSPHOUR1pmFsE8NQ=
 		</data>
 		<key>Modules/GeoZip.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<data>
-		mHr0g1yoePKQMS1rM3WAlpMrYbU=
+		QqGaJw0Gwedd7x4el4Pn2x5QisM=
 		</data>
 		<key>Modules/GeoZip.swiftmodule/i386.swiftdoc</key>
 		<data>
-		ZRZ++bESaM1RuZhu87sUAgvBR60=
+		Z1rjAEVG06eIZ2gGGdqaAyklMQg=
 		</data>
 		<key>Modules/GeoZip.swiftmodule/i386.swiftinterface</key>
 		<data>
-		LpfJbicm+U/SSNVM0YfMWBDLnow=
+		j6ng2/iIqhAUSPHOUR1pmFsE8NQ=
 		</data>
 		<key>Modules/GeoZip.swiftmodule/i386.swiftmodule</key>
 		<data>
-		mHr0g1yoePKQMS1rM3WAlpMrYbU=
+		QqGaJw0Gwedd7x4el4Pn2x5QisM=
 		</data>
 		<key>Modules/GeoZip.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		vPtQmx23oMMKDazi/xeREuulrlY=
+		RV+p0tANHCbLDi/giwjT2bO0Gss=
 		</data>
 		<key>Modules/GeoZip.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		OEp4+beBnJnGHGpto6RR9DZuVbA=
+		EIOMf6B5oXCyqkxNoemK1SZqSM4=
 		</data>
 		<key>Modules/GeoZip.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		7WJDVRhRdA/tKm8UBP0GF4gmb3M=
+		YIaMdOoijSaO14tbVsUsSwTyR9k=
 		</data>
 		<key>Modules/GeoZip.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		vPtQmx23oMMKDazi/xeREuulrlY=
+		RV+p0tANHCbLDi/giwjT2bO0Gss=
 		</data>
 		<key>Modules/GeoZip.swiftmodule/x86_64.swiftinterface</key>
 		<data>
-		OEp4+beBnJnGHGpto6RR9DZuVbA=
+		EIOMf6B5oXCyqkxNoemK1SZqSM4=
 		</data>
 		<key>Modules/GeoZip.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		7WJDVRhRdA/tKm8UBP0GF4gmb3M=
+		YIaMdOoijSaO14tbVsUsSwTyR9k=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -99,11 +99,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			XcdeKt2/EmASBys+RjG9hp9jZn0=
+			T8XLKkgW9TbaFesGSMe6Ncv9WHw=
 			</data>
 			<key>hash2</key>
 			<data>
-			Q4hVGafsA6fQdeNDnKM6BD+HN3tevu15gHcvPvsFPtA=
+			fzHNRoH2jG8nHfL+5EPnkOsXqv3YU6wJonnUfukM3Lw=
 			</data>
 		</dict>
 		<key>Headers/GeoZip.h</key>
@@ -121,198 +121,198 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			x2Sr1ywVVJvrqPLNTCfIcX6NaU8=
+			0CbuAY5Z+FxtHEK6Jk0R9Vx/mXg=
 			</data>
 			<key>hash2</key>
 			<data>
-			sa78nnJcBsFDwzMV9IYt8WnwtfHLnTBiE5pse5hS3MM=
+			kTBB5x6c40SRPJd2ztgn4oEAXdFbFRMW65wOQeRpaoE=
 			</data>
 		</dict>
 		<key>Modules/GeoZip.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			pG2z0ABftFTJ4NIGa6apmkamc+I=
+			aHRRiYLUIywZprYy4edReVfhiXo=
 			</data>
 			<key>hash2</key>
 			<data>
-			hZGscO0NtGzlUJN5kd4FAToVig/pGlc/7kcIOVhp5YA=
+			GVW2odAMLLrReqgrzFvgIspwmNmQQzvnmFHUkJ9w3jA=
 			</data>
 		</dict>
 		<key>Modules/GeoZip.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			FS6+0L2H1KkoDpzl1zKf1nANJFo=
+			R3lgJ7HFF3LpyAuTKyKy5BhK7NA=
 			</data>
 			<key>hash2</key>
 			<data>
-			2IpRIOnxVv7O1gPBEbUriq2MC6w2KTA7fC5vt0IV4vI=
+			ID5lEZBGYsRgAiEhlBQ9zq8umeOf3qtpB2pKuW4eBpo=
 			</data>
 		</dict>
 		<key>Modules/GeoZip.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			x2Sr1ywVVJvrqPLNTCfIcX6NaU8=
+			0CbuAY5Z+FxtHEK6Jk0R9Vx/mXg=
 			</data>
 			<key>hash2</key>
 			<data>
-			sa78nnJcBsFDwzMV9IYt8WnwtfHLnTBiE5pse5hS3MM=
+			kTBB5x6c40SRPJd2ztgn4oEAXdFbFRMW65wOQeRpaoE=
 			</data>
 		</dict>
 		<key>Modules/GeoZip.swiftmodule/arm64.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			pG2z0ABftFTJ4NIGa6apmkamc+I=
+			aHRRiYLUIywZprYy4edReVfhiXo=
 			</data>
 			<key>hash2</key>
 			<data>
-			hZGscO0NtGzlUJN5kd4FAToVig/pGlc/7kcIOVhp5YA=
+			GVW2odAMLLrReqgrzFvgIspwmNmQQzvnmFHUkJ9w3jA=
 			</data>
 		</dict>
 		<key>Modules/GeoZip.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			FS6+0L2H1KkoDpzl1zKf1nANJFo=
+			R3lgJ7HFF3LpyAuTKyKy5BhK7NA=
 			</data>
 			<key>hash2</key>
 			<data>
-			2IpRIOnxVv7O1gPBEbUriq2MC6w2KTA7fC5vt0IV4vI=
+			ID5lEZBGYsRgAiEhlBQ9zq8umeOf3qtpB2pKuW4eBpo=
 			</data>
 		</dict>
 		<key>Modules/GeoZip.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ZRZ++bESaM1RuZhu87sUAgvBR60=
+			Z1rjAEVG06eIZ2gGGdqaAyklMQg=
 			</data>
 			<key>hash2</key>
 			<data>
-			RCOqmh7dRhn72eLDq7SX3Q3vdbIGH6AzZ6JaW2BllLs=
+			C0E5WOPK/dQW/44QZE0U+vjbli8RNTyRR+xaE/Lge6Y=
 			</data>
 		</dict>
 		<key>Modules/GeoZip.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			LpfJbicm+U/SSNVM0YfMWBDLnow=
+			j6ng2/iIqhAUSPHOUR1pmFsE8NQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			VbSfGEV/7dO+Aff2HYVoyKPS40sdF/ZEwR69RBUnqPY=
+			bKDrZ8cwyL1p9gT4GzdNT474VWsr7Cyux8Ofa9rLnoo=
 			</data>
 		</dict>
 		<key>Modules/GeoZip.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			mHr0g1yoePKQMS1rM3WAlpMrYbU=
+			QqGaJw0Gwedd7x4el4Pn2x5QisM=
 			</data>
 			<key>hash2</key>
 			<data>
-			Wt/mn48d1u5jl8tkXnbTvxoJCMKWgAMfUqvAAJNgdLY=
+			qbM+cybUV4LxdeVamlD2t0lVMq0v16sfbt68XOJRXwc=
 			</data>
 		</dict>
 		<key>Modules/GeoZip.swiftmodule/i386.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ZRZ++bESaM1RuZhu87sUAgvBR60=
+			Z1rjAEVG06eIZ2gGGdqaAyklMQg=
 			</data>
 			<key>hash2</key>
 			<data>
-			RCOqmh7dRhn72eLDq7SX3Q3vdbIGH6AzZ6JaW2BllLs=
+			C0E5WOPK/dQW/44QZE0U+vjbli8RNTyRR+xaE/Lge6Y=
 			</data>
 		</dict>
 		<key>Modules/GeoZip.swiftmodule/i386.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			LpfJbicm+U/SSNVM0YfMWBDLnow=
+			j6ng2/iIqhAUSPHOUR1pmFsE8NQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			VbSfGEV/7dO+Aff2HYVoyKPS40sdF/ZEwR69RBUnqPY=
+			bKDrZ8cwyL1p9gT4GzdNT474VWsr7Cyux8Ofa9rLnoo=
 			</data>
 		</dict>
 		<key>Modules/GeoZip.swiftmodule/i386.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			mHr0g1yoePKQMS1rM3WAlpMrYbU=
+			QqGaJw0Gwedd7x4el4Pn2x5QisM=
 			</data>
 			<key>hash2</key>
 			<data>
-			Wt/mn48d1u5jl8tkXnbTvxoJCMKWgAMfUqvAAJNgdLY=
+			qbM+cybUV4LxdeVamlD2t0lVMq0v16sfbt68XOJRXwc=
 			</data>
 		</dict>
 		<key>Modules/GeoZip.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			vPtQmx23oMMKDazi/xeREuulrlY=
+			RV+p0tANHCbLDi/giwjT2bO0Gss=
 			</data>
 			<key>hash2</key>
 			<data>
-			Vyl6/lkTsBcGQt3EDoD1D60T1WVBWe7MvAG2hhl0Huk=
+			JhiVm/I3ztUOMmU/9gTm4G9r6ymdd7ndnWqU+njFgXs=
 			</data>
 		</dict>
 		<key>Modules/GeoZip.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OEp4+beBnJnGHGpto6RR9DZuVbA=
+			EIOMf6B5oXCyqkxNoemK1SZqSM4=
 			</data>
 			<key>hash2</key>
 			<data>
-			8pBQK5dJP9xQHbxp7tUazFn7hgvJmeCH0JrlYOyeJ4c=
+			1k+X0bUGGAhv86cgKDtKuptp183V8+tOaAii7X2NVSo=
 			</data>
 		</dict>
 		<key>Modules/GeoZip.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			7WJDVRhRdA/tKm8UBP0GF4gmb3M=
+			YIaMdOoijSaO14tbVsUsSwTyR9k=
 			</data>
 			<key>hash2</key>
 			<data>
-			vaCVQASUTGuwNZC/fwVhDPzFOVZFt6JYMlcq95WBiDQ=
+			36MLX/Vq9Tk6FuJdJefH/oDdxBuPzLrQKWG/FzfmQeI=
 			</data>
 		</dict>
 		<key>Modules/GeoZip.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			vPtQmx23oMMKDazi/xeREuulrlY=
+			RV+p0tANHCbLDi/giwjT2bO0Gss=
 			</data>
 			<key>hash2</key>
 			<data>
-			Vyl6/lkTsBcGQt3EDoD1D60T1WVBWe7MvAG2hhl0Huk=
+			JhiVm/I3ztUOMmU/9gTm4G9r6ymdd7ndnWqU+njFgXs=
 			</data>
 		</dict>
 		<key>Modules/GeoZip.swiftmodule/x86_64.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OEp4+beBnJnGHGpto6RR9DZuVbA=
+			EIOMf6B5oXCyqkxNoemK1SZqSM4=
 			</data>
 			<key>hash2</key>
 			<data>
-			8pBQK5dJP9xQHbxp7tUazFn7hgvJmeCH0JrlYOyeJ4c=
+			1k+X0bUGGAhv86cgKDtKuptp183V8+tOaAii7X2NVSo=
 			</data>
 		</dict>
 		<key>Modules/GeoZip.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			7WJDVRhRdA/tKm8UBP0GF4gmb3M=
+			YIaMdOoijSaO14tbVsUsSwTyR9k=
 			</data>
 			<key>hash2</key>
 			<data>
-			vaCVQASUTGuwNZC/fwVhDPzFOVZFt6JYMlcq95WBiDQ=
+			36MLX/Vq9Tk6FuJdJefH/oDdxBuPzLrQKWG/FzfmQeI=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

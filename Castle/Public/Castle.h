@@ -18,7 +18,7 @@ FOUNDATION_EXPORT const unsigned char CastleVersionString[];
 #if COCOAPODS
 #import <Castle/CastleConfiguration.h>
 #else
-#import <CastleConfiguration.h>
+#import "CastleConfiguration.h"
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
