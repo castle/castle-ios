@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.1 (2021-06-08)
+- Fix: [#64](https://github.com/castle/castle-ios/pull/64) Remove duplicate bcsymbolfiles, update import in umbrella header.
+- Fix: [#63](https://github.com/castle/castle-ios/pull/63) Expose CastleRequestTokenHeaderName const.
+
 ## 2.1.0 (2021-06-03)
 - Fix: [#60](https://github.com/castle/castle-ios/pull/60) Failing tests when automated screen tracking is off by default
 - Fix: [#59](https://github.com/castle/castle-ios/pull/59) Potential crash in fingerpringting when called on another thread.
