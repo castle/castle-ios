@@ -169,8 +169,7 @@ class SwiftTests: XCTestCase {
         
         Castle.flush()
         
-        
-        var expectation = expectation(description: "Test flush with no publishable key")
+        var expectation = self.expectation(description: "Test flush with no publishable key")
         var result = XCTWaiter.wait(for: [expectation], timeout: 2.0)
         if(result == XCTWaiter.Result.timedOut) {
             let afterFlushCount = CASEventStorage.storedQueue().count
