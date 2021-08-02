@@ -12,6 +12,12 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+#if DEBUG
+    if (NSProcessInfo.processInfo.environment[@"XCTestConfigurationFilePath"] != nil) {
+        [Castle setAutomaticFlushOnLifecycleEvents:NO];
+    }
+#endif
+    
     // Create configuration object
     CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
     configuration.screenTrackingEnabled = YES;

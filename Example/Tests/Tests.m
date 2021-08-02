@@ -30,6 +30,9 @@
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
     
+    // Disable automatic flush on life cycle events
+    [Castle setAutomaticFlushOnLifecycleEvents:NO];
+    
     NSArray *baseURLAllowList = @[ [NSURL URLWithString:@"https://google.com/"] ];
     CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
     configuration.baseURLAllowList = baseURLAllowList;
@@ -52,6 +55,8 @@
         [fileManager removeItemAtPath:path error:&error];
         XCTAssertNil(error);
     }
+    
+    [Castle resetConfiguration];
 }
 
 - (void)testDateFormatter
@@ -86,6 +91,56 @@
     NSUInteger matches = [regex numberOfMatchesInString:userAgent options:0 range:NSMakeRange(0, userAgent.length)];
     XCTAssertNil(error, @"Failed to create regular expression for User Agent format validation");
     XCTAssert(matches == 1);
+}
+
+- (void)testConfigurationWithoutPublishableKey
+{
+    CastleConfiguration *configuration =  [CastleConfiguration defaultConfiguration];
+    
+    // Check that all default values are set correctly
+    XCTAssertEqual(configuration.screenTrackingEnabled, NO);
+    XCTAssertEqual(configuration.debugLoggingEnabled, NO);
+    XCTAssertEqual(configuration.flushLimit, 20);
+    XCTAssertEqual(configuration.maxQueueLimit, 1000);
+    XCTAssertNil(configuration.baseURLAllowList);
+    
+    [Castle configure:configuration];
+    
+    // Track screen event
+    [Castle screen:@"Main"];
+    
+    // Get current event count
+    NSUInteger count = [CASEventStorage storedQueue].count;
+    
+    // Track screen event
+    [Castle screen:@"Main"];
+    
+    NSUInteger newCount = [CASEventStorage storedQueue].count;
+    XCTAssertTrue(newCount == count+1);
+    
+    [Castle flush];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Test flush with no publishable key"];
+    XCTWaiterResult result = [XCTWaiter waitForExpectations:@[expectation] timeout:2.0];
+    if(result == XCTWaiterResultTimedOut) {
+        NSUInteger afterFlushCount = [CASEventStorage storedQueue].count;
+        XCTAssert(afterFlushCount == newCount);
+    } else {
+        XCTFail("Event count should be the same since flushing won't have any effect before setting a publishable key");
+    }
+    
+    [Castle configureWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    
+    [Castle flush];
+    
+    expectation = [self expectationWithDescription:@"Test flush with publishable key"];
+    result = [XCTWaiter waitForExpectations:@[expectation] timeout:2.0];
+    if(result == XCTWaiterResultTimedOut) {
+        NSUInteger afterFlushCount = [CASEventStorage storedQueue].count;
+        XCTAssert(afterFlushCount == 0);
+    } else {
+        XCTFail("Event count should be the same since flushing won't have any effect before setting a publishable key");
+    }
 }
 
 - (void)testConfiguration

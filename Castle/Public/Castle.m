@@ -44,6 +44,10 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 @property (nonatomic, assign, readonly) NSUInteger maxBatchSize;
 @property (nonatomic, strong, readwrite) CASReachability *reachability;
 @property (nonatomic, strong, readwrite) Highwind *highwind;
+#if DEBUG
+/// Property used to control auto flushing on life cycle events, only available for debuging purposes.
+@property (nonatomic, assign, readwrite) BOOL automaticFlushOnLifecycleEvents;
+#endif
 @end
 
 @implementation Castle
@@ -56,6 +60,9 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedClient = [[Castle alloc] init];
+#if DEBUG
+        _sharedClient.automaticFlushOnLifecycleEvents = YES;
+#endif
     });
     return _sharedClient;
 }
@@ -86,6 +93,8 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 {
     // Setup shared instance using provided configuration
     Castle *castle = [Castle sharedInstance];
+    [Castle resetConfiguration];
+    
     castle.client = [CASAPIClient clientWithConfiguration:configuration];
     castle.configuration = configuration;
     
@@ -115,6 +124,12 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 + (void)configureWithPublishableKey:(NSString *)publishableKey
 {
     CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:publishableKey];
+    [Castle configure:configuration];
+}
+
++ (void)configure
+{
+    CastleConfiguration *configuration = [CastleConfiguration defaultConfiguration];
     [Castle configure:configuration];
 }
 
@@ -199,6 +214,15 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return nil;
 }
 
+#if DEBUG
+
++ (BOOL)automaticFlushOnLifecycleEvents
+{
+    return [Castle sharedInstance].automaticFlushOnLifecycleEvents;
+}
+
+#endif
+
 #pragma mark - Setters
 
 - (void)setUserId:(NSString *)userId
@@ -220,6 +244,15 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     [defaults setObject:userSignature forKey:CastleSecureSignatureKey];
     [defaults synchronize];
 }
+
+#if DEBUG
+
++ (void)setAutomaticFlushOnLifecycleEvents:(BOOL)automaticFlushOnLifecycleEvents
+{
+    [Castle sharedInstance].automaticFlushOnLifecycleEvents = automaticFlushOnLifecycleEvents;
+}
+
+#endif
 
 #pragma mark - Tracking
 
@@ -280,7 +313,13 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         [castle queueEvent:identity];
         
         // Identify call will always flush
+    #if DEBUG
+        if (Castle.automaticFlushOnLifecycleEvents) {
+            [Castle flush];
+        }
+    #else
         [Castle flush];
+    #endif
     }
 }
 
@@ -361,7 +400,13 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     castle.task = nil;
     
     // Flush queue
+#if DEBUG
+    if (Castle.automaticFlushOnLifecycleEvents) {
+        [Castle flush];
+    }
+#else
     [Castle flush];
+#endif
     
     // Reset cached user id
     castle.userId = nil;
@@ -455,7 +500,13 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         [Castle track:@"Application installed"];
         
         // Flush the event queue when a application installed event is triggered
+    #if DEBUG
+        if (Castle.automaticFlushOnLifecycleEvents) {
+            [Castle flush];
+        }
+    #else
         [Castle flush];
+    #endif
     } else if (![installedVersion isEqualToString:currentVersion]) {
         // App version changed since the application was last run: application was updated
         CASLog(@"App version stored in settings is different from current version string: the application was just updated.");
@@ -463,7 +514,13 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         [Castle track:@"Application updated"];
         
         // Flush the event queue when a application updated event is triggered
+    #if DEBUG
+        if (Castle.automaticFlushOnLifecycleEvents) {
+            [Castle flush];
+        }
+    #else
         [Castle flush];
+    #endif
     }
     
     [defaults setObject:currentVersion forKey:CastleAppVersionKey];
@@ -479,29 +536,59 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
-    CASLog(@"Application life cycle event detected: Will track application did become active event");
-    [Castle track:@"Application Did Become Active"];
-    
-    // Flush the event queue when a application did become active event is triggered
-    [Castle flush];
+    void (^block)(void) = ^() {
+        CASLog(@"Application life cycle event detected: Will track application did become active event");
+        [Castle track:@"Application Did Become Active"];
+
+        // Flush the event queue when a application did become active event is triggered
+        [Castle flush];
+    };
+
+#if DEBUG
+    if (self.automaticFlushOnLifecycleEvents) {
+        block();
+    }
+#else
+    block();
+#endif
 }
 
 - (void)applicationDidEnterBackground:(NSNotification *)notification
 {
-    CASLog(@"Application life cycle event detected: Will track application did enter background event");
-    [Castle track:@"Application Did Enter Background"];
-    
-    // Flush the event queue when a application did enter background event is triggered
-    [Castle flush];
+    void (^block)(void) = ^() {
+        CASLog(@"Application life cycle event detected: Will track application did enter background event");
+        [Castle track:@"Application Did Enter Background"];
+
+        // Flush the event queue when a application did enter background event is triggered
+        [Castle flush];
+    };
+
+#if DEBUG
+    if (self.automaticFlushOnLifecycleEvents) {
+        block();
+    }
+#else
+    block();
+#endif
 }
 
 - (void)applicationWillTerminate:(NSNotificationCenter *)notification
 {
-    CASLog(@"Application life cycle event detected: Will track application will terminate event");
-    [Castle track:@"Application Will Terminate"];
-    
-    // Flush the event queue when a application will terminate event is triggered
-    [Castle flush];
+    void (^block)(void) = ^() {
+        CASLog(@"Application life cycle event detected: Will track application will terminate event");
+        [Castle track:@"Application Will Terminate"];
+
+        // Flush the event queue when a application will terminate event is triggered
+        [Castle flush];
+    };
+
+#if DEBUG
+    if (self.automaticFlushOnLifecycleEvents) {
+        block();
+    }
+#else
+    block();
+#endif
 }
 
 #pragma mark - Metadata

@@ -41,6 +41,13 @@
                                   postData:(NSData *)data
                                 completion:(void (^)(id responseObject,  NSURLResponse * __nullable response, NSError * __nullable error))completion
 {
+    if (![self.configuration.publishableKey hasPrefix:@"pk_"]) {
+        completion(nil, nil, [[NSError alloc] initWithDomain:@"CastleError" code:1001 userInfo:@{
+            NSLocalizedDescriptionKey:@"No publishable key present, won't send data to Castle."
+        }]);
+        return nil;
+    }
+    
     NSURL *url = [NSURL URLWithString:path relativeToURL:self.baseURL];
     
     // Setup request

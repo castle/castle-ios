@@ -19,10 +19,16 @@ static NSString *CastleConfigurationCloudflareAPIPath = @"v1/c/mobile/";
 
 + (instancetype _Nonnull)configurationWithPublishableKey:(NSString * _Nonnull)publishableKey
 {
-    NSAssert([publishableKey hasPrefix:@"pk_"], @"You must provide a valid Castle publishable key when initializing the SDK.");
+    NSAssert([publishableKey hasPrefix:@"pk_"], @"You must provide a valid Castle publishable key.");
 
-    CastleConfiguration *configuration = [[CastleConfiguration alloc] init];
+    CastleConfiguration *configuration = [self defaultConfiguration];
     configuration.publishableKey = publishableKey;
+    return configuration;
+}
+
++ (instancetype _Nonnull)defaultConfiguration
+{
+    CastleConfiguration *configuration = [[CastleConfiguration alloc] init];
     configuration.screenTrackingEnabled = NO;
     configuration.debugLoggingEnabled = NO;
     configuration.flushLimit = 20;

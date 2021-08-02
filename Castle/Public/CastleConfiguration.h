@@ -79,4 +79,13 @@
  */
 + (instancetype _Nonnull)configurationWithPublishableKey:(NSString * _Nonnull)publishableKey;
 
+/**
+ Default configuration without publishable key
+ @return CastleConfiguration instance with default settings
+ @code // Create configuration object
+ CastleConfiguration *configuration = [CastleConfiguration defaultConfiguration];
+ @endcode
+ */
++ (instancetype _Nonnull)defaultConfiguration;
+
 @end

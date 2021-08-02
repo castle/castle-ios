@@ -66,6 +66,13 @@ extern NSString * const CastleRequestTokenHeaderName;
 + (void)configureWithPublishableKey:(NSString *)publishableKey;
 
 /**
+ Configure Castle with default configuration without publishable key
+ 
+ @code [Castle configure];
+ */
++ (void)configure;
+
+/**
  Session configuration used to enable the Castle request interceptor.
  All requests created with the NSURLSession using the configuration will be intercepted if the URL is
  allowlisted and the client identifier will be added as a header 'X-Castle-Client-Id'.
@@ -217,6 +224,18 @@ extern NSString * const CastleRequestTokenHeaderName;
  @return return The current size of the event queue
  */
 + (NSUInteger)queueSize;
+
+
+#if DEBUG
+
+/// Current state for auto flushing on life cycle events, only available for debuging purposes.
++ (BOOL)automaticFlushOnLifecycleEvents;
+
+/// Update auto flushing on life cycle events state
+/// @param enabled new auto flush state
++ (void)setAutomaticFlushOnLifecycleEvents:(BOOL)enabled;
+
+#endif
 
 @end
 
