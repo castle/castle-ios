@@ -142,6 +142,56 @@ class SwiftTests: XCTestCase {
 
         Castle.configure(withPublishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
     }
+    
+    func testConfigurationWithoutPublishableKey() {
+        let configuration =  CastleConfiguration.default()
+        
+        // Check that all default values are set correctly
+        XCTAssertEqual(configuration.isScreenTrackingEnabled, false);
+        XCTAssertEqual(configuration.isDebugLoggingEnabled, false);
+        XCTAssertEqual(configuration.flushLimit, 20);
+        XCTAssertEqual(configuration.maxQueueLimit, 1000);
+        XCTAssertNil(configuration.baseURLAllowList);
+        
+        Castle.configure(configuration)
+        
+        // Track screen event
+        Castle.screen("Main")
+        
+        // Get current event count
+        let count = CASEventStorage.storedQueue().count
+        
+        // Track screen event
+        Castle.screen("Main")
+        
+        let newCount = CASEventStorage.storedQueue().count
+        XCTAssertTrue(newCount == count+1)
+        
+        Castle.flush()
+        
+        
+        var expectation = expectation(description: "Test flush with no publishable key")
+        var result = XCTWaiter.wait(for: [expectation], timeout: 2.0)
+        if(result == XCTWaiter.Result.timedOut) {
+            let afterFlushCount = CASEventStorage.storedQueue().count
+            XCTAssert(afterFlushCount == newCount)
+        } else {
+            XCTFail("Event count should be the same since flushing won't have any effect before setting a publishable key");
+        }
+        
+        Castle.configure(withPublishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
+        
+        Castle.flush()
+        
+        expectation = self.expectation(description: "Test flush with publishable key")
+        result = XCTWaiter.wait(for: [expectation], timeout: 2.0)
+        if(result == XCTWaiter.Result.timedOut) {
+            let afterFlushCount = CASEventStorage.storedQueue().count
+            XCTAssert(afterFlushCount == 0);
+        } else {
+            XCTFail("Event count should be the same since flushing won't have any effect before setting a publishable key");
+        }
+    }
 
     func testDeviceIdentifier() throws {
         // Check device ID
