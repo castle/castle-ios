@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.2 (2021-09-14)
+- Device parameter collection improvements.
+
 ## 2.1.1 (2021-06-08)
 - Fix: [#64](https://github.com/castle/castle-ios/pull/64) Remove duplicate bcsymbolfiles, update import in umbrella header.
 - Fix: [#63](https://github.com/castle/castle-ios/pull/63) Expose CastleRequestTokenHeaderName const.

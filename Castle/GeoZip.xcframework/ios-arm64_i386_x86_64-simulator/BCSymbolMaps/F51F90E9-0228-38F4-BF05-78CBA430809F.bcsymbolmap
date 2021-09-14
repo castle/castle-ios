@@ -1,5 +1,5 @@
 BCSymbolMap Version: 2.0
-Apple clang version 12.0.5 (clang-1205.0.22.9)
+Apple clang version 12.0.5 (clang-1205.0.22.11)
 /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator14.5.sdk
 iPhoneSimulator14.5.sdk
 /Users/aLxx/Library/Developer/Xcode/DerivedData/GeoZip-gmzzobmowdxwazcweczokysrlzmm/Build/Intermediates.noindex/ArchiveIntermediates/GeoZip/IntermediateBuildFilesPath/GeoZip.build/Release-iphonesimulator/GeoZip.build/DerivedSources/GeoZip_vers.c
@@ -63,10 +63,10 @@ __swift_FORCE_LOAD_$_swiftCoreLocation_$_GeoZip
 _symbolic _____y_____G s23_ContiguousArrayStorageC s5UInt8V
 _$ss23_ContiguousArrayStorageCys5UInt8VGMD
 ___swift_reflection_version
-Apple clang version 12.0.5 (clang-1205.0.19.55)
+Apple clang version 12.0.5 (clang-1205.0.19.57)
 -private-discriminator _2AFD30BB220D0785D3B5C175C10A042D
 <swift-imported-modules>
-Apple Swift version 5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)
+Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
 /Users/aLxx/Documents/Castle/GeoZip/GeoZip/GeoZip.swift
 __swift_instantiateConcreteTypeFromMangledName
 <compiler-generated>

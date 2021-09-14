@@ -16,8 +16,14 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Description of what the lane does"
+  desc "Create XCFramework"
   lane :xcframework do
+    clean_build_artifacts
+
+    FileUtils.mkdir_p(File.expand_path("../Products/Castle.framework"))
+    FileUtils.cp_r(File.expand_path("../Castle/Highwind.xcframework"), File.expand_path("../Products/Castle.framework/Highwind.xcframework"))
+    FileUtils.cp_r(File.expand_path("../Castle/GeoZip.xcframework"), File.expand_path("../Products/Castle.framework/GeoZip.xcframework"))
+
     create_xcframework(
         workspace: 'Castle.xcworkspace',
         scheme: 'Castle',
@@ -27,6 +33,14 @@ platform :ios do
         include_bitcode: true,
         destinations: ['iOS'],
         xcframework_output_directory: 'Products/xcframeworks',
+    )
+
+    FileUtils.cp_r(File.expand_path("../Products/xcframeworks/Castle.xcframework"), File.expand_path("../Products/Castle.framework/Castle.xcframework"))
+
+    zip(
+        path: "Products/Castle.framework",
+        output_path: "Products/Castle.framework.zip",
+        exclude: "**/.DS_Store"
     )
   end
 end
