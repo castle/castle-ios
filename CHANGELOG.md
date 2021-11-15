@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.3 (2021-11-15)
+- Fix: [#71](https://github.com/castle/castle-ios/pull/71) Remove COCOAPODS macro check from Castle.h.
+
 ## 2.1.2 (2021-09-14)
 - Device parameter collection improvements.
 
