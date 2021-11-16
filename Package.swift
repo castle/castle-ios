@@ -16,6 +16,7 @@ let package = Package(
     targets: [
         .target(
             name: "Castle",
+            dependencies: ["Highwind", "GeoZip"],
             path: "Castle/",
             exclude: ["SwiftSources", "Info.plist", "Highwind.xcframework", "GeoZip.xcframework"],
             publicHeadersPath: "Public",
