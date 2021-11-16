@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.4 (2021-11-16)
+- Fix: [#73](https://github.com/castle/castle-ios/pull/73) Add dependencies Highwind and GeoZip to Package.swift.
+
 ## 2.1.3 (2021-11-15)
 - Fix: [#71](https://github.com/castle/castle-ios/pull/71) Remove COCOAPODS macro check from Castle.h.
 
