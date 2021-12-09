@@ -10,7 +10,7 @@
 #import <Castle/Castle.h>
 #import <Castle/CASEventStorage.h>
 #import <Castle/CASScreen.h>
-#import <Castle/CASBatch.h>
+#import <Castle/CASMonitor.h>
 #import <Castle/CASIdentity.h>
 #import <Castle/CASRequestInterceptor.h>
 #import <Castle/CASAPIClient.h>
@@ -252,10 +252,10 @@
 
 - (void)testModels
 {
-    CASBatch *batch1 = [CASBatch batchWithEvents:nil];
+    CASMonitor *batch1 = [CASMonitor batchWithEvents:nil];
     XCTAssertNil(batch1);
 
-    CASBatch *batch2 = [CASBatch batchWithEvents:@[]];
+    CASMonitor *batch2 = [CASMonitor batchWithEvents:@[]];
     XCTAssertNil(batch2);
 
     CASEvent *event1 = [CASEvent eventWithName:nil];
@@ -609,17 +609,17 @@
 - (void)testNetworking
 {
     CASEvent *event = [CASEvent eventWithName:@"Example event"];
-    __block CASBatch *batchModel = [CASBatch batchWithEvents:@[event]];
+    __block CASMonitor *batchModel = [CASMonitor batchWithEvents:@[event]];
     XCTAssertNotNil(batchModel);
 
-    XCTestExpectation *expectation = [self expectationWithDescription:@"GET /batch"];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"POST /monitor"];
 
     // Create configuration object
     CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
     CASAPIClient *client = [CASAPIClient clientWithConfiguration:configuration];
 
     // Perform batch network request
-    NSURLSessionTask *task = [client dataTaskWithPath:@"batch" postData:[batchModel JSONData] completion:^(id responseObject, NSURLResponse *response, NSError *error) {
+    NSURLSessionTask *task = [client dataTaskWithPath:@"monitor" postData:[batchModel JSONData] completion:^(id responseObject, NSURLResponse *response, NSError *error) {
         XCTAssertNil(error, "error should be nil");
 
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {

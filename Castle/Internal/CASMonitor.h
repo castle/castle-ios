@@ -1,5 +1,5 @@
 //
-//  CASBatch.h
+//  CASMonitor.h
 //  Castle
 //
 //  Copyright © 2017 Castle. All rights reserved.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CASBatch : CASModel
+@interface CASMonitor : CASModel
 
 @property (nonatomic, strong, readonly, nullable) NSArray *events;
 

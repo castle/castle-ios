@@ -5,15 +5,16 @@
 //  Copyright © 2017 Castle. All rights reserved.
 //
 
-#import "CASBatch.h"
+#import "CASMonitor.h"
 
 #import "CASUtils.h"
+#import "Castle.h"
 
-@interface CASBatch ()
+@interface CASMonitor ()
 @property (nonatomic, strong, readwrite) NSArray *events;
 @end
 
-@implementation CASBatch
+@implementation CASMonitor
 
 #pragma mark - Factory
 
@@ -29,7 +30,12 @@
         return nil;
     }
     
-    CASBatch *batch = [[CASBatch alloc] init];
+    if([Castle userId] == nil) {
+        CASLog(@"[%@] No user id set, won't flush events.", NSStringFromClass(self.class));
+        return nil;
+    }
+    
+    CASMonitor *batch = [[CASMonitor alloc] init];
     batch.events = events;
     return batch;
 }
@@ -38,9 +44,10 @@
 
 - (NSDictionary *)JSONPayload
 {
-    NSString *timestamp = [[CASModel timestampDateFormatter] stringFromDate:[NSDate date]];
-    return @{ @"batch": [self.events valueForKey:@"JSONPayload"],
-              @"sent_at": timestamp };
+    return @{
+        @"user": @{ @"id": [Castle userId] },
+        @"events": [self.events valueForKey:@"JSONPayload"]
+    };
 }
 
 @end

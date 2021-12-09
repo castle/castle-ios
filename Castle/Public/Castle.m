@@ -18,7 +18,7 @@
 #import "CASEvent.h"
 #import "CASIdentity.h"
 #import "CASScreen.h"
-#import "CASBatch.h"
+#import "CASMonitor.h"
 #import "CASEventStorage.h"
 #import "CASRequestInterceptor.h"
 #import "UIViewController+CASScreen.h"
@@ -317,14 +317,14 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     
     CASLog(@"Flushing %ld of %ld queued events", batch.count, castle.eventQueue.count);
     
-    __block CASBatch *batchModel = [CASBatch batchWithEvents:batch];
+    __block CASMonitor *batchModel = [CASMonitor batchWithEvents:batch];
     
     // Nil batch model object means there's no events to flush
     if(!batchModel) {
         return;
     }
     
-    castle.task = [castle.client dataTaskWithPath:@"batch" postData:[batchModel JSONData] completion:^(id responseObject, NSURLResponse *response, NSError *error) {
+    castle.task = [castle.client dataTaskWithPath:@"monitor" postData:[batchModel JSONData] completion:^(id responseObject, NSURLResponse *response, NSError *error) {
         if(error != nil) {
             CASLog(@"Flush failed with error: %@", error);
             castle.task = nil;

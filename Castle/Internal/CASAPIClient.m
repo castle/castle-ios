@@ -135,9 +135,7 @@
     [request setTimeoutInterval:10.0f];
     
     // Authentication
-    NSString *authStr = [NSString stringWithFormat:@":%@", self.configuration.publishableKey];
-    NSData *authData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
-    [request setValue:[NSString stringWithFormat:@"Basic %@", [authData base64EncodedStringWithOptions:0]] forHTTPHeaderField:@"Authorization"];
+    [request setValue:self.configuration.publishableKey forHTTPHeaderField:@"X-Castle-Publishable-Api-Key"];
     
     return request;
 }
