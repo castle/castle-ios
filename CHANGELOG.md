@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.5 (2021-12-09)
+- Improved device fingerprinting.
+
 ## 2.1.4 (2021-11-16)
 - Fix: [#73](https://github.com/castle/castle-ios/pull/73) Add dependencies Highwind and GeoZip to Package.swift.
 
