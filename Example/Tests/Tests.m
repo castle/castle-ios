@@ -118,7 +118,7 @@
     XCTAssertEqual(configuration.baseURLAllowList.count, 1);
     XCTAssertTrue([configuration.baseURLAllowList[0].absoluteString isEqualToString:@"https://google.com/"]);
     XCTAssertFalse(configuration.useCloudflareApp);
-    XCTAssertTrue([configuration.baseURL.absoluteString isEqualToString:@"https://api.castle.io/v1/"]);
+    XCTAssertTrue([configuration.baseURL.absoluteString isEqualToString:@"https://t.castle.io/v1/"]);
 
     [configuration setBaseURLAllowList:@[ [NSURL URLWithString:@"https://google.com/somethingelse"]]];
     XCTAssertFalse([configuration.baseURLAllowList[0].absoluteString isEqualToString:@"https://google.com/somethingelse"]);

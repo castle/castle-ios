@@ -7,7 +7,7 @@
 
 #import "CastleConfiguration.h"
 
-static NSString *CastleConfigurationDefaultAPIDomain = @"api.castle.io";
+static NSString *CastleConfigurationDefaultAPIDomain = @"t.castle.io";
 static NSString *CastleConfigurationCastleAPIPath = @"v1/";
 static NSString *CastleConfigurationCloudflareAPIPath = @"v1/c/mobile/";
 

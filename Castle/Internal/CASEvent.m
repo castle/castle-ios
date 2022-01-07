@@ -8,16 +8,12 @@
 #import "CASEvent.h"
 
 #import "CASUtils.h"
-#import "CASContext.h"
 #import "Castle.h"
 
 @interface CASEvent ()
-@property (nonatomic, copy, readwrite) NSString *name;
-@property (nonatomic, copy, readwrite) NSDictionary *properties;
+@property (nonatomic, copy, readwrite, nullable) NSString *name;
 @property (nonatomic, copy, readwrite) NSDate *timestamp;
-@property (nonatomic, copy, readwrite) NSString *userId;
-@property (nonatomic, copy, readwrite) NSString *userSignature;
-@property (nonatomic, copy, readwrite) CASContext *context;
+@property (nonatomic, copy, readwrite) NSString *token;
 @end
 
 @implementation CASEvent
@@ -26,30 +22,8 @@
 
 + (instancetype)eventWithName:(NSString *)name
 {
-    return [CASEvent eventWithName:name properties:@{}];
-}
-
-+ (instancetype)eventWithName:(NSString *)name properties:(NSDictionary *)properties
-{
-    if(!name) {
-        CASLog(@"Event name can't be nil.");
-        return nil;
-    }
-
-    if([name isEqualToString:@""]) {
-        CASLog(@"Event names must be at least one (1) character long.");
-        return nil;
-    }
-
-    BOOL valid = [CASEvent propertiesContainValidData:properties];
-    if(!valid) {
-        CASLog(@"Traits dictionary contains invalid data. Supported types are: NSString, NSNumber, NSDictionary & NSNull");
-        return nil;
-    }
-
     CASEvent *event = [[self alloc] init];
     event.name = name;
-    event.properties = properties;
     return event;
 }
 
@@ -60,8 +34,7 @@
     self = [super init];
     if(self) {
         self.timestamp = [NSDate date];
-        self.userId = [Castle userId];
-        self.userSignature = [Castle userSignature];
+        self.token = [Castle createRequestToken];
     }
     return self;
 }
@@ -73,10 +46,8 @@
     self = [super init];
     if(self) {
         self.name = [decoder decodeObjectOfClass:NSString.class forKey:@"name"];
-        self.properties = [decoder decodeObjectOfClass:NSDictionary.class forKey:@"properties"];
         self.timestamp = [decoder decodeObjectOfClass:NSDate.class forKey:@"timestamp"];
-        self.userId = [decoder decodeObjectOfClass:NSString.class forKey:@"user_id"];
-        self.userSignature = [decoder decodeObjectOfClass:NSString.class forKey:@"user_signature"];
+        self.token = [decoder decodeObjectOfClass:NSString.class forKey:@"token"];
     }
     return self;
 }
@@ -84,10 +55,8 @@
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:self.name forKey:@"name"];
-    [encoder encodeObject:self.properties forKey:@"properties"];
     [encoder encodeObject:self.timestamp forKey:@"timestamp"];
-    [encoder encodeObject:self.userId forKey:@"user_id"];
-    [encoder encodeObject:self.userSignature forKey:@"user_signature"];
+    [encoder encodeObject:self.token forKey:@"token"];
 }
 
 #pragma mark - NSSecureCoding
@@ -103,37 +72,17 @@
 {
     NSString *timestamp = [[CASModel timestampDateFormatter] stringFromDate:self.timestamp];
 
-    NSMutableDictionary *payload = @{ @"type": self.type,
-                                      @"event": self.name,
-                                      @"timestamp": timestamp,
-                                      @"context": self.context.JSONPayload }.mutableCopy;
-
-    if(self.userId != nil) {
-        payload[@"user_id"] = self.userId;
-    }
-    
-    if(self.userSignature != nil) {
-        payload[@"user_signature"] = self.userSignature;
-    }
-    
-    return [payload copy];
+    return @{ @"type": self.type,
+              @"timestamp": timestamp,
+              @"token": self.token };
 }
 
 #pragma mark - Getters
 
 - (NSString *)type
 {
-    return @"track";
-}
-
-- (CASContext *)context
-{
-    // Get a context snapshot object if there isn't already a context.
-    // Note: this should only happen when upgrading from 1.0.x to 1.2.0 which changes how the context is used.
-    if(!_context) {
-        _context = [CASContext snapshotContext];
-    }
-    return _context;
+    NSAssert(false, @"Subclass of CASEvent must override %s", __PRETTY_FUNCTION__);
+    return nil;
 }
 
 #pragma mark - Util

@@ -93,7 +93,7 @@ class SwiftTests: XCTestCase {
         XCTAssertEqual(configuration.baseURLAllowList!.count, 1)
         XCTAssertTrue(configuration.baseURLAllowList![0].absoluteString == "https://google.com/")
         XCTAssertFalse(configuration.useCloudflareApp)
-        XCTAssertTrue(configuration.baseURL.absoluteString == "https://api.castle.io/v1/")
+        XCTAssertTrue(configuration.baseURL.absoluteString == "https://t.castle.io/v1/")
 
         configuration.baseURLAllowList = [URL(string: "https://google.com/somethingelse")!]
         XCTAssertFalse(configuration.baseURLAllowList![0].absoluteString  == "https://google.com/somethingelse")

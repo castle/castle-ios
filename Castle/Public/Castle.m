@@ -16,8 +16,8 @@
 #import "CASReachability.h"
 #import "CASUtils.h"
 #import "CASEvent.h"
-#import "CASIdentity.h"
 #import "CASScreen.h"
+#import "CASCustom.h"
 #import "CASMonitor.h"
 #import "CASEventStorage.h"
 #import "CASRequestInterceptor.h"
@@ -240,16 +240,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     }
     
     Castle *castle = [Castle sharedInstance];
-    CASEvent *event = [CASEvent eventWithName:eventName properties:properties];
+    CASCustom *event = [CASCustom eventWithName:eventName properties: properties];
     [castle queueEvent:event];
 }
 
 + (void)screen:(NSString *)screenName
-{
-    [Castle screen:screenName properties:@{}];
-}
-
-+ (void)screen:(NSString *)screenName properties:(NSDictionary *)properties
 {
     if(!screenName || [screenName isEqualToString:@""]) {
         CASLog(@"No screen name provided. Will cancel track event operation.");
@@ -257,7 +252,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     }
     
     Castle *castle = [Castle sharedInstance];
-    CASScreen *screen = [CASScreen eventWithName:screenName properties:properties];
+    CASScreen *screen = [CASScreen eventWithName:screenName];
     [castle queueEvent:screen];
 }
 
@@ -272,20 +267,20 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         CASLog(@"No user id provided. Will cancel identify operation.");
         return;
     }
-    
+
     Castle *castle = [Castle sharedInstance];
-    if(![castle secureModeEnabled]) {
-        CASLog(@"Identify called without secure mode user signature set. If secure mode is enabled in Castle and identify is called before secure, the identify event will be discarded.");
-    }
-    
-    CASIdentity *identity = [CASIdentity identityWithUserId:userId traits:traits];
-    if(identity != nil) {
+//    if(![castle secureModeEnabled]) {
+//        CASLog(@"Identify called without secure mode user signature set. If secure mode is enabled in Castle and identify is called before secure, the identify event will be discarded.");
+//    }
+
+//    CASIdentity *identity = [CASIdentity identityWithUserId:userId traits:traits];
+//    if(identity != nil) {
         [castle setUserId:userId];
-        [castle queueEvent:identity];
-        
-        // Identify call will always flush
-        [Castle flush];
-    }
+//        [castle queueEvent:identity];
+
+//         Identify call will always flush
+//        [Castle flush];
+//    }
 }
 
 + (void)secure:(NSString *)userSignature
