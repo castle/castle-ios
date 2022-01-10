@@ -11,13 +11,13 @@
 
 @interface CASEvent : CASModel <NSSecureCoding>
 
-@property (nonatomic, copy, readonly) NSString *name;
-@property (nonatomic, copy, readonly) NSDate *timestamp;
-@property (nonatomic, copy, readonly) NSString *type;
-@property (nonatomic, readonly) NSString *token;
+@property (nonatomic, copy, readonly) NSString * _Nullable name;
+@property (nonatomic, copy, readonly) NSDate * _Nonnull timestamp;
+@property (nonatomic, copy, readonly) NSString * _Nonnull type;
+@property (nonatomic, readonly) NSString * _Nonnull token;
 
-+ (instancetype)eventWithName:(NSString *)name;
++ (_Nullable instancetype)eventWithName:(NSString * _Nullable)name;
 
-+ (BOOL)propertiesContainValidData:(NSDictionary *)dictionary;
++ (BOOL)propertiesContainValidData:(NSDictionary * _Nullable)dictionary;
 
 @end

@@ -9,8 +9,8 @@
 
 @interface CASCustom : CASEvent
 
-@property (nonatomic, readonly) NSDictionary *properties;
+@property (nonatomic, readonly) NSDictionary * _Nullable properties;
 
-+ (instancetype)eventWithName:(NSString *)name properties:(NSDictionary *)properties;
++ (_Nullable instancetype)eventWithName:(NSString * _Nullable)name properties:(NSDictionary * _Nullable)properties;
 
 @end
