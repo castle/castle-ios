@@ -23,7 +23,7 @@
 + (instancetype)eventWithName:(NSString *)name
 {
     CASEvent *event = [[self alloc] init];
-    event.name = name;
+    event.name = [name truncate:255];
     return event;
 }
 
