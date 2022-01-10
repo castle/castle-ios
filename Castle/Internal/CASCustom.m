@@ -60,7 +60,10 @@
     
     // Add name to payload and remove event property
     [payload setObject:self.name forKey:@"name"];
-    [payload setObject:self.properties forKey:@"properties"];
+    
+    if (self.properties && self.properties.count > 0) {
+        [payload setObject:self.properties forKey:@"properties"];
+    }
     
     return [payload copy];
 }

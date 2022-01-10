@@ -45,7 +45,7 @@
     NSMutableDictionary *payload = ((NSDictionary *) [super JSONPayload]).mutableCopy;
     
     // Add name to payload
-    [payload setObject:self.name forKey:@"screen.name"];
+    [payload setObject:@{ @"name": self.name } forKey:@"screen"];
     
     return [payload copy];
 }

@@ -74,7 +74,7 @@
 
     return @{ @"type": self.type,
               @"timestamp": timestamp,
-              @"token": self.token };
+              @"request_token": self.token };
 }
 
 #pragma mark - Getters

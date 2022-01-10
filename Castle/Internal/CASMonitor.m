@@ -18,7 +18,7 @@
 
 #pragma mark - Factory
 
-+ (instancetype)batchWithEvents:(NSArray *)events
++ (instancetype)monitorWithEvents:(NSArray *)events
 {
     if(!events) {
         CASLog(@"[%@] Nil event array parameter provided. Won't flush events.", NSStringFromClass(self.class));

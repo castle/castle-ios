@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly, nullable) NSArray *events;
 
-+ (nullable instancetype)batchWithEvents:(nullable NSArray *)events;
++ (nullable instancetype)monitorWithEvents:(nullable NSArray *)events;
 
 @end
 

@@ -312,7 +312,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     
     CASLog(@"Flushing %ld of %ld queued events", batch.count, castle.eventQueue.count);
     
-    __block CASMonitor *batchModel = [CASMonitor batchWithEvents:batch];
+    __block CASMonitor *batchModel = [CASMonitor monitorWithEvents:batch];
     
     // Nil batch model object means there's no events to flush
     if(!batchModel) {
