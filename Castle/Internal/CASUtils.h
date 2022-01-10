@@ -13,3 +13,9 @@ void CASLog(NSString *format, ...);
 
 // User Agent
 NSString *CASUserAgent(void);
+
+@interface NSString (Truncate)
+
+- (NSString *)truncate:(NSUInteger)maxLength;
+
+@end
