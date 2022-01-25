@@ -9,7 +9,7 @@
 
 #import "CASModel.h"
 
-@interface CASEvent : CASModel <NSSecureCoding>
+@interface CASEvent : CASModel
 
 @property (nonatomic, copy, readonly) NSString * _Nullable name;
 @property (nonatomic, copy, readonly) NSDate * _Nonnull timestamp;
@@ -17,7 +17,5 @@
 @property (nonatomic, readonly) NSString * _Nonnull token;
 
 + (_Nullable instancetype)eventWithName:(NSString * _Nullable)name;
-
-+ (BOOL)propertiesContainValidData:(NSDictionary * _Nullable)dictionary;
 
 @end

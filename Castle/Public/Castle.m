@@ -19,6 +19,7 @@
 #import "CASScreen.h"
 #import "CASCustom.h"
 #import "CASMonitor.h"
+#import "CASUser.h"
 #import "CASEventStorage.h"
 #import "CASRequestInterceptor.h"
 #import "UIViewController+CASScreen.h"
@@ -26,6 +27,7 @@
 @import Highwind;
 
 NSString *const CastleUserIdentifierKey = @"CastleUserIdentifierKey";
+NSString *const CastleUserKey = @"CastleUserKey";
 NSString *const CastleSecureSignatureKey = @"CastleSecureSignatureKey";
 NSString *const CastleAppVersionKey = @"CastleAppVersionKey";
 
@@ -40,6 +42,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 @property (nonatomic, strong) NSURLSessionDataTask *task;
 @property (nonatomic, strong, nonnull) NSMutableArray *eventQueue;
 @property (nonatomic, copy, readwrite, nullable) NSString *userId;
+@property (nonatomic, copy, readwrite, nullable) CASUser *user;
 @property (nonatomic, copy, readwrite, nullable) NSString *userSignature;
 @property (nonatomic, assign, readonly) NSUInteger maxBatchSize;
 @property (nonatomic, strong, readwrite) CASReachability *reachability;
@@ -49,6 +52,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 @implementation Castle
 
 @synthesize userId = _userId;
+@synthesize user = _user;
 @synthesize userSignature = _userSignature;
 
 + (instancetype)sharedInstance {
@@ -181,6 +185,16 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return _userId;
 }
 
+- (CASUser *)user
+{
+    // If there's no user: try fetching it from settings
+    if(!_user) {
+        NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:CastleUserKey];
+        _user = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    return _user;
+}
+
 - (NSString *)userSignature
 {
     // If there's no user signature: try fetching it from settings
@@ -212,6 +226,23 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     // Store user identity in user defaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:userId forKey:CastleUserIdentifierKey];
+    [defaults synchronize];
+}
+
+- (void)setUser:(CASUser *)user
+{
+    // If the new user if different from the current user we shoul reset.
+    // This means that the queue will be flushed and the settings reset.
+    if (![_user isEqual:user] && user != nil) {
+        [Castle reset];
+    }
+    
+    _user = user;
+    
+    // Store user in user defaults
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:user];
+    [defaults setObject:data forKey:CastleUserKey];
     [defaults synchronize];
 }
 
@@ -258,29 +289,24 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 + (void)identify:(NSString *)userId
 {
-    [Castle identify:userId traits:@{}];
+    [Castle identify:userId properties:@{}];
 }
 
-+ (void)identify:(NSString *)userId traits:(NSDictionary *)traits
++ (void)identify:(NSString *)identifier traits:(NSDictionary *)traits
 {
-    if(!userId || [userId isEqualToString:@""]) {
+    [Castle identify:identifier properties:traits];
+}
+
++ (void)identify:(NSString *)identifier properties:(NSDictionary *)properties
+{
+    if(!identifier || [identifier isEqualToString:@""]) {
         CASLog(@"No user id provided. Will cancel identify operation.");
         return;
     }
 
     Castle *castle = [Castle sharedInstance];
-//    if(![castle secureModeEnabled]) {
-//        CASLog(@"Identify called without secure mode user signature set. If secure mode is enabled in Castle and identify is called before secure, the identify event will be discarded.");
-//    }
-
-//    CASIdentity *identity = [CASIdentity identityWithUserId:userId traits:traits];
-//    if(identity != nil) {
-        [castle setUserId:userId];
-//        [castle queueEvent:identity];
-
-//         Identify call will always flush
-//        [Castle flush];
-//    }
+    CASUser *user = [CASUser userWithId:identifier properties:properties];
+    [castle setUser:user];
 }
 
 + (void)secure:(NSString *)userSignature
@@ -300,6 +326,13 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     
     if(castle.task != nil) {
         CASLog(@"Queue is already being flushed. Won't flush again.");
+        return;
+    }
+    
+    if(castle.user == nil) {
+        CASLog(@"No user set, clearing the queue.");
+        castle.eventQueue = [[NSMutableArray alloc] init];
+        [castle persistQueue];
         return;
     }
     
@@ -363,7 +396,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     [Castle flush];
     
     // Reset cached user id
-    castle.userId = nil;
+    castle.user = nil;
     
     // Reset cached signature
     castle.userSignature = nil;
@@ -398,6 +431,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 {
     if(!event) {
         CASLog(@"Can't enqueue nil event");
+        return;
+    }
+    
+    if([Castle user] == nil) {
+        CASLog(@"No user information set, won't queue event");
         return;
     }
     
@@ -518,6 +556,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 + (NSString *)userId
 {
     return [Castle sharedInstance].userId;
+}
+
++ (CASUser *)user
+{
+    return [Castle sharedInstance].user;
 }
 
 + (NSString *)userSignature

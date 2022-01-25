@@ -8,6 +8,7 @@
 #import "CASMonitor.h"
 
 #import "CASUtils.h"
+#import "Castle+Util.h"
 #import "Castle.h"
 
 @interface CASMonitor ()
@@ -30,7 +31,7 @@
         return nil;
     }
     
-    if([Castle userId] == nil) {
+    if([Castle user] == nil) {
         CASLog(@"[%@] No user id set, won't flush events.", NSStringFromClass(self.class));
         return nil;
     }
@@ -40,12 +41,20 @@
     return batch;
 }
 
+#pragma mark - NSSecureCoding
+
++ (BOOL)supportsSecureCoding
+{
+    return YES;
+}
+
 #pragma mark - CASModel
 
 - (NSDictionary *)JSONPayload
 {
+    id userPayload = [[Castle user] JSONPayload];
     return @{
-        @"user": @{ @"id": [Castle userId] },
+        @"user": userPayload,
         @"events": [self.events valueForKey:@"JSONPayload"]
     };
 }

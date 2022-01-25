@@ -93,12 +93,24 @@ extern NSString * const CastleRequestTokenHeaderName;
 /**
  Track identify event with specified user id. User identity will be persisted. A call to identify or reset will clear the stored user identity.
 
- @param userId User Id
+ @param identifier User Id
  @code // Identify User with unique identifier
  [Castle identify:@"1245-3055"];
  @endcode
  */
-+ (void)identify:(nullable NSString *)userId;
++ (void)identify:(nullable NSString *)identifier;
+
+/**
+ Track identify event with specified user identity. User identity will be persisted. A call to identify or reset will clear the stored user identity.
+ Provided user properties will be included in the identify event sent to the Castle API.
+
+ @param identifier User Id
+ @param properties User properties dictionary
+ @code // Identify User with unique identifier including user properties
+ [Castle identify:@"1245-3055" properties:@{ @"email": @"laura@example.com" }];
+ @endcode
+ */
++ (void)identify:(nullable NSString *)identifier properties:(nullable NSDictionary *)properties;
 
 /**
  Track identify event with specified user identity. User identity will be persisted. A call to identify or reset will clear the stored user identity.
@@ -110,7 +122,7 @@ extern NSString * const CastleRequestTokenHeaderName;
  [Castle identify:@"1245-3055" traits:@{ @"email": @"laura@example.com" }];
  @endcode
  */
-+ (void)identify:(NSString *)identifier traits:(nullable NSDictionary *)traits;
++ (void)identify:(NSString *)identifier traits:(nullable NSDictionary *)traits __deprecated_msg("Use +identify:properties: intead");
 
 /**
  Set user signature and enable secure mode. User signature will be included in all events after it has been set and will be persisted.
@@ -174,7 +186,7 @@ extern NSString * const CastleRequestTokenHeaderName;
 /**
  Get client identifier if set, otherwise returns nil
 
- @return client identifier
+ @return client identifiers
  */
 + (nullable NSString *)clientId __deprecated_msg("Use +createRequestToken instead");
 
@@ -190,7 +202,7 @@ extern NSString * const CastleRequestTokenHeaderName;
 
  @return User Id
  */
-+ (nullable NSString *)userId;
++ (nullable NSString *)userId __deprecated_msg("Will be removed in an upcoming version of the library");
 
 /**
  Get stored signature from secure call, returns nil if not set

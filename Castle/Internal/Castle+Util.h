@@ -6,8 +6,16 @@
 //
 
 #import "Castle.h"
+#import "CASUser.h"
 
 @interface Castle (Util)
+
+/**
+ Get stored user information from last identify call, returns nil if not set
+
+ @return User object
+ */
++ (nullable CASUser *)user;
 
 /**
  Get current connection state for Wifi
@@ -28,13 +36,13 @@
 
  @return Carrier name
  */
-+ (NSString *)carrierName;
++ (nullable NSString *)carrierName;
 
 /**
   Get the UIApplication instance if available
  
  @return UIApplication instance
  */
-+ (UIApplication *)sharedUIApplication;
++ (nullable UIApplication *)sharedUIApplication;
 
 @end
