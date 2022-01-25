@@ -12,11 +12,12 @@
 #import <Castle/CASScreen.h>
 #import <Castle/CASMonitor.h>
 #import <Castle/CASCustom.h>
-//#import <Castle/CASIdentity.h>
+#import <Castle/CASUser.h>
 #import <Castle/CASRequestInterceptor.h>
 #import <Castle/CASAPIClient.h>
 #import <Castle/UIViewController+CASScreen.h>
 #import <Castle/CASReachability.h>
+#import <Castle/Castle+Util.h>
 
 #import "MainViewController.h"
 
@@ -185,7 +186,7 @@
     [Castle identify:@"thisisatestuser"];
 
     // Check that the stored identity is the same as the identity we tracked
-    XCTAssertEqual([Castle userId], @"thisisatestuser");
+    XCTAssertEqual([Castle user].userId, @"thisisatestuser");
 }
 
 - (void)testSignaturePersistance
@@ -202,7 +203,7 @@
     [Castle reset];
 
     // Check to see if the user id and user signature was cleared on reset
-    XCTAssertNil([Castle userId]);
+    XCTAssertNil([Castle user]);
     XCTAssertNil([Castle userSignature]);
 }
 
@@ -221,11 +222,11 @@
     [Castle identify:@""];
     newCount = [CASEventStorage storedQueue].count;
     XCTAssertTrue(count == newCount); // Count should be unchanced
-    XCTAssertNil([Castle userId]); // User id should be nil
+    XCTAssertNil([Castle user]); // User id should be nil
 
     // This should lead to no event being tracked properties can't be nil
     count = [CASEventStorage storedQueue].count;
-    [Castle identify:@"testuser1" traits:nil];
+    [Castle identify:@"testuser1" properties:nil];
     newCount = [CASEventStorage storedQueue].count;
     XCTAssertTrue(count == newCount); // Count should be unchanced
 //    XCTAssertNil([Castle userId]); // User id should be nil

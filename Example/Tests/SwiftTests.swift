@@ -153,7 +153,7 @@ class SwiftTests: XCTestCase {
         Castle.identify("thisisatestuser")
 
         // Check that the stored identity is the same as the identity we tracked
-        XCTAssertEqual(Castle.userId(), "thisisatestuser")
+        XCTAssertEqual(Castle.user()?.userId, "thisisatestuser")
     }
 
     func testSignaturePersistance() throws {
@@ -168,7 +168,7 @@ class SwiftTests: XCTestCase {
         Castle.reset()
 
         // Check to see if the user id and user signature was cleared on reset
-        XCTAssertNil(Castle.userId());
+        XCTAssertNil(Castle.user());
         XCTAssertNil(Castle.userSignature());
     }
 
@@ -186,14 +186,14 @@ class SwiftTests: XCTestCase {
         Castle.identify("")
         newCount = CASEventStorage.storedQueue().count
         XCTAssertTrue(count == newCount) // Count should be unchanced
-        XCTAssertNil(Castle.userId()) // User id should be nil
+        XCTAssertNil(Castle.user()) // User should be nil
 
         // This should lead to no event being tracked properties can't be nil
         count = CASEventStorage.storedQueue().count
-        Castle.identify("testuser1", traits: nil)
+        Castle.identify("testuser1", properties: nil)
         newCount = CASEventStorage.storedQueue().count
         XCTAssertTrue(count == newCount) // Count should be unchanced
-//        XCTAssertNil(Castle.userId()) // User id should be nil
+        XCTAssertNotNil(Castle.user()) // User should be nil
 
         let screen = CASScreen(name: "Main");
         XCTAssertNotNil(screen);
@@ -587,6 +587,8 @@ class SwiftTests: XCTestCase {
         configuration.maxQueueLimit = 8
 
         Castle.configure(configuration)
+        
+        Castle.identify("thisisatestuser")
 
         // Fill the queue
         for i in 0...configuration.maxQueueLimit {
