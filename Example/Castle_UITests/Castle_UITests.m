@@ -29,8 +29,9 @@
 
     [app.buttons[@"reset"] tap];
     sleep(1);
+    
+    [app.buttons[@"identify"] tap];
 
-    // Tap screen track button
     [app.buttons[@"trackScreen"] tap];
     BOOL exists = [app.staticTexts[@"Queue size: 1"] waitForExistenceWithTimeout:10];
     XCTAssertTrue(exists);
