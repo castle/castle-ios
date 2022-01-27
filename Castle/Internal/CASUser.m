@@ -68,6 +68,11 @@
         return nil;
     }
     
+    if(userId.length == 0) {
+        CASLog(@"User id can't be empty.");
+        return nil;
+    }
+    
     BOOL valid = [CASModel propertiesContainValidData:traits];
     if(traits != nil && !valid) {
         CASLog(@"Traits dictionary contains invalid data. Supported types are: NSString, NSNumber, NSDictionary & NSNull");
