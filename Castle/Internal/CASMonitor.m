@@ -13,6 +13,7 @@
 
 @interface CASMonitor ()
 @property (nonatomic, strong, readwrite) NSArray *events;
+@property (nonatomic, strong) CASUser *user;
 @end
 
 @implementation CASMonitor
@@ -31,13 +32,15 @@
         return nil;
     }
     
-    if([Castle user] == nil) {
+    CASUser *user = [Castle user];
+    if(user == nil) {
         CASLog(@"[%@] No user id set, won't flush events.", NSStringFromClass(self.class));
         return nil;
     }
     
     CASMonitor *batch = [[CASMonitor alloc] init];
     batch.events = events;
+    batch.user = user;
     return batch;
 }
 
@@ -52,7 +55,7 @@
 
 - (NSDictionary *)JSONPayload
 {
-    id userPayload = [[Castle user] JSONPayload];
+    id userPayload = [self.user JSONPayload];
     return @{
         @"user": userPayload,
         @"events": [self.events valueForKey:@"JSONPayload"]
