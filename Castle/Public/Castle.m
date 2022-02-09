@@ -90,7 +90,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     castle.configuration = configuration;
     
     // Highwind
-    castle.highwind = [[Highwind alloc] initWithVersion:Castle.versionString uuid:castle.deviceIdentifier userAgent: CASUserAgent()];
+    NSError *error = nil;
+    castle.highwind = [[Highwind alloc] initWithVersion:Castle.versionString uuid:castle.deviceIdentifier publishableKey: configuration.publishableKey userAgent: CASUserAgent() error: &error];
+    if(error) {
+        NSAssert(true, @"You must provide a valid Castle publishable key when initializing the SDK.");
+    }
     
     castle.reachability = [CASReachability reachabilityWithHostname:@"google.com"];
     [castle.reachability startNotifier];
@@ -146,7 +150,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 + (NSString *)versionString
 {
-    return @"2.1.5";
+    return @"2.1.6";
 }
 
 - (NSString *)deviceIdentifier

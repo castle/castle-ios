@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.6 (2022-02-09)
+- Improved device fingerprinting.
+
 ## 2.1.5 (2021-12-09)
 - Improved device fingerprinting.
 
