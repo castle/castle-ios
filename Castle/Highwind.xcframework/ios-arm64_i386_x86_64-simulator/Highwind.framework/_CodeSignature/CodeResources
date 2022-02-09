@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/Highwind-Swift.h</key>
 		<data>
-		/gu7bUtE+P0mJ8gl1UswA+UIWZk=
+		7OGnYyg55yBsRY+ig9oY8s2LKz0=
 		</data>
 		<key>Headers/Highwind.h</key>
 		<data>
@@ -14,79 +14,79 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		kHdGuGwike/7I4Zlb2XuyscECBA=
+		VkGa9dM0APIgiVWJvzCw41eQ1lY=
 		</data>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		c5DrO227YDd50+/2VAmTI7tag9A=
+		DtanK8HwR4bKHg0mynDahIrVSEc=
 		</data>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		b5Ovay8MXVGl79L8qDt6MwISZhY=
+		AQ5q9kUa6D9lu8JOJsBuzX4Xla4=
 		</data>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		ShnkZqbzAZ/gpop5oYy2wM7PJH4=
+		UtRF3F3NZ9ynEjlGTInOvxNG4r0=
 		</data>
 		<key>Modules/Highwind.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		c5DrO227YDd50+/2VAmTI7tag9A=
+		DtanK8HwR4bKHg0mynDahIrVSEc=
 		</data>
 		<key>Modules/Highwind.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		b5Ovay8MXVGl79L8qDt6MwISZhY=
+		AQ5q9kUa6D9lu8JOJsBuzX4Xla4=
 		</data>
 		<key>Modules/Highwind.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		ShnkZqbzAZ/gpop5oYy2wM7PJH4=
+		UtRF3F3NZ9ynEjlGTInOvxNG4r0=
 		</data>
 		<key>Modules/Highwind.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<data>
-		Rq+KvOll0Teu+gDnAAH029q4pjk=
+		iq9B4/1QDwcgRA/fNglYJdD5olc=
 		</data>
 		<key>Modules/Highwind.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
 		<data>
-		BCsvbXMCy5KrfApbYxqLfXpwsu0=
+		zfGBJD5m90SbkqDQe896tmswuv8=
 		</data>
 		<key>Modules/Highwind.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<data>
-		xzn0lm94oH3j+DqIcVkHQDDGQbY=
+		xKFegq7K81i1jTHZ6AHIvbX+JDo=
 		</data>
 		<key>Modules/Highwind.swiftmodule/i386.swiftdoc</key>
 		<data>
-		Rq+KvOll0Teu+gDnAAH029q4pjk=
+		iq9B4/1QDwcgRA/fNglYJdD5olc=
 		</data>
 		<key>Modules/Highwind.swiftmodule/i386.swiftinterface</key>
 		<data>
-		BCsvbXMCy5KrfApbYxqLfXpwsu0=
+		zfGBJD5m90SbkqDQe896tmswuv8=
 		</data>
 		<key>Modules/Highwind.swiftmodule/i386.swiftmodule</key>
 		<data>
-		xzn0lm94oH3j+DqIcVkHQDDGQbY=
+		xKFegq7K81i1jTHZ6AHIvbX+JDo=
 		</data>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		xu9TuhV2er973XtMrMdvz4ieCxc=
+		Z+QIehPpd13qSRbZkOSPRkfC6ks=
 		</data>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		nA+BIRzXG8VGs1GN3EFzIYh672g=
+		so0lRfow0u7gij1MxBGgxp2DACM=
 		</data>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		ARXay77Uo7gSsL3fzQx95By7uZQ=
+		4jQnLYHORKXHx76QjcUkytYvdCI=
 		</data>
 		<key>Modules/Highwind.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		xu9TuhV2er973XtMrMdvz4ieCxc=
+		Z+QIehPpd13qSRbZkOSPRkfC6ks=
 		</data>
 		<key>Modules/Highwind.swiftmodule/x86_64.swiftinterface</key>
 		<data>
-		nA+BIRzXG8VGs1GN3EFzIYh672g=
+		so0lRfow0u7gij1MxBGgxp2DACM=
 		</data>
 		<key>Modules/Highwind.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		ARXay77Uo7gSsL3fzQx95By7uZQ=
+		4jQnLYHORKXHx76QjcUkytYvdCI=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -99,11 +99,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			/gu7bUtE+P0mJ8gl1UswA+UIWZk=
+			7OGnYyg55yBsRY+ig9oY8s2LKz0=
 			</data>
 			<key>hash2</key>
 			<data>
-			Ozg1iiHidXCg+8UvMJuZOzw8DARGlZY1dvZK/jgnmEU=
+			jbsikeMF9k7mGHVeaPRihG4vwO2PK4RvPemuy+KpbGY=
 			</data>
 		</dict>
 		<key>Headers/Highwind.h</key>
@@ -121,198 +121,198 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			c5DrO227YDd50+/2VAmTI7tag9A=
+			DtanK8HwR4bKHg0mynDahIrVSEc=
 			</data>
 			<key>hash2</key>
 			<data>
-			dwp1wy92FufotzplBwZfiJ7k8H4KEwry8NOiclvyKXQ=
+			Hv4/ZPd6r52b5qdOxdDsp9Cia1+d4Cq5MqL77zXUWVI=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			b5Ovay8MXVGl79L8qDt6MwISZhY=
+			AQ5q9kUa6D9lu8JOJsBuzX4Xla4=
 			</data>
 			<key>hash2</key>
 			<data>
-			mNXb4EBqZouEQ5BCJ9xiJcjehHhEbOe+lYbwW4ckpO8=
+			cUb3rUz9sDy5ooJqsRfkOyxBlVt2k7h1Va0/adoXgG8=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ShnkZqbzAZ/gpop5oYy2wM7PJH4=
+			UtRF3F3NZ9ynEjlGTInOvxNG4r0=
 			</data>
 			<key>hash2</key>
 			<data>
-			WnKo0/MRq6z7QFNh42UblivtauIUjgWng1PJInNSnQ0=
+			r8Xou4nlttNT7WrZT1gQ5i5QEMIeq/7vNAxZpJopGEg=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			c5DrO227YDd50+/2VAmTI7tag9A=
+			DtanK8HwR4bKHg0mynDahIrVSEc=
 			</data>
 			<key>hash2</key>
 			<data>
-			dwp1wy92FufotzplBwZfiJ7k8H4KEwry8NOiclvyKXQ=
+			Hv4/ZPd6r52b5qdOxdDsp9Cia1+d4Cq5MqL77zXUWVI=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/arm64.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			b5Ovay8MXVGl79L8qDt6MwISZhY=
+			AQ5q9kUa6D9lu8JOJsBuzX4Xla4=
 			</data>
 			<key>hash2</key>
 			<data>
-			mNXb4EBqZouEQ5BCJ9xiJcjehHhEbOe+lYbwW4ckpO8=
+			cUb3rUz9sDy5ooJqsRfkOyxBlVt2k7h1Va0/adoXgG8=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ShnkZqbzAZ/gpop5oYy2wM7PJH4=
+			UtRF3F3NZ9ynEjlGTInOvxNG4r0=
 			</data>
 			<key>hash2</key>
 			<data>
-			WnKo0/MRq6z7QFNh42UblivtauIUjgWng1PJInNSnQ0=
+			r8Xou4nlttNT7WrZT1gQ5i5QEMIeq/7vNAxZpJopGEg=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Rq+KvOll0Teu+gDnAAH029q4pjk=
+			iq9B4/1QDwcgRA/fNglYJdD5olc=
 			</data>
 			<key>hash2</key>
 			<data>
-			Sja1EDE85FjzVeg1NG/LjJ5KhtnV78CLtoV6RdRwfcE=
+			1unpIJAHoIkwa20uvA5Cgt0LeDuAh98FLZDVNM9FoOc=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			BCsvbXMCy5KrfApbYxqLfXpwsu0=
+			zfGBJD5m90SbkqDQe896tmswuv8=
 			</data>
 			<key>hash2</key>
 			<data>
-			zkRlxAZoY3PywLLcZcsx0dVSrg0ldLGKbNxtUjlxKzQ=
+			iDy6pf+9/Hf0twGpM8G3HwX/FHDHt1Cl9iZKYUQvRcY=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			xzn0lm94oH3j+DqIcVkHQDDGQbY=
+			xKFegq7K81i1jTHZ6AHIvbX+JDo=
 			</data>
 			<key>hash2</key>
 			<data>
-			Q9MwaHxJL5ApnGsSauYDGIyorWVehfLr+CtIEq9nInU=
+			CmIVkPfYDYHtI+PSmRVds4Q+eXUKQ+Ctusp1Ph8Eimw=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/i386.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Rq+KvOll0Teu+gDnAAH029q4pjk=
+			iq9B4/1QDwcgRA/fNglYJdD5olc=
 			</data>
 			<key>hash2</key>
 			<data>
-			Sja1EDE85FjzVeg1NG/LjJ5KhtnV78CLtoV6RdRwfcE=
+			1unpIJAHoIkwa20uvA5Cgt0LeDuAh98FLZDVNM9FoOc=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/i386.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			BCsvbXMCy5KrfApbYxqLfXpwsu0=
+			zfGBJD5m90SbkqDQe896tmswuv8=
 			</data>
 			<key>hash2</key>
 			<data>
-			zkRlxAZoY3PywLLcZcsx0dVSrg0ldLGKbNxtUjlxKzQ=
+			iDy6pf+9/Hf0twGpM8G3HwX/FHDHt1Cl9iZKYUQvRcY=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/i386.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			xzn0lm94oH3j+DqIcVkHQDDGQbY=
+			xKFegq7K81i1jTHZ6AHIvbX+JDo=
 			</data>
 			<key>hash2</key>
 			<data>
-			Q9MwaHxJL5ApnGsSauYDGIyorWVehfLr+CtIEq9nInU=
+			CmIVkPfYDYHtI+PSmRVds4Q+eXUKQ+Ctusp1Ph8Eimw=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			xu9TuhV2er973XtMrMdvz4ieCxc=
+			Z+QIehPpd13qSRbZkOSPRkfC6ks=
 			</data>
 			<key>hash2</key>
 			<data>
-			cIxENzKhiQ5NPPgi/CPzMpWlYnWsd4ZQ/I0ctRFsU0A=
+			4HYux8EYQxb5FuayKySAceCoD3IAyy9UdziL2k0kZlo=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			nA+BIRzXG8VGs1GN3EFzIYh672g=
+			so0lRfow0u7gij1MxBGgxp2DACM=
 			</data>
 			<key>hash2</key>
 			<data>
-			KS3Q5p4RNYtCX59/9w0JNlHWT50E871BuIAOZCei4zI=
+			Dd9E9oENJ7GLB0xLfue9gPjlxFMhl/FtR7YEsD5pSxc=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ARXay77Uo7gSsL3fzQx95By7uZQ=
+			4jQnLYHORKXHx76QjcUkytYvdCI=
 			</data>
 			<key>hash2</key>
 			<data>
-			LfNf9VKMMOphLMU/ongM7d3sQthn8nXIfScAWX2qQVk=
+			aVu5/pVbtNAAz/KwelK2e/R0ApDzrnKXf65ogYOIviQ=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			xu9TuhV2er973XtMrMdvz4ieCxc=
+			Z+QIehPpd13qSRbZkOSPRkfC6ks=
 			</data>
 			<key>hash2</key>
 			<data>
-			cIxENzKhiQ5NPPgi/CPzMpWlYnWsd4ZQ/I0ctRFsU0A=
+			4HYux8EYQxb5FuayKySAceCoD3IAyy9UdziL2k0kZlo=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/x86_64.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			nA+BIRzXG8VGs1GN3EFzIYh672g=
+			so0lRfow0u7gij1MxBGgxp2DACM=
 			</data>
 			<key>hash2</key>
 			<data>
-			KS3Q5p4RNYtCX59/9w0JNlHWT50E871BuIAOZCei4zI=
+			Dd9E9oENJ7GLB0xLfue9gPjlxFMhl/FtR7YEsD5pSxc=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ARXay77Uo7gSsL3fzQx95By7uZQ=
+			4jQnLYHORKXHx76QjcUkytYvdCI=
 			</data>
 			<key>hash2</key>
 			<data>
-			LfNf9VKMMOphLMU/ongM7d3sQthn8nXIfScAWX2qQVk=
+			aVu5/pVbtNAAz/KwelK2e/R0ApDzrnKXf65ogYOIviQ=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
