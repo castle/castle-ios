@@ -1,7 +1,7 @@
 # Changelog
 
 ## 2.1.6 (2022-02-09)
-- Improved device fingerprinting.
+- Fixes a rare bug where the request token would occasionally get encoded incorrectly and consequently rejected by the API
 
 ## 2.1.5 (2021-12-09)
 - Improved device fingerprinting.
@@ -64,7 +64,7 @@
 
 - [#34](https://github.com/castle/castle-ios/pull/34) Remove custom event tracking.
 - [#35](https://github.com/castle/castle-ios/pull/35) Remove ability to add custom properties on events.
- 
+
 ## 1.0.2 (2020-01-13)
 
 - Fix: [#33](https://github.com/castle/castle-ios/pull/33) Reduce the number of screen events produced by the automatic screen tracking
