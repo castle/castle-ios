@@ -93,6 +93,10 @@ extension Highwind.Reachability {
 @objc public class Highwind : ObjectiveC.NSObject {
   @objc public init(version: Swift.String, uuid: Swift.String, publishableKey: Swift.String, userAgent: Swift.String) throws
   @objc public func token() -> Swift.String
+  @objc public func encodePayload(publishableKey: Swift.String, encodedUserPayload: Swift.String, encodedEventPayloads: Swift.Array<Swift.String>) -> Swift.String?
+  @objc public func encodeScreenEvent(requestToken: Swift.String, payload: Swift.String, userFlexibleEncoding: Swift.Bool = false) -> Swift.String
+  @objc public func encodeCustomEvent(requestToken: Swift.String, payload: Swift.String, userFlexibleEncoding: Swift.Bool = false) -> Swift.String
+  @objc public func encodeUserPayloadSet(payload: Swift.String, userFlexibleEncoding: Swift.Bool = false) -> Swift.String
   @objc deinit
 }
 @available(*, unavailable, renamed: "Connection")
