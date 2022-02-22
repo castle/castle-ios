@@ -347,29 +347,29 @@
     XCTAssertEqualObjects(event2.name, @"Second");
     XCTAssertEqualObjects(event2.type, @"$screen");
     
-//    // Archive identity object
-//    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:event2 requiringSecureCoding:true error:nil];
-//    CASEvent *event3 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASEvent.class fromData:data error:nil];
-//    XCTAssertEqualObjects(event2.name, event3.userId);
-//    XCTAssertEqualObjects(event2.type, event3.userSignature);
+    // Archive identity object
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:event2 requiringSecureCoding:true error:nil];
+    CASEvent *event3 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASEvent.class fromData:data error:nil];
+    XCTAssertEqualObjects(event2.name, @"Second");
+    XCTAssertEqualObjects(event2.type, @"$screen");
     
     // Update user identity
     [Castle identify:@"thisisatestuser2"];
     
-//    // Update user signature
-//    NSString *signature2 = @"844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
-//    [Castle secure:signature2];
-//
-//    // Verify that the user id and token are the same after archiving and unarchiving after updating the user id and signature
-//    data = [NSKeyedArchiver archivedDataWithRootObject:event2 requiringSecureCoding:true error:nil];
-//    event3 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASEvent.class fromData:data error:nil];
-//    XCTAssertEqualObjects(event3.userId, @"thisisatestuser1");
+    // Update user signature
+    NSString *signature2 = @"844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
+    [Castle secure:signature2];
+
+    // Verify that the user id and token are the same after archiving and unarchiving after updating the user id and signature
+    data = [NSKeyedArchiver archivedDataWithRootObject:event2 requiringSecureCoding:true error:nil];
+    event3 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASEvent.class fromData:data error:nil];
+//    XCTAssertEqualObjects(event3., @"thisisatestuser1");
 //    XCTAssertEqualObjects(event3.userSignature, signature);
-//
-//    // Create a new event that should have the new updated user id and signature
-//    CASEvent *event4 = [CASScreen eventWithName:@"Third"];
-//    data = [NSKeyedArchiver archivedDataWithRootObject:event4 requiringSecureCoding:true error:nil];
-//    CASEvent *event5 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASEvent.class fromData:data error:nil];
+
+    // Create a new event that should have the new updated user id and signature
+    CASEvent *event4 = [CASScreen eventWithName:@"Third"];
+    data = [NSKeyedArchiver archivedDataWithRootObject:event4 requiringSecureCoding:true error:nil];
+    CASEvent *event5 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASEvent.class fromData:data error:nil];
 //    XCTAssertEqualObjects(event5.userId, @"thisisatestuser2");
 //    XCTAssertEqualObjects(event5.userSignature, signature2);
 }
@@ -478,16 +478,16 @@
     NSString *signature2 = @"844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
     [Castle secure:signature2];
     
-//    // Verify that the user id and token are the same after archiving and unarchiving after updating the user id and signature
-//    data = [NSKeyedArchiver archivedDataWithRootObject:event2 requiringSecureCoding:true error:nil];
-//    event3 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASEvent.class fromData:data error:nil];
+    // Verify that the user id and token are the same after archiving and unarchiving after updating the user id and signature
+    data = [NSKeyedArchiver archivedDataWithRootObject:event2 requiringSecureCoding:true error:nil];
+    event3 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASEvent.class fromData:data error:nil];
 //    XCTAssertEqualObjects(event3.userId, @"thisisatestuser1");
 //    XCTAssertEqualObjects(event3.userSignature, signature);
-//
-//    // Create a new event that should have the new updated user id and signature
-//    CASEvent *event4 = [CASEvent eventWithName:@"event4"];
-//    data = [NSKeyedArchiver archivedDataWithRootObject:event4 requiringSecureCoding:true error:nil];
-//    CASEvent *event5 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASEvent.class fromData:data error:nil];
+
+    // Create a new event that should have the new updated user id and signature
+    CASEvent *event4 = [CASEvent eventWithName:@"event4"];
+    data = [NSKeyedArchiver archivedDataWithRootObject:event4 requiringSecureCoding:true error:nil];
+    CASEvent *event5 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASEvent.class fromData:data error:nil];
 //    XCTAssertEqualObjects(event5.userId, @"thisisatestuser2");
 //    XCTAssertEqualObjects(event5.userSignature, signature2);
 }
