@@ -134,7 +134,7 @@
 
 #pragma mark - CASModel
 
-- (NSDictionary *)JSONPayload
+- (id)JSONPayload
 {
     NSMutableDictionary *payload = [[NSMutableDictionary alloc] init];
     

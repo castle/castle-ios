@@ -8,7 +8,23 @@
 #import "Castle.h"
 #import "CASUser.h"
 
+@import Highwind;
+
 @interface Castle (Util)
+
+/**
+ Get Highwind instance used for token generation and payload encoding
+ 
+ @return Highwind instance
+ */
++ (nonnull Highwind *)highwind;
+
+/**
+ Get publishable key
+ 
+ @return Publishable key
+ */
++ (nullable NSString *)publishableKey;
 
 /**
  Get stored user information from last identify call, returns nil if not set

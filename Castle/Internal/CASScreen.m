@@ -40,14 +40,9 @@
 
 #pragma mark - CASModel
 
-- (NSDictionary *)JSONPayload
+- (id)JSONPayload
 {
-    NSMutableDictionary *payload = ((NSDictionary *) [super JSONPayload]).mutableCopy;
-    
-    // Add name to payload
-    [payload setObject:@{ @"name": self.name } forKey:@"screen"];
-    
-    return [payload copy];
+    return @{ @"name": self.name };
 }
 
 #pragma mark - Getters

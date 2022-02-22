@@ -563,6 +563,16 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return [Castle sharedInstance].user;
 }
 
++ (Highwind *)highwind
+{
+    return [Castle sharedInstance].highwind;
+}
+
++ (nullable NSString *)publishableKey
+{
+    return [Castle sharedInstance].configuration.publishableKey;
+}
+
 + (NSString *)userSignature
 {
     return [Castle sharedInstance].userSignature;
