@@ -48,6 +48,12 @@
         self.name = [decoder decodeObjectOfClass:NSString.class forKey:@"name"];
         self.timestamp = [decoder decodeObjectOfClass:NSDate.class forKey:@"timestamp"];
         self.token = [decoder decodeObjectOfClass:NSString.class forKey:@"token"];
+        
+        // Check to see that all required fields could be decoded
+        if(self.name == nil || self.timestamp == nil || self.token == nil) {
+            CASLog(@"Failed to decode all required params, (name: %@, timestamp: %@, token: %@", self.name, self.timestamp, self.token);
+            return nil;
+        }
     }
     return self;
 }
