@@ -1,7 +1,10 @@
 # Changelog
 
+## 2.1.7 (2022-02-25)
+- Fixes a rare bug that resulted in incorrectly encoded request tokens.
+
 ## 2.1.6 (2022-02-09)
-- Fixes a rare bug where the request token would occasionally get encoded incorrectly and consequently rejected by the API
+- Fixes a rare bug where the request token would occasionally get encoded incorrectly and consequently rejected by the API.
 
 ## 2.1.5 (2021-12-09)
 - Improved device fingerprinting.
