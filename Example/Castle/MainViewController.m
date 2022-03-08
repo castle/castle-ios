@@ -31,7 +31,7 @@
 
 - (IBAction)identify:(id)sender {
     // Identify user with unique identifier including user traits
-    [Castle identify:@"1245-3055" properties:@{ @"email": @"laura@example.com" }];
+    [Castle identify:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
     [self updateQueueCountLabel];
 }
 

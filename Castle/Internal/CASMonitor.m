@@ -12,13 +12,14 @@
 #import "CASEvent.h"
 #import "CASScreen.h"
 #import "CASCustom.h"
+#import "CASUserJwt.h"
 #import "Castle.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CASMonitor ()
 @property (nonatomic, strong, readwrite) NSArray *events;
-@property (nonatomic, strong) CASUser *user;
+@property (nonatomic, strong) NSString *userJwt;
 @end
 
 @implementation CASMonitor
@@ -37,15 +38,15 @@ NS_ASSUME_NONNULL_BEGIN
         return nil;
     }
     
-    CASUser *user = [Castle user];
-    if(user == nil) {
-        CASLog(@"[%@] No user id set, won't flush events.", NSStringFromClass(self.class));
+    NSString *userJwt = [Castle userJwt];
+    if(userJwt == nil) {
+        CASLog(@"[%@] No user jwt set, won't flush events.", NSStringFromClass(self.class));
         return nil;
     }
     
     CASMonitor *batch = [[CASMonitor alloc] init];
     batch.events = events;
-    batch.user = user;
+    batch.userJwt = userJwt;
     
     return batch;
 }
@@ -62,8 +63,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable id)JSONPayload
 {
     Highwind *highwind = [Castle highwind];
-    NSString *userPayload = [self.user JSONString];
-    NSString *encodedUser = [highwind encodeUserPayloadSetWithPayload:userPayload userFlexibleEncoding:false];
+    NSString *userPayload = [[CASUserJwt userWithJwt:self.userJwt] JSONString];
+    NSString *encodedUser = [highwind encodeUserJwtPayloadSetWithPayload:userPayload];
     
     NSMutableArray *encodedEvents = @[].mutableCopy;
     for (CASEvent *event in self.events) {
@@ -83,9 +84,9 @@ NS_ASSUME_NONNULL_BEGIN
     NSString *payload = [event JSONString];
     
     if([event isKindOfClass:CASScreen.class]) {
-        return [highwind encodeScreenEventWithRequestToken:event.token payload:payload userFlexibleEncoding:false];
+        return [highwind encodeScreenEventWithRequestToken:event.token payload:payload];
     } else if([event isKindOfClass:CASCustom.class]) {
-        return [highwind encodeCustomEventWithRequestToken:event.token payload:payload userFlexibleEncoding:false];
+        return [highwind encodeCustomEventWithRequestToken:event.token payload:payload];
     }
     
     NSAssert(false, @"Unhandled event class type (%@) in %s", NSStringFromClass(event.class), __PRETTY_FUNCTION__);

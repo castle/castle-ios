@@ -32,12 +32,12 @@
 + (instancetype)eventWithName:(NSString *)name properties:(NSDictionary *)properties
 {
     if(!name) {
-        CASLog(@"Screen name can't be nil.");
+        CASLog(@"Event name can't be nil.");
         return nil;
     }
     
     if([name isEqualToString:@""]) {
-        CASLog(@"Screen names must be at least one (1) character long.");
+        CASLog(@"Event names must be at least one (1) character long.");
         return nil;
     }
     

@@ -12,12 +12,12 @@
 #import <Castle/CASScreen.h>
 #import <Castle/CASMonitor.h>
 #import <Castle/CASCustom.h>
-#import <Castle/CASUser.h>
 #import <Castle/CASRequestInterceptor.h>
 #import <Castle/CASAPIClient.h>
 #import <Castle/UIViewController+CASScreen.h>
 #import <Castle/CASReachability.h>
 #import <Castle/Castle+Util.h>
+#import <Castle/CASUserJwt.h>
 
 #import "MainViewController.h"
 
@@ -33,7 +33,7 @@
     // Put setup code here. This method is called before the invocation of each test method in the class.
     
     NSArray *baseURLAllowList = @[ [NSURL URLWithString:@"https://google.com/"] ];
-    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
     configuration.baseURLAllowList = baseURLAllowList;
     
     [Castle configure:configuration];
@@ -92,8 +92,9 @@
 
 - (void)testConfiguration
 {
+    NSString *publishableKey = @"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA";
     NSArray *baseURLAllowList = @[ [NSURL URLWithString:@"https://google.com/"] ];
-    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:publishableKey];
     
     // Check that all default values are set correctly
     XCTAssertEqual(configuration.screenTrackingEnabled, NO);
@@ -111,7 +112,7 @@
     configuration.baseURLAllowList = baseURLAllowList;
 
     // Check that all the configuration parameters where set correctly
-    XCTAssertTrue([configuration.publishableKey isEqualToString:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"]);
+    XCTAssertTrue([configuration.publishableKey isEqualToString:publishableKey]);
     XCTAssertEqual(configuration.screenTrackingEnabled, YES);
     XCTAssertEqual(configuration.debugLoggingEnabled, YES);
     XCTAssertEqual(configuration.deviceIDAutoForwardingEnabled, YES);
@@ -126,7 +127,7 @@
     XCTAssertFalse([configuration.baseURLAllowList[0].absoluteString isEqualToString:@"https://google.com/somethingelse"]);
 
     // Setup Castle SDK with publishable key
-    [Castle configureWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    [Castle configureWithPublishableKey:publishableKey];
     
     // Configuration reset
     [Castle resetConfiguration];
@@ -142,10 +143,10 @@
     [Castle resetConfiguration];
 
     // Test cloudflare logic
-    configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    configuration = [CastleConfiguration configurationWithPublishableKey:publishableKey];
     XCTAssertThrows(configuration.useCloudflareApp = YES, "");
 
-    configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    configuration = [CastleConfiguration configurationWithPublishableKey:publishableKey];
     configuration.apiDomain = @"example.com";
     configuration.useCloudflareApp = YES;
     
@@ -160,7 +161,7 @@
 
     [Castle resetConfiguration];
     
-    configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    configuration = [CastleConfiguration configurationWithPublishableKey:publishableKey];
     configuration.apiDomain = @"example.com";
     configuration.apiPath = @"v1/test/";
     configuration.useCloudflareApp = YES;
@@ -171,7 +172,7 @@
     
     [Castle resetConfiguration];
     
-    [Castle configureWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    [Castle configureWithPublishableKey:publishableKey];
 }
 
 - (void)testDeviceIdentifier
@@ -183,19 +184,11 @@
 - (void)testUserIdPersistance
 {
     // Make sure the user id is persisted correctly after identify
-    [Castle identify:@"thisisatestuser"];
+    [Castle identify:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
 
     // Check that the stored identity is the same as the identity we tracked
-    XCTAssertEqual([Castle user].userId, @"thisisatestuser");
-}
-
-- (void)testSignaturePersistance
-{
-    // Call secure to save the signature
-    [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
-    
-    // Check that the stored user signature is the same as the user signature we provided
-    XCTAssertEqual([Castle userSignature], @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52");
+    NSString *userJwt = @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
+    XCTAssertEqual([Castle userJwt], userJwt);
 }
 
 - (void)testReset
@@ -203,8 +196,7 @@
     [Castle reset];
 
     // Check to see if the user id and user signature was cleared on reset
-    XCTAssertNil([Castle user]);
-    XCTAssertNil([Castle userSignature]);
+    XCTAssertNil([Castle userJwt]);
 }
 
 - (void)testTracking
@@ -222,14 +214,14 @@
     [Castle identify:@""];
     newCount = [CASEventStorage storedQueue].count;
     XCTAssertTrue(count == newCount); // Count should be unchanced
-    XCTAssertNil([Castle user]); // User id should be nil
+    XCTAssertNil([Castle userJwt]); // User jwt should be nil
 
     // This should lead to no event being tracked properties can't be nil
     count = [CASEventStorage storedQueue].count;
-    [Castle identify:@"testuser1" properties:nil];
+    [Castle identify:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
     newCount = [CASEventStorage storedQueue].count;
     XCTAssertTrue(count == newCount); // Count should be unchanced
-//    XCTAssertNil([Castle userId]); // User id should be nil
+    XCTAssertNotNil([Castle userJwt]); // User jwt should not be nil
 
     CASScreen *screen = [CASScreen eventWithName:@"Main"];
     XCTAssertNotNil(screen);
@@ -272,17 +264,9 @@
     CASScreen *screen2 = [CASScreen eventWithName:@""];
     XCTAssertNil(screen2);
 
-    CASUser *user1 = [CASUser userWithId:@"" properties:@{}];
+    CASUserJwt *user1 = [CASUserJwt userWithJwt:@""];
     XCTAssertNil(user1);
-
-    CASUser *user2 = [CASUser userWithId:@"testuser" properties:@{}];
-
-    NSData *user2Data = [NSKeyedArchiver archivedDataWithRootObject:user2 requiringSecureCoding:true error:nil];
-    XCTAssertNotNil(user2Data);
-
-    CASUser *user3 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASUser.class fromData:user2Data error:nil];
-    XCTAssertNotNil(user3);
-
+    
     XCTAssertTrue([CASEvent supportsSecureCoding]);
 }
 
@@ -296,29 +280,14 @@
     event = [CASScreen eventWithName:@""];
     XCTAssertNil(event);
     
-    CASUser *user = [CASUser userWithId:@"" properties:properties];
+    CASUserJwt *user = [CASUserJwt userWithJwt:@""];
     XCTAssertNil(user);
-}
-
-- (void)testSecureMode
-{
-    // Calling secure with a nil user signature should not store or replace any previous signature
-    [Castle secure:nil];
-    XCTAssertNil([Castle userSignature]);
-    
-    // User signature should be stored
-    [Castle secure:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
-    XCTAssertEqual([Castle userSignature], @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52");
-    
-    // Calling secure again should override previously stored signature
-    [Castle secure:@"844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
-    XCTAssertEqual([Castle userSignature], @"844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52");
 }
 
 - (void)testObjectSerializationForScreen
 {
     [Castle reset];
-    [Castle identify:@"thisisatestuser1"];
+    [Castle identify:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
     
     // Create screen view
     CASEvent *event = [CASScreen eventWithName:@"Main"];
@@ -327,7 +296,7 @@
     
     // Validate payload
     NSDictionary *payload = [event JSONPayload];
-    XCTAssertTrue([payload[@"screen"][@"name"] isEqualToString:@"Main"]);
+    XCTAssertTrue([payload[@"name"] isEqualToString:@"Main"]);
     XCTAssertTrue([payload[@"type"] isEqualToString:@"$screen"]);
     XCTAssertNil(payload[@"properties"]);
     XCTAssertNotNil(payload[@"timestamp"]);
@@ -338,95 +307,43 @@
     // Payload should not include these parameters
     XCTAssertNil(payload[@"event"]);
     
-    // Enable secure mode
-    NSString *signature = @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
-    [Castle secure:signature];
-    
     // The user signature should be included in any new event objects
     CASEvent *event2 =  [CASScreen eventWithName:@"Second"];
     XCTAssertEqualObjects(event2.name, @"Second");
     XCTAssertEqualObjects(event2.type, @"$screen");
     
-    // Archive identity object
+    // Archive screen object
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:event2 requiringSecureCoding:true error:nil];
-    CASEvent *event3 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASEvent.class fromData:data error:nil];
-    XCTAssertEqualObjects(event2.name, @"Second");
-    XCTAssertEqualObjects(event2.type, @"$screen");
     
-    // Update user identity
-    [Castle identify:@"thisisatestuser2"];
-    
-    // Update user signature
-    NSString *signature2 = @"844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
-    [Castle secure:signature2];
-
-    // Verify that the user id and token are the same after archiving and unarchiving after updating the user id and signature
-    data = [NSKeyedArchiver archivedDataWithRootObject:event2 requiringSecureCoding:true error:nil];
-    event3 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASEvent.class fromData:data error:nil];
-//    XCTAssertEqualObjects(event3., @"thisisatestuser1");
-//    XCTAssertEqualObjects(event3.userSignature, signature);
-
-    // Create a new event that should have the new updated user id and signature
-    CASEvent *event4 = [CASScreen eventWithName:@"Third"];
-    data = [NSKeyedArchiver archivedDataWithRootObject:event4 requiringSecureCoding:true error:nil];
-    CASEvent *event5 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASEvent.class fromData:data error:nil];
-//    XCTAssertEqualObjects(event5.userId, @"thisisatestuser2");
-//    XCTAssertEqualObjects(event5.userSignature, signature2);
+    // Unarchived data should match model before archive
+    CASEvent *event3 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASScreen.class fromData:data error:nil];
+    XCTAssertEqualObjects(event3.name, event2.name);
+    XCTAssertEqualObjects(event3.type, event2.type);
 }
 
 - (void)testObjectSerializationForIdentify
 {
+    NSString *userJwt = @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
     [Castle reset];
-    [Castle identify:@"thisisatestuser1"];
+    [Castle identify:userJwt];
 
     // Create user identity
-    NSDictionary *traits = @{ @"trait": @"value" };
-    CASUser *event = [CASUser userWithId:@"123" properties: @{ @"traits": traits }];
+    CASUserJwt *event = [CASUserJwt userWithJwt:userJwt];
 
     // Validate payload
     NSDictionary *payload = [event JSONPayload];
-    XCTAssertTrue([payload[@"traits"] isEqualToDictionary:traits]);
+    XCTAssertTrue([payload[@"jwt"] isEqualToString:userJwt]);
 
-    // Enable secure mode
-    NSString *signature = @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
-    [Castle secure:signature];
-
-    // The user signature should be included in any new event objects
-    CASUser *event2 =  [CASUser userWithId:@"456" properties:traits];
-    XCTAssertEqualObjects(event2.userId, @"456");
-//    XCTAssertEqualObjects(event2.userSignature, signature);
-
-    // Archive identity object
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:event2 requiringSecureCoding:true error:nil];
-    CASUser *event3 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASUser.class fromData:data error:nil];
-    XCTAssertEqualObjects(event2.userId, event3.userId);
-//    XCTAssertEqualObjects(event2.userSignature, event3.userSignature);
-
-    // Update user identity
-    [Castle identify:@"thisisatestuser2"];
-
-    // Update user signature
-    NSString *signature2 = @"844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
-    [Castle secure:signature2];
-
-    // Verify that the user id and token are the same after archiving and unarchiving after updating the user id and signature
-    data = [NSKeyedArchiver archivedDataWithRootObject:event2 requiringSecureCoding:true error:nil];
-    event3 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASUser.class fromData:data error:nil];
-    XCTAssertEqualObjects(event3.userId, event2.userId);
-//    XCTAssertEqualObjects(event3.userSignature, signature);
-
-    // Create a new event that should have the new updated user id and signature
-    CASUser *event4 = [CASUser userWithId:@"789" properties:traits];
-    data = [NSKeyedArchiver archivedDataWithRootObject:event4 requiringSecureCoding:true error:nil];
-    CASUser *event5 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASUser.class fromData:data error:nil];
-    XCTAssertEqualObjects(event5.userId, @"789");
-//    XCTAssertEqualObjects(event5.userSignature, signature2);
+    // Validate jwt payload
+    CASUserJwt *event2 = [CASUserJwt userWithJwt:userJwt];
+    XCTAssertEqualObjects(event2.jwt, userJwt);
 }
 
 - (void)testObjectSerializationForEvent
 {
+    NSString *userJwt = @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
     [Castle reset];
-    [Castle identify:@"thisisatestuser1"];
+    [Castle identify:userJwt];
     
     CASModel *model = [[CASModel alloc] init];
     XCTAssertNil(model.JSONPayload);
@@ -458,38 +375,18 @@
     CASCustom *invalidEvent2 = [CASCustom eventWithName:@"testevent2" properties:@{ @"invalidParamContainer": @{ @"invalidParam": [[NSObject alloc] init] } }];
     XCTAssertNil(invalidEvent2);
     
-    // Enable secure mode
-    NSString *signature = @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
-    [Castle secure:signature];
-    
-    // The user signature should be included in any new event objects
+    // Check parameters of custom model
     CASCustom *event2 =  [CASCustom eventWithName:@"event2"];
     XCTAssertEqualObjects(event2.name, @"event2");
+    XCTAssertEqualObjects(event2.type, @"$custom");
     
-    // Archive identity object
+    // Archive custom object
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:event2 requiringSecureCoding:true error:nil];
+    
+    // Unarchived data should match model before archive
     CASEvent *event3 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASEvent.class fromData:data error:nil];
     XCTAssertEqualObjects(event2.name, event3.name);
-    
-    // Update user identity
-    [Castle identify:@"thisisatestuser2"];
-    
-    // Update user signature
-    NSString *signature2 = @"844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
-    [Castle secure:signature2];
-    
-    // Verify that the user id and token are the same after archiving and unarchiving after updating the user id and signature
-    data = [NSKeyedArchiver archivedDataWithRootObject:event2 requiringSecureCoding:true error:nil];
-    event3 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASEvent.class fromData:data error:nil];
-//    XCTAssertEqualObjects(event3.userId, @"thisisatestuser1");
-//    XCTAssertEqualObjects(event3.userSignature, signature);
-
-    // Create a new event that should have the new updated user id and signature
-    CASEvent *event4 = [CASEvent eventWithName:@"event4"];
-    data = [NSKeyedArchiver archivedDataWithRootObject:event4 requiringSecureCoding:true error:nil];
-    CASEvent *event5 = [NSKeyedUnarchiver unarchivedObjectOfClass:CASEvent.class fromData:data error:nil];
-//    XCTAssertEqualObjects(event5.userId, @"thisisatestuser2");
-//    XCTAssertEqualObjects(event5.userSignature, signature2);
+    XCTAssertEqualObjects(event2.type, event3.type);
 }
 
 - (void)testPersistance
@@ -533,7 +430,7 @@
 - (void)testRequestInterceptor
 {
     // Create configuration object
-    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
     
     NSArray *baseURLAllowList = @[ [NSURL URLWithString:@"https://google.com/"] ];
     
@@ -601,7 +498,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"POST /monitor"];
 
     // Create configuration object
-    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
     CASAPIClient *client = [CASAPIClient clientWithConfiguration:configuration];
 
     // Perform batch network request
@@ -629,7 +526,7 @@
 
 - (void)testMaxQueueLength
 {
-    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
     
     // Update configuration and set max queue limit to less than the flush limit.
     configuration.debugLoggingEnabled = YES;
@@ -662,7 +559,7 @@
     [defaults synchronize];
     
     [Castle resetConfiguration];
-    [Castle configureWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    [Castle configureWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
     
     // Check to see if the installed version was updated correctly i.e. the SDK detected an app update.
     NSString *currentVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];

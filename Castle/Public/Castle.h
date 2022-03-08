@@ -91,49 +91,14 @@ extern NSString * const CastleRequestTokenHeaderName;
 #pragma mark - Tracking
 
 /**
- Track identify event with specified user id. User identity will be persisted. A call to identify or reset will clear the stored user identity.
+ Track identify event with specified user id. User jwt will be persisted. A call to identify or reset will clear the stored user identity.
 
- @param identifier User Id
- @code // Identify User with unique identifier
+ @param userJwt User Jwt
+ @code // Identify User with jwt
  [Castle identify:@"1245-3055"];
  @endcode
  */
-+ (void)identify:(nullable NSString *)identifier;
-
-/**
- Track identify event with specified user identity. User identity will be persisted. A call to identify or reset will clear the stored user identity.
- Provided user properties will be included in the identify event sent to the Castle API.
-
- @param identifier User Id
- @param properties User properties dictionary
- @code // Identify User with unique identifier including user properties
- [Castle identify:@"1245-3055" properties:@{ @"email": @"laura@example.com" }];
- @endcode
- */
-+ (void)identify:(nullable NSString *)identifier properties:(nullable NSDictionary *)properties;
-
-/**
- Track identify event with specified user identity. User identity will be persisted. A call to identify or reset will clear the stored user identity.
- Provided user traits will be included in the identify event sent to the Castle API.
-
- @param identifier user id
- @param traits user traits
- @code // Identify user with unique identifier including user traits
- [Castle identify:@"1245-3055" traits:@{ @"email": @"laura@example.com" }];
- @endcode
- */
-+ (void)identify:(NSString *)identifier traits:(nullable NSDictionary *)traits __deprecated_msg("Use +identify:properties: intead");
-
-/**
- Set user signature and enable secure mode. User signature will be included in all events after it has been set and will be persisted.
- A stored user signature will be removed when the user signature or reset methods are called.
-
- @param signature User signature (SHA-256 HMAC in hex format)
- @code // Add user signature
- [Castle signature:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
- @endcode
- */
-+ (void)secure:(nullable NSString *)signature;
++ (void)identify:(nullable NSString *)userJwt;
 
 /**
  Track screen event with a specified name
@@ -184,32 +149,11 @@ extern NSString * const CastleRequestTokenHeaderName;
 #pragma mark - Metadata
 
 /**
- Get client identifier if set, otherwise returns nil
-
- @return client identifiers
- */
-+ (nullable NSString *)clientId __deprecated_msg("Use +createRequestToken instead");
-
-/**
  Get request token
 
  @return request token
  */
 + (nonnull NSString *)createRequestToken;
-
-/**
- Get stored user id from last identify call, returns nil if not set
-
- @return User Id
- */
-+ (nullable NSString *)userId __deprecated_msg("Will be removed in an upcoming version of the library");
-
-/**
- Get stored signature from secure call, returns nil if not set
-
- @return Signature
- */
-+ (nullable NSString *)userSignature;
 
 /**
  Get the User Agent for used in all requests to the Castle API.

@@ -6,7 +6,6 @@
 //
 
 #import "Castle.h"
-#import "CASUser.h"
 
 @import Highwind;
 
@@ -27,11 +26,11 @@
 + (nullable NSString *)publishableKey;
 
 /**
- Get stored user information from last identify call, returns nil if not set
+ Get stored user jwt from last identify call, returns nil if not set
 
- @return User object
+ @return User JWT
  */
-+ (nullable CASUser *)user;
++ (nullable NSString *)userJwt;
 
 /**
  Get current connection state for Wifi

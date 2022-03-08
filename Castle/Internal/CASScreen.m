@@ -42,7 +42,12 @@
 
 - (id)JSONPayload
 {
-    return @{ @"name": self.name };
+    NSMutableDictionary *payload = ((NSDictionary *) [super JSONPayload]).mutableCopy;
+    
+    // Add name to payload
+    [payload setObject:self.name forKey:@"name"];
+    
+    return [payload copy];
 }
 
 #pragma mark - Getters
