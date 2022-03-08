@@ -211,7 +211,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 
 @class NSString;
-@class NSNumber;
 
 /// Highwind public API
 SWIFT_CLASS("_TtC8Highwind8Highwind")
@@ -245,32 +244,33 @@ SWIFT_CLASS("_TtC8Highwind8Highwind")
 ///
 /// \param payload payload to encode
 ///
-/// \param userFlexibleEncoding bool flexible encoding
-///
 ///
 /// returns:
 /// Encoded Screen Event
-- (NSString * _Nonnull)encodeScreenEventWithRequestToken:(NSString * _Nonnull)requestToken payload:(NSString * _Nonnull)payload userFlexibleEncoding:(BOOL)userFlexibleEncoding SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)encodeScreenEventWithRequestToken:(NSString * _Nonnull)requestToken payload:(NSString * _Nonnull)payload SWIFT_WARN_UNUSED_RESULT;
 /// Encode Custom Event
 /// \param requestToken request token
 ///
 /// \param payload payload to encode
 ///
-/// \param userFlexibleEncoding bool flexible encoding
-///
 ///
 /// returns:
 /// Encoded custom Event
-- (NSString * _Nonnull)encodeCustomEventWithRequestToken:(NSString * _Nonnull)requestToken payload:(NSString * _Nonnull)payload userFlexibleEncoding:(BOOL)userFlexibleEncoding SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)encodeCustomEventWithRequestToken:(NSString * _Nonnull)requestToken payload:(NSString * _Nonnull)payload SWIFT_WARN_UNUSED_RESULT;
 /// Encode User Payload Set
 /// \param payload user payload to encode
-///
-/// \param userFlexibleEncoding bool flexible encoding
 ///
 ///
 /// returns:
 /// Encoded User Payload Set
-- (NSString * _Nonnull)encodeUserPayloadSetWithPayload:(NSString * _Nonnull)payload userFlexibleEncoding:(BOOL)userFlexibleEncoding SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)encodeUserPayloadSetWithPayload:(NSString * _Nonnull)payload SWIFT_WARN_UNUSED_RESULT;
+/// Encode User JWT Payload Set
+/// \param payload user jwt payload to encode
+///
+///
+/// returns:
+/// Encoded User JWT Payload Set
+- (NSString * _Nonnull)encodeUserJwtPayloadSetWithPayload:(NSString * _Nonnull)payload SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -494,7 +494,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 
 @class NSString;
-@class NSNumber;
 
 /// Highwind public API
 SWIFT_CLASS("_TtC8Highwind8Highwind")
@@ -528,32 +527,33 @@ SWIFT_CLASS("_TtC8Highwind8Highwind")
 ///
 /// \param payload payload to encode
 ///
-/// \param userFlexibleEncoding bool flexible encoding
-///
 ///
 /// returns:
 /// Encoded Screen Event
-- (NSString * _Nonnull)encodeScreenEventWithRequestToken:(NSString * _Nonnull)requestToken payload:(NSString * _Nonnull)payload userFlexibleEncoding:(BOOL)userFlexibleEncoding SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)encodeScreenEventWithRequestToken:(NSString * _Nonnull)requestToken payload:(NSString * _Nonnull)payload SWIFT_WARN_UNUSED_RESULT;
 /// Encode Custom Event
 /// \param requestToken request token
 ///
 /// \param payload payload to encode
 ///
-/// \param userFlexibleEncoding bool flexible encoding
-///
 ///
 /// returns:
 /// Encoded custom Event
-- (NSString * _Nonnull)encodeCustomEventWithRequestToken:(NSString * _Nonnull)requestToken payload:(NSString * _Nonnull)payload userFlexibleEncoding:(BOOL)userFlexibleEncoding SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)encodeCustomEventWithRequestToken:(NSString * _Nonnull)requestToken payload:(NSString * _Nonnull)payload SWIFT_WARN_UNUSED_RESULT;
 /// Encode User Payload Set
 /// \param payload user payload to encode
-///
-/// \param userFlexibleEncoding bool flexible encoding
 ///
 ///
 /// returns:
 /// Encoded User Payload Set
-- (NSString * _Nonnull)encodeUserPayloadSetWithPayload:(NSString * _Nonnull)payload userFlexibleEncoding:(BOOL)userFlexibleEncoding SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)encodeUserPayloadSetWithPayload:(NSString * _Nonnull)payload SWIFT_WARN_UNUSED_RESULT;
+/// Encode User JWT Payload Set
+/// \param payload user jwt payload to encode
+///
+///
+/// returns:
+/// Encoded User JWT Payload Set
+- (NSString * _Nonnull)encodeUserJwtPayloadSetWithPayload:(NSString * _Nonnull)payload SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
