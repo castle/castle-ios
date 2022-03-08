@@ -5,7 +5,7 @@ jobs:
 
     # Specify the Xcode version to use
     macos:
-      xcode: "13.1"
+      xcode: "12.5.1"
     working_directory: /Users/distiller/project
 
     steps:
