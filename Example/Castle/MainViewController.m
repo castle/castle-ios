@@ -30,7 +30,7 @@
 }
 
 - (IBAction)custom:(id)sender {
-    [Castle track:@"Custom" properties:@{ @"customKey": @"value" }];
+    [Castle custom:@"Custom" properties:@{ @"customKey": @"value" }];
     [self updateQueueCountLabel];
 }
 

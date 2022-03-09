@@ -115,21 +115,21 @@ extern NSString * const CastleRequestTokenHeaderName;
 
  @param eventName Event name
  @code // Track custom event
- [Castle track:@"Custom"];
+ [Castle custom:@"Custom"];
  @endcode
  */
-+ (void)track:(NSString *)eventName;
++ (void)custom:(NSString *)eventName;
 
 /**
- Track custom event with a specified name
+ Track custom event with a specified name and properties
 
  @param eventName Event name
  @param properties Properties
  @code // Track custom event with properties
- [Castle track:@"Custom" properties:@{ @"customKey": @"value" }];
+ [Castle custom:@"Custom" properties:@{ @"customKey": @"value" }];
  @endcode
  */
-+ (void)track:(NSString *)eventName properties:(NSDictionary *)properties;
++ (void)custom:(NSString *)eventName properties:(NSDictionary *)properties;
 
 /**
  Force a flush of the batch event queue, even if the flush limit hasn't been reached
