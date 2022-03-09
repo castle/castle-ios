@@ -152,12 +152,11 @@ class SwiftTests: XCTestCase {
     }
 
     func testUserIdPersistance() throws {
-        let userJwt = "944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"
-        
         // Make sure the user id is persisted correctly after identify
-        Castle.identify(userJwt)
+        Castle.identify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
 
         // Check that the stored identity is the same as the identity we tracked
+        let userJwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"
         XCTAssertEqual(Castle.userJwt(), userJwt)
     }
 
@@ -186,7 +185,7 @@ class SwiftTests: XCTestCase {
 
         // This should lead to no event being tracked properties can't be nil
         count = CASEventStorage.storedQueue().count
-        Castle.identify("944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52")
+        Castle.identify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
         newCount = CASEventStorage.storedQueue().count
         XCTAssertTrue(count == newCount) // Count should be unchanced
         XCTAssertNotNil(Castle.userJwt()) // User jwt should not be nil
@@ -251,7 +250,7 @@ class SwiftTests: XCTestCase {
 
     func testObjectSerializationForScreen() throws {
         Castle.reset()
-        Castle.identify("thisisatestuser1")
+        Castle.identify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
         
         // Create screen view
         let event = CASScreen(name: "Main")!
@@ -287,7 +286,7 @@ class SwiftTests: XCTestCase {
     }
 
     func testObjectSerializationForIdentify() {
-        let userJwt = "944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"
+        let userJwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"
         Castle.reset()
         Castle.identify(userJwt)
 
@@ -305,7 +304,7 @@ class SwiftTests: XCTestCase {
 
     func testObjectSerializationForEvent() {
         Castle.reset()
-        Castle.identify("944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52")
+        Castle.identify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
 
         let model = CASModel()
         XCTAssertNil(model.jsonPayload());
@@ -447,7 +446,7 @@ class SwiftTests: XCTestCase {
 
     func testNetworking() throws {
         // Must identify, otherwise CASMonitor constructor will return nil
-        Castle.identify("thisisatestuser")
+        Castle.identify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
         
         let event = CASCustom(name: "Example event")!
         let batchModel = CASMonitor(events: [event])!
@@ -491,7 +490,7 @@ class SwiftTests: XCTestCase {
 
         Castle.configure(configuration)
         
-        Castle.identify("thisisatestuser")
+        Castle.identify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
 
         // Fill the queue
         for i in 0...configuration.maxQueueLimit {

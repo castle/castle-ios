@@ -184,10 +184,10 @@
 - (void)testUserIdPersistance
 {
     // Make sure the user id is persisted correctly after identify
-    [Castle identify:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
+    [Castle identify:@"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"];
 
     // Check that the stored identity is the same as the identity we tracked
-    NSString *userJwt = @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
+    NSString *userJwt = @"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0";
     XCTAssertEqual([Castle userJwt], userJwt);
 }
 
@@ -218,7 +218,7 @@
 
     // This should lead to no event being tracked properties can't be nil
     count = [CASEventStorage storedQueue].count;
-    [Castle identify:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
+    [Castle identify:@"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"];
     newCount = [CASEventStorage storedQueue].count;
     XCTAssertTrue(count == newCount); // Count should be unchanced
     XCTAssertNotNil([Castle userJwt]); // User jwt should not be nil
@@ -287,7 +287,7 @@
 - (void)testObjectSerializationForScreen
 {
     [Castle reset];
-    [Castle identify:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
+    [Castle identify:@"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"];
     
     // Create screen view
     CASEvent *event = [CASScreen eventWithName:@"Main"];
@@ -323,7 +323,7 @@
 
 - (void)testObjectSerializationForIdentify
 {
-    NSString *userJwt = @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
+    NSString *userJwt = @"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0";
     [Castle reset];
     [Castle identify:userJwt];
 
@@ -341,7 +341,7 @@
 
 - (void)testObjectSerializationForEvent
 {
-    NSString *userJwt = @"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52";
+    NSString *userJwt = @"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0";
     [Castle reset];
     [Castle identify:userJwt];
     
