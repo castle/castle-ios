@@ -98,7 +98,7 @@ extern NSString * const CastleRequestTokenHeaderName;
  [Castle identify:@"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"];
  @endcode
  */
-+ (void)identify:(nullable NSString *)userJwt;
++ (void)identify:(nullable NSString *)userJwt NS_SWIFT_NAME(identify(userJwt:));
 
 /**
  Track screen event with a specified name
