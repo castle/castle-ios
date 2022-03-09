@@ -1170,6 +1170,7 @@ $sSSSTsST22_copyToContiguousArrays0cD0Vy7ElementQzGyFTW
 $sSlsE22_copyToContiguousArrays0cD0Vy7ElementQzGyFSS_Tgq5
 $ss32_copyCollectionToContiguousArrayys0dE0Vy7ElementQzGxSlRzlFSS_Tgq5
 Swift runtime failure: invalid Collection: less than 'count' elements in collection
+numOfBytesNeeded
 $ss18EnumeratedSequenceV8IteratorV4nextSi6offset_7ElementQz7elementtSgyFSaySSG_Tg5
 $sSa9_getCountSiyFSS_Tg5
 $ss12_ArrayBufferV14immutableCountSivgSS_Tg5
@@ -1187,7 +1188,6 @@ $ss15ContiguousArrayVAByxGycfCSJ_Tgq5
 stringEncode
 truncate
 prefix
-numOfBytesNeeded
 $sSSs5Error_pIggzo_SSsAA_pIegnzo_TR
 $ss17_NativeDictionaryV5_keysSpyxGvgSS_ypTg5
 $sSD4KeysVyxq__GSTsST12makeIterator0C0QzyFTWSS_ypTg5
