@@ -75,6 +75,10 @@
     [app.navigationBars[@"UITabBar"].buttons[@"Example"] tap];
     exists = [app.staticTexts[@"Queue size: 12"] waitForExistenceWithTimeout:10];
     XCTAssertTrue(exists);
+    
+    [app.buttons[@"trackCustom"] tap];
+    exists = [app.staticTexts[@"Queue size: 13"] waitForExistenceWithTimeout:10];
+    XCTAssertTrue(exists);
 }
 
 @end
