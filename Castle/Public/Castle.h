@@ -94,42 +94,42 @@ extern NSString * const CastleRequestTokenHeaderName;
  Track identify event with specified user id. User jwt will be persisted. A call to identify or reset will clear the stored user identity.
 
  @param userJwt User Jwt
- @code // Identify User with jwt
- [Castle identify:@"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"];
+ @code // Set user jwt
+ [Castle setUserJwt:@"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"];
  @endcode
  */
-+ (void)identify:(nullable NSString *)userJwt NS_SWIFT_NAME(identify(userJwt:));
++ (void)setUserJwt:(nullable NSString *)userJwt NS_SWIFT_NAME(userJwt(_:));
 
 /**
  Track screen event with a specified name
 
- @param screenName Screen name
+ @param name Screen name
  @code // Track a screen view
- [Castle screen:@"Menu"];
+ [Castle screenWithName:@"Menu"];
  @endcode
  */
-+ (void)screen:(NSString *)screenName;
++ (void)screenWithName:(NSString *)name NS_SWIFT_NAME(screen(name:));
 
 /**
  Track custom event with a specified name
 
- @param eventName Event name
+ @param name Event name
  @code // Track custom event
- [Castle custom:@"Custom"];
+ [Castle customWithName:@"Custom"];
  @endcode
  */
-+ (void)custom:(NSString *)eventName;
++ (void)customWithName:(NSString *)name NS_SWIFT_NAME(custom(name:));
 
 /**
  Track custom event with a specified name and properties
 
- @param eventName Event name
+ @param name Event name
  @param properties Properties
  @code // Track custom event with properties
- [Castle custom:@"Custom" properties:@{ @"customKey": @"value" }];
+ [Castle customWithName:@"Custom" properties:@{ @"customKey": @"value" }];
  @endcode
  */
-+ (void)custom:(NSString *)eventName properties:(NSDictionary *)properties;
++ (void)customWithName:(NSString *)name properties:(NSDictionary *)properties NS_SWIFT_NAME(custom(name:properties:));
 
 /**
  Force a flush of the batch event queue, even if the flush limit hasn't been reached

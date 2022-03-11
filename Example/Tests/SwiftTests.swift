@@ -153,7 +153,7 @@ class SwiftTests: XCTestCase {
 
     func testUserIdPersistance() throws {
         // Make sure the user id is persisted correctly after identify
-        Castle.identify(userJwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
+        Castle.userJwt( "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
 
         // Check that the stored identity is the same as the identity we tracked
         let userJwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"
@@ -172,27 +172,33 @@ class SwiftTests: XCTestCase {
 
         // This should lead to no event being tracked since empty string isn't a valid name
         var count = CASEventStorage.storedQueue().count
-        Castle.screen("")
+        Castle.screen(name: "")
         var newCount = CASEventStorage.storedQueue().count
         XCTAssertTrue(count == newCount);
 
         // This should lead to no event being tracked since identity can't be an empty string
         count = CASEventStorage.storedQueue().count
-        Castle.identify(userJwt: "")
+        Castle.userJwt("")
         newCount = CASEventStorage.storedQueue().count
         XCTAssertTrue(count == newCount) // Count should be unchanced
         XCTAssertNil(Castle.userJwt()) // User jwt should be nil
 
         // This should lead to no event being tracked properties can't be nil
         count = CASEventStorage.storedQueue().count
-        Castle.identify(userJwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
+        Castle.userJwt( "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
         newCount = CASEventStorage.storedQueue().count
         XCTAssertTrue(count == newCount) // Count should be unchanced
         XCTAssertNotNil(Castle.userJwt()) // User jwt should not be nil
 
-        let screen = CASScreen(name: "Main");
-        XCTAssertNotNil(screen);
-        XCTAssertTrue(screen!.type == "$screen");
+        let screen = CASScreen(name: "Main")
+        XCTAssertNotNil(screen)
+        XCTAssertTrue(screen!.type == "$screen")
+        
+        let properties = ["key": "value"]
+        let custom = CASCustom.event(withName: "Custom", properties: properties)
+        XCTAssertNotNil(custom)
+        XCTAssertTrue(custom!.type == "$custom")
+        XCTAssertEqual(custom!.properties as! [String: String], properties)
     }
 
     func testViewControllerSwizzle() throws {
@@ -233,6 +239,8 @@ class SwiftTests: XCTestCase {
         XCTAssertNil(user1)
         
         XCTAssertTrue(CASEvent.supportsSecureCoding)
+        XCTAssertTrue(CASMonitor.supportsSecureCoding)
+        XCTAssertTrue(CASModel.supportsSecureCoding)
     }
     
     func testModelInvalidData() {
@@ -250,7 +258,7 @@ class SwiftTests: XCTestCase {
 
     func testObjectSerializationForScreen() throws {
         Castle.reset()
-        Castle.identify(userJwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
+        Castle.userJwt( "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
         
         // Create screen view
         let event = CASScreen(name: "Main")!
@@ -288,7 +296,7 @@ class SwiftTests: XCTestCase {
     func testObjectSerializationForIdentify() {
         let userJwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"
         Castle.reset()
-        Castle.identify(userJwt: userJwt)
+        Castle.userJwt(userJwt)
 
         // Create user identity
         let event = CASUserJwt.user(withJwt: userJwt)!
@@ -304,7 +312,7 @@ class SwiftTests: XCTestCase {
 
     func testObjectSerializationForEvent() {
         Castle.reset()
-        Castle.identify(userJwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
+        Castle.userJwt("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
 
         let model = CASModel()
         XCTAssertNil(model.jsonPayload());
@@ -356,7 +364,7 @@ class SwiftTests: XCTestCase {
         let path = paths[0].appending("/castle/events")
 
         // Track a single event to trigger the persistance
-        Castle.screen("example screen")
+        Castle.screen(name: "example screen")
         XCTAssertTrue(fileManager.fileExists(atPath: path));
 
         // Remove event queue data file and verify
@@ -364,7 +372,7 @@ class SwiftTests: XCTestCase {
         XCTAssertFalse(fileManager.fileExists(atPath: path))
 
         // Track a single event to trigger the persistance
-        Castle.screen("example screen")
+        Castle.screen(name: "example screen")
         XCTAssertTrue(fileManager.fileExists(atPath: path))
 
         let currentQueueSize = Castle.queueSize()
@@ -374,9 +382,19 @@ class SwiftTests: XCTestCase {
         XCTAssertTrue(currentQueueSize == queue.count);
 
         // Tracking a new event should increase queue size by one
-        Castle.screen("example screen")
+        Castle.screen(name: "example screen")
         queue = CASEventStorage.storedQueue()
         XCTAssertTrue(queue.count == currentQueueSize+1);
+        
+        // Tracking a new event should increase queue size by one
+        Castle.custom(name: "custom event")
+        queue = CASEventStorage.storedQueue()
+        XCTAssertTrue(queue.count == currentQueueSize+2);
+        
+        // Tracking a new event should increase queue size by one
+        Castle.custom(name: "custom event", properties: ["key": "value"])
+        queue = CASEventStorage.storedQueue()
+        XCTAssertTrue(queue.count == currentQueueSize+3);
     }
 
     func testDefaultHeaders() throws {
@@ -446,7 +464,7 @@ class SwiftTests: XCTestCase {
 
     func testNetworking() throws {
         // Must identify, otherwise CASMonitor constructor will return nil
-        Castle.identify(userJwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
+        Castle.userJwt("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
         
         let event = CASCustom(name: "Example event")!
         let batchModel = CASMonitor(events: [event])!
@@ -490,18 +508,18 @@ class SwiftTests: XCTestCase {
 
         Castle.configure(configuration)
         
-        Castle.identify(userJwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
+        Castle.userJwt("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
 
         // Fill the queue
         for i in 0...configuration.maxQueueLimit {
-            Castle.screen(String(format: "Screen %d", i))
+            Castle.screen(name: String(format: "Screen %d", i))
         }
 
         // The queue size should be equal to maxQueueLimit
         XCTAssertTrue(configuration.maxQueueLimit == Castle.queueSize());
 
         // Track a new event so the maxQueueLimit is reached
-        Castle.screen("Screen")
+        Castle.screen(name: "Screen")
 
         // Add one more event so the oldest event in the queue is evicted
         // The queue size should still be equal to maxQueueLimit

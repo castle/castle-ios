@@ -25,18 +25,18 @@
 }
 
 - (IBAction)screen:(id)sender {
-    [Castle screen:@"Main Screen"];
+    [Castle screenWithName:@"Main Screen"];
     [self updateQueueCountLabel];
 }
 
 - (IBAction)custom:(id)sender {
-    [Castle custom:@"Custom" properties:@{ @"customKey": @"value" }];
+    [Castle customWithName:@"Custom" properties:@{ @"customKey": @"value" }];
     [self updateQueueCountLabel];
 }
 
 - (IBAction)identify:(id)sender {
     // Identify user with unique identifier including user traits
-    [Castle identify:@"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"];
+    [Castle setUserJwt:@"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"];
     [self updateQueueCountLabel];
 }
 

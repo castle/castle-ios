@@ -206,36 +206,36 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 #pragma mark - Tracking
 
-+ (void)custom:(NSString *)eventName
++ (void)customWithName:(NSString *)name
 {
-    [Castle custom:eventName properties:@{}];
+    [Castle customWithName:name properties:@{}];
 }
 
-+ (void)custom:(NSString *)eventName properties:(NSDictionary *)properties
++ (void)customWithName:(NSString *)name properties:(NSDictionary *)properties
 {
-    if(!eventName || [eventName isEqualToString:@""]) {
+    if(!name || [name isEqualToString:@""]) {
         CASLog(@"No event name provided. Will cancel track event operation.");
         return;
     }
     
     Castle *castle = [Castle sharedInstance];
-    CASCustom *event = [CASCustom eventWithName:eventName properties: properties];
+    CASCustom *event = [CASCustom eventWithName:name properties: properties];
     [castle queueEvent:event];
 }
 
-+ (void)screen:(NSString *)screenName
++ (void)screenWithName:(NSString *)name
 {
-    if(!screenName || [screenName isEqualToString:@""]) {
+    if(!name || [name isEqualToString:@""]) {
         CASLog(@"No screen name provided. Will cancel track event operation.");
         return;
     }
     
     Castle *castle = [Castle sharedInstance];
-    CASScreen *screen = [CASScreen eventWithName:screenName];
+    CASScreen *screen = [CASScreen eventWithName:name];
     [castle queueEvent:screen];
 }
 
-+ (void)identify:(NSString *)userJwt
++ (void)setUserJwt:(NSString *)userJwt
 {
     if(!userJwt || [userJwt isEqualToString:@""]) {
         CASLog(@"No user jwt provided.");
@@ -412,7 +412,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         // This means that the application was just installed.
         CASLog(@"No app version was stored in settings: the application was just installed.");
         CASLog(@"Application life cycle event detected: Will track install event");
-        [Castle custom:@"Application installed"];
+        [Castle customWithName:@"Application installed"];
         
         // Flush the event queue when a application installed event is triggered
         [Castle flush];
@@ -420,7 +420,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         // App version changed since the application was last run: application was updated
         CASLog(@"App version stored in settings is different from current version string: the application was just updated.");
         CASLog(@"Application life cycle event detected: Will track update event");
-        [Castle custom:@"Application updated"];
+        [Castle customWithName:@"Application updated"];
         
         // Flush the event queue when a application updated event is triggered
         [Castle flush];
@@ -435,7 +435,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
     CASLog(@"Application life cycle event detected: Will track application did become active event");
-    [Castle custom:@"Application Did Become Active"];
+    [Castle customWithName:@"Application Did Become Active"];
     
     // Flush the event queue when a application did become active event is triggered
     [Castle flush];
@@ -444,7 +444,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 - (void)applicationDidEnterBackground:(NSNotification *)notification
 {
     CASLog(@"Application life cycle event detected: Will track application did enter background event");
-    [Castle custom:@"Application Did Enter Background"];
+    [Castle customWithName:@"Application Did Enter Background"];
     
     // Flush the event queue when a application did enter background event is triggered
     [Castle flush];
@@ -453,7 +453,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 - (void)applicationWillTerminate:(NSNotificationCenter *)notification
 {
     CASLog(@"Application life cycle event detected: Will track application will terminate event");
-    [Castle custom:@"Application Will Terminate"];
+    [Castle customWithName:@"Application Will Terminate"];
     
     // Flush the event queue when a application will terminate event is triggered
     [Castle flush];

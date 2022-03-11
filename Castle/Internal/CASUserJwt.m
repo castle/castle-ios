@@ -16,7 +16,7 @@
 
 #pragma mark - Factory
 
-+ (_Nullable instancetype)userWithJwt:(NSString * _Nonnull)jwt
++ (_Nullable instancetype)userWithJwt:(NSString * _Nullable)jwt
 {
     if(!jwt) {
         CASLog(@"User jwt can't be nil.");

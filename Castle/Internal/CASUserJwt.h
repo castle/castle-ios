@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy, readonly) NSString * _Nonnull jwt;
 
-+ (_Nullable instancetype)userWithJwt:(NSString * _Nonnull)jwt;
++ (_Nullable instancetype)userWithJwt:(NSString * _Nullable)jwt;
 
 @end
 

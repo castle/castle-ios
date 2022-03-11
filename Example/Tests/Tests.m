@@ -184,7 +184,7 @@
 - (void)testUserIdPersistance
 {
     // Make sure the user id is persisted correctly after identify
-    [Castle identify:@"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"];
+    [Castle setUserJwt:@"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"];
 
     // Check that the stored identity is the same as the identity we tracked
     NSString *userJwt = @"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0";
@@ -205,20 +205,20 @@
 
     // This should lead to no event being tracked since empty string isn't a valid name
     NSUInteger count = [CASEventStorage storedQueue].count;
-    [Castle screen:@""];
+    [Castle screenWithName:@""];
     NSUInteger newCount = [CASEventStorage storedQueue].count;
     XCTAssertTrue(count == newCount);
 
     // This should lead to no event being tracked since identity can't be an empty string
     count = [CASEventStorage storedQueue].count;
-    [Castle identify:@""];
+    [Castle setUserJwt:@""];
     newCount = [CASEventStorage storedQueue].count;
     XCTAssertTrue(count == newCount); // Count should be unchanced
     XCTAssertNil([Castle userJwt]); // User jwt should be nil
 
     // This should lead to no event being tracked properties can't be nil
     count = [CASEventStorage storedQueue].count;
-    [Castle identify:@"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"];
+    [Castle setUserJwt:@"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"];
     newCount = [CASEventStorage storedQueue].count;
     XCTAssertTrue(count == newCount); // Count should be unchanced
     XCTAssertNotNil([Castle userJwt]); // User jwt should not be nil
@@ -226,6 +226,12 @@
     CASScreen *screen = [CASScreen eventWithName:@"Main"];
     XCTAssertNotNil(screen);
     XCTAssertTrue([screen.type isEqualToString:@"$screen"]);
+    
+    NSDictionary *properties = @{ @"key": @"value" };
+    CASCustom *custom = [CASCustom eventWithName: @"Custom" properties: properties];
+    XCTAssertNotNil(custom);
+    XCTAssertTrue([custom.type isEqualToString:@"$custom"]);
+    XCTAssertEqual(custom.properties, properties);
 }
 
 - (void)testViewControllerSwizzle
@@ -268,6 +274,8 @@
     XCTAssertNil(user1);
     
     XCTAssertTrue([CASEvent supportsSecureCoding]);
+    XCTAssertTrue([CASMonitor supportsSecureCoding]);
+    XCTAssertTrue([CASModel supportsSecureCoding]);
 }
 
 - (void)testModelInvalidData
@@ -282,12 +290,15 @@
     
     CASUserJwt *user = [CASUserJwt userWithJwt:@""];
     XCTAssertNil(user);
+    
+    user = [CASUserJwt userWithJwt:nil];
+    XCTAssertNil(user);
 }
 
 - (void)testObjectSerializationForScreen
 {
     [Castle reset];
-    [Castle identify:@"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"];
+    [Castle setUserJwt:@"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"];
     
     // Create screen view
     CASEvent *event = [CASScreen eventWithName:@"Main"];
@@ -325,7 +336,7 @@
 {
     NSString *userJwt = @"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0";
     [Castle reset];
-    [Castle identify:userJwt];
+    [Castle setUserJwt:userJwt];
 
     // Create user identity
     CASUserJwt *event = [CASUserJwt userWithJwt:userJwt];
@@ -343,7 +354,7 @@
 {
     NSString *userJwt = @"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0";
     [Castle reset];
-    [Castle identify:userJwt];
+    [Castle setUserJwt:userJwt];
     
     CASModel *model = [[CASModel alloc] init];
     XCTAssertNil(model.JSONPayload);
@@ -396,7 +407,7 @@
     NSString *path = [paths.firstObject stringByAppendingString:@"/castle/events"];
 
     // Track a single event to trigger the persistance
-    [Castle screen:@"example screen"];
+    [Castle screenWithName:@"example screen"];
     XCTAssertTrue([fileManager fileExistsAtPath:path]);
 
     // Remove event queue data file and verify
@@ -406,7 +417,7 @@
     XCTAssertFalse([fileManager fileExistsAtPath:path]);
 
     // Track a single event to trigger the persistance
-    [Castle screen:@"example screen"];
+    [Castle screenWithName:@"example screen"];
     XCTAssertTrue([fileManager fileExistsAtPath:path]);
     
     NSUInteger currentQueueSize = [Castle queueSize];
@@ -416,9 +427,19 @@
     XCTAssertEqual(currentQueueSize, queue.count);
     
     // Tracking a new event should increase queue size by one
-    [Castle screen:@"example screen"];
+    [Castle screenWithName:@"example screen"];
     queue = [CASEventStorage storedQueue];
     XCTAssertTrue(queue.count == currentQueueSize+1);
+    
+    // Tracking a new event should increase queue size by one
+    [Castle customWithName:@"custom event"];
+    queue = [CASEventStorage storedQueue];
+    XCTAssertTrue(queue.count == currentQueueSize+2);
+    
+    // Tracking a new event should increase queue size by one
+    [Castle customWithName:@"custom event" properties:@{ @"key": @"value" }];
+    queue = [CASEventStorage storedQueue];
+    XCTAssertTrue(queue.count == currentQueueSize+3);
 }
 
 - (void)testDefaultHeaders
@@ -537,14 +558,14 @@
     
     // Fill the queue
     for (int i = 0; i < configuration.maxQueueLimit; i++) {
-        [Castle screen:[NSString stringWithFormat:@"Screen %d", i]];
+        [Castle screenWithName:[NSString stringWithFormat:@"Screen %d", i]];
     }
     
     // The queue size should be equal to maxQueueLimit
     XCTAssertTrue(configuration.maxQueueLimit == [Castle queueSize]);
     
     // Track a new event so the maxQueueLimit is reached
-    [Castle screen:@"Screen"];
+    [Castle screenWithName:@"Screen"];
     
     // Add one more event so the oldest event in the queue is evicted
     // The queue size should still be equal to maxQueueLimit
