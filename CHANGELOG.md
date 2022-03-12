@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.8 (2022-03-12)
+- Updated internal library because of an issue with the vendored framework included in the 2.1.7 release.
+
 ## 2.1.7 (2022-02-25)
 - Fixes a rare bug that resulted in incorrectly encoded request tokens.
 
