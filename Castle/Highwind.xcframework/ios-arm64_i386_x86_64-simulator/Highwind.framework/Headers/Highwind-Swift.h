@@ -190,6 +190,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import Foundation;
 @import ObjectiveC;
 #endif
 
@@ -227,6 +228,49 @@ SWIFT_CLASS("_TtC8Highwind8Highwind")
 /// returns:
 /// Client token string
 - (NSString * _Nonnull)token SWIFT_WARN_UNUSED_RESULT;
+/// Encode Payload
+/// \param publishableKey publishable key
+///
+/// \param encodedUserPayload encoded user payload
+///
+/// \param encodedEventPayloads encoded event payloads
+///
+///
+/// returns:
+/// Encoded
+- (NSString * _Nullable)encodePayloadWithPublishableKey:(NSString * _Nonnull)publishableKey encodedUserPayload:(NSString * _Nonnull)encodedUserPayload encodedEventPayloads:(NSArray<NSString *> * _Nonnull)encodedEventPayloads SWIFT_WARN_UNUSED_RESULT;
+/// Encode Screen Event
+/// \param requestToken request token
+///
+/// \param payload payload to encode
+///
+///
+/// returns:
+/// Encoded Screen Event
+- (NSString * _Nonnull)encodeScreenEventWithRequestToken:(NSString * _Nonnull)requestToken payload:(NSString * _Nonnull)payload SWIFT_WARN_UNUSED_RESULT;
+/// Encode Custom Event
+/// \param requestToken request token
+///
+/// \param payload payload to encode
+///
+///
+/// returns:
+/// Encoded custom Event
+- (NSString * _Nonnull)encodeCustomEventWithRequestToken:(NSString * _Nonnull)requestToken payload:(NSString * _Nonnull)payload SWIFT_WARN_UNUSED_RESULT;
+/// Encode User Payload Set
+/// \param payload user payload to encode
+///
+///
+/// returns:
+/// Encoded User Payload Set
+- (NSString * _Nonnull)encodeUserPayloadSetWithPayload:(NSString * _Nonnull)payload SWIFT_WARN_UNUSED_RESULT;
+/// Encode User JWT Payload Set
+/// \param payload user jwt payload to encode
+///
+///
+/// returns:
+/// Encoded User JWT Payload Set
+- (NSString * _Nonnull)encodeUserJwtPayloadSetWithPayload:(NSString * _Nonnull)payload SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -429,6 +473,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import Foundation;
 @import ObjectiveC;
 #endif
 
@@ -466,6 +511,49 @@ SWIFT_CLASS("_TtC8Highwind8Highwind")
 /// returns:
 /// Client token string
 - (NSString * _Nonnull)token SWIFT_WARN_UNUSED_RESULT;
+/// Encode Payload
+/// \param publishableKey publishable key
+///
+/// \param encodedUserPayload encoded user payload
+///
+/// \param encodedEventPayloads encoded event payloads
+///
+///
+/// returns:
+/// Encoded
+- (NSString * _Nullable)encodePayloadWithPublishableKey:(NSString * _Nonnull)publishableKey encodedUserPayload:(NSString * _Nonnull)encodedUserPayload encodedEventPayloads:(NSArray<NSString *> * _Nonnull)encodedEventPayloads SWIFT_WARN_UNUSED_RESULT;
+/// Encode Screen Event
+/// \param requestToken request token
+///
+/// \param payload payload to encode
+///
+///
+/// returns:
+/// Encoded Screen Event
+- (NSString * _Nonnull)encodeScreenEventWithRequestToken:(NSString * _Nonnull)requestToken payload:(NSString * _Nonnull)payload SWIFT_WARN_UNUSED_RESULT;
+/// Encode Custom Event
+/// \param requestToken request token
+///
+/// \param payload payload to encode
+///
+///
+/// returns:
+/// Encoded custom Event
+- (NSString * _Nonnull)encodeCustomEventWithRequestToken:(NSString * _Nonnull)requestToken payload:(NSString * _Nonnull)payload SWIFT_WARN_UNUSED_RESULT;
+/// Encode User Payload Set
+/// \param payload user payload to encode
+///
+///
+/// returns:
+/// Encoded User Payload Set
+- (NSString * _Nonnull)encodeUserPayloadSetWithPayload:(NSString * _Nonnull)payload SWIFT_WARN_UNUSED_RESULT;
+/// Encode User JWT Payload Set
+/// \param payload user jwt payload to encode
+///
+///
+/// returns:
+/// Encoded User JWT Payload Set
+- (NSString * _Nonnull)encodeUserJwtPayloadSetWithPayload:(NSString * _Nonnull)payload SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -668,6 +756,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import Foundation;
 @import ObjectiveC;
 #endif
 
@@ -705,6 +794,49 @@ SWIFT_CLASS("_TtC8Highwind8Highwind")
 /// returns:
 /// Client token string
 - (NSString * _Nonnull)token SWIFT_WARN_UNUSED_RESULT;
+/// Encode Payload
+/// \param publishableKey publishable key
+///
+/// \param encodedUserPayload encoded user payload
+///
+/// \param encodedEventPayloads encoded event payloads
+///
+///
+/// returns:
+/// Encoded
+- (NSString * _Nullable)encodePayloadWithPublishableKey:(NSString * _Nonnull)publishableKey encodedUserPayload:(NSString * _Nonnull)encodedUserPayload encodedEventPayloads:(NSArray<NSString *> * _Nonnull)encodedEventPayloads SWIFT_WARN_UNUSED_RESULT;
+/// Encode Screen Event
+/// \param requestToken request token
+///
+/// \param payload payload to encode
+///
+///
+/// returns:
+/// Encoded Screen Event
+- (NSString * _Nonnull)encodeScreenEventWithRequestToken:(NSString * _Nonnull)requestToken payload:(NSString * _Nonnull)payload SWIFT_WARN_UNUSED_RESULT;
+/// Encode Custom Event
+/// \param requestToken request token
+///
+/// \param payload payload to encode
+///
+///
+/// returns:
+/// Encoded custom Event
+- (NSString * _Nonnull)encodeCustomEventWithRequestToken:(NSString * _Nonnull)requestToken payload:(NSString * _Nonnull)payload SWIFT_WARN_UNUSED_RESULT;
+/// Encode User Payload Set
+/// \param payload user payload to encode
+///
+///
+/// returns:
+/// Encoded User Payload Set
+- (NSString * _Nonnull)encodeUserPayloadSetWithPayload:(NSString * _Nonnull)payload SWIFT_WARN_UNUSED_RESULT;
+/// Encode User JWT Payload Set
+/// \param payload user jwt payload to encode
+///
+///
+/// returns:
+/// Encoded User JWT Payload Set
+- (NSString * _Nonnull)encodeUserJwtPayloadSetWithPayload:(NSString * _Nonnull)payload SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
