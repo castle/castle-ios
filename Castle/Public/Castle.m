@@ -150,7 +150,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 + (NSString *)versionString
 {
-    return @"2.1.7";
+    return @"2.1.8";
 }
 
 - (NSString *)deviceIdentifier

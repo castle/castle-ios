@@ -1,11 +1,11 @@
-version: 2.0
+version: 2.1
 
 jobs:
   build:
 
     # Specify the Xcode version to use
     macos:
-      xcode: "12.4.0"
+      xcode: "13.2.1"
     working_directory: /Users/distiller/project
 
     steps:
@@ -14,9 +14,7 @@ jobs:
       # Install CocoaPods
       - run:
           name: Install CocoaPods
-          command: |
-            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
-            pod install --project-directory=Example
+          command: pod install --project-directory=Example --verbose
 
       # Lint Podfile
       - run:
