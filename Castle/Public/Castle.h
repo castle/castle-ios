@@ -127,7 +127,7 @@ extern NSString * const CastleRequestTokenHeaderName;
 + (void)customWithName:(NSString *)name properties:(NSDictionary *)properties NS_SWIFT_NAME(custom(name:properties:));
 
 /**
- Force a flush of the batch event queue, even if the flush limit hasn't been reached
+ Force a flush of the event queue, even if the flush limit hasn't been reached
  */
 + (void)flush;
 

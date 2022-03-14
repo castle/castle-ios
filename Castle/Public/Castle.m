@@ -269,14 +269,14 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     
     CASLog(@"Flushing %ld of %ld queued events", batch.count, castle.eventQueue.count);
     
-    __block CASMonitor *batchModel = [CASMonitor monitorWithEvents:batch];
+    __block CASMonitor *monitorModel = [CASMonitor monitorWithEvents:batch];
     
-    // Nil batch model object means there's no events to flush
-    if(!batchModel) {
+    // Nil monitor model object means there's no events to flush
+    if(!monitorModel) {
         return;
     }
     
-    castle.task = [castle.client dataTaskWithPath:@"monitor" postData:[batchModel JSONData] completion:^(id responseObject, NSURLResponse *response, NSError *error) {
+    castle.task = [castle.client dataTaskWithPath:@"monitor" postData:[monitorModel JSONData] completion:^(id responseObject, NSURLResponse *response, NSError *error) {
         if(error != nil) {
             CASLog(@"Flush failed with error: %@", error);
             castle.task = nil;
@@ -284,12 +284,12 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         }
         
         // Remove successfully flushed events from queue and persist
-        [castle.eventQueue removeObjectsInArray:batchModel.events];
+        [castle.eventQueue removeObjectsInArray:monitorModel.events];
         [castle persistQueue];
         
         castle.task = nil;
         
-        CASLog(@"Successfully flushed (%ld) events: %@", batchModel.events.count, [batchModel JSONPayload]);
+        CASLog(@"Successfully flushed (%ld) events: %@", monitorModel.events.count, [monitorModel JSONPayload]);
         
         if ([castle eventQueueExceedsFlushLimit] && castle.eventQueue.count > 0) {
             CASLog(@"Current event queue still exceeds flush limit. Flush again");

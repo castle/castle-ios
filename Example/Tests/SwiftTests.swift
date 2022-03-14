@@ -188,11 +188,11 @@ class SwiftTests: XCTestCase {
     }
 
     func testModels() throws {
-        let batch1 = CASMonitor(events: nil)
-        XCTAssertNil(batch1)
+        let monitor1 = CASMonitor(events: nil)
+        XCTAssertNil(monitor1)
 
-        let batch2 = CASMonitor(events: [])
-        XCTAssertNil(batch2)
+        let monitor2 = CASMonitor(events: [])
+        XCTAssertNil(monitor2)
 
         let event1 = CASCustom(name: nil)
         XCTAssertNil(event1)
@@ -439,8 +439,8 @@ class SwiftTests: XCTestCase {
         Castle.userJwt("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
         
         let event = CASCustom(name: "Example event")!
-        let batchModel = CASMonitor(events: [event])!
-        XCTAssertNotNil(batchModel);
+        let monitorModel = CASMonitor(events: [event])!
+        XCTAssertNotNil(monitorModel);
 
         let expectation = self.expectation(description: "GET /monitor")
 
@@ -448,8 +448,8 @@ class SwiftTests: XCTestCase {
         let configuration = CastleConfiguration(publishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA")
         let client = CASAPIClient(configuration: configuration)
 
-        // Perform batch network request
-        let task = client.dataTask(withPath: "monitor", post: batchModel.jsonData()!, completion: { (responseObject, response, error) in
+        // Perform monitor network request
+        let task = client.dataTask(withPath: "monitor", post: monitorModel.jsonData()!, completion: { (responseObject, response, error) in
             XCTAssertNil(error, "error should be nil");
 
             if let httpResponse = response as? HTTPURLResponse {

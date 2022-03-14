@@ -1,5 +1,5 @@
 //
-//  CASBatch.m
+//  CASMonitor.m
 //  Castle
 //
 //  Copyright © 2017 Castle. All rights reserved.
@@ -44,11 +44,11 @@ NS_ASSUME_NONNULL_BEGIN
         return nil;
     }
     
-    CASMonitor *batch = [[CASMonitor alloc] init];
-    batch.events = events;
-    batch.userJwt = userJwt;
+    CASMonitor *monitor = [[CASMonitor alloc] init];
+    monitor.events = events;
+    monitor.userJwt = userJwt;
     
-    return batch;
+    return monitor;
 }
 
 #pragma mark - NSSecureCoding

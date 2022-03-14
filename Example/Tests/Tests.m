@@ -219,11 +219,11 @@
 
 - (void)testModels
 {
-    CASMonitor *batch1 = [CASMonitor monitorWithEvents:nil];
-    XCTAssertNil(batch1);
+    CASMonitor *monitor1 = [CASMonitor monitorWithEvents:nil];
+    XCTAssertNil(monitor1);
 
-    CASMonitor *batch2 = [CASMonitor monitorWithEvents:@[]];
-    XCTAssertNil(batch2);
+    CASMonitor *monitor2 = [CASMonitor monitorWithEvents:@[]];
+    XCTAssertNil(monitor2);
 
     CASCustom *event1 = [CASCustom eventWithName:nil];
     XCTAssertNil(event1);
@@ -481,8 +481,8 @@
 - (void)testNetworking
 {
     CASCustom *event = [CASCustom eventWithName:@"Example event"];
-    __block CASMonitor *batchModel = [CASMonitor monitorWithEvents:@[event]];
-    XCTAssertNotNil(batchModel);
+    __block CASMonitor *monitorModel = [CASMonitor monitorWithEvents:@[event]];
+    XCTAssertNotNil(monitorModel);
 
     XCTestExpectation *expectation = [self expectationWithDescription:@"POST /monitor"];
 
@@ -490,8 +490,8 @@
     CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
     CASAPIClient *client = [CASAPIClient clientWithConfiguration:configuration];
 
-    // Perform batch network request
-    NSURLSessionTask *task = [client dataTaskWithPath:@"monitor" postData:[batchModel JSONData] completion:^(id responseObject, NSURLResponse *response, NSError *error) {
+    // Perform monitor network request
+    NSURLSessionTask *task = [client dataTaskWithPath:@"monitor" postData:[monitorModel JSONData] completion:^(id responseObject, NSURLResponse *response, NSError *error) {
         XCTAssertNil(error, "error should be nil");
 
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
