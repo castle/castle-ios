@@ -69,7 +69,7 @@ class SwiftTests: XCTestCase {
     func testConfiguration() throws {
         let publishableKey = "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"
         let baseURLAllowList = [URL(string:"https://google.com/")!];
-        var configuration = CastleConfiguration(publishableKey: publishableKey)
+        let configuration = CastleConfiguration(publishableKey: publishableKey)
 
         // Check that all default values are set correctly
         XCTAssertEqual(configuration.isScreenTrackingEnabled, false);
@@ -95,7 +95,6 @@ class SwiftTests: XCTestCase {
         XCTAssertEqual(configuration.maxQueueLimit, 20)
         XCTAssertEqual(configuration.baseURLAllowList!.count, 1)
         XCTAssertTrue(configuration.baseURLAllowList![0].absoluteString == "https://google.com/")
-        XCTAssertFalse(configuration.useCloudflareApp)
         XCTAssertTrue(configuration.baseURL.absoluteString == "https://m.castle.io/v1/")
 
         configuration.baseURLAllowList = [URL(string: "https://google.com/somethingelse")!]
@@ -116,34 +115,6 @@ class SwiftTests: XCTestCase {
         XCTAssertFalse(Castle.isAllowlistURL(nil))
 
         Castle.resetConfiguration()
-
-        configuration = CastleConfiguration(publishableKey: publishableKey)
-        configuration.apiDomain = "example.com"
-        configuration.useCloudflareApp = true
-
-        XCTAssertTrue(configuration.useCloudflareApp)
-        XCTAssertTrue(configuration.apiDomain == "example.com")
-        XCTAssertTrue(configuration.apiPath == "v1/c/mobile/")
-        XCTAssertTrue(configuration.baseURL.absoluteString == "https://example.com/v1/c/mobile/")
-
-        Castle.configure(configuration)
-
-        XCTAssertTrue(Castle.baseURL().absoluteString == "https://example.com/v1/c/mobile/");
-
-        Castle.resetConfiguration()
-
-        configuration = CastleConfiguration(publishableKey: publishableKey)
-        configuration.apiDomain = "example.com"
-        configuration.apiPath = "v1/test/"
-        configuration.useCloudflareApp = true
-
-        XCTAssertTrue(configuration.useCloudflareApp);
-        XCTAssertTrue(configuration.apiDomain == "example.com");
-        XCTAssertTrue(configuration.baseURL.absoluteString == "https://example.com/v1/test/");
-        
-        Castle.resetConfiguration()
-
-        Castle.configure(withPublishableKey: publishableKey)
     }
 
     func testDeviceIdentifier() throws {

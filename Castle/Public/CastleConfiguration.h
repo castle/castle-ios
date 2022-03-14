@@ -49,11 +49,6 @@
 @property (nonatomic, strong, readwrite, nullable) NSArray<NSURL *> *baseURLAllowList;
 
 /**
- Cloudflare proxying enabled
- */
-@property (nonatomic, assign) BOOL useCloudflareApp;
-
-/**
  Get base url
  */
 @property (nonatomic, copy, readonly, getter=baseURL, nonnull) NSURL * baseURL;

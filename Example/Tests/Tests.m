@@ -120,7 +120,6 @@
     XCTAssertEqual(configuration.maxQueueLimit, 20);
     XCTAssertEqual(configuration.baseURLAllowList.count, 1);
     XCTAssertTrue([configuration.baseURLAllowList[0].absoluteString isEqualToString:@"https://google.com/"]);
-    XCTAssertFalse(configuration.useCloudflareApp);
     XCTAssertTrue([configuration.baseURL.absoluteString isEqualToString:@"https://m.castle.io/v1/"]);
 
     [configuration setBaseURLAllowList:@[ [NSURL URLWithString:@"https://google.com/somethingelse"]]];
@@ -141,38 +140,6 @@
     XCTAssertFalse([Castle isAllowlistURL:nil]);
     
     [Castle resetConfiguration];
-
-    // Test cloudflare logic
-    configuration = [CastleConfiguration configurationWithPublishableKey:publishableKey];
-    XCTAssertThrows(configuration.useCloudflareApp = YES, "");
-
-    configuration = [CastleConfiguration configurationWithPublishableKey:publishableKey];
-    configuration.apiDomain = @"example.com";
-    configuration.useCloudflareApp = YES;
-    
-    XCTAssertTrue(configuration.useCloudflareApp);
-    XCTAssertTrue([configuration.apiDomain isEqualToString:@"example.com"]);
-    XCTAssertTrue([configuration.apiPath isEqualToString:@"v1/c/mobile/"]);
-    XCTAssertTrue([configuration.baseURL.absoluteString isEqualToString:@"https://example.com/v1/c/mobile/"]);
-    
-    [Castle configure:configuration];
-    
-    XCTAssertTrue([Castle.baseURL.absoluteString isEqualToString:@"https://example.com/v1/c/mobile/"]);
-
-    [Castle resetConfiguration];
-    
-    configuration = [CastleConfiguration configurationWithPublishableKey:publishableKey];
-    configuration.apiDomain = @"example.com";
-    configuration.apiPath = @"v1/test/";
-    configuration.useCloudflareApp = YES;
-    
-    XCTAssertTrue(configuration.useCloudflareApp);
-    XCTAssertTrue([configuration.apiDomain isEqualToString:@"example.com"]);
-    XCTAssertTrue([configuration.baseURL.absoluteString isEqualToString:@"https://example.com/v1/test/"]);
-    
-    [Castle resetConfiguration];
-    
-    [Castle configureWithPublishableKey:publishableKey];
 }
 
 - (void)testDeviceIdentifier
