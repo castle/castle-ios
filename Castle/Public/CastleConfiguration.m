@@ -26,7 +26,6 @@ static NSString *CastleConfigurationCastleAPIPath = @"v1/";
     configuration.debugLoggingEnabled = NO;
     configuration.flushLimit = 20;
     configuration.maxQueueLimit = 1000;
-    configuration.apiDomain = CastleConfigurationDefaultAPIDomain;
     return configuration;
 }
 
