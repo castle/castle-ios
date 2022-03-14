@@ -51,17 +51,7 @@
 /**
  Get base url
  */
-@property (nonatomic, copy, readonly, getter=baseURL, nonnull) NSURL * baseURL;
-
-/**
- Get API domain
- */
-@property (nonatomic, copy) NSString * _Nonnull apiDomain;
-
-/**
- Get API path
- */
-@property (nonatomic, copy) NSString * _Nullable apiPath;
+@property (nonatomic, copy, readonly, getter=baseURL, nonnull) NSURL *baseURL;
 
 /**
  Default configuration with provided publishable key

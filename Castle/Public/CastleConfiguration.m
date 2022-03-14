@@ -27,7 +27,6 @@ static NSString *CastleConfigurationCastleAPIPath = @"v1/";
     configuration.flushLimit = 20;
     configuration.maxQueueLimit = 1000;
     configuration.apiDomain = CastleConfigurationDefaultAPIDomain;
-    configuration.apiPath = nil;
     return configuration;
 }
 
@@ -49,12 +48,7 @@ static NSString *CastleConfigurationCastleAPIPath = @"v1/";
 
 - (NSURL *)baseURL
 {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"https://%@/%@", CastleConfigurationDefaultAPIDomain, self.apiPath]];
-}
-
-- (NSString *)apiPath
-{
-    return CastleConfigurationCastleAPIPath;
+    return [NSURL URLWithString:[NSString stringWithFormat:@"https://%@/%@", CastleConfigurationDefaultAPIDomain, CastleConfigurationCastleAPIPath]];
 }
 
 @end
