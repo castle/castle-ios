@@ -86,15 +86,6 @@
 
     // Iterate through the contents and make sure there's no unsupported data types
     for(id value in dictionary.allValues) {
-        // If the value is a NSDictionary call the method recursively
-        if([value isKindOfClass:NSDictionary.class]) {
-            // If the contents aren't valid we can return without continuing any futher
-            BOOL valid = [CASModel propertiesContainValidData:value];
-            if(!valid) {
-                return NO;
-            }
-        }
-
         // If the value if of any other type than NSNumber, NSString or NSNull: validation failed
         if(!([value isKindOfClass:NSNumber.class] ||
              [value isKindOfClass:NSString.class] ||

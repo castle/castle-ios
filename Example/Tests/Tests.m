@@ -350,8 +350,9 @@
     CASCustom *invalidEvent1 = [CASCustom eventWithName:@"testevent2" properties:@{ @"invalidparam": [[NSObject alloc] init] }];
     XCTAssertNil(invalidEvent1);
 
-    CASCustom *invalidEvent2 = [CASCustom eventWithName:@"testevent2" properties:@{ @"invalidParamContainer": @{ @"invalidParam": [[NSObject alloc] init] } }];
-    XCTAssertNil(invalidEvent2);
+    // Event will skip any nested dictionaries
+    CASCustom *validEventSkipNested = [CASCustom eventWithName:@"testevent2" properties:@{ @"invalidParamContainer": @{ @"invalidParam": [[NSObject alloc] init] } }];
+    XCTAssertNotNil(validEventSkipNested);
     
     // Check parameters of custom model
     CASCustom *event2 =  [CASCustom eventWithName:@"event2"];

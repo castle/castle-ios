@@ -312,8 +312,9 @@ class SwiftTests: XCTestCase {
         let invalidEvent1 = CASCustom.event(withName: "testevent2", properties: [ "invalidparam": NSObject() ])
         XCTAssertNil(invalidEvent1)
 
-        let invalidEvent2 = CASCustom.event(withName: "testevent2", properties: [ "invalidParamContainer": [ "invalidParam": NSObject() ] ])
-        XCTAssertNil(invalidEvent2)
+        // Event will skip any nested dictionaries
+        let validEventSkipNested = CASCustom.event(withName: "testevent2", properties: [ "invalidParamContainer": [ "invalidParam": NSObject() ] ])
+        XCTAssertNotNil(validEventSkipNested)
 
         // Check parameters of custom model
         let event2 = CASCustom(name: "event2")!
