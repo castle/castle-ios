@@ -20,11 +20,6 @@ FOUNDATION_EXPORT const unsigned char CastleVersionString[];
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- Castle client id header name
- */
-extern NSString * const CastleClientIdHeaderName;
-
-/**
  Castle request token header name
  */
 extern NSString * const CastleRequestTokenHeaderName;

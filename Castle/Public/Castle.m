@@ -25,11 +25,9 @@
 
 @import Highwind;
 
-NSString *const CastleUserIdentifierKey = @"CastleUserIdentifierKey";
 NSString *const CastleUserJwtKey = @"CastleUserJwtKey";
 NSString *const CastleAppVersionKey = @"CastleAppVersionKey";
 
-NSString *const CastleClientIdHeaderName = @"X-Castle-Client-Id";
 NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
 
 static CTTelephonyNetworkInfo *_telephonyNetworkInfo;

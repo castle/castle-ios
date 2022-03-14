@@ -399,7 +399,7 @@ class SwiftTests: XCTestCase {
 
     func testDefaultHeaders() throws {
         XCTAssertNotNil(Castle.createRequestToken());
-        XCTAssertTrue(CastleClientIdHeaderName == "X-Castle-Client-Id");
+        XCTAssertTrue(CastleRequestTokenHeaderName == "X-Castle-Request-Token");
     }
 
     func testRequestInterceptor() throws {
@@ -436,7 +436,7 @@ class SwiftTests: XCTestCase {
         var request = URLRequest(url: url)
 
         // Get required header from the Castle SDK if you don't want to use the request interceptor
-        request.setValue(Castle.createRequestToken(), forHTTPHeaderField: CastleClientIdHeaderName)
+        request.setValue(Castle.createRequestToken(), forHTTPHeaderField: CastleRequestTokenHeaderName)
 
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
