@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.0.1 (2022-03-15)
+- Fix: [#83](https://github.com/castle/castle-ios/pull/83) Clear event queue if there is an error when reading from storage.
+
 ## 3.0.0 (2022-03-15)
 - Add support for enhanced user activity monitoring.
 	- Introduced custom(name:) method
