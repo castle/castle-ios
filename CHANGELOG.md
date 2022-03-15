@@ -4,6 +4,7 @@
 - Add support for enhanced user activity monitoring.
 	- Introduced custom(name:) method
 	- Introduced custom(name:properties:) method
+	- Introduced screen(name:) method
 	- Introduced userJwt() method
 - Remove deprecated methods.
 	- Removed identify()
