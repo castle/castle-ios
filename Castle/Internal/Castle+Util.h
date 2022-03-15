@@ -7,7 +7,30 @@
 
 #import "Castle.h"
 
+@import Highwind;
+
 @interface Castle (Util)
+
+/**
+ Get Highwind instance used for token generation and payload encoding
+ 
+ @return Highwind instance
+ */
++ (nonnull Highwind *)highwind;
+
+/**
+ Get publishable key
+ 
+ @return Publishable key
+ */
++ (nullable NSString *)publishableKey;
+
+/**
+ Get stored user jwt from last identify call, returns nil if not set
+
+ @return User JWT
+ */
++ (nullable NSString *)userJwt;
 
 /**
  Get current connection state for Wifi
@@ -28,13 +51,13 @@
 
  @return Carrier name
  */
-+ (NSString *)carrierName;
++ (nullable NSString *)carrierName;
 
 /**
   Get the UIApplication instance if available
  
  @return UIApplication instance
  */
-+ (UIApplication *)sharedUIApplication;
++ (nullable UIApplication *)sharedUIApplication;
 
 @end

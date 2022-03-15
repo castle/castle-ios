@@ -20,11 +20,6 @@ FOUNDATION_EXPORT const unsigned char CastleVersionString[];
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- Castle client id header name
- */
-extern NSString * const CastleClientIdHeaderName;
-
-/**
  Castle request token header name
  */
 extern NSString * const CastleRequestTokenHeaderName;
@@ -91,50 +86,48 @@ extern NSString * const CastleRequestTokenHeaderName;
 #pragma mark - Tracking
 
 /**
- Track identify event with specified user id. User identity will be persisted. A call to identify or reset will clear the stored user identity.
+ Track identify event with specified user id. User jwt will be persisted. A call to identify or reset will clear the stored user identity.
 
- @param userId User Id
- @code // Identify User with unique identifier
- [Castle identify:@"1245-3055"];
+ @param userJwt User Jwt
+ @code // Set user jwt
+ [Castle setUserJwt:@"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"];
  @endcode
  */
-+ (void)identify:(nullable NSString *)userId;
-
-/**
- Track identify event with specified user identity. User identity will be persisted. A call to identify or reset will clear the stored user identity.
- Provided user traits will be included in the identify event sent to the Castle API.
-
- @param identifier user id
- @param traits user traits
- @code // Identify user with unique identifier including user traits
- [Castle identify:@"1245-3055" traits:@{ @"email": @"laura@example.com" }];
- @endcode
- */
-+ (void)identify:(NSString *)identifier traits:(nullable NSDictionary *)traits;
-
-/**
- Set user signature and enable secure mode. User signature will be included in all events after it has been set and will be persisted.
- A stored user signature will be removed when the user signature or reset methods are called.
-
- @param signature User signature (SHA-256 HMAC in hex format)
- @code // Add user signature
- [Castle signature:@"944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"];
- @endcode
- */
-+ (void)secure:(nullable NSString *)signature;
++ (void)setUserJwt:(nullable NSString *)userJwt NS_SWIFT_NAME(userJwt(_:));
 
 /**
  Track screen event with a specified name
 
- @param screenName Screen name
+ @param name Screen name
  @code // Track a screen view
- [Castle screen:@"Menu"];
+ [Castle screenWithName:@"Menu"];
  @endcode
  */
-+ (void)screen:(NSString *)screenName;
++ (void)screenWithName:(NSString *)name NS_SWIFT_NAME(screen(name:));
 
 /**
- Force a flush of the batch event queue, even if the flush limit hasn't been reached
+ Track custom event with a specified name
+
+ @param name Event name
+ @code // Track custom event
+ [Castle customWithName:@"Custom"];
+ @endcode
+ */
++ (void)customWithName:(NSString *)name NS_SWIFT_NAME(custom(name:));
+
+/**
+ Track custom event with a specified name and properties
+
+ @param name Event name
+ @param properties Properties
+ @code // Track custom event with properties
+ [Castle customWithName:@"Custom" properties:@{ @"customKey": @"value" }];
+ @endcode
+ */
++ (void)customWithName:(NSString *)name properties:(NSDictionary *)properties NS_SWIFT_NAME(custom(name:properties:));
+
+/**
+ Force a flush of the event queue, even if the flush limit hasn't been reached
  */
 + (void)flush;
 
@@ -172,32 +165,11 @@ extern NSString * const CastleRequestTokenHeaderName;
 #pragma mark - Metadata
 
 /**
- Get client identifier if set, otherwise returns nil
-
- @return client identifier
- */
-+ (nullable NSString *)clientId __deprecated_msg("Use +createRequestToken instead");
-
-/**
  Get request token
 
  @return request token
  */
 + (nonnull NSString *)createRequestToken;
-
-/**
- Get stored user id from last identify call, returns nil if not set
-
- @return User Id
- */
-+ (nullable NSString *)userId;
-
-/**
- Get stored signature from secure call, returns nil if not set
-
- @return Signature
- */
-+ (nullable NSString *)userSignature;
 
 /**
  Get the User Agent for used in all requests to the Castle API.

@@ -9,18 +9,13 @@
 
 #import "CASModel.h"
 
-@interface CASEvent : CASModel <NSSecureCoding>
+@interface CASEvent : CASModel
 
-@property (nonatomic, copy, readonly) NSString *name;
-@property (nonatomic, copy, readonly) NSDictionary *properties;
-@property (nonatomic, copy, readonly) NSDate *timestamp;
-@property (nonatomic, copy, readonly) NSString *type;
-@property (nonatomic, copy, readonly) NSString *userId;
-@property (nonatomic, copy, readonly) NSString *userSignature;
+@property (nonatomic, copy, readonly) NSString * _Nullable name;
+@property (nonatomic, copy, readonly) NSDate * _Nonnull timestamp;
+@property (nonatomic, copy, readonly) NSString * _Nonnull type;
+@property (nonatomic, readonly) NSString * _Nonnull token;
 
-+ (instancetype)eventWithName:(NSString *)name;
-+ (instancetype)eventWithName:(NSString *)name properties:(NSDictionary *)properties;
-
-+ (BOOL)propertiesContainValidData:(NSDictionary *)dictionary;
++ (_Nullable instancetype)eventWithName:(NSString * _Nullable)name;
 
 @end

@@ -10,13 +10,15 @@ import XCTest
 
 import Castle
 
+class MainViewController: UIViewController { }
+
 class SwiftTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
         let baseURLAllowList = [URL(string: "https://google.com/")!]
-        let configuration = CastleConfiguration(publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
+        let configuration = CastleConfiguration(publishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA")
         configuration.baseURLAllowList = baseURLAllowList
         
         Castle.configure(configuration)
@@ -65,8 +67,9 @@ class SwiftTests: XCTestCase {
     }
 
     func testConfiguration() throws {
+        let publishableKey = "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"
         let baseURLAllowList = [URL(string:"https://google.com/")!];
-        var configuration = CastleConfiguration(publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
+        let configuration = CastleConfiguration(publishableKey: publishableKey)
 
         // Check that all default values are set correctly
         XCTAssertEqual(configuration.isScreenTrackingEnabled, false);
@@ -84,7 +87,7 @@ class SwiftTests: XCTestCase {
         configuration.baseURLAllowList = baseURLAllowList;
 
         // Check that all the configuration parameters where set correctly
-        XCTAssertTrue(configuration.publishableKey == "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
+        XCTAssertTrue(configuration.publishableKey == publishableKey)
         XCTAssertEqual(configuration.isScreenTrackingEnabled, true)
         XCTAssertEqual(configuration.isDebugLoggingEnabled, true)
         XCTAssertEqual(configuration.isDeviceIDAutoForwardingEnabled, true)
@@ -92,14 +95,13 @@ class SwiftTests: XCTestCase {
         XCTAssertEqual(configuration.maxQueueLimit, 20)
         XCTAssertEqual(configuration.baseURLAllowList!.count, 1)
         XCTAssertTrue(configuration.baseURLAllowList![0].absoluteString == "https://google.com/")
-        XCTAssertFalse(configuration.useCloudflareApp)
-        XCTAssertTrue(configuration.baseURL.absoluteString == "https://api.castle.io/v1/")
+        XCTAssertTrue(configuration.baseURL.absoluteString == "https://m.castle.io/v1/")
 
         configuration.baseURLAllowList = [URL(string: "https://google.com/somethingelse")!]
         XCTAssertFalse(configuration.baseURLAllowList![0].absoluteString  == "https://google.com/somethingelse")
 
         // Setup Castle SDK with publishable key
-        Castle.configure(withPublishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
+        Castle.configure(withPublishableKey: publishableKey)
 
         // Configuration reset
         Castle.resetConfiguration()
@@ -113,34 +115,6 @@ class SwiftTests: XCTestCase {
         XCTAssertFalse(Castle.isAllowlistURL(nil))
 
         Castle.resetConfiguration()
-
-        configuration = CastleConfiguration(publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
-        configuration.apiDomain = "example.com"
-        configuration.useCloudflareApp = true
-
-        XCTAssertTrue(configuration.useCloudflareApp)
-        XCTAssertTrue(configuration.apiDomain == "example.com")
-        XCTAssertTrue(configuration.apiPath == "v1/c/mobile/")
-        XCTAssertTrue(configuration.baseURL.absoluteString == "https://example.com/v1/c/mobile/")
-
-        Castle.configure(configuration)
-
-        XCTAssertTrue(Castle.baseURL().absoluteString == "https://example.com/v1/c/mobile/");
-
-        Castle.resetConfiguration()
-
-        configuration = CastleConfiguration(publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
-        configuration.apiDomain = "example.com"
-        configuration.apiPath = "v1/test/"
-        configuration.useCloudflareApp = true
-
-        XCTAssertTrue(configuration.useCloudflareApp);
-        XCTAssertTrue(configuration.apiDomain == "example.com");
-        XCTAssertTrue(configuration.baseURL.absoluteString == "https://example.com/v1/test/");
-        
-        Castle.resetConfiguration()
-
-        Castle.configure(withPublishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
     }
 
     func testDeviceIdentifier() throws {
@@ -150,26 +124,18 @@ class SwiftTests: XCTestCase {
 
     func testUserIdPersistance() throws {
         // Make sure the user id is persisted correctly after identify
-        Castle.identify("thisisatestuser")
+        Castle.userJwt( "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
 
         // Check that the stored identity is the same as the identity we tracked
-        XCTAssertEqual(Castle.userId(), "thisisatestuser")
-    }
-
-    func testSignaturePersistance() throws {
-        // Call secure to save the signature
-        Castle.secure("944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52")
-        
-        // Check that the stored user signature is the same as the user signature we provided
-        XCTAssertEqual(Castle.userSignature(), "944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52")
+        let userJwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"
+        XCTAssertEqual(Castle.userJwt(), userJwt)
     }
 
     func testReset() throws {
         Castle.reset()
 
         // Check to see if the user id and user signature was cleared on reset
-        XCTAssertNil(Castle.userId());
-        XCTAssertNil(Castle.userSignature());
+        XCTAssertNil(Castle.userJwt());
     }
 
     func testTracking() throws {
@@ -177,27 +143,33 @@ class SwiftTests: XCTestCase {
 
         // This should lead to no event being tracked since empty string isn't a valid name
         var count = CASEventStorage.storedQueue().count
-        Castle.screen("")
+        Castle.screen(name: "")
         var newCount = CASEventStorage.storedQueue().count
         XCTAssertTrue(count == newCount);
 
         // This should lead to no event being tracked since identity can't be an empty string
         count = CASEventStorage.storedQueue().count
-        Castle.identify("")
+        Castle.userJwt("")
         newCount = CASEventStorage.storedQueue().count
         XCTAssertTrue(count == newCount) // Count should be unchanced
-        XCTAssertNil(Castle.userId()) // User id should be nil
+        XCTAssertNil(Castle.userJwt()) // User jwt should be nil
 
         // This should lead to no event being tracked properties can't be nil
         count = CASEventStorage.storedQueue().count
-        Castle.identify("testuser1", traits: nil)
+        Castle.userJwt( "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
         newCount = CASEventStorage.storedQueue().count
         XCTAssertTrue(count == newCount) // Count should be unchanced
-        XCTAssertNil(Castle.userId()) // User id should be nil
+        XCTAssertNotNil(Castle.userJwt()) // User jwt should not be nil
 
-        let screen = CASScreen(name: "Main");
-        XCTAssertNotNil(screen);
-        XCTAssertTrue(screen!.type == "screen");
+        let screen = CASScreen(name: "Main")
+        XCTAssertNotNil(screen)
+        XCTAssertTrue(screen!.type == "$screen")
+        
+        let properties = ["key": "value"]
+        let custom = CASCustom.event(withName: "Custom", properties: properties)
+        XCTAssertNotNil(custom)
+        XCTAssertTrue(custom!.type == "$custom")
+        XCTAssertEqual(custom!.properties as! [String: String], properties)
     }
 
     func testViewControllerSwizzle() throws {
@@ -216,16 +188,16 @@ class SwiftTests: XCTestCase {
     }
 
     func testModels() throws {
-        let batch1 = CASBatch(events: nil)
-        XCTAssertNil(batch1)
+        let monitor1 = CASMonitor(events: nil)
+        XCTAssertNil(monitor1)
 
-        let batch2 = CASBatch(events: [])
-        XCTAssertNil(batch2)
+        let monitor2 = CASMonitor(events: [])
+        XCTAssertNil(monitor2)
 
-        let event1 = CASEvent(name: nil)
+        let event1 = CASCustom(name: nil)
         XCTAssertNil(event1)
 
-        let event2 = CASEvent(name: "")
+        let event2 = CASCustom(name: "")
         XCTAssertNil(event2)
 
         let screen1 = CASScreen(name: nil)
@@ -234,37 +206,30 @@ class SwiftTests: XCTestCase {
         let screen2 = CASScreen(name: "")
         XCTAssertNil(screen2)
 
-        let identity1 = CASIdentity(userId: "", traits: [:])
-        XCTAssertNil(identity1)
-
-        let identity2 = CASIdentity(userId:"testuser", traits: [:])
-
-        let identity2Data = try! NSKeyedArchiver.archivedData(withRootObject: identity2 as Any, requiringSecureCoding: true)
-        XCTAssertNotNil(identity2Data)
-
-        let identity3 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASIdentity.self, from: identity2Data)
-        XCTAssertNotNil(identity3)
-
+        let user1 = CASUserJwt.user(withJwt: "")
+        XCTAssertNil(user1)
+        
         XCTAssertTrue(CASEvent.supportsSecureCoding)
+        XCTAssertTrue(CASMonitor.supportsSecureCoding)
+        XCTAssertTrue(CASModel.supportsSecureCoding)
     }
-
-    func testSecureMode() throws {
-        // Calling secure with a nil user signature should not store or replace any previous signature
-        Castle.secure(nil)
-        XCTAssertNil(Castle.userSignature())
+    
+    func testModelInvalidData() {
+        let data = NSData()
+        let properties = ["key": data];
+        var event: CASEvent? = CASCustom.event(withName: "event", properties: properties)
+        XCTAssertNil(event);
         
-        // User signature should be stored
-        Castle.secure("944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52")
-        XCTAssertEqual(Castle.userSignature(), "944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52");
+        event = CASScreen(name: "")
+        XCTAssertNil(event);
         
-        // Calling secure again should override previously stored signature
-        Castle.secure("844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52")
-        XCTAssertEqual(Castle.userSignature(), "844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52")
+        let user = CASUserJwt.user(withJwt: "")
+        XCTAssertNil(user);
     }
 
     func testObjectSerializationForScreen() throws {
         Castle.reset()
-        Castle.identify("thisisatestuser1")
+        Castle.userJwt( "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
         
         // Create screen view
         let event = CASScreen(name: "Main")!
@@ -272,186 +237,97 @@ class SwiftTests: XCTestCase {
         XCTAssertTrue(event.name == "Main")
         
         // Validate payload
-        let payload = event.jsonPayload()!
+        let payload = event.jsonPayload() as! NSDictionary
         XCTAssertTrue(payload["name"]! as! String == "Main")
-        XCTAssertTrue(payload["type"]! as! String == "screen")
+        XCTAssertTrue(payload["type"]! as! String == "$screen")
         XCTAssertNil(payload["properties"])
         XCTAssertNotNil(payload["timestamp"]!)
-        XCTAssertNotNil(payload["context"]!)
-        XCTAssertNil(payload["user_signature"])
         
-        // Client id should be set
-        let context = payload["context"] as! [AnyHashable:Any]
-        let clientId = context["client_id"] as! String
-        XCTAssertNotNil(clientId);
+        // Token should be set
+        let token = payload["request_token"] as! String
+        XCTAssertNotNil(token);
         
         // Payload should not include these parameters
         XCTAssertNil(payload["event"])
         
-        // Enable secure mode
-        let signature = "944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"
-        Castle.secure(signature)
-        
-        // The user signature should be included in any new event objects
+        // Check parameters of screen model
         let event2 = CASScreen(name: "Second")!
-        XCTAssertTrue(event2.userId == "thisisatestuser1")
-        XCTAssertTrue(event2.userSignature == signature)
+        XCTAssertTrue(event2.type == "$screen")
+        XCTAssertTrue(event2.name == "Second")
         
-        // Archive identity object
-        var data = try! NSKeyedArchiver.archivedData(withRootObject:event2 as Any, requiringSecureCoding: true)
-        var event3 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASScreen.self, from: data)
-        XCTAssertTrue(event2.userId == event3!.userId)
-        XCTAssertTrue(event2.userSignature == event3!.userSignature)
+        // Archive screen object
+        let data = try! NSKeyedArchiver.archivedData(withRootObject:event2 as Any, requiringSecureCoding: true)
         
-        // Update user identity
-        Castle.identify("thisisatestuser2")
-        
-        // Update user signature
-        let signature2 = "844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"
-        Castle.secure(signature2)
-        
-        // Verify that the user id and token are the same after archiving and unarchiving after updating the user id and signature
-        data = try! NSKeyedArchiver.archivedData(withRootObject: event2, requiringSecureCoding: true)
-        event3 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASScreen.self, from: data)
-        XCTAssertTrue(event3?.userId == "thisisatestuser1");
-        XCTAssertTrue(event3?.userSignature == signature);
-        
-        // Create a new event that should have the new updated user id and signature
-        let event4 = CASScreen(name: "Third")!
-        data = try! NSKeyedArchiver.archivedData(withRootObject: event4, requiringSecureCoding: true)
-        let event5 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASScreen.self, from: data)
-        XCTAssertTrue(event5?.userId == "thisisatestuser2")
-        XCTAssertTrue(event5?.userSignature == signature2)
+        // Unarchived data should match model before archive
+        let event3 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASScreen.self, from: data)
+        XCTAssertTrue(event2.name == event3!.name)
+        XCTAssertTrue(event2.type == event3!.type)
     }
 
     func testObjectSerializationForIdentify() {
+        let userJwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"
         Castle.reset()
-        Castle.identify("thisisatestuser1")
-        
+        Castle.userJwt(userJwt)
+
         // Create user identity
-        let traits = ["trait": "value"];
-        let event = CASIdentity(userId: "123", traits: traits)!
+        let event = CASUserJwt.user(withJwt: userJwt)!
 
         // Validate payload
-        let payload = event.jsonPayload()!
-        XCTAssertTrue(payload["user_id"] as! String == "123")
-        XCTAssertTrue(payload["type"] as! String  == "identify")
-        XCTAssertTrue(payload["traits"]! as! [String:String] == traits)
-        XCTAssertNotNil(payload["timestamp"])
-        XCTAssertNotNil(payload["context"])
-        XCTAssertNil(payload["user_signature"])
+        let payload = event.jsonPayload() as! NSDictionary
+        XCTAssertTrue(payload["jwt"] as! String == userJwt)
         
-        // Payload should not include these parameters
-        XCTAssertNil(payload["properties"])
-        XCTAssertNil(payload["event"])
-        
-        // Enable secure mode
-        let signature = "944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"
-        Castle.secure(signature)
-        
-        // The user signature should be included in any new event objects
-        let event2 = CASIdentity(userId: "456", traits: traits)!
-        XCTAssertTrue(event2.userId == "456");
-        XCTAssertTrue(event2.userSignature == signature);
-        
-        // Archive identity object
-        var data = try! NSKeyedArchiver.archivedData(withRootObject: event2, requiringSecureCoding: true)
-        var event3 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASIdentity.self, from: data)
-        XCTAssertTrue(event2.userId == event3?.userId)
-        XCTAssertTrue(event2.userSignature == event3?.userSignature)
-        
-        // Update user identity
-        Castle.identify("thisisatestuser2")
-        
-        // Update user signature
-        let signature2 = "844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"
-        Castle.secure(signature2)
-        
-        // Verify that the user id and token are the same after archiving and unarchiving after updating the user id and signature
-        data = try! NSKeyedArchiver.archivedData(withRootObject: event2, requiringSecureCoding: true)
-        event3 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASIdentity.self, from: data)
-        XCTAssertTrue(event3?.userId == event2.userId);
-        XCTAssertTrue(event3?.userSignature == signature);
-        
-        // Create a new event that should have the new updated user id and signature
-        let event4 = CASIdentity(userId:"789", traits:traits)!
-        data = try! NSKeyedArchiver.archivedData(withRootObject: event4, requiringSecureCoding: true)
-        let event5 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASIdentity.self, from: data)
-        XCTAssertTrue(event5?.userId == "789");
-        XCTAssertTrue(event5?.userSignature == signature2);
+        // Validate jwt payload
+        let event2 = CASUserJwt.user(withJwt: userJwt)!
+        XCTAssertTrue(event2.jwt == userJwt);
     }
 
     func testObjectSerializationForEvent() {
         Castle.reset()
-        Castle.identify("thisisatestuser1")
+        Castle.userJwt("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
 
         let model = CASModel()
         XCTAssertNil(model.jsonPayload());
         XCTAssertNil(model.jsonData());
 
         // Create basic event with valid data
-        let event = CASEvent(name: "testevent1", properties:["param1": "value1", "param2": [ "param3": 2 ] ])!
+        let event = CASCustom(name: "testevent1")!
         XCTAssertNotNil(event);
         XCTAssertTrue(event.name == "testevent1");
-        XCTAssertNotNil(event.properties);
 
         // Validate simple factory method
-        let event1 = CASEvent(name: "testevent2")!
+        let event1 = CASCustom(name: "testevent2")!
         XCTAssertTrue(event1.name == "testevent2");
-        XCTAssertNotNil(event1.properties);
 
         // Validate payload
-        let payload = event.jsonPayload()!
-        XCTAssertTrue(payload["event"] as! String == "testevent1")
-        XCTAssertTrue(payload["type"] as! String == "track")
+        let payload = event.jsonPayload()! as! NSDictionary
+        XCTAssertTrue(payload["name"] as! String == "testevent1")
+        XCTAssertTrue(payload["type"] as! String == "$custom")
         XCTAssertNil(payload["properties"])
         XCTAssertNotNil(payload["timestamp"])
-        XCTAssertNotNil(payload["context"])
-        XCTAssertNil(payload["user_signature"])
+        XCTAssertNotNil(payload["request_token"])
 
         // Validate JSON Serialization success
         XCTAssertNotNil(event.jsonData());
 
-        let invalidEvent1 = CASEvent(name: "testevent2", properties: [ "invalidparam": NSObject() ])
+        let invalidEvent1 = CASCustom.event(withName: "testevent2", properties: [ "invalidparam": NSObject() ])
         XCTAssertNil(invalidEvent1)
 
-        let invalidEvent2 = CASEvent(name: "testevent2", properties: [ "invalidParamContainer": [ "invalidParam": NSObject() ] ])
-        XCTAssertNil(invalidEvent2)
+        // Event will skip any nested dictionaries
+        let validEventSkipNested = CASCustom.event(withName: "testevent2", properties: [ "invalidParamContainer": [ "invalidParam": NSObject() ] ])
+        XCTAssertNotNil(validEventSkipNested)
 
-        // Enable secure mode
-        let signature = "944d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"
-        Castle.secure(signature)
+        // Check parameters of custom model
+        let event2 = CASCustom(name: "event2")!
+        XCTAssertTrue(event2.name == "event2")
+        XCTAssertTrue(event2.type == "$custom");
 
-        // The user signature should be included in any new event objects
-        let event2 =  CASEvent(name: "event2")!
-        XCTAssertTrue(event2.userId == "thisisatestuser1")
-        XCTAssertTrue(event2.userSignature == signature);
-
-        // Archive identity object
-        var data = try! NSKeyedArchiver.archivedData(withRootObject: event2, requiringSecureCoding: true)
-        var event3 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASEvent.self, from: data)
-        XCTAssertTrue(event2.userId == event3?.userId);
-        XCTAssertTrue(event2.userSignature == event3?.userSignature);
-
-        // Update user identity
-        Castle.identify("thisisatestuser2")
-
-        // Update user signature
-        let signature2 = "844d7d6c5187cafac297785bbf6de0136a2e10f31788e92b2822f5cfd407fa52"
-        Castle.secure(signature2)
-
-        // Verify that the user id and token are the same after archiving and unarchiving after updating the user id and signature
-        data = try! NSKeyedArchiver.archivedData(withRootObject: event2, requiringSecureCoding: true)
-        event3 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASEvent.self, from: data)
-        XCTAssertTrue(event3?.userId == "thisisatestuser1")
-        XCTAssertTrue(event3?.userSignature == signature)
-
-        // Create a new event that should have the new updated user id and signature
-        let event4 = CASEvent(name: "event4")!
-        data = try! NSKeyedArchiver.archivedData(withRootObject: event4, requiringSecureCoding: true)
-        let event5 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASEvent.self, from: data)
-        XCTAssertTrue(event5?.userId == "thisisatestuser2")
-        XCTAssertTrue(event5?.userSignature == signature2)
+        // Archive screen object
+        let data = try! NSKeyedArchiver.archivedData(withRootObject:event2 as Any, requiringSecureCoding: true)
+        
+        // Unarchived data should match model before archive
+        let event3 = try! NSKeyedUnarchiver.unarchivedObject(ofClass: CASCustom.self, from: data)
+        XCTAssertTrue(event2.name == event3?.name);
+        XCTAssertTrue(event2.type == event3?.type);
     }
 
     func testPersistance() throws {
@@ -460,7 +336,7 @@ class SwiftTests: XCTestCase {
         let path = paths[0].appending("/castle/events")
 
         // Track a single event to trigger the persistance
-        Castle.screen("example screen")
+        Castle.screen(name: "example screen")
         XCTAssertTrue(fileManager.fileExists(atPath: path));
 
         // Remove event queue data file and verify
@@ -468,7 +344,7 @@ class SwiftTests: XCTestCase {
         XCTAssertFalse(fileManager.fileExists(atPath: path))
 
         // Track a single event to trigger the persistance
-        Castle.screen("example screen")
+        Castle.screen(name: "example screen")
         XCTAssertTrue(fileManager.fileExists(atPath: path))
 
         let currentQueueSize = Castle.queueSize()
@@ -478,19 +354,29 @@ class SwiftTests: XCTestCase {
         XCTAssertTrue(currentQueueSize == queue.count);
 
         // Tracking a new event should increase queue size by one
-        Castle.screen("example screen")
+        Castle.screen(name: "example screen")
         queue = CASEventStorage.storedQueue()
         XCTAssertTrue(queue.count == currentQueueSize+1);
+        
+        // Tracking a new event should increase queue size by one
+        Castle.custom(name: "custom event")
+        queue = CASEventStorage.storedQueue()
+        XCTAssertTrue(queue.count == currentQueueSize+2);
+        
+        // Tracking a new event should increase queue size by one
+        Castle.custom(name: "custom event", properties: ["key": "value"])
+        queue = CASEventStorage.storedQueue()
+        XCTAssertTrue(queue.count == currentQueueSize+3);
     }
 
     func testDefaultHeaders() throws {
         XCTAssertNotNil(Castle.createRequestToken());
-        XCTAssertTrue(CastleClientIdHeaderName == "X-Castle-Client-Id");
+        XCTAssertTrue(CastleRequestTokenHeaderName == "X-Castle-Request-Token");
     }
 
     func testRequestInterceptor() throws {
         // Create configuration object
-        let configuration = CastleConfiguration(publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
+        let configuration = CastleConfiguration(publishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA")
         
         let baseURLAllowList = [URL(string: "https://google.com/")!]
 
@@ -522,7 +408,7 @@ class SwiftTests: XCTestCase {
         var request = URLRequest(url: url)
 
         // Get required header from the Castle SDK if you don't want to use the request interceptor
-        request.setValue(Castle.createRequestToken(), forHTTPHeaderField: CastleClientIdHeaderName)
+        request.setValue(Castle.createRequestToken(), forHTTPHeaderField: CastleRequestTokenHeaderName)
 
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
@@ -549,22 +435,25 @@ class SwiftTests: XCTestCase {
     }
 
     func testNetworking() throws {
-        let event = CASEvent(name: "Example event")!
-        let batchModel = CASBatch(events: [event])!
-        XCTAssertNotNil(batchModel);
+        // Must identify, otherwise CASMonitor constructor will return nil
+        Castle.userJwt("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
+        
+        let event = CASCustom(name: "Example event")!
+        let monitorModel = CASMonitor(events: [event])!
+        XCTAssertNotNil(monitorModel);
 
-        let expectation = self.expectation(description: "GET /batch")
+        let expectation = self.expectation(description: "GET /monitor")
 
         // Create configuration object
-        let configuration = CastleConfiguration(publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
+        let configuration = CastleConfiguration(publishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA")
         let client = CASAPIClient(configuration: configuration)
 
-        // Perform batch network request
-        let task = client.dataTask(withPath: "batch", post: batchModel.jsonData()!, completion: { (responseObject, response, error) in
+        // Perform monitor network request
+        let task = client.dataTask(withPath: "monitor", post: monitorModel.jsonData()!, completion: { (responseObject, response, error) in
             XCTAssertNil(error, "error should be nil");
 
             if let httpResponse = response as? HTTPURLResponse {
-                XCTAssertEqual(httpResponse.statusCode, 202, "HTTP response status code should be 202")
+                XCTAssertEqual(httpResponse.statusCode, 204, "HTTP response status code should be 204 (no response body)")
             } else {
                 XCTFail("Response was not NSHTTPURLResponse");
             }
@@ -582,7 +471,7 @@ class SwiftTests: XCTestCase {
     }
 
     func testMaxQueueLength() throws {
-        let configuration = CastleConfiguration(publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
+        let configuration = CastleConfiguration(publishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA")
 
         // Update configuration and set max queue limit to less than the flush limit.
         configuration.isDebugLoggingEnabled = true
@@ -590,17 +479,19 @@ class SwiftTests: XCTestCase {
         configuration.maxQueueLimit = 8
 
         Castle.configure(configuration)
+        
+        Castle.userJwt("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
 
         // Fill the queue
         for i in 0...configuration.maxQueueLimit {
-            Castle.screen(String(format: "Screen %d", i))
+            Castle.screen(name: String(format: "Screen %d", i))
         }
 
         // The queue size should be equal to maxQueueLimit
         XCTAssertTrue(configuration.maxQueueLimit == Castle.queueSize());
 
         // Track a new event so the maxQueueLimit is reached
-        Castle.screen("Screen")
+        Castle.screen(name: "Screen")
 
         // Add one more event so the oldest event in the queue is evicted
         // The queue size should still be equal to maxQueueLimit
@@ -614,7 +505,7 @@ class SwiftTests: XCTestCase {
         defaults.synchronize()
 
         Castle.resetConfiguration()
-        Castle.configure(withPublishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
+        Castle.configure(withPublishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA")
 
         // Check to see if the installed version was updated correctly i.e. the SDK detected an app update.
         let currentVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String

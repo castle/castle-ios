@@ -56,3 +56,17 @@ NSString *CASUserAgent(void)
     
     return [NSString stringWithFormat:@"%@/%@ (%@) (%@; %@ %@; Castle %@)", name, version, build, model, system, systemVersion, [Castle versionString]];
 }
+
+@implementation NSString (Truncate)
+
+- (NSString *)truncate:(NSUInteger)maxLength
+{
+    NSRange stringRange = {0, MIN([self length], maxLength)};
+
+    // adjust the range to include dependent chars
+    stringRange = [self rangeOfComposedCharacterSequencesForRange:stringRange];
+    
+    return [self substringWithRange:stringRange];
+}
+
+@end

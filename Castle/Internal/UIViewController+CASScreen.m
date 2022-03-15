@@ -60,7 +60,7 @@
     if (self == top) {
         NSString *identifier = [top ca_viewIdentifier];
         CASLog(@"Will send automatic screen event for screen: %@", identifier);
-        [Castle screen:identifier];
+        [Castle screenWithName:identifier];
     }
 }
 

@@ -16,20 +16,18 @@
 #import "CASReachability.h"
 #import "CASUtils.h"
 #import "CASEvent.h"
-#import "CASIdentity.h"
 #import "CASScreen.h"
-#import "CASBatch.h"
+#import "CASCustom.h"
+#import "CASMonitor.h"
 #import "CASEventStorage.h"
 #import "CASRequestInterceptor.h"
 #import "UIViewController+CASScreen.h"
 
 @import Highwind;
 
-NSString *const CastleUserIdentifierKey = @"CastleUserIdentifierKey";
-NSString *const CastleSecureSignatureKey = @"CastleSecureSignatureKey";
+NSString *const CastleUserJwtKey = @"CastleUserJwtKey";
 NSString *const CastleAppVersionKey = @"CastleAppVersionKey";
 
-NSString *const CastleClientIdHeaderName = @"X-Castle-Client-Id";
 NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
 
 static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
@@ -39,8 +37,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 @property (nonatomic, strong) CastleConfiguration *configuration;
 @property (nonatomic, strong) NSURLSessionDataTask *task;
 @property (nonatomic, strong, nonnull) NSMutableArray *eventQueue;
-@property (nonatomic, copy, readwrite, nullable) NSString *userId;
-@property (nonatomic, copy, readwrite, nullable) NSString *userSignature;
+@property (nonatomic, copy, readwrite, nullable) NSString *userJwt;
 @property (nonatomic, assign, readonly) NSUInteger maxBatchSize;
 @property (nonatomic, strong, readwrite) CASReachability *reachability;
 @property (nonatomic, strong, readwrite) Highwind *highwind;
@@ -48,8 +45,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 @implementation Castle
 
-@synthesize userId = _userId;
-@synthesize userSignature = _userSignature;
+@synthesize userJwt = _userJwt;
 
 + (instancetype)sharedInstance {
     static Castle *_sharedClient = nil;
@@ -172,22 +168,13 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return 100;
 }
 
-- (NSString *)userId
+- (NSString *)userJwt
 {
-    // If there's no user id: try fetching it from settings
-    if(!_userId) {
-        _userId = [[NSUserDefaults standardUserDefaults] objectForKey:CastleUserIdentifierKey];
+    // If there's no user jwt: try fetching it from settings
+    if(!_userJwt) {
+        _userJwt = [[NSUserDefaults standardUserDefaults] objectForKey:CastleUserJwtKey];
     }
-    return _userId;
-}
-
-- (NSString *)userSignature
-{
-    // If there's no user signature: try fetching it from settings
-    if(!_userSignature) {
-        _userSignature = [[NSUserDefaults standardUserDefaults] objectForKey:CastleSecureSignatureKey];
-    }
-    return _userSignature;
+    return _userJwt;
 }
 
 + (NSString *)userAgent
@@ -205,98 +192,56 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 #pragma mark - Setters
 
-- (void)setUserId:(NSString *)userId
+- (void)setUserJwt:(NSString *)userJwt
 {
-    _userId = userId;
+    _userJwt = userJwt;
     
-    // Store user identity in user defaults
+    // Store user jwt in user defaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:userId forKey:CastleUserIdentifierKey];
-    [defaults synchronize];
-}
-
-- (void)setUserSignature:(NSString *)userSignature
-{
-    _userSignature = userSignature;
-    
-    // Store user signature in user defaults
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:userSignature forKey:CastleSecureSignatureKey];
+    [defaults setObject:userJwt forKey:CastleUserJwtKey];
     [defaults synchronize];
 }
 
 #pragma mark - Tracking
 
-+ (void)track:(NSString *)eventName
++ (void)customWithName:(NSString *)name
 {
-    [Castle track:eventName properties:@{}];
+    [Castle customWithName:name properties:@{}];
 }
 
-+ (void)track:(NSString *)eventName properties:(NSDictionary *)properties
++ (void)customWithName:(NSString *)name properties:(NSDictionary *)properties
 {
-    if(!eventName || [eventName isEqualToString:@""]) {
+    if(!name || [name isEqualToString:@""]) {
         CASLog(@"No event name provided. Will cancel track event operation.");
         return;
     }
     
     Castle *castle = [Castle sharedInstance];
-    CASEvent *event = [CASEvent eventWithName:eventName properties:properties];
+    CASCustom *event = [CASCustom eventWithName:name properties: properties];
     [castle queueEvent:event];
 }
 
-+ (void)screen:(NSString *)screenName
++ (void)screenWithName:(NSString *)name
 {
-    [Castle screen:screenName properties:@{}];
-}
-
-+ (void)screen:(NSString *)screenName properties:(NSDictionary *)properties
-{
-    if(!screenName || [screenName isEqualToString:@""]) {
+    if(!name || [name isEqualToString:@""]) {
         CASLog(@"No screen name provided. Will cancel track event operation.");
         return;
     }
     
     Castle *castle = [Castle sharedInstance];
-    CASScreen *screen = [CASScreen eventWithName:screenName properties:properties];
+    CASScreen *screen = [CASScreen eventWithName:name];
     [castle queueEvent:screen];
 }
 
-+ (void)identify:(NSString *)userId
++ (void)setUserJwt:(NSString *)userJwt
 {
-    [Castle identify:userId traits:@{}];
-}
-
-+ (void)identify:(NSString *)userId traits:(NSDictionary *)traits
-{
-    if(!userId || [userId isEqualToString:@""]) {
-        CASLog(@"No user id provided. Will cancel identify operation.");
+    if(!userJwt || [userJwt isEqualToString:@""]) {
+        CASLog(@"No user jwt provided.");
         return;
     }
     
     Castle *castle = [Castle sharedInstance];
-    if(![castle secureModeEnabled]) {
-        CASLog(@"Identify called without secure mode user signature set. If secure mode is enabled in Castle and identify is called before secure, the identify event will be discarded.");
-    }
-    
-    CASIdentity *identity = [CASIdentity identityWithUserId:userId traits:traits];
-    if(identity != nil) {
-        [castle setUserId:userId];
-        [castle queueEvent:identity];
-        
-        // Identify call will always flush
-        [Castle flush];
-    }
-}
-
-+ (void)secure:(NSString *)userSignature
-{
-    if(!userSignature || [userSignature isEqualToString:@""]) {
-        CASLog(@"No user signature provided. Will cancel secure operation.");
-        return;
-    }
-    
-    Castle *castle = [Castle sharedInstance];
-    [castle setUserSignature:userSignature];
+    [castle setUserJwt:userJwt];
 }
 
 + (void)flush
@@ -305,6 +250,13 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     
     if(castle.task != nil) {
         CASLog(@"Queue is already being flushed. Won't flush again.");
+        return;
+    }
+    
+    if(castle.userJwt == nil) {
+        CASLog(@"No user jwt set, clearing the queue.");
+        castle.eventQueue = [[NSMutableArray alloc] init];
+        [castle persistQueue];
         return;
     }
     
@@ -317,14 +269,14 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     
     CASLog(@"Flushing %ld of %ld queued events", batch.count, castle.eventQueue.count);
     
-    __block CASBatch *batchModel = [CASBatch batchWithEvents:batch];
+    __block CASMonitor *monitorModel = [CASMonitor monitorWithEvents:batch];
     
-    // Nil batch model object means there's no events to flush
-    if(!batchModel) {
+    // Nil monitor model object means there's no events to flush
+    if(!monitorModel) {
         return;
     }
     
-    castle.task = [castle.client dataTaskWithPath:@"batch" postData:[batchModel JSONData] completion:^(id responseObject, NSURLResponse *response, NSError *error) {
+    castle.task = [castle.client dataTaskWithPath:@"monitor" postData:[monitorModel JSONData] completion:^(id responseObject, NSURLResponse *response, NSError *error) {
         if(error != nil) {
             CASLog(@"Flush failed with error: %@", error);
             castle.task = nil;
@@ -332,12 +284,12 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         }
         
         // Remove successfully flushed events from queue and persist
-        [castle.eventQueue removeObjectsInArray:batchModel.events];
+        [castle.eventQueue removeObjectsInArray:monitorModel.events];
         [castle persistQueue];
         
         castle.task = nil;
         
-        CASLog(@"Successfully flushed (%ld) events: %@", batchModel.events.count, [batchModel JSONPayload]);
+        CASLog(@"Successfully flushed (%ld) events: %@", monitorModel.events.count, [monitorModel JSONPayload]);
         
         if ([castle eventQueueExceedsFlushLimit] && castle.eventQueue.count > 0) {
             CASLog(@"Current event queue still exceeds flush limit. Flush again");
@@ -368,10 +320,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     [Castle flush];
     
     // Reset cached user id
-    castle.userId = nil;
-    
-    // Reset cached signature
-    castle.userSignature = nil;
+    castle.userJwt = nil;
 }
 
 + (BOOL)isAllowlistURL:(NSURL *)url
@@ -403,6 +352,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 {
     if(!event) {
         CASLog(@"Can't enqueue nil event");
+        return;
+    }
+    
+    if([Castle userJwt] == nil) {
+        CASLog(@"No user jwt set, won't queue event");
         return;
     }
     
@@ -456,7 +410,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         // This means that the application was just installed.
         CASLog(@"No app version was stored in settings: the application was just installed.");
         CASLog(@"Application life cycle event detected: Will track install event");
-        [Castle track:@"Application installed"];
+        [Castle customWithName:@"Application installed"];
         
         // Flush the event queue when a application installed event is triggered
         [Castle flush];
@@ -464,7 +418,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         // App version changed since the application was last run: application was updated
         CASLog(@"App version stored in settings is different from current version string: the application was just updated.");
         CASLog(@"Application life cycle event detected: Will track update event");
-        [Castle track:@"Application updated"];
+        [Castle customWithName:@"Application updated"];
         
         // Flush the event queue when a application updated event is triggered
         [Castle flush];
@@ -474,17 +428,12 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     [defaults synchronize];
 }
 
-- (BOOL)secureModeEnabled
-{
-    return self.userSignature != nil;
-}
-
 #pragma mark - Application Lifecycle
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
     CASLog(@"Application life cycle event detected: Will track application did become active event");
-    [Castle track:@"Application Did Become Active"];
+    [Castle customWithName:@"Application Did Become Active"];
     
     // Flush the event queue when a application did become active event is triggered
     [Castle flush];
@@ -493,7 +442,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 - (void)applicationDidEnterBackground:(NSNotification *)notification
 {
     CASLog(@"Application life cycle event detected: Will track application did enter background event");
-    [Castle track:@"Application Did Enter Background"];
+    [Castle customWithName:@"Application Did Enter Background"];
     
     // Flush the event queue when a application did enter background event is triggered
     [Castle flush];
@@ -502,7 +451,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 - (void)applicationWillTerminate:(NSNotificationCenter *)notification
 {
     CASLog(@"Application life cycle event detected: Will track application will terminate event");
-    [Castle track:@"Application Will Terminate"];
+    [Castle customWithName:@"Application Will Terminate"];
     
     // Flush the event queue when a application will terminate event is triggered
     [Castle flush];
@@ -520,14 +469,19 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return [[Castle sharedInstance].highwind token];
 }
 
-+ (NSString *)userId
++ (NSString *)userJwt
 {
-    return [Castle sharedInstance].userId;
+    return [Castle sharedInstance].userJwt;
 }
 
-+ (NSString *)userSignature
++ (Highwind *)highwind
 {
-    return [Castle sharedInstance].userSignature;
+    return [Castle sharedInstance].highwind;
+}
+
++ (nullable NSString *)publishableKey
+{
+    return [Castle sharedInstance].configuration.publishableKey;
 }
 
 + (NSUInteger)queueSize
