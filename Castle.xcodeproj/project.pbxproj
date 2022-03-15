@@ -8,25 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		B612D061242BD012005B41B7 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B612D060242BD012005B41B7 /* CoreTelephony.framework */; };
+		B648463C27E0B793000A7EDA /* CASMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = B648463B27E0B793000A7EDA /* CASMonitor.h */; };
+		B648463E27E0B79A000A7EDA /* CASMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = B648463D27E0B79A000A7EDA /* CASMonitor.m */; };
+		B648464027E0B7A1000A7EDA /* CASCustom.h in Headers */ = {isa = PBXBuildFile; fileRef = B648463F27E0B7A1000A7EDA /* CASCustom.h */; };
+		B648464227E0B7A9000A7EDA /* CASCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = B648464127E0B7A9000A7EDA /* CASCustom.m */; };
+		B648464427E0B7B4000A7EDA /* CASUserJwt.h in Headers */ = {isa = PBXBuildFile; fileRef = B648464327E0B7B4000A7EDA /* CASUserJwt.h */; };
+		B648464627E0B7BA000A7EDA /* CASUserJwt.m in Sources */ = {isa = PBXBuildFile; fileRef = B648464527E0B7BA000A7EDA /* CASUserJwt.m */; };
 		B69885192612402D009D4CD9 /* Castle.m in Sources */ = {isa = PBXBuildFile; fileRef = B69885152612402D009D4CD9 /* Castle.m */; };
 		B698851A2612402D009D4CD9 /* CastleConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = B69885162612402D009D4CD9 /* CastleConfiguration.m */; };
 		B698851B2612402D009D4CD9 /* Castle.h in Headers */ = {isa = PBXBuildFile; fileRef = B69885172612402D009D4CD9 /* Castle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B698851C2612402D009D4CD9 /* CastleConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = B69885182612402D009D4CD9 /* CastleConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B6988541261243DD009D4CD9 /* CASModel.h in Headers */ = {isa = PBXBuildFile; fileRef = B6988526261243DC009D4CD9 /* CASModel.h */; };
 		B6988542261243DD009D4CD9 /* CASEventStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = B6988527261243DC009D4CD9 /* CASEventStorage.h */; };
-		B6988543261243DD009D4CD9 /* CASIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = B6988528261243DC009D4CD9 /* CASIdentity.m */; };
 		B6988545261243DD009D4CD9 /* CASScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = B698852A261243DC009D4CD9 /* CASScreen.m */; };
-		B6988546261243DD009D4CD9 /* CASBatch.h in Headers */ = {isa = PBXBuildFile; fileRef = B698852B261243DC009D4CD9 /* CASBatch.h */; };
-		B6988549261243DD009D4CD9 /* CASIdentity.h in Headers */ = {isa = PBXBuildFile; fileRef = B698852E261243DC009D4CD9 /* CASIdentity.h */; };
 		B698854A261243DD009D4CD9 /* CASRequestInterceptor.h in Headers */ = {isa = PBXBuildFile; fileRef = B698852F261243DC009D4CD9 /* CASRequestInterceptor.h */; };
 		B698854D261243DD009D4CD9 /* CASRequestInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = B6988532261243DC009D4CD9 /* CASRequestInterceptor.m */; };
 		B698854E261243DD009D4CD9 /* CASEventStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = B6988533261243DC009D4CD9 /* CASEventStorage.m */; };
 		B6988550261243DD009D4CD9 /* CASModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B6988535261243DC009D4CD9 /* CASModel.m */; };
 		B6988551261243DD009D4CD9 /* UIViewController+CASScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = B6988536261243DC009D4CD9 /* UIViewController+CASScreen.m */; };
 		B6988553261243DD009D4CD9 /* UIViewController+CASScreen.h in Headers */ = {isa = PBXBuildFile; fileRef = B6988538261243DC009D4CD9 /* UIViewController+CASScreen.h */; };
-		B6988554261243DD009D4CD9 /* CASBatch.m in Sources */ = {isa = PBXBuildFile; fileRef = B6988539261243DC009D4CD9 /* CASBatch.m */; };
-		B6988557261243DD009D4CD9 /* CASContext.m in Sources */ = {isa = PBXBuildFile; fileRef = B698853C261243DD009D4CD9 /* CASContext.m */; };
-		B6988558261243DD009D4CD9 /* CASContext.h in Headers */ = {isa = PBXBuildFile; fileRef = B698853D261243DD009D4CD9 /* CASContext.h */; };
 		B698855A261243DD009D4CD9 /* CASScreen.h in Headers */ = {isa = PBXBuildFile; fileRef = B698853F261243DD009D4CD9 /* CASScreen.h */; };
 		B6988569261244A2009D4CD9 /* Castle+Util.h in Headers */ = {isa = PBXBuildFile; fileRef = B6988568261244A2009D4CD9 /* Castle+Util.h */; };
 		B698856E261244B7009D4CD9 /* CASAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B698856C261244B7009D4CD9 /* CASAPIClient.m */; };
@@ -54,25 +54,25 @@
 
 /* Begin PBXFileReference section */
 		B612D060242BD012005B41B7 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
+		B648463B27E0B793000A7EDA /* CASMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASMonitor.h; path = Internal/CASMonitor.h; sourceTree = "<group>"; };
+		B648463D27E0B79A000A7EDA /* CASMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CASMonitor.m; path = Internal/CASMonitor.m; sourceTree = "<group>"; };
+		B648463F27E0B7A1000A7EDA /* CASCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASCustom.h; path = Internal/CASCustom.h; sourceTree = "<group>"; };
+		B648464127E0B7A9000A7EDA /* CASCustom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CASCustom.m; path = Internal/CASCustom.m; sourceTree = "<group>"; };
+		B648464327E0B7B4000A7EDA /* CASUserJwt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASUserJwt.h; path = Internal/CASUserJwt.h; sourceTree = "<group>"; };
+		B648464527E0B7BA000A7EDA /* CASUserJwt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CASUserJwt.m; path = Internal/CASUserJwt.m; sourceTree = "<group>"; };
 		B69885152612402D009D4CD9 /* Castle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Castle.m; sourceTree = "<group>"; };
 		B69885162612402D009D4CD9 /* CastleConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CastleConfiguration.m; sourceTree = "<group>"; };
 		B69885172612402D009D4CD9 /* Castle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Castle.h; sourceTree = "<group>"; };
 		B69885182612402D009D4CD9 /* CastleConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CastleConfiguration.h; sourceTree = "<group>"; };
 		B6988526261243DC009D4CD9 /* CASModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASModel.h; path = Internal/CASModel.h; sourceTree = "<group>"; };
 		B6988527261243DC009D4CD9 /* CASEventStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASEventStorage.h; path = Internal/CASEventStorage.h; sourceTree = "<group>"; };
-		B6988528261243DC009D4CD9 /* CASIdentity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CASIdentity.m; path = Internal/CASIdentity.m; sourceTree = "<group>"; };
 		B698852A261243DC009D4CD9 /* CASScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CASScreen.m; path = Internal/CASScreen.m; sourceTree = "<group>"; };
-		B698852B261243DC009D4CD9 /* CASBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASBatch.h; path = Internal/CASBatch.h; sourceTree = "<group>"; };
-		B698852E261243DC009D4CD9 /* CASIdentity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASIdentity.h; path = Internal/CASIdentity.h; sourceTree = "<group>"; };
 		B698852F261243DC009D4CD9 /* CASRequestInterceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASRequestInterceptor.h; path = Internal/CASRequestInterceptor.h; sourceTree = "<group>"; };
 		B6988532261243DC009D4CD9 /* CASRequestInterceptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CASRequestInterceptor.m; path = Internal/CASRequestInterceptor.m; sourceTree = "<group>"; };
 		B6988533261243DC009D4CD9 /* CASEventStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CASEventStorage.m; path = Internal/CASEventStorage.m; sourceTree = "<group>"; };
 		B6988535261243DC009D4CD9 /* CASModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CASModel.m; path = Internal/CASModel.m; sourceTree = "<group>"; };
 		B6988536261243DC009D4CD9 /* UIViewController+CASScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+CASScreen.m"; path = "Internal/UIViewController+CASScreen.m"; sourceTree = "<group>"; };
 		B6988538261243DC009D4CD9 /* UIViewController+CASScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+CASScreen.h"; path = "Internal/UIViewController+CASScreen.h"; sourceTree = "<group>"; };
-		B6988539261243DC009D4CD9 /* CASBatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CASBatch.m; path = Internal/CASBatch.m; sourceTree = "<group>"; };
-		B698853C261243DD009D4CD9 /* CASContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CASContext.m; path = Internal/CASContext.m; sourceTree = "<group>"; };
-		B698853D261243DD009D4CD9 /* CASContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASContext.h; path = Internal/CASContext.h; sourceTree = "<group>"; };
 		B698853F261243DD009D4CD9 /* CASScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASScreen.h; path = Internal/CASScreen.h; sourceTree = "<group>"; };
 		B6988568261244A2009D4CD9 /* Castle+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Castle+Util.h"; path = "Internal/Castle+Util.h"; sourceTree = "<group>"; };
 		B698856C261244B7009D4CD9 /* CASAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CASAPIClient.m; path = Internal/CASAPIClient.m; sourceTree = "<group>"; };
@@ -138,8 +138,10 @@
 			children = (
 				B698856D261244B7009D4CD9 /* CASAPIClient.h */,
 				B6988572261244C1009D4CD9 /* CASEvent.h */,
+				B648464327E0B7B4000A7EDA /* CASUserJwt.h */,
 				B698856C261244B7009D4CD9 /* CASAPIClient.m */,
 				B6988571261244C1009D4CD9 /* CASEvent.m */,
+				B648464527E0B7BA000A7EDA /* CASUserJwt.m */,
 			);
 			name = Client;
 			sourceTree = "<group>";
@@ -183,22 +185,20 @@
 		B6B355DE1ED71D9700C2B817 /* Castle */ = {
 			isa = PBXGroup;
 			children = (
-				B698852B261243DC009D4CD9 /* CASBatch.h */,
-				B698853D261243DD009D4CD9 /* CASContext.h */,
 				B6988527261243DC009D4CD9 /* CASEventStorage.h */,
-				B698852E261243DC009D4CD9 /* CASIdentity.h */,
+				B648463B27E0B793000A7EDA /* CASMonitor.h */,
 				B6988526261243DC009D4CD9 /* CASModel.h */,
 				B698852F261243DC009D4CD9 /* CASRequestInterceptor.h */,
 				B698853F261243DD009D4CD9 /* CASScreen.h */,
+				B648463F27E0B7A1000A7EDA /* CASCustom.h */,
 				B6988568261244A2009D4CD9 /* Castle+Util.h */,
 				B6988538261243DC009D4CD9 /* UIViewController+CASScreen.h */,
-				B6988539261243DC009D4CD9 /* CASBatch.m */,
-				B698853C261243DD009D4CD9 /* CASContext.m */,
 				B6988533261243DC009D4CD9 /* CASEventStorage.m */,
-				B6988528261243DC009D4CD9 /* CASIdentity.m */,
+				B648463D27E0B79A000A7EDA /* CASMonitor.m */,
 				B6988535261243DC009D4CD9 /* CASModel.m */,
 				B6988532261243DC009D4CD9 /* CASRequestInterceptor.m */,
 				B698852A261243DC009D4CD9 /* CASScreen.m */,
+				B648464127E0B7A9000A7EDA /* CASCustom.m */,
 				B6988536261243DC009D4CD9 /* UIViewController+CASScreen.m */,
 				B6B355E71ED71F9D00C2B817 /* Info.plist */,
 				B698855D261243EB009D4CD9 /* Client */,
@@ -216,20 +216,20 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6988549261243DD009D4CD9 /* CASIdentity.h in Headers */,
 				B698851B2612402D009D4CD9 /* Castle.h in Headers */,
+				B648463C27E0B793000A7EDA /* CASMonitor.h in Headers */,
 				B6988542261243DD009D4CD9 /* CASEventStorage.h in Headers */,
 				B698856F261244B7009D4CD9 /* CASAPIClient.h in Headers */,
 				B6988574261244C1009D4CD9 /* CASEvent.h in Headers */,
+				B648464027E0B7A1000A7EDA /* CASCustom.h in Headers */,
 				B6988541261243DD009D4CD9 /* CASModel.h in Headers */,
 				B698854A261243DD009D4CD9 /* CASRequestInterceptor.h in Headers */,
 				B6988579261244CF009D4CD9 /* CASReachability.h in Headers */,
 				B698855A261243DD009D4CD9 /* CASScreen.h in Headers */,
-				B6988546261243DD009D4CD9 /* CASBatch.h in Headers */,
 				B6988569261244A2009D4CD9 /* Castle+Util.h in Headers */,
+				B648464427E0B7B4000A7EDA /* CASUserJwt.h in Headers */,
 				B6988553261243DD009D4CD9 /* UIViewController+CASScreen.h in Headers */,
 				B6988580261244DE009D4CD9 /* CASUtils.h in Headers */,
-				B6988558261243DD009D4CD9 /* CASContext.h in Headers */,
 				B698851C2612402D009D4CD9 /* CastleConfiguration.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,18 +342,18 @@
 			files = (
 				B698851A2612402D009D4CD9 /* CastleConfiguration.m in Sources */,
 				B698857A261244CF009D4CD9 /* CASReachability.m in Sources */,
+				B648464627E0B7BA000A7EDA /* CASUserJwt.m in Sources */,
 				B698854E261243DD009D4CD9 /* CASEventStorage.m in Sources */,
 				B6988545261243DD009D4CD9 /* CASScreen.m in Sources */,
+				B648464227E0B7A9000A7EDA /* CASCustom.m in Sources */,
 				B6988551261243DD009D4CD9 /* UIViewController+CASScreen.m in Sources */,
 				B6988550261243DD009D4CD9 /* CASModel.m in Sources */,
+				B648463E27E0B79A000A7EDA /* CASMonitor.m in Sources */,
 				B698856E261244B7009D4CD9 /* CASAPIClient.m in Sources */,
-				B6988554261243DD009D4CD9 /* CASBatch.m in Sources */,
 				B69885192612402D009D4CD9 /* Castle.m in Sources */,
 				B6988573261244C1009D4CD9 /* CASEvent.m in Sources */,
 				B698854D261243DD009D4CD9 /* CASRequestInterceptor.m in Sources */,
 				B698857F261244DE009D4CD9 /* CASUtils.m in Sources */,
-				B6988543261243DD009D4CD9 /* CASIdentity.m in Sources */,
-				B6988557261243DD009D4CD9 /* CASContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
