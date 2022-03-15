@@ -21,24 +21,18 @@ Castle is available through [CocoaPods](https://cocoapods.org), [Carthage](https
 Add Castle as a dependency by including it in your `Podfile`.
 
 ```
-pod "Castle", "2.1.8"
+pod "Castle", "3.0.0"
 ```
 
 ### Carthage
-We have started to include internal dependencies (as xcframeworks) that Carthage currently doesn't support. Therefore we are (temporarily) not supporting Carthage until they add support for adding xcframework dependencies. You can still continue using version `1.0.10` or add the dependency using `CocoaPods` or `Swift Package Manager`.
-
-Add Castle as a dependency by including it in your `Cartfile`.
-
-```
-github "castle/castle-ios" "1.0.10"
-```
+We have started to include internal dependencies (as xcframeworks) that Carthage currently doesn't support. Therefore we are (temporarily) not supporting Carthage until they add support for adding xcframework dependencies. For now we recommend that you use one of the other installation options.
 
 ### Swift Package Manager
 Add Castle as a dependency by adding it to the `dependencies` value of your `Package.swift`.
 
 ```
 dependencies: [
-    .package(url: "https://github.com/castle/castle-ios.git", .upToNextMajor(from: "2.1.8"))
+    .package(url: "https://github.com/castle/castle-ios.git", .upToNextMajor(from: "3.0.0"))
 ]
 ```
 
@@ -47,7 +41,7 @@ Download the zip file from the github release, unzip and drag `GeoZip.xcframewor
 
 ## Usage
 
-Please see the [Mobile Integration Guide](https://docs.castle.io).
+Please see the [Mobile Integration Guide](https://docs.castle.io/docs/sdk-mobile).
 
 ## Library size
 
