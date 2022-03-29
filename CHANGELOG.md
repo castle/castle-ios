@@ -1,7 +1,7 @@
 # Changelog
 
 ## 3.0.2 (2022-03-29)
-- Improvement: Additional fingerprint params.
+- Internal enhancements and stability improvements.
 
 ## 3.0.1 (2022-03-15)
 - Fix: [#83](https://github.com/castle/castle-ios/pull/83) Clear event queue if there is an error when reading from storage.
