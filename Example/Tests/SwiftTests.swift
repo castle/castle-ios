@@ -368,6 +368,12 @@ class SwiftTests: XCTestCase {
         queue = CASEventStorage.storedQueue()
         XCTAssertTrue(queue.count == currentQueueSize+3);
     }
+    
+    func testRequestTokenUninitialized() throws {
+        XCTAssertNotNil(Castle.createRequestToken())
+        Castle.resetConfiguration()
+        XCTAssertNil(Castle.createRequestToken())
+    }
 
     func testDefaultHeaders() throws {
         XCTAssertNotNil(Castle.createRequestToken());

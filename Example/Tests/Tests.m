@@ -410,6 +410,12 @@
     XCTAssertTrue(queue.count == currentQueueSize+3);
 }
 
+- (void)testRequestTokenUninitialized {
+    XCTAssertNotNil([Castle createRequestToken]);
+    [Castle resetConfiguration];
+    XCTAssertNil([Castle createRequestToken]);
+}
+
 - (void)testDefaultHeaders
 {
     XCTAssertNotNil([Castle createRequestToken]);
