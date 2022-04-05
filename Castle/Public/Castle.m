@@ -27,6 +27,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+static Castle *_sharedClient = nil;
+
 NSString *const CastleUserJwtKey = @"CastleUserJwtKey";
 NSString *const CastleAppVersionKey = @"CastleAppVersionKey";
 
@@ -50,11 +52,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 @synthesize userJwt = _userJwt;
 
 + (instancetype)sharedInstance {
-    static Castle *_sharedClient = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedClient = [[Castle alloc] init];
-    });
+    NSAssert(_sharedClient, @"Castle SDK must be configured before calling this method");
     return _sharedClient;
 }
 
@@ -82,6 +80,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 + (void)configure:(CastleConfiguration *)configuration
 {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedClient = [[Castle alloc] init];
+    });
+    
     // Setup shared instance using provided configuration
     Castle *castle = [Castle sharedInstance];
     castle.client = [CASAPIClient clientWithConfiguration:configuration];
