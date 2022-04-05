@@ -465,18 +465,8 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 #pragma mark - Metadata
 
-+ (NSString *)clientId
++ (NSString *)createRequestToken
 {
-    return [[Castle sharedInstance].highwind token];
-}
-
-+ (nullable NSString *)createRequestToken
-{
-    Highwind *highwind = [Castle highwind];
-    if(highwind == nil) {
-        NSLog(@"[WARNING] createRequestToken called on unconfigured Castle instance.");
-        return nil;
-    }
     return [[Castle sharedInstance].highwind token];
 }
 

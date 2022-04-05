@@ -158,7 +158,7 @@ extern NSString * const CastleRequestTokenHeaderName;
 
  @return request token
  */
-+ (nullable NSString *)createRequestToken;
++ (NSString *)createRequestToken;
 
 /**
  Get the User Agent for used in all requests to the Castle API.
