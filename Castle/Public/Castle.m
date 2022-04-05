@@ -25,6 +25,8 @@
 
 @import Highwind;
 
+NS_ASSUME_NONNULL_BEGIN
+
 NSString *const CastleUserJwtKey = @"CastleUserJwtKey";
 NSString *const CastleAppVersionKey = @"CastleAppVersionKey";
 
@@ -33,14 +35,14 @@ NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
 static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 @interface Castle ()
-@property (nonatomic, strong) CASAPIClient *client;
-@property (nonatomic, strong) CastleConfiguration *configuration;
-@property (nonatomic, strong) NSURLSessionDataTask *task;
-@property (nonatomic, strong, nonnull) NSMutableArray *eventQueue;
+@property (nonatomic, strong, nullable) CASAPIClient *client;
+@property (nonatomic, strong, nullable) CastleConfiguration *configuration;
+@property (nonatomic, strong, nullable) NSURLSessionDataTask *task;
+@property (nonatomic, strong) NSMutableArray *eventQueue;
 @property (nonatomic, copy, readwrite, nullable) NSString *userJwt;
 @property (nonatomic, assign, readonly) NSUInteger maxBatchSize;
-@property (nonatomic, strong, readwrite) CASReachability *reachability;
-@property (nonatomic, strong, readwrite) Highwind *highwind;
+@property (nonatomic, strong, readwrite, nullable) CASReachability *reachability;
+@property (nonatomic, strong, readwrite, nullable) Highwind *highwind;
 @end
 
 @implementation Castle
@@ -87,7 +89,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     
     // Highwind
     NSError *error = nil;
-    castle.highwind = [[Highwind alloc] initWithVersion:Castle.versionString uuid:castle.deviceIdentifier publishableKey: configuration.publishableKey userAgent: CASUserAgent() error: &error];
+    castle.highwind = [[Highwind alloc] initWithVersion:Castle.versionString uuid:castle.deviceIdentifier publishableKey:configuration.publishableKey userAgent: CASUserAgent() error: &error];
     if(error) {
         NSAssert(true, @"You must provide a valid Castle publishable key when initializing the SDK.");
     }
@@ -127,6 +129,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     castle.client = nil;
     castle.configuration = nil;
     castle.reachability = nil;
+    castle.highwind = nil;
     CASEnableDebugLogging(NO);
     
     // Unregister request interceptor
@@ -168,7 +171,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return 100;
 }
 
-- (NSString *)userJwt
+- (nullable NSString *)userJwt
 {
     // If there's no user jwt: try fetching it from settings
     if(!_userJwt) {
@@ -192,7 +195,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 #pragma mark - Setters
 
-- (void)setUserJwt:(NSString *)userJwt
+- (void)setUserJwt:(nullable NSString *)userJwt
 {
     _userJwt = userJwt;
     
@@ -233,7 +236,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     [castle queueEvent:screen];
 }
 
-+ (void)setUserJwt:(NSString *)userJwt
++ (void)setUserJwt:(nullable NSString *)userJwt
 {
     if(!userJwt || [userJwt isEqualToString:@""]) {
         CASLog(@"No user jwt provided.");
@@ -323,7 +326,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     castle.userJwt = nil;
 }
 
-+ (BOOL)isAllowlistURL:(NSURL *)url
++ (BOOL)isAllowlistURL:(nullable NSURL *)url
 {
     if(url == nil) {
         CASLog(@"Provided allowlist URL was nil");
@@ -464,8 +467,13 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return [[Castle sharedInstance].highwind token];
 }
 
-+ (NSString *)createRequestToken
++ (nullable NSString *)createRequestToken
 {
+    Highwind *highwind = [Castle highwind];
+    if(highwind == nil) {
+        NSLog(@"[WARNING] createRequestToken called on unconfigured Castle instance.");
+        return nil;
+    }
     return [[Castle sharedInstance].highwind token];
 }
 
@@ -474,7 +482,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return [Castle sharedInstance].userJwt;
 }
 
-+ (Highwind *)highwind
++ (nullable Highwind *)highwind
 {
     return [Castle sharedInstance].highwind;
 }
@@ -490,3 +498,5 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

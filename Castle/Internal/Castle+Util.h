@@ -16,7 +16,7 @@
  
  @return Highwind instance
  */
-+ (nonnull Highwind *)highwind;
++ (nullable Highwind *)highwind;
 
 /**
  Get publishable key

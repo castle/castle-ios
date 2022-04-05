@@ -10,6 +10,8 @@
 #import "CASUtils.h"
 #import "Castle.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface CASEvent ()
 @property (nonatomic, copy, readwrite, nullable) NSString *name;
 @property (nonatomic, copy, readwrite) NSDate *timestamp;
@@ -20,7 +22,7 @@
 
 #pragma mark - Factory
 
-+ (instancetype)eventWithName:(NSString *)name
++ (nullable instancetype)eventWithName:(nullable NSString *)name
 {
     CASEvent *event = [[self alloc] init];
     event.name = [name truncate:255];
@@ -29,7 +31,7 @@
 
 #pragma mark - Init
 
-- (instancetype)init
+- (nullable instancetype)init
 {
     self = [super init];
     if(self) {
@@ -41,7 +43,7 @@
 
 #pragma mark - NSCoding
 
-- (id)initWithCoder:(NSCoder *)decoder
+- (nullable id)initWithCoder:(NSCoder *)decoder
 {
     self = [super init];
     if(self) {
@@ -74,7 +76,7 @@
 
 #pragma mark - CASModel
 
-- (id)JSONPayload
+- (nullable id)JSONPayload
 {
     NSString *timestamp = [[CASModel timestampDateFormatter] stringFromDate:self.timestamp];
 
@@ -92,3 +94,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END
