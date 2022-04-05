@@ -372,7 +372,7 @@ class SwiftTests: XCTestCase {
     func testRequestTokenUninitialized() throws {
         XCTAssertNotNil(Castle.createRequestToken())
         Castle.resetConfiguration()
-        XCTAssertNil(Castle.createRequestToken())
+        XCTAssertEqual(Castle.createRequestToken(), "")
     }
 
     func testDefaultHeaders() throws {
