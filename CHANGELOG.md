@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.3 (2022-04-06)
+- Improvement: [#86](https://github.com/castle/castle-ios/pull/86) Null/empty request tokens. More strict checks that the SDK is configured before use.
+- Internal enhancements and stability improvements.
+
 ## 3.0.2 (2022-03-29)
 - Internal enhancements and stability improvements.
 
