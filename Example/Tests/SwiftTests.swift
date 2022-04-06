@@ -103,8 +103,6 @@ class SwiftTests: XCTestCase {
         // Setup Castle SDK with publishable key
         Castle.configure(withPublishableKey: publishableKey)
 
-        // Configuration reset
-        Castle.resetConfiguration()
         XCTAssertFalse(Castle.isAllowlistURL(URL(string:"https://google.com/somethingelse")!))
 
         // Setup Castle SDK with provided configuration
@@ -367,6 +365,28 @@ class SwiftTests: XCTestCase {
         Castle.custom(name: "custom event", properties: ["key": "value"])
         queue = CASEventStorage.storedQueue()
         XCTAssertTrue(queue.count == currentQueueSize+3);
+    }
+    
+    func testRequestTokenUninitialized() throws {
+        XCTAssertNotNil(Castle.createRequestToken())
+        
+        Castle.resetConfiguration()
+        XCTAssertNotNil(tryBlock { Castle.createRequestToken() })
+    }
+    
+    func testNonConfiguredInstance() throws {
+        Castle.resetConfiguration()
+        
+        XCTAssertNotNil(tryBlock { Castle.screen(name: "Screen name") })
+        XCTAssertNotNil(tryBlock { Castle.custom(name: "Custom event") })
+        XCTAssertNotNil(tryBlock { Castle.userJwt() })
+        XCTAssertNotNil(tryBlock { Castle.userJwt("invalid_jwt_token_string") })
+        XCTAssertNotNil(tryBlock { Castle.queueSize() })
+        XCTAssertNotNil(tryBlock { Castle.flush() })
+        XCTAssertNotNil(tryBlock { Castle.flushIfNeeded(URL(string: "https://google.com/")!) })
+        XCTAssertNotNil(tryBlock { Castle.isAllowlistURL(URL(string: "https://google.com/")!) })
+        XCTAssertNotNil(tryBlock { Castle.baseURL() })
+        XCTAssertNotNil(tryBlock { Castle.createRequestToken() })
     }
 
     func testDefaultHeaders() throws {

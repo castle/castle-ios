@@ -128,8 +128,6 @@
     // Setup Castle SDK with publishable key
     [Castle configureWithPublishableKey:publishableKey];
     
-    // Configuration reset
-    [Castle resetConfiguration];
     XCTAssertFalse([Castle isAllowlistURL:[NSURL URLWithString:@"https://google.com/somethingelse"]]);
     
     // Setup Castle SDK with provided configuration
@@ -408,6 +406,29 @@
     [Castle customWithName:@"custom event" properties:@{ @"key": @"value" }];
     queue = [CASEventStorage storedQueue];
     XCTAssertTrue(queue.count == currentQueueSize+3);
+}
+
+- (void)testRequestTokenUninitialized
+{
+    XCTAssertNotNil([Castle createRequestToken]);
+    [Castle resetConfiguration];
+    XCTAssertThrows([Castle createRequestToken]);
+}
+
+- (void)testNonConfiguredInstance
+{
+    [Castle resetConfiguration];
+    
+    XCTAssertThrows([Castle screenWithName: @"Screen name"]);
+    XCTAssertThrows([Castle customWithName: @"Custom event"]);
+    XCTAssertThrows([Castle userJwt]);
+    XCTAssertThrows([Castle setUserJwt: @"invalid_jwt_token_string"]);
+    XCTAssertThrows([Castle queueSize]);
+    XCTAssertThrows([Castle flush]);
+    XCTAssertThrows([Castle flushIfNeeded:[NSURL URLWithString: @"https://google.com/"]]);
+    XCTAssertThrows([Castle isAllowlistURL:[NSURL URLWithString: @"https://google.com/"]]);
+    XCTAssertThrows([Castle baseURL]);
+    XCTAssertThrows([Castle createRequestToken]);
 }
 
 - (void)testDefaultHeaders

@@ -25,6 +25,10 @@
 
 @import Highwind;
 
+NS_ASSUME_NONNULL_BEGIN
+
+static Castle *_sharedClient = nil;
+
 NSString *const CastleUserJwtKey = @"CastleUserJwtKey";
 NSString *const CastleAppVersionKey = @"CastleAppVersionKey";
 
@@ -33,14 +37,14 @@ NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
 static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 @interface Castle ()
-@property (nonatomic, strong) CASAPIClient *client;
-@property (nonatomic, strong) CastleConfiguration *configuration;
-@property (nonatomic, strong) NSURLSessionDataTask *task;
-@property (nonatomic, strong, nonnull) NSMutableArray *eventQueue;
+@property (nonatomic, strong, nullable) CASAPIClient *client;
+@property (nonatomic, strong, nullable) CastleConfiguration *configuration;
+@property (nonatomic, strong, nullable) NSURLSessionDataTask *task;
+@property (nonatomic, strong) NSMutableArray *eventQueue;
 @property (nonatomic, copy, readwrite, nullable) NSString *userJwt;
 @property (nonatomic, assign, readonly) NSUInteger maxBatchSize;
-@property (nonatomic, strong, readwrite) CASReachability *reachability;
-@property (nonatomic, strong, readwrite) Highwind *highwind;
+@property (nonatomic, strong, readwrite, nullable) CASReachability *reachability;
+@property (nonatomic, strong, readwrite, nullable) Highwind *highwind;
 @end
 
 @implementation Castle
@@ -48,11 +52,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 @synthesize userJwt = _userJwt;
 
 + (instancetype)sharedInstance {
-    static Castle *_sharedClient = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedClient = [[Castle alloc] init];
-    });
+    NSAssert([Castle isConfigured], @"Castle SDK must be configured before calling this method");
     return _sharedClient;
 }
 
@@ -80,14 +80,29 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 + (void)configure:(CastleConfiguration *)configuration
 {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedClient = [[Castle alloc] init];
+    });
+    
+    // Check if the SDK has already been configured.
+    // If that is the case reset the instance and start over.
+    if ([Castle isConfigured]) {
+        [Castle resetConfiguration];
+    }
+    
     // Setup shared instance using provided configuration
-    Castle *castle = [Castle sharedInstance];
+    Castle *castle = _sharedClient;
     castle.client = [CASAPIClient clientWithConfiguration:configuration];
     castle.configuration = configuration;
     
     // Highwind
     NSError *error = nil;
-    castle.highwind = [[Highwind alloc] initWithVersion:Castle.versionString uuid:castle.deviceIdentifier publishableKey: configuration.publishableKey userAgent: CASUserAgent() error: &error];
+    castle.highwind = [[Highwind alloc] initWithVersion:Castle.versionString
+                                                   uuid:castle.deviceIdentifier
+                                         publishableKey:configuration.publishableKey
+                                              userAgent:CASUserAgent()
+                                                  error:&error];
     if(error) {
         NSAssert(true, @"You must provide a valid Castle publishable key when initializing the SDK.");
     }
@@ -127,6 +142,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     castle.client = nil;
     castle.configuration = nil;
     castle.reachability = nil;
+    castle.highwind = nil;
     CASEnableDebugLogging(NO);
     
     // Unregister request interceptor
@@ -168,7 +184,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return 100;
 }
 
-- (NSString *)userJwt
+- (nullable NSString *)userJwt
 {
     // If there's no user jwt: try fetching it from settings
     if(!_userJwt) {
@@ -177,12 +193,26 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return _userJwt;
 }
 
++ (BOOL)isConfigured
+{
+    if (_sharedClient == nil) {
+        return false;
+    }
+    
+    Castle *castle = _sharedClient;
+    if (castle.configuration == nil || castle.highwind == nil || castle.reachability == nil || castle.client == nil) {
+        return false;
+    }
+    
+    return true;
+}
+
 + (NSString *)userAgent
 {
     return CASUserAgent();
 }
 
-+ (UIApplication *)sharedUIApplication
++ (nullable UIApplication *)sharedUIApplication
 {
     if ([[UIApplication class] respondsToSelector:@selector(sharedApplication)]) {
         return [[UIApplication class] performSelector:@selector(sharedApplication)];
@@ -192,7 +222,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 #pragma mark - Setters
 
-- (void)setUserJwt:(NSString *)userJwt
+- (void)setUserJwt:(nullable NSString *)userJwt
 {
     _userJwt = userJwt;
     
@@ -233,7 +263,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     [castle queueEvent:screen];
 }
 
-+ (void)setUserJwt:(NSString *)userJwt
++ (void)setUserJwt:(nullable NSString *)userJwt
 {
     if(!userJwt || [userJwt isEqualToString:@""]) {
         CASLog(@"No user jwt provided.");
@@ -323,7 +353,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     castle.userJwt = nil;
 }
 
-+ (BOOL)isAllowlistURL:(NSURL *)url
++ (BOOL)isAllowlistURL:(nullable NSURL *)url
 {
     if(url == nil) {
         CASLog(@"Provided allowlist URL was nil");
@@ -432,6 +462,10 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
+    if (![Castle isConfigured]) {
+        return;
+    }
+    
     CASLog(@"Application life cycle event detected: Will track application did become active event");
     [Castle customWithName:@"Application Did Become Active"];
     
@@ -441,6 +475,10 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 - (void)applicationDidEnterBackground:(NSNotification *)notification
 {
+    if (![Castle isConfigured]) {
+        return;
+    }
+    
     CASLog(@"Application life cycle event detected: Will track application did enter background event");
     [Castle customWithName:@"Application Did Enter Background"];
     
@@ -450,6 +488,10 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 - (void)applicationWillTerminate:(NSNotificationCenter *)notification
 {
+    if (![Castle isConfigured]) {
+        return;
+    }
+    
     CASLog(@"Application life cycle event detected: Will track application will terminate event");
     [Castle customWithName:@"Application Will Terminate"];
     
@@ -458,11 +500,6 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 }
 
 #pragma mark - Metadata
-
-+ (NSString *)clientId
-{
-    return [[Castle sharedInstance].highwind token];
-}
 
 + (NSString *)createRequestToken
 {
@@ -474,7 +511,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return [Castle sharedInstance].userJwt;
 }
 
-+ (Highwind *)highwind
++ (nullable Highwind *)highwind
 {
     return [Castle sharedInstance].highwind;
 }
@@ -490,3 +527,5 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

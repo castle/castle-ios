@@ -50,6 +50,11 @@
 {
     [self ca_viewDidAppear:animated];
     
+    if (![Castle isConfigured]) {
+        CASLog(@"SDK instance not configured, won't track automatic screen event");
+        return;
+    }
+    
     UIViewController *top = [[self class] ca_visibleViewController];
     if (!top) {
         CASLog(@"Couldn't determine the visible view controller.");

@@ -9,13 +9,17 @@
 
 #import "CASModel.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface CASEvent : CASModel
 
-@property (nonatomic, copy, readonly) NSString * _Nullable name;
-@property (nonatomic, copy, readonly) NSDate * _Nonnull timestamp;
-@property (nonatomic, copy, readonly) NSString * _Nonnull type;
-@property (nonatomic, readonly) NSString * _Nonnull token;
+@property (nonatomic, copy, readonly, nullable) NSString *name;
+@property (nonatomic, copy, readonly, nonnull) NSDate *timestamp;
+@property (nonatomic, copy, readonly, nonnull) NSString *type;
+@property (nonatomic, readonly, nonnull) NSString *token;
 
-+ (_Nullable instancetype)eventWithName:(NSString * _Nullable)name;
++ (nullable instancetype)eventWithName:(nullable NSString *)name;
 
 @end
+
+NS_ASSUME_NONNULL_END

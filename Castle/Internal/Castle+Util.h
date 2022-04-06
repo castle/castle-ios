@@ -16,7 +16,7 @@
  
  @return Highwind instance
  */
-+ (nonnull Highwind *)highwind;
++ (nullable Highwind *)highwind;
 
 /**
  Get publishable key
@@ -59,5 +59,10 @@
  @return UIApplication instance
  */
 + (nullable UIApplication *)sharedUIApplication;
+
+/**
+ Determine if the Castle SDK instance is configured
+ */
++ (BOOL)isConfigured;
 
 @end

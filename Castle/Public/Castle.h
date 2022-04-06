@@ -72,7 +72,6 @@ extern NSString * const CastleRequestTokenHeaderName;
  */
 + (NSURLSessionConfiguration *)urlSessionInterceptConfiguration;
 
-
 /**
  Reset current configuration. Will disable logging, request interception (if enabled).
  Once reset the shared Castle instance can be re-configured.
@@ -154,7 +153,6 @@ extern NSString * const CastleRequestTokenHeaderName;
  */
 + (BOOL)isAllowlistURL:(nullable NSURL *)url;
 
-
 /**
  Get base url
 
@@ -169,7 +167,7 @@ extern NSString * const CastleRequestTokenHeaderName;
 
  @return request token
  */
-+ (nonnull NSString *)createRequestToken;
++ (NSString *)createRequestToken;
 
 /**
  Get the User Agent for used in all requests to the Castle API.
