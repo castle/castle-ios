@@ -212,7 +212,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return CASUserAgent();
 }
 
-+ (UIApplication *)sharedUIApplication
++ (nullable UIApplication *)sharedUIApplication
 {
     if ([[UIApplication class] respondsToSelector:@selector(sharedApplication)]) {
         return [[UIApplication class] performSelector:@selector(sharedApplication)];
