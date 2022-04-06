@@ -143,7 +143,6 @@ extern NSString * const CastleRequestTokenHeaderName;
  */
 + (BOOL)isAllowlistURL:(nullable NSURL *)url;
 
-
 /**
  Get base url
 

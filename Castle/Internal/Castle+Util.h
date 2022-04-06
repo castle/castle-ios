@@ -70,4 +70,9 @@
  */
 + (void)resetConfiguration;
 
+/**
+ Determine if the Castle SDK instance is configured
+ */
++ (BOOL)isConfigured;
+
 @end
