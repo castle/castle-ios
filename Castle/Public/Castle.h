@@ -57,16 +57,6 @@ extern NSString * const CastleRequestTokenHeaderName;
 + (void)configureWithPublishableKey:(NSString *)publishableKey;
 
 /**
- Reset current configuration. Will disable logging, request interception (if enabled).
- Once reset the shared Castle instance can be re-configured.
-
- @code // Reset configuration
- [Castle resetConfiguration];
- @endcode
- */
-+ (void)resetConfiguration;
-
-/**
  Session configuration used to enable the Castle request interceptor.
  All requests created with the NSURLSession using the configuration will be intercepted if the URL is
  allowlisted and the client identifier will be added as a header 'X-Castle-Client-Id'.
@@ -81,6 +71,16 @@ extern NSString * const CastleRequestTokenHeaderName;
  @endcode
  */
 + (NSURLSessionConfiguration *)urlSessionInterceptConfiguration;
+
+/**
+ Reset current configuration. Will disable logging, request interception (if enabled).
+ Once reset the shared Castle instance can be re-configured.
+
+ @code // Reset configuration
+ [Castle resetConfiguration];
+ @endcode
+ */
++ (void)resetConfiguration;
 
 #pragma mark - Tracking
 
