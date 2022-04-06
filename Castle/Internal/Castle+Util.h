@@ -61,16 +61,6 @@
 + (nullable UIApplication *)sharedUIApplication;
 
 /**
- Reset current configuration. Will disable logging, request interception (if enabled).
- Once reset the shared Castle instance can be re-configured.
-
- @code // Reset configuration
- [Castle resetConfiguration];
- @endcode
- */
-+ (void)resetConfiguration;
-
-/**
  Determine if the Castle SDK instance is configured
  */
 + (BOOL)isConfigured;
