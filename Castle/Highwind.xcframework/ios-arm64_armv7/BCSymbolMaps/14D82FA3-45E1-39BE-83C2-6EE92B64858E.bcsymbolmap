@@ -756,16 +756,20 @@ _getEmbeddedNSError
 _userInfo.get
 _code.get
 _domain.get
-_$s8HighwindAAC0A5ErrorOSQAASQ2eeoiySbx_xtFZTW
-_$s8HighwindAAC0A5ErrorOSHAASH9hashValueSivgTW
-_$s8HighwindAAC0A5ErrorOSHAASH4hash4intoys6HasherVz_tFTW
-_$s8HighwindAAC0A5ErrorOSHAASH13_rawHashValue4seedS2i_tFTW
-_$s8HighwindAAC0A5ErrorOs0B0AAsAEP7_domainSSvgTW
-_$s8HighwindAAC0A5ErrorOs0B0AAsAEP5_codeSivgTW
-_$s8HighwindAAC0A5ErrorOs0B0AAsAEP9_userInfoyXlSgvgTW
-_$s8HighwindAAC0A5ErrorOs0B0AAsAEP19_getEmbeddedNSErroryXlSgyFTW
+_$s8Highwind0A5ErrorOSQAASQ2eeoiySbx_xtFZTW
+_$s8Highwind0A5ErrorOSHAASH9hashValueSivgTW
+_$s8Highwind0A5ErrorOSHAASH4hash4intoys6HasherVz_tFTW
+_$s8Highwind0A5ErrorOSHAASH13_rawHashValue4seedS2i_tFTW
+_$s8Highwind0A5ErrorOSYAASY8rawValuexSg03RawD0Qz_tcfCTW
+_$s8Highwind0A5ErrorOSYAASY8rawValue03RawD0QzvgTW
+_$s8Highwind0A5ErrorOs0B0AAsADP7_domainSSvgTW
+_$s8Highwind0A5ErrorOs0B0AAsADP5_codeSivgTW
+_$s8Highwind0A5ErrorOs0B0AAsADP9_userInfoyXlSgvgTW
+_$s8Highwind0A5ErrorOs0B0AAsADP19_getEmbeddedNSErroryXlSgyFTW
+_$s8Highwind0A5ErrorO10Foundation15_BridgedNSErrorAadEP03_nsB6DomainSSvgZTW
+_$s8Highwind0A5ErrorO10Foundation021_ObjectiveCBridgeableB0AadEP15_bridgedNSErrorxSgSo0G0Ch_tcfCTW
 _$s8HighwindAAC12reachability_WZ
-_$s8HighwindAAC0A5ErrorOADs0B0AAWl
+_$s8Highwind0A5ErrorOACs0B0AAWl
 _$s8Highwind9GeneratorCMa
 _$s8HighwindAAC7version4uuid14publishableKey9userAgentABSS_S3StKcfcTo
 _$s8HighwindAAC5tokenSSyF
@@ -791,25 +795,49 @@ _$s8Highwind9GeneratorC4uuid14publishableKey7version9userAgentACSS_S3StcfcTf4ggn
 _$s8Highwind14PayloadEncoderV06encodeB02pk011encodedUserB00F13EventPayloadsSSSgSS_SSSaySSGtFZTf4nnnd_n
 _$s8Highwind14PayloadEncoderV06encodeB3Set7setType7payload11allowedList0i6NestedJ020userFlexibleEncodingSSSi_SSSaySSGAJSbtFZTf4nnnnnd_n
 _$s8HighwindAAC17encodeCustomEvent12requestToken7payloadS2S_SStFTf4nnd_n
-___swift_memcpy0_1
-_$s8HighwindAAC0A5ErrorOwet
-_$s8HighwindAAC0A5ErrorOwst
-_$s8HighwindAAC0A5ErrorOwug
-_$s8HighwindAAC0A5ErrorOwup
-_$s8HighwindAAC0A5ErrorOwui
-_$s8HighwindAAC0A5ErrorOMa
-_$s8HighwindAAC0A5ErrorOSHAASQWb
-_$s8HighwindAAC0A5ErrorOADSQAAWl
+_$s8Highwind0A5ErrorOSHAASQWb
+_$s8Highwind0A5ErrorOACSQAAWl
+_$s8Highwind0A5ErrorO10Foundation15_BridgedNSErrorAaD021_ObjectiveCBridgeableB0PWb
+_$s8Highwind0A5ErrorOAC10Foundation021_ObjectiveCBridgeableB0AAWl
+_$s8Highwind0A5ErrorO10Foundation15_BridgedNSErrorAASHWb
+_$s8Highwind0A5ErrorOACSHAAWl
+_$s8Highwind0A5ErrorO10Foundation15_BridgedNSErrorAASYWb
+_$s8Highwind0A5ErrorOACSYAAWl
+_$s8Highwind0A5ErrorO10Foundation15_BridgedNSErrorAA8RawValueSY_s17FixedWidthIntegerPWT
+_$sS2is17FixedWidthIntegersWl
+_$s8Highwind0A5ErrorO10Foundation021_ObjectiveCBridgeableB0AAs0B0PWb
+_$s8Highwind0A5ErrorOAC10Foundation15_BridgedNSErrorAAWl
 _$s8HighwindAAC8generate33_44846CC9CACD11465A3F8B91B8494047LLSSyFSSycfU_TA
 _$s8HighwindAAC8generate33_44846CC9CACD11465A3F8B91B8494047LLSSyFyyXEfU0_TA
 _$sIg_Ieg_TRTA
 _$sIeg_SgWOe
 _$s8HighwindAAC12reachabilityAA12ReachabilityCvpZ
-_$s8HighwindAAC0A5ErrorOADs0B0AAWL
+_$s8Highwind0A5ErrorOACs0B0AAWL
 _$s8HighwindAAC7version33_44846CC9CACD11465A3F8B91B8494047LLSSvpWvd
 _$s8HighwindAAC9generator33_44846CC9CACD11465A3F8B91B8494047LLAA9GeneratorCvpWvd
 _symbolic _____ySSG s23_ContiguousArrayStorageC
 _$ss23_ContiguousArrayStorageCySSGMD
+_$s8Highwind0A5ErrorOSQAAMcMK
+_$s8Highwind0A5ErrorOACSQAAWL
+_associated conformance 8Highwind0A5ErrorOSHAASQ
+_$s8Highwind0A5ErrorOSHAAMcMK
+_symbolic _____ 8Highwind0A5ErrorO
+_$s8Highwind0A5ErrorOSYAAMA
+_$s8Highwind0A5ErrorOSYAAMcMK
+_$s8Highwind0A5ErrorOs0B0AAMcMK
+_$s8Highwind0A5ErrorOAC10Foundation021_ObjectiveCBridgeableB0AAWL
+_associated conformance 8Highwind0A5ErrorO10Foundation15_BridgedNSErrorAaD021_ObjectiveCBridgeableB0
+_$s8Highwind0A5ErrorOACSHAAWL
+_associated conformance 8Highwind0A5ErrorO10Foundation15_BridgedNSErrorAASH
+_$s8Highwind0A5ErrorOACSYAAWL
+_associated conformance 8Highwind0A5ErrorO10Foundation15_BridgedNSErrorAASY
+_$sS2is17FixedWidthIntegersWL
+_associated conformance 8Highwind0A5ErrorO10Foundation15_BridgedNSErrorAA8RawValueSY_s17FixedWidthInteger
+_$s8Highwind0A5ErrorO10Foundation15_BridgedNSErrorAAMcMK
+_associated conformance 8Highwind0A5ErrorO10Foundation021_ObjectiveCBridgeableB0AAs0B0
+_$s8Highwind0A5ErrorO10Foundation021_ObjectiveCBridgeableB0AAMcMK
+_$s8Highwind0A5ErrorOMf
+_$s8Highwind0A5ErrorOMB
 __METACLASS_DATA__TtC8Highwind8Highwind
 __INSTANCE_METHODS__TtC8Highwind8Highwind
 __IVARS__TtC8Highwind8Highwind
@@ -820,22 +848,9 @@ _symbolic _____ 8HighwindAAC
 _$s8Highwind9GeneratorCMn
 _symbolic _____ 8Highwind9GeneratorC
 _$s8HighwindAACMF
-_$s8HighwindAAC0A5ErrorOWV
-_$s8HighwindAAC0A5ErrorOMn
-_$s8HighwindAAC0A5ErrorOMf
-_symbolic _____ 8HighwindAAC0A5ErrorO
-_$s8HighwindAAC0A5ErrorOMF
-_$s8HighwindAAC0A5ErrorOADSQAAWL
-_associated conformance 8HighwindAAC0A5ErrorOSHAASQ
-_$s8HighwindAAC0A5ErrorOSHAAMcMK
-_$s8HighwindAAC0A5ErrorOSHAAMc
-_$s8HighwindAAC0A5ErrorOSQAAMcMK
-_$s8HighwindAAC0A5ErrorOSQAAMc
-_$s8HighwindAAC0A5ErrorOs0B0AAMcMK
-_$s8HighwindAAC0A5ErrorOs0B0AAMc
+_$s8Highwind0A5ErrorOAC10Foundation15_BridgedNSErrorAAWL
 _symbolic SSIego_
 _symbolic Ig_
-_$s8HighwindAAC0A5ErrorON
 -private-discriminator _44846CC9CACD11465A3F8B91B8494047
 /Users/aLxx/castle/highwind-all/ios/Highwind/Highwind.swift
 $sIg_Ieg_TRTA
@@ -845,15 +860,19 @@ $s8HighwindAAC8generate33_44846CC9CACD11465A3F8B91B8494047LLSSyFyyXEfU0_TA
 $s8HighwindAAC8generate33_44846CC9CACD11465A3F8B91B8494047LLSSyFyyXEfU0_
 $s8HighwindAAC8generate33_44846CC9CACD11465A3F8B91B8494047LLSSyFSSycfU_TA
 $s8HighwindAAC8generate33_44846CC9CACD11465A3F8B91B8494047LLSSyFSSycfU_
-$s8HighwindAAC0A5ErrorOADSQAAWl
-$s8HighwindAAC0A5ErrorOSHAASQWb
-$s8HighwindAAC0A5ErrorOMa
-$s8HighwindAAC0A5ErrorOwui
-$s8HighwindAAC0A5ErrorOwup
-$s8HighwindAAC0A5ErrorOwug
-$s8HighwindAAC0A5ErrorOwst
-$s8HighwindAAC0A5ErrorOwet
-__swift_memcpy0_1
+$s8Highwind0A5ErrorOAC10Foundation15_BridgedNSErrorAAWl
+$s8Highwind0A5ErrorOMa
+$s8Highwind0A5ErrorO10Foundation021_ObjectiveCBridgeableB0AAs0B0PWb
+$sS2is17FixedWidthIntegersWl
+$s8Highwind0A5ErrorO10Foundation15_BridgedNSErrorAA8RawValueSY_s17FixedWidthIntegerPWT
+$s8Highwind0A5ErrorOACSYAAWl
+$s8Highwind0A5ErrorO10Foundation15_BridgedNSErrorAASYWb
+$s8Highwind0A5ErrorOACSHAAWl
+$s8Highwind0A5ErrorO10Foundation15_BridgedNSErrorAASHWb
+$s8Highwind0A5ErrorOAC10Foundation021_ObjectiveCBridgeableB0AAWl
+$s8Highwind0A5ErrorO10Foundation15_BridgedNSErrorAaD021_ObjectiveCBridgeableB0PWb
+$s8Highwind0A5ErrorOACSQAAWl
+$s8Highwind0A5ErrorOSHAASQWb
 encodeCustomEvent
 encodeEventPayloadSet
 Highwind/PayloadEncoder.swift
@@ -873,15 +892,15 @@ encodePayload
 token
 pointee.set
 $s8HighwindAACMa
-$s8HighwindAAC0A5ErrorOADs0B0AAWl
+$s8Highwind0A5ErrorOACs0B0AAWl
 $s8HighwindAAC12reachabilityAA12ReachabilityCvau
 Highwind/Generator.swift
 $s8HighwindAAC12reachability_WZ
 Highwind/Reachability.swift
 $s8Highwind12ReachabilityC8hostname8queueQoS11targetQueueACSgSS_8Dispatch0hE1SVSo012OS_dispatch_D0CSgtcfcfA0_
-combine
+_nsErrorDomain.get
 hashValue.get
-_hashValue
+$sSiSHsSH9hashValueSivgTW
 /Users/aLxx/castle/highwind-all/ios/Highwind/Constants.swift
 _$s8Highwind10SensorTypeOSQAASQ2eeoiySbx_xtFZTW
 _$s8Highwind10SensorTypeOSHAASH9hashValueSivgTW
@@ -949,7 +968,6 @@ track
 $sSfSjsSj9magnitude9MagnitudeQzvgTW
 $sSf9magnitudeSfvg
 $sSds20TextOutputStreamablessAAP5write2toyqd__z_ts0aB6StreamRd__lFTWs26DefaultStringInterpolationV_Tg5
-$sSiSHsSH9hashValueSivgTW
 _$s8Highwind4UtilCfD
 _$s8Highwind4UtilCMa
 _$sSS8HighwindE5split2bySaySSGSi_tF
@@ -1658,6 +1676,7 @@ _$s8Highwind9GeneratorCfD
 _$s8Highwind9GeneratorC13scrambledTimeySSSiFTf4nd_n
 _$s8Highwind9GeneratorC13encodeToToken4time7version4uuid14publishableKey14libraryVersion6random12paramsConfig0N0SSSi_S7StFTf4ndnnnnnnn_n
 _$s8Highwind9GeneratorC0B5ErrorOAEs0C0AAWl
+___swift_memcpy0_1
 _$s8Highwind9GeneratorC0B5ErrorOwet
 _$s8Highwind9GeneratorC0B5ErrorOwst
 _$s8Highwind9GeneratorC0B5ErrorOwug
@@ -1737,6 +1756,7 @@ $s8Highwind9GeneratorC0B5ErrorOwup
 $s8Highwind9GeneratorC0B5ErrorOwug
 $s8Highwind9GeneratorC0B5ErrorOwst
 $s8Highwind9GeneratorC0B5ErrorOwet
+__swift_memcpy0_1
 $s8Highwind9GeneratorC0B5ErrorOAEs0C0AAWl
 encodeToToken
 $sSSSKsSK5index_8offsetBy07limitedC05IndexQzSgAE_SiAEtFTW
@@ -1749,6 +1769,8 @@ $sSTsE13_copyContents12initializing8IteratorQz_SitSry7ElementQzG_tFSS_Tgq5
 $s8Highwind9GeneratorCMa
 parametersConfig
 size
+combine
+_hashValue
 /AppleInternal/BuildRoot/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang --driver-mode=g++ -D CMARK_STATIC_DEFINE -D GTEST_HAS_RTTI=0 -D SWIFT_INLINE_NAMESPACE=__runtime -D __STDC_CONSTANT_MACROS -D __STDC_FORMAT_MACROS -D __STDC_LIMIT_MACROS -I stdlib/toolchain/Compatibility51 -I /AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Sources/swiftlang/swiftlang-1300.0.47.5/swift/stdlib/toolchain/Compatibility51 -I /AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Sources/swiftlang/swiftlang-1300.0.47.5/swift/stdlib/include -I include -I /AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Sources/swiftlang/swiftlang-1300.0.47.5/swift/include -I /AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Sources/swiftlang/swiftlang-1300.0.47.5/llvm-project/llvm/include -I /AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Binaries/swiftlang/install/TempContent/Objects/BNI_Xcode/llvm-macosx-x86_64/include -I /AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Sources/swiftlang/swiftlang-1300.0.47.5/llvm-project/clang/include -I /AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Binaries/swiftlang/install/TempContent/Objects/BNI_Xcode/llvm-macosx-x86_64/tools/clang/include -I /AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Sources/swiftlang/swiftlang-1300.0.47.5/cmark/src -I /AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Binaries/swiftlang/install/TempContent/Objects/BNI_Xcode/cmark-macosx-x86_64/src -Wno-unknown-warning-option -Werror=unguarded-availability-new -fno-stack-protector -fPIC -fvisibility-inlines-hidden -Werror=date-time -Werror=unguarded-availability-new -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wmissing-field-initializers -Wimplicit-fallthrough -Wcovered-switch-default -Wno-class-memaccess -Wno-noexcept-type -Wnon-virtual-dtor -Wdelete-non-virtual-dtor -Wsuggest-override -Wstring-conversion -fdiagnostics-color -Werror=switch -Wdocumentation -Wimplicit-fallthrough -Wunreachable-code -Woverloaded-virtual -D OBJC_OLD_DISPATCH_PROTOTYPES=0 -O2 -D NDEBUG -arch arm64 -isysroot /AppleInternal/BuildRoot/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -fno-exceptions -funwind-tables -fno-rtti -Werror=gnu -Wall -Wglobal-constructors -Wexit-time-destructors -D SWIFT_COMPATIBILITY_LIBRARY=1 -D SWIFT_TARGET_LIBRARY_NAME=swiftCompatibility51 -fembed-bitcode=all --target=arm64-apple-ios7.0 -isysroot /AppleInternal/BuildRoot/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.2.sdk -arch arm64 -F/AppleInternal/BuildRoot/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.2.sdk/../../../Developer/Library/Frameworks -F/AppleInternal/BuildRoot/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.2.sdk/../../../Developer/AppleInternal/Library/Frameworks -O2 -g -D NDEBUG -D SWIFT_LIBRARY_EVOLUTION=0 -D SWIFT_RUNTIME_OS_VERSIONING -std=c++14 -MD -MT stdlib/toolchain/Compatibility51/CMakeFiles/swiftCompatibility51-iphoneos-arm64.dir/Overrides.cpp.o -MF stdlib/toolchain/Compatibility51/CMakeFiles/swiftCompatibility51-iphoneos-arm64.dir/Overrides.cpp.o.d -o stdlib/toolchain/Compatibility51/CMakeFiles/swiftCompatibility51-iphoneos-arm64.dir/Overrides.cpp.o -c /AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Sources/swiftlang/swiftlang-1300.0.47.5/swift/stdlib/toolchain/Compatibility51/Overrides.cpp -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -Xclang -clang-vendor-feature=+nullptrToBoolConversion -Xclang -clang-vendor-feature=+messageToSelfInClassMethodIdReturnType -Xclang -clang-vendor-feature=+disableInferNewAvailabilityFromInit -Xclang -clang-vendor-feature=+disableNeonImmediateRangeCheck -Xclang -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -Xclang -fno-odr-hash-protocols -Xclang -clang-vendor-feature=+revert09abecef7bbf -mlinker-version=711 -stdlib=libc++
 /AppleInternal/BuildRoot/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.2.sdk
 /AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Sources/swiftlang/swiftlang-1300.0.47.5/swift/stdlib/toolchain/Compatibility51/Overrides.cpp
