@@ -65,4 +65,9 @@
  */
 + (BOOL)isConfigured;
 
+/**
+ Determine if the Castle SDK instance is ready to be used
+ */
++ (BOOL)isReady;
+
 @end

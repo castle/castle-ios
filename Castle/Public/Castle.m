@@ -96,17 +96,6 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     castle.client = [CASAPIClient clientWithConfiguration:configuration];
     castle.configuration = configuration;
     
-    // Highwind
-    NSError *error = nil;
-    castle.highwind = [[Highwind alloc] initWithVersion:Castle.versionString
-                                                   uuid:castle.deviceIdentifier
-                                         publishableKey:configuration.publishableKey
-                                              userAgent:CASUserAgent()
-                                                  error:&error];
-    if(error) {
-        NSAssert(true, @"You must provide a valid Castle publishable key when initializing the SDK.");
-    }
-    
     castle.reachability = [CASReachability reachabilityWithHostname:@"google.com"];
     [castle.reachability startNotifier];
     
@@ -160,6 +149,33 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 #pragma mark - Getters
 
+- (nullable Highwind *)highwind
+{
+    // Create a new Highwind instance if there is none and the SDK has been configured
+    if (_highwind == nil && [[self class] isConfigured]) {
+        Castle *castle = [Castle sharedInstance];
+        CastleConfiguration *configuration = castle.configuration;
+        
+        NSString *uuid = [castle deviceIdentifier];
+        NSError *error = nil;
+        _highwind = [[Highwind alloc] initWithVersion:Castle.versionString
+                                                 uuid:uuid
+                                       publishableKey:configuration.publishableKey
+                                            userAgent:CASUserAgent()
+                                                error:&error];
+        
+        if(error) {
+            if (error.domain == HighwindErrorDomain && error.code == HighwindErrorInvalidPublishableKey) {
+                NSAssert(true, @"You must provide a valid Castle publishable key when initializing the SDK.");
+            } else if (error.domain == HighwindErrorDomain && error.code == HighwindErrorInvalidUUID) {
+                CASLog(@"[WARNING] Invalid uuid detected (%@). Will try to recover.", uuid);
+            }
+            NSAssert(true, @"Unknown unrecoverable error occurred: %@", error);
+        }
+    }
+    return _highwind;
+}
+
 + (NSString *)versionString
 {
     return @"3.0.3";
@@ -200,10 +216,27 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     }
     
     Castle *castle = _sharedClient;
-    if (castle.configuration == nil || castle.highwind == nil || castle.reachability == nil || castle.client == nil) {
+    if (castle.configuration == nil || castle.reachability == nil || castle.client == nil) {
         return false;
     }
     
+    return true;
+}
+
++ (BOOL)isReady
+{
+    // SDK isn't ready if it hasn't been configured
+    if (![self isConfigured]) {
+        return false;
+    }
+    
+    // Check for valid Highwind instance
+    Castle *castle = _sharedClient;
+    if (castle.highwind == nil) {
+        return false;
+    }
+    
+    // Validation passed, SDK ready to be used
     return true;
 }
 
@@ -387,6 +420,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     
     if([Castle userJwt] == nil) {
         CASLog(@"No user jwt set, won't queue event");
+        return;
+    }
+    
+    if(![Castle isReady]) {
+        CASLog(@"SDK not yet ready, won't queue event: %@, of type: %@", event.name, event.type);
         return;
     }
     
