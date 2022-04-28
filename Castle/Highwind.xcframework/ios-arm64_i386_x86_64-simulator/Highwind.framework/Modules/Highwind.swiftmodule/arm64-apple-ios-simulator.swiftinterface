@@ -11,19 +11,19 @@ import Swift
 import SystemConfiguration
 import UIKit
 import _Concurrency
-@objc public enum HighwindError : Swift.Int, Swift.Error {
-  case invalidPublishableKey
-  case invalidUUID
-  public init?(rawValue: Swift.Int)
-  public typealias RawValue = Swift.Int
-  public static var _nsErrorDomain: Swift.String {
-    get
-  }
-  public var rawValue: Swift.Int {
-    get
-  }
-}
 @objc public class Highwind : ObjectiveC.NSObject {
+  @objc public enum HighwindError : Swift.Int, Swift.Error {
+    case invalidPublishableKey
+    case invalidUUID
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public static var _nsErrorDomain: Swift.String {
+      get
+    }
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
   @objc public init(version: Swift.String, uuid: Swift.String, publishableKey: Swift.String, userAgent: Swift.String) throws
   @objc public func token() -> Swift.String
   @objc public func encodePayload(publishableKey: Swift.String, encodedUserPayload: Swift.String, encodedEventPayloads: Swift.Array<Swift.String>) -> Swift.String?
@@ -33,6 +33,6 @@ import _Concurrency
   @objc public func encodeUserJwtPayloadSet(payload: Swift.String) -> Swift.String
   @objc deinit
 }
-extension Highwind.HighwindError : Swift.Equatable {}
-extension Highwind.HighwindError : Swift.Hashable {}
-extension Highwind.HighwindError : Swift.RawRepresentable {}
+extension Highwind.Highwind.HighwindError : Swift.Equatable {}
+extension Highwind.Highwind.HighwindError : Swift.Hashable {}
+extension Highwind.Highwind.HighwindError : Swift.RawRepresentable {}
