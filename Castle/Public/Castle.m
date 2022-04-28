@@ -181,7 +181,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 - (NSUInteger)maxBatchSize
 {
-    return 100;
+    return 20;
 }
 
 - (nullable NSString *)userJwt
