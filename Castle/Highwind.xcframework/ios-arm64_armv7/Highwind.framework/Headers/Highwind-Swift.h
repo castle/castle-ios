@@ -283,7 +283,7 @@ typedef SWIFT_ENUM(NSInteger, HighwindError, open) {
 /// Error thrown when initializing with an invalid uuid
   HighwindErrorInvalidUUID = 1,
 };
-static NSString * _Nonnull const HighwindErrorDomain = @"Highwind.Highwind.HighwindError";
+static NSString * _Nonnull const HighwindErrorDomain = @"Highwind.HighwindError";
 
 
 #if __has_attribute(external_source_symbol)
@@ -576,7 +576,7 @@ typedef SWIFT_ENUM(NSInteger, HighwindError, open) {
 /// Error thrown when initializing with an invalid uuid
   HighwindErrorInvalidUUID = 1,
 };
-static NSString * _Nonnull const HighwindErrorDomain = @"Highwind.Highwind.HighwindError";
+static NSString * _Nonnull const HighwindErrorDomain = @"Highwind.HighwindError";
 
 
 #if __has_attribute(external_source_symbol)
