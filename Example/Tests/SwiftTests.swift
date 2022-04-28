@@ -113,6 +113,10 @@ class SwiftTests: XCTestCase {
         XCTAssertFalse(Castle.isAllowlistURL(nil))
 
         Castle.resetConfiguration()
+        
+        // Test invalid publishable key validation error
+        XCTAssertNotNil(tryBlock { Castle.configure(withPublishableKey: "") })
+        XCTAssertNotNil(tryBlock { Castle.configure(withPublishableKey: "ab_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA") })
     }
 
     func testDeviceIdentifier() throws {

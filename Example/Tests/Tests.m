@@ -138,6 +138,10 @@
     XCTAssertFalse([Castle isAllowlistURL:nil]);
     
     [Castle resetConfiguration];
+    
+    // Test invalid publishable key validation error
+    XCTAssertThrows([Castle configureWithPublishableKey:@""]);
+    XCTAssertThrows([Castle configureWithPublishableKey:@"ab_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"]);
 }
 
 - (void)testDeviceIdentifier
