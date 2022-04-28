@@ -18,7 +18,7 @@ let package = Package(
             name: "Castle",
             dependencies: ["Highwind", "GeoZip"],
             path: "Castle/",
-            exclude: ["SwiftSources", "Info.plist", "Highwind.xcframework", "GeoZip.xcframework"],
+            exclude: ["Info.plist", "Highwind.xcframework", "GeoZip.xcframework"],
             publicHeadersPath: "Public",
             cSettings: [
                 .headerSearchPath("Public"),
