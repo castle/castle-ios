@@ -9,6 +9,8 @@
 
 @interface Castle (Util)
 
++ (nullable Castle *)sharedInstance;
+
 /**
  Get current connection state for Wifi
 
@@ -24,22 +26,20 @@
 + (BOOL)isCellularAvailable;
 
 /**
- Get the name of the current carrier, only applicable when a cellular connection is available
-
- @return Carrier name
- */
-+ (NSString *)carrierName;
-
-/**
   Get the UIApplication instance if available
  
  @return UIApplication instance
  */
-+ (UIApplication *)sharedUIApplication;
++ (nullable UIApplication *)sharedUIApplication;
 
 /**
  Determine if the Castle SDK instance is ready to be used
  */
 + (BOOL)isReady;
+
+/**
+ Returns a uniue UUID using [[UIDevice currentDevice] identifierForVendor]
+ */
+- (nullable NSString *)deviceIdentifier;
 
 @end

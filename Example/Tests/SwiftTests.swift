@@ -16,7 +16,7 @@ class SwiftTests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
         let baseURLAllowList = [URL(string: "https://google.com/")!]
-        let configuration = CastleConfiguration(publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
+        let configuration = CastleConfiguration(publishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA")
         configuration.baseURLAllowList = baseURLAllowList
         
         Castle.configure(configuration)
@@ -66,7 +66,7 @@ class SwiftTests: XCTestCase {
 
     func testConfiguration() throws {
         let baseURLAllowList = [URL(string:"https://google.com/")!];
-        var configuration = CastleConfiguration(publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
+        var configuration = CastleConfiguration(publishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA")
 
         // Check that all default values are set correctly
         XCTAssertEqual(configuration.isScreenTrackingEnabled, false);
@@ -84,7 +84,7 @@ class SwiftTests: XCTestCase {
         configuration.baseURLAllowList = baseURLAllowList;
 
         // Check that all the configuration parameters where set correctly
-        XCTAssertTrue(configuration.publishableKey == "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
+        XCTAssertTrue(configuration.publishableKey == "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA")
         XCTAssertEqual(configuration.isScreenTrackingEnabled, true)
         XCTAssertEqual(configuration.isDebugLoggingEnabled, true)
         XCTAssertEqual(configuration.isDeviceIDAutoForwardingEnabled, true)
@@ -99,7 +99,7 @@ class SwiftTests: XCTestCase {
         XCTAssertFalse(configuration.baseURLAllowList![0].absoluteString  == "https://google.com/somethingelse")
 
         // Setup Castle SDK with publishable key
-        Castle.configure(withPublishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
+        Castle.configure(withPublishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA")
 
         // Configuration reset
         Castle.resetConfiguration()
@@ -113,7 +113,7 @@ class SwiftTests: XCTestCase {
 
         Castle.resetConfiguration()
 
-        configuration = CastleConfiguration(publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
+        configuration = CastleConfiguration(publishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA")
         configuration.apiDomain = "example.com"
         configuration.useCloudflareApp = true
 
@@ -128,7 +128,7 @@ class SwiftTests: XCTestCase {
 
         Castle.resetConfiguration()
 
-        configuration = CastleConfiguration(publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
+        configuration = CastleConfiguration(publishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA")
         configuration.apiDomain = "example.com"
         configuration.apiPath = "v1/test/"
         configuration.useCloudflareApp = true
@@ -137,7 +137,36 @@ class SwiftTests: XCTestCase {
         XCTAssertTrue(configuration.apiDomain == "example.com");
         XCTAssertTrue(configuration.baseURL.absoluteString == "https://example.com/v1/test/");
 
-        Castle.configure(withPublishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
+        Castle.configure(withPublishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA")
+    }
+    
+    func testHighwindNilUUID()
+    {
+        Castle.reset()
+
+        // Swizzle device identifier to simulate [[UIDevice currentDevice] identifierForVendor] returning nil
+        Castle.enableSwizzle(true)
+
+        let publishableKey = "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"
+        Castle.configure(withPublishableKey: publishableKey)
+
+        let count = CASEventStorage.storedQueue().count
+        XCTAssertEqual(count, 0)
+
+        // Tracking a custom event with the device identifier being nil should not add the event to the queue
+        Castle.screen("custom event")
+
+        let newCount = CASEventStorage.storedQueue().count
+        XCTAssertEqual(newCount, 0)
+
+        // Disable swizzle, deviceIdentifier should now return a valid UUID
+        Castle.enableSwizzle(false)
+
+        // Track another event, Highwind instance should now be initialized (deviceIdentifier returned non-null UUID)
+        Castle.screen("custom event")
+
+        let finalCount = CASEventStorage.storedQueue().count
+        XCTAssertGreaterThan(finalCount, 0)
     }
 
     func testDeviceIdentifier() throws {
@@ -487,7 +516,7 @@ class SwiftTests: XCTestCase {
 
     func testRequestInterceptor() throws {
         // Create configuration object
-        let configuration = CastleConfiguration(publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
+        let configuration = CastleConfiguration(publishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA")
         
         let baseURLAllowList = [URL(string: "https://google.com/")!]
 
@@ -553,7 +582,7 @@ class SwiftTests: XCTestCase {
         let expectation = self.expectation(description: "GET /batch")
 
         // Create configuration object
-        let configuration = CastleConfiguration(publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
+        let configuration = CastleConfiguration(publishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA")
         let client = CASAPIClient(configuration: configuration)
 
         // Perform batch network request
@@ -579,7 +608,7 @@ class SwiftTests: XCTestCase {
     }
 
     func testMaxQueueLength() throws {
-        let configuration = CastleConfiguration(publishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
+        let configuration = CastleConfiguration(publishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA")
 
         // Update configuration and set max queue limit to less than the flush limit.
         configuration.isDebugLoggingEnabled = true
@@ -611,7 +640,7 @@ class SwiftTests: XCTestCase {
         defaults.synchronize()
 
         Castle.resetConfiguration()
-        Castle.configure(withPublishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
+        Castle.configure(withPublishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA")
 
         // Check to see if the installed version was updated correctly i.e. the SDK detected an app update.
         let currentVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String

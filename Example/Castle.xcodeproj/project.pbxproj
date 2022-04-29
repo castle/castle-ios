@@ -26,6 +26,7 @@
 		A87D84CB9083C95635E7E289 /* Pods_Castle_UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECCED2A5143C35EAD30AD09 /* Pods_Castle_UITests.framework */; };
 		B57E62FEBC6CF4810F6140EA /* Pods_Castle_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A1668A76E46B0EEF7D3169 /* Pods_Castle_Example.framework */; };
 		B66955BE25AEFECC00F473F3 /* SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66955BD25AEFECC00F473F3 /* SwiftTests.swift */; };
+		B678FB82281C2A32007211C8 /* Castle+InvalidUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = B678FB81281C2A32007211C8 /* Castle+InvalidUUID.m */; };
 		B6A923FE23C8EF0E004D3AB0 /* Castle_UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A923FD23C8EF0E004D3AB0 /* Castle_UITests.m */; };
 		B6B1A64A23C896AC00263088 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B1A64923C896AC00263088 /* DemoViewController.m */; };
 /* End PBXBuildFile section */
@@ -76,6 +77,8 @@
 		9890A22A2CE18073B9B5FFFE /* Pods_Castle_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Castle_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B66955BC25AEFECB00F473F3 /* Castle_Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Castle_Tests-Bridging-Header.h"; sourceTree = "<group>"; };
 		B66955BD25AEFECC00F473F3 /* SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTests.swift; sourceTree = "<group>"; };
+		B678FB80281C2A31007211C8 /* Castle+InvalidUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Castle+InvalidUUID.h"; sourceTree = "<group>"; };
+		B678FB81281C2A32007211C8 /* Castle+InvalidUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Castle+InvalidUUID.m"; sourceTree = "<group>"; };
 		B6A923FB23C8EF0E004D3AB0 /* Castle_UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Castle_UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A923FD23C8EF0E004D3AB0 /* Castle_UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Castle_UITests.m; sourceTree = "<group>"; };
 		B6A923FF23C8EF0E004D3AB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -194,6 +197,8 @@
 			isa = PBXGroup;
 			children = (
 				6003F5BB195388D20070C39A /* Tests.m */,
+				B678FB80281C2A31007211C8 /* Castle+InvalidUUID.h */,
+				B678FB81281C2A32007211C8 /* Castle+InvalidUUID.m */,
 				B66955BD25AEFECC00F473F3 /* SwiftTests.swift */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 				B66955BC25AEFECB00F473F3 /* Castle_Tests-Bridging-Header.h */,
@@ -487,6 +492,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B678FB82281C2A32007211C8 /* Castle+InvalidUUID.m in Sources */,
 				6003F59E195388D20070C39A /* AppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* MainViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,

@@ -13,7 +13,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Create configuration object
-    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
     configuration.screenTrackingEnabled = YES;
     configuration.debugLoggingEnabled = YES;
     configuration.deviceIDAutoForwardingEnabled = YES;

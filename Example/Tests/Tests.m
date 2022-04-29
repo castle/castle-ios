@@ -18,6 +18,7 @@
 #import <Castle/CASReachability.h>
 
 #import "MainViewController.h"
+#import "Castle+InvalidUUID.h"
 
 @interface Tests : XCTestCase
 
@@ -31,7 +32,7 @@
     // Put setup code here. This method is called before the invocation of each test method in the class.
     
     NSArray *baseURLAllowList = @[ [NSURL URLWithString:@"https://google.com/"] ];
-    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
     configuration.baseURLAllowList = baseURLAllowList;
     
     [Castle configure:configuration];
@@ -91,7 +92,7 @@
 - (void)testConfiguration
 {
     NSArray *baseURLAllowList = @[ [NSURL URLWithString:@"https://google.com/"] ];
-    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
     
     // Check that all default values are set correctly
     XCTAssertEqual(configuration.screenTrackingEnabled, NO);
@@ -109,7 +110,7 @@
     configuration.baseURLAllowList = baseURLAllowList;
 
     // Check that all the configuration parameters where set correctly
-    XCTAssertTrue([configuration.publishableKey isEqualToString:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"]);
+    XCTAssertTrue([configuration.publishableKey isEqualToString:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"]);
     XCTAssertEqual(configuration.screenTrackingEnabled, YES);
     XCTAssertEqual(configuration.debugLoggingEnabled, YES);
     XCTAssertEqual(configuration.deviceIDAutoForwardingEnabled, YES);
@@ -124,7 +125,7 @@
     XCTAssertFalse([configuration.baseURLAllowList[0].absoluteString isEqualToString:@"https://google.com/somethingelse"]);
 
     // Setup Castle SDK with publishable key
-    [Castle configureWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    [Castle configureWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
     
     // Configuration reset
     [Castle resetConfiguration];
@@ -139,10 +140,10 @@
     [Castle resetConfiguration];
 
     // Test cloudflare logic
-    configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
     XCTAssertThrows(configuration.useCloudflareApp = YES, "");
 
-    configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
     configuration.apiDomain = @"example.com";
     configuration.useCloudflareApp = YES;
     
@@ -157,7 +158,7 @@
 
     [Castle resetConfiguration];
     
-    configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
     configuration.apiDomain = @"example.com";
     configuration.apiPath = @"v1/test/";
     configuration.useCloudflareApp = YES;
@@ -166,7 +167,36 @@
     XCTAssertTrue([configuration.apiDomain isEqualToString:@"example.com"]);
     XCTAssertTrue([configuration.baseURL.absoluteString isEqualToString:@"https://example.com/v1/test/"]);
     
-    [Castle configureWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    [Castle configureWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
+}
+
+- (void)testHighwindNilUUID
+{
+    [Castle reset];
+
+    // Swizzle device identifier to simulate [[UIDevice currentDevice] identifierForVendor] returning nil
+    [Castle enableSwizzle:true];
+
+    NSString *publishableKey = @"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA";
+    [Castle configureWithPublishableKey:publishableKey];
+
+    NSUInteger count = [CASEventStorage storedQueue].count;
+    XCTAssertEqual(count, 0);
+
+    // Tracking a custom event with the device identifier being nil should not add the event to the queue
+    [Castle screen:@"custom event"];
+
+    NSUInteger newCount = [CASEventStorage storedQueue].count;
+    XCTAssertEqual(newCount, 0);
+
+    // Disable swizzle, deviceIdentifier should now return a valid UUID
+    [Castle enableSwizzle:false];
+
+    // Track another event, Highwind instance should now be initialized (deviceIdentifier returned non-null UUID)
+    [Castle screen:@"custom event"];
+
+    NSUInteger finalCount = [CASEventStorage storedQueue].count;
+    XCTAssertGreaterThan(finalCount, 0);
 }
 
 - (void)testDeviceIdentifier
@@ -544,7 +574,7 @@
 - (void)testRequestInterceptor
 {
     // Create configuration object
-    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
     
     NSArray *baseURLAllowList = @[ [NSURL URLWithString:@"https://google.com/"] ];
     
@@ -612,7 +642,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"GET /batch"];
 
     // Create configuration object
-    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
     CASAPIClient *client = [CASAPIClient clientWithConfiguration:configuration];
 
     // Perform batch network request
@@ -640,7 +670,7 @@
 
 - (void)testMaxQueueLength
 {
-    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
     
     // Update configuration and set max queue limit to less than the flush limit.
     configuration.debugLoggingEnabled = YES;
@@ -673,7 +703,7 @@
     [defaults synchronize];
     
     [Castle resetConfiguration];
-    [Castle configureWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
+    [Castle configureWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
     
     // Check to see if the installed version was updated correctly i.e. the SDK detected an app update.
     NSString *currentVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
