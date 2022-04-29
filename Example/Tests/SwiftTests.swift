@@ -103,7 +103,6 @@ class SwiftTests: XCTestCase {
 
         // Configuration reset
         Castle.resetConfiguration()
-        XCTAssertFalse(Castle.isAllowlistURL(URL(string:"https://google.com/somethingelse")!))
 
         // Setup Castle SDK with provided configuration
         Castle.configure(configuration)
@@ -137,8 +136,6 @@ class SwiftTests: XCTestCase {
         XCTAssertTrue(configuration.useCloudflareApp);
         XCTAssertTrue(configuration.apiDomain == "example.com");
         XCTAssertTrue(configuration.baseURL.absoluteString == "https://example.com/v1/test/");
-        
-        Castle.resetConfiguration()
 
         Castle.configure(withPublishableKey: "pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ")
     }

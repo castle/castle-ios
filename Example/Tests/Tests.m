@@ -128,7 +128,6 @@
     
     // Configuration reset
     [Castle resetConfiguration];
-    XCTAssertFalse([Castle isAllowlistURL:[NSURL URLWithString:@"https://google.com/somethingelse"]]);
     
     // Setup Castle SDK with provided configuration
     [Castle configure:configuration];
@@ -166,8 +165,6 @@
     XCTAssertTrue(configuration.useCloudflareApp);
     XCTAssertTrue([configuration.apiDomain isEqualToString:@"example.com"]);
     XCTAssertTrue([configuration.baseURL.absoluteString isEqualToString:@"https://example.com/v1/test/"]);
-    
-    [Castle resetConfiguration];
     
     [Castle configureWithPublishableKey:@"pk_SE5aTeotKZpDEn8kurzBYquRZyy21fvZ"];
 }

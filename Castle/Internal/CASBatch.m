@@ -8,6 +8,9 @@
 #import "CASBatch.h"
 
 #import "CASUtils.h"
+#import "Castle+Util.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface CASBatch ()
 @property (nonatomic, strong, readwrite) NSArray *events;
@@ -17,8 +20,13 @@
 
 #pragma mark - Factory
 
-+ (instancetype)batchWithEvents:(NSArray *)events
++ (nullable instancetype)batchWithEvents:(nullable NSArray *)events
 {
+    if(![Castle isReady]) {
+        CASLog(@"[WARNING] SDK not yet ready, CASBatch JSONPayload will be nil.");
+        return nil;
+    }
+    
     if(!events) {
         CASLog(@"[%@] Nil event array parameter provided. Won't flush events.", NSStringFromClass(self.class));
         return nil;
@@ -36,11 +44,18 @@
 
 #pragma mark - CASModel
 
-- (NSDictionary *)JSONPayload
+- (nullable NSDictionary *)JSONPayload
 {
+    if(![Castle isReady]) {
+        CASLog(@"[WARNING] SDK not yet ready, CASBatch JSONPayload will be nil.");
+        return nil;
+    }
+    
     NSString *timestamp = [[CASModel timestampDateFormatter] stringFromDate:[NSDate date]];
     return @{ @"batch": [self.events valueForKey:@"JSONPayload"],
               @"sent_at": timestamp };
 }
 
 @end
+
+NS_ASSUME_NONNULL_END
