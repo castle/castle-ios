@@ -20,6 +20,7 @@
 #import <Castle/CASUserJwt.h>
 
 #import "MainViewController.h"
+#import "Castle+InvalidUUID.h"
 
 @interface Tests : XCTestCase
 
@@ -142,6 +143,37 @@
     // Test invalid publishable key validation error
     XCTAssertThrows([Castle configureWithPublishableKey:@""]);
     XCTAssertThrows([Castle configureWithPublishableKey:@"ab_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"]);
+}
+
+- (void)testHighwindNilUUID
+{
+    [Castle reset];
+    
+    // Swizzle device identifier to simulate [[UIDevice currentDevice] identifierForVendor] returning nil
+    [Castle enableSwizzle:true];
+    
+    NSString *publishableKey = @"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA";
+    NSString *jwt = @"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0";
+    [Castle configureWithPublishableKey:publishableKey];
+    [Castle setUserJwt:jwt];
+    
+    NSUInteger count = [CASEventStorage storedQueue].count;
+    XCTAssertEqual(count, 0);
+    
+    // Tracking a custom event with the device identifier being nil should not add the event to the queue
+    [Castle customWithName:@"custom event"];
+    
+    NSUInteger newCount = [CASEventStorage storedQueue].count;
+    XCTAssertEqual(newCount, 0);
+    
+    // Disable swizzle, deviceIdentifier should now return a valid UUID
+    [Castle enableSwizzle:false];
+    
+    // Track another event, Highwind instance should now be initialized (deviceIdentifier returned non-null UUID)
+    [Castle customWithName:@"custom event"];
+    
+    NSUInteger finalCount = [CASEventStorage storedQueue].count;
+    XCTAssertGreaterThan(finalCount, 0);
 }
 
 - (void)testDeviceIdentifier
@@ -642,4 +674,3 @@
 }
 
 @end
-

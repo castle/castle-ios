@@ -181,7 +181,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return @"3.0.3";
 }
 
-- (NSString *)deviceIdentifier
+- (nullable NSString *)deviceIdentifier
 {
     return [[[UIDevice currentDevice] identifierForVendor] UUIDString];
 }

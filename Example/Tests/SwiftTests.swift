@@ -118,6 +118,37 @@ class SwiftTests: XCTestCase {
         XCTAssertNotNil(tryBlock { Castle.configure(withPublishableKey: "") })
         XCTAssertNotNil(tryBlock { Castle.configure(withPublishableKey: "ab_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA") })
     }
+    
+    func testHighwindNilUUID()
+    {
+        Castle.reset()
+        
+        // Swizzle device identifier to simulate [[UIDevice currentDevice] identifierForVendor] returning nil
+        Castle.enableSwizzle(true)
+        
+        let publishableKey = "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"
+        let jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0";
+        Castle.configure(withPublishableKey: publishableKey)
+        Castle.userJwt(jwt)
+        
+        let count = CASEventStorage.storedQueue().count
+        XCTAssertEqual(count, 0)
+        
+        // Tracking a custom event with the device identifier being nil should not add the event to the queue
+        Castle.custom(name: "custom event")
+        
+        let newCount = CASEventStorage.storedQueue().count
+        XCTAssertEqual(newCount, 0)
+        
+        // Disable swizzle, deviceIdentifier should now return a valid UUID
+        Castle.enableSwizzle(false)
+        
+        // Track another event, Highwind instance should now be initialized (deviceIdentifier returned non-null UUID)
+        Castle.custom(name: "custom event")
+        
+        let finalCount = CASEventStorage.storedQueue().count
+        XCTAssertGreaterThan(finalCount, 0)
+    }
 
     func testDeviceIdentifier() throws {
         // Check device ID
