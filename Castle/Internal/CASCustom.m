@@ -10,6 +10,8 @@
 #import "Castle.h"
 #import "CASUtils.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface CASCustom ()
 @property (nonatomic, copy, readwrite) NSString *name;
 @property (nonatomic, copy, readwrite) NSDictionary *properties;
@@ -24,12 +26,12 @@
 
 #pragma mark - Factory
 
-+ (instancetype)eventWithName:(NSString *)name
++ (nullable instancetype)eventWithName:(nullable NSString *)name
 {
     return [self eventWithName:name properties:@{}];
 }
 
-+ (instancetype)eventWithName:(NSString *)name properties:(NSDictionary *)properties
++ (nullable instancetype)eventWithName:(nullable NSString *)name properties:(nullable NSDictionary *)properties
 {
     if(!name) {
         CASLog(@"Event name can't be nil.");
@@ -54,7 +56,7 @@
 
 #pragma mark - CASModel
 
-- (id)JSONPayload
+- (nullable id)JSONPayload
 {
     NSMutableDictionary *payload = ((NSDictionary *) [super JSONPayload]).mutableCopy;
     
@@ -76,3 +78,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

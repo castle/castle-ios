@@ -9,6 +9,8 @@
 
 #import "CASUtils.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation CASModel
 
 - (nullable instancetype)initWithCoder:(nonnull NSCoder *)coder {
@@ -18,13 +20,13 @@
 
 - (void)encodeWithCoder:(nonnull NSCoder *)coder { }
 
-- (id)JSONPayload
+- (nullable id)JSONPayload
 {
     CASLog(@"JSONPayload method should be overridden in subclass: %@", NSStringFromClass(self.class));
     return nil;
 }
 
-- (NSData *)JSONData
+- (nullable NSData *)JSONData
 {
     id payload = [self JSONPayload];
     if(payload != nil) {
@@ -38,7 +40,7 @@
     return nil;
 }
 
-- (NSString *)JSONString
+- (nullable NSString *)JSONString
 {
     NSData *data = [self JSONData];
     if(data != nil) {
@@ -77,7 +79,7 @@
 
 #pragma mark - Util
 
-+ (BOOL)propertiesContainValidData:(NSDictionary *)dictionary
++ (BOOL)propertiesContainValidData:(nullable NSDictionary *)dictionary
 {
     // Check if dictionary is nil
     if(!dictionary) {
@@ -103,3 +105,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END
