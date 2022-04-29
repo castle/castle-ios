@@ -311,6 +311,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 {
     __block Castle *castle = [Castle sharedInstance];
     
+    if(![Castle isReady]) {
+        CASLog(@"SDK not yet ready, won't flush events.");
+        return;
+    }
+    
     if(castle.task != nil) {
         CASLog(@"Queue is already being flushed. Won't flush again.");
         return;
