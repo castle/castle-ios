@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.4 (2022-04-29)
+- Improvement: [#89](https://github.com/castle/castle-ios/pull/89) Decrease batch size to 20.
+- Fix: [#90](https://github.com/castle/castle-ios/pull/90) Potential crash when UUID is nil.
+- Fix: [#91](https://github.com/castle/castle-ios/pull/91) Remove SwiftSources from exclude in Package.swift.
+
 ## 3.0.3 (2022-04-06)
 - Improvement: [#86](https://github.com/castle/castle-ios/pull/86) Null/empty request tokens. More strict checks that the SDK is configured before use.
 - Internal enhancements and stability improvements.
