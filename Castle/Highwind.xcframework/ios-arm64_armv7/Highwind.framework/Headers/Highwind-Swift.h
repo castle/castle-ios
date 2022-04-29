@@ -276,6 +276,15 @@ SWIFT_CLASS("_TtC8Highwind8Highwind")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+/// Highwind Error Enum
+typedef SWIFT_ENUM(NSInteger, HighwindError, open) {
+/// Error thrown when initializing with an invalid publishable key
+  HighwindErrorInvalidPublishableKey = 0,
+/// Error thrown when initializing with an invalid uuid
+  HighwindErrorInvalidUUID = 1,
+};
+static NSString * _Nonnull const HighwindErrorDomain = @"Highwind.HighwindError";
+
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
@@ -559,6 +568,15 @@ SWIFT_CLASS("_TtC8Highwind8Highwind")
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+/// Highwind Error Enum
+typedef SWIFT_ENUM(NSInteger, HighwindError, open) {
+/// Error thrown when initializing with an invalid publishable key
+  HighwindErrorInvalidPublishableKey = 0,
+/// Error thrown when initializing with an invalid uuid
+  HighwindErrorInvalidUUID = 1,
+};
+static NSString * _Nonnull const HighwindErrorDomain = @"Highwind.HighwindError";
 
 
 #if __has_attribute(external_source_symbol)

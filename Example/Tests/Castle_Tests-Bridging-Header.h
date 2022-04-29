@@ -3,6 +3,7 @@
 //
 
 #import "MainViewController.h"
+#import "Castle+InvalidUUID.h"
 
 NS_INLINE NSException * _Nullable tryBlock(void(NS_NOESCAPE^_Nonnull tryBlock)(void)) {
     @try {

@@ -11,6 +11,18 @@ import Swift
 import SystemConfiguration
 import UIKit
 import _Concurrency
+@objc public enum HighwindError : Swift.Int, Swift.Error, Swift.Equatable, Swift.Hashable, Swift.RawRepresentable {
+  case invalidPublishableKey
+  case invalidUUID
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public static var _nsErrorDomain: Swift.String {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
 @objc public class Highwind : ObjectiveC.NSObject {
   @objc public init(version: Swift.String, uuid: Swift.String, publishableKey: Swift.String, userAgent: Swift.String) throws
   @objc public func token() -> Swift.String

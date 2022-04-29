@@ -11,6 +11,8 @@
 
 @interface Castle (Util)
 
++ (nullable Castle *)sharedInstance;
+
 /**
  Get Highwind instance used for token generation and payload encoding
  
@@ -64,5 +66,15 @@
  Determine if the Castle SDK instance is configured
  */
 + (BOOL)isConfigured;
+
+/**
+ Determine if the Castle SDK instance is ready to be used
+ */
++ (BOOL)isReady;
+
+/**
+ Returns a uniue UUID using [[UIDevice currentDevice] identifierForVendor]
+ */
+- (nullable NSString *)deviceIdentifier;
 
 @end

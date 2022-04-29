@@ -62,6 +62,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable id)JSONPayload
 {
+    if(![Castle isReady]) {
+        CASLog(@"[WARNING] SDK not yet ready, CASMonitor JSONPayload will be nil.");
+        return nil;
+    }
+    
     Highwind *highwind = [Castle highwind];
     NSString *userPayload = [[CASUserJwt userWithJwt:self.userJwt] JSONString];
     NSString *encodedUser = [highwind encodeUserJwtPayloadSetWithPayload:userPayload];
