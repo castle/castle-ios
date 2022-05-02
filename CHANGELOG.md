@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.9 (2022-05-02)
+- Fix: [#90](https://github.com/castle/castle-ios/pull/90) Potential crash when UUID is nil.
+
 ## 2.1.8 (2022-03-12)
 - Updated internal library because of an issue with the vendored framework included in the 2.1.7 release.
 
