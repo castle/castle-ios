@@ -23,6 +23,10 @@
     // Setup Castle SDK with provided configuration
     [Castle configure:configuration];
     
+    // Enable secure mode
+    NSString *signature = @"d2a28f905835ddcdd783be84c727a3b039ccdd3eef481259b6f9ecfaeeef573e";
+    [Castle secure:signature];
+    
     return YES;
 }
 
