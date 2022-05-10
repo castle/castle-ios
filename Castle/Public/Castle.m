@@ -124,6 +124,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 + (void)resetConfiguration
 {
+    // If the SDK hasn't been configured, no reset is necessary
+    if (![Castle isConfigured]) {
+        return;
+    }
+    
     Castle *castle = [Castle sharedInstance];
     CastleConfiguration *configuration = castle.configuration;
     
