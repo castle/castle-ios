@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.0.5 (2022-05-10)
+- Fix: [#94](https://github.com/castle/castle-ios/pull/94) Add check to determine if the SDK has been configured in resetConfiguration.
+
 ## 3.0.4 (2022-04-29)
 - Improvement: [#89](https://github.com/castle/castle-ios/pull/89) Decrease batch size to 20.
 - Fix: [#90](https://github.com/castle/castle-ios/pull/90) Potential crash when UUID is nil.
