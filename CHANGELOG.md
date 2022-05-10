@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.10 (2022-05-10)
+- Fix: Add check to determine if the SDK has been configured in resetConfiguration.
+
 ## 2.1.9 (2022-05-02)
 - Fix: [#90](https://github.com/castle/castle-ios/pull/90) Potential crash when UUID is nil.
 
