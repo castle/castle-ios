@@ -480,6 +480,10 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 - (void)trackApplicationUpdated
 {
+    if (![Castle isConfigured]) {
+        return;
+    }
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *currentVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     NSString *installedVersion = [defaults objectForKey:CastleAppVersionKey];
