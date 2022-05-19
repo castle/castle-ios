@@ -22,7 +22,8 @@ let package = Package(
             publicHeadersPath: "Public",
             cSettings: [
                 .headerSearchPath("Public"),
-                .headerSearchPath("Internal")
+                .headerSearchPath("Internal"),
+                .define("NS_BLOCK_ASSERTIONS", to: "1", .when(configuration: .release))
             ]
         ),
         .binaryTarget(
