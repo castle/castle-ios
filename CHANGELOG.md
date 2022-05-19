@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.11 (2022-05-19)
+- Fix: Add check to determine if the SDK has been configured in NSNotification callbacks.
+- Fix: [#97](https://github.com/castle/castle-ios/pull/97) SwiftPM - disable NSAssert in release builds.
+
 ## 2.1.10 (2022-05-10)
 - Fix: Add check to determine if the SDK has been configured in resetConfiguration.
 
