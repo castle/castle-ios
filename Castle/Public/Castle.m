@@ -559,6 +559,10 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
+    if (![Castle isConfigured]) {
+        return;
+    }
+    
     CASLog(@"Application life cycle event detected: Will track application did become active event");
     [Castle track:@"Application Did Become Active"];
     
@@ -568,6 +572,10 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 - (void)applicationDidEnterBackground:(NSNotification *)notification
 {
+    if (![Castle isConfigured]) {
+        return;
+    }
+    
     CASLog(@"Application life cycle event detected: Will track application did enter background event");
     [Castle track:@"Application Did Enter Background"];
     
@@ -577,6 +585,10 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 - (void)applicationWillTerminate:(NSNotificationCenter *)notification
 {
+    if (![Castle isConfigured]) {
+        return;
+    }
+    
     CASLog(@"Application life cycle event detected: Will track application will terminate event");
     [Castle track:@"Application Will Terminate"];
     
