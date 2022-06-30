@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.0.6 (2022-06-29)
+- Internal enhancements and stability improvements.
+
 ## 3.0.5 (2022-05-10)
 - Fix: [#94](https://github.com/castle/castle-ios/pull/94) Add check to determine if the SDK has been configured in resetConfiguration.
 
