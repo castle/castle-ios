@@ -2,8 +2,8 @@ BCSymbolMap Version: 2.0
 Apple clang version 13.0.0 (clang-1300.0.29.30)
 /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.2.sdk
 iPhoneOS15.2.sdk
-/Users/aLxx/Library/Developer/Xcode/DerivedData/GeoZip-hgtiwryrefuyazdfbaxmfotfetjg/Build/Intermediates.noindex/ArchiveIntermediates/GeoZip/IntermediateBuildFilesPath/GeoZip.build/Release-iphoneos/GeoZip.build/DerivedSources/GeoZip_vers.c
-/Users/aLxx/castle/GeoZip
+/Users/slebbo/Library/Developer/Xcode/DerivedData/GeoZip-eypzwdcapqarhxhiafytynutfumu/Build/Intermediates.noindex/ArchiveIntermediates/GeoZip/IntermediateBuildFilesPath/GeoZip.build/Release-iphoneos/GeoZip.build/DerivedSources/GeoZip_vers.c
+/Users/slebbo/iOS/geozip-ios
 _$s6GeoZip0aB5ErrorOSQAASQ2eeoiySbx_xtFZTW
 _$s6GeoZip0aB5ErrorOSHAASH9hashValueSivgTW
 _$s6GeoZip0aB5ErrorOSHAASH4hash4intoys6HasherVz_tFTW
@@ -96,7 +96,7 @@ ___swift_reflection_version
 -private-discriminator _2AFD30BB220D0785D3B5C175C10A042D
 <swift-imported-modules>
 Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)
-/Users/aLxx/castle/GeoZip/GeoZip/GeoZip.swift
+/Users/slebbo/iOS/geozip-ios/GeoZip/GeoZip.swift
 $ss22_ContiguousArrayBufferV19_uninitializedCount15minimumCapacityAByxGSi_SitcfCs5UInt8V_s5Int32Vt_Tg5Tf4nnd_n
 <compiler-generated>
 $ss22_ContiguousArrayBufferV18_initStorageHeader5count8capacityySi_SitFs5UInt8V_s5Int32Vt_Tg5
@@ -248,7 +248,7 @@ _$sSays5UInt8VGML
 _objc_classes
 _$s6GeoZip6FormatCACycfCTq
 _$s6GeoZip6FormatCN
-/Users/aLxx/castle/GeoZip/GeoZip/Format.swift
+/Users/slebbo/iOS/geozip-ios/GeoZip/Format.swift
 __swift_destroy_boxed_opaque_existential_1
 __swift_project_boxed_opaque_existential_1
 $sSays5UInt8VGMa
@@ -325,7 +325,7 @@ _symbolic _____Sg s5UInt8V
 _$s6GeoZip8LocationCMF
 _$s6GeoZip0aB5ErrorOACs0C0AAWL
 _$s6GeoZip8AccuracyC20ACCURACY_MAP_INVERSE33_44CC6ADF743F6B1EA93F04AC653653E9LLSDys5UInt8Vs5Int32VGvpZ
-/Users/aLxx/castle/GeoZip/GeoZip/Location.swift
+/Users/slebbo/iOS/geozip-ios/GeoZip/Location.swift
 $s6GeoZip0aB5ErrorOACs0C0AAWl
 $sSa15_checkSubscript_20wasNativeTypeCheckeds16_DependenceTokenVSi_SbtFSd_Tg5
 $ss12_ArrayBufferV37_checkInoutAndNativeTypeCheckedBounds_03wasfgH0ySi_SbtFSd_Tg5
@@ -401,7 +401,7 @@ _$ss5Error_pMD
 _$s6GeoZip8AccuracyCACycfCTq
 _$s6GeoZip8AccuracyCN
 -private-discriminator _44CC6ADF743F6B1EA93F04AC653653E9
-/Users/aLxx/castle/GeoZip/GeoZip/Accuracy.swift
+/Users/slebbo/iOS/geozip-ios/GeoZip/Accuracy.swift
 accuracyMap
 updateValue
 $sSD8_VariantV11updateValue_6forKeyq_Sgq_n_xtFs5Int32V_s5UInt8VTg5
@@ -521,7 +521,7 @@ _$s6GeoZip8ProviderCMF
 _$s6GeoZip8ProviderCACycfCTq
 _$s6GeoZip8ProviderCN
 -private-discriminator _4EB6DEBDFBEBE73CAE28BB143EDEA195
-/Users/aLxx/castle/GeoZip/GeoZip/Provider.swift
+/Users/slebbo/iOS/geozip-ios/GeoZip/Provider.swift
 $s6GeoZip8ProviderCMa
 _$s6GeoZip4GridCfD
 _$s6GeoZip4GridCMa
@@ -547,7 +547,7 @@ _$s6GeoZip4GridC11indexToTile3idxSays5UInt8VGAG_tFTq
 _$s6GeoZip4GridC4sizeACs5UInt8V_tcfCTq
 _$s6GeoZip4GridCN
 -private-discriminator _C7B148BEFD6BAD6DBB6A05643022954D
-/Users/aLxx/castle/GeoZip/GeoZip/Grid.swift
+/Users/slebbo/iOS/geozip-ios/GeoZip/Grid.swift
 sliceByValue
 Swift runtime failure: Double value cannot be converted to UInt8 because the result would be greater than UInt8.max
 Swift runtime failure: Double value cannot be converted to UInt8 because the result would be less than UInt8.min
@@ -589,7 +589,7 @@ _symbolic _____ 6GeoZip10CoordinateC
 _$s6GeoZip10CoordinateCMF
 _$s6GeoZip10CoordinateCACycfCTq
 -private-discriminator _C19F48940D8474C8B85808EBF668F5A1
-/Users/aLxx/castle/GeoZip/GeoZip/Coordinate.swift
+/Users/slebbo/iOS/geozip-ios/GeoZip/Coordinate.swift
 $sSis5UInt8Vs5Error_pIgydzo_SiABsAC_pIegnrzo_TR
 $s6GeoZip10CoordinateC6encode3lat3lon9precisionSays5UInt8VGSdSg_AkItFZAISiXEfU_
 tileToIndex
