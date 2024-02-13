@@ -5,7 +5,7 @@ jobs:
 
     # Specify the Xcode version to use
     macos:
-      xcode: "13.2.1"
+      xcode: "15.2.0"
     working_directory: /Users/distiller/project
 
     steps:
@@ -26,7 +26,7 @@ jobs:
           name: Run tests
           command: fastlane scan --workspace "Example/Castle.xcworkspace" --code_coverage
           environment:
-            SCAN_DEVICE: iPhone 12 Pro Max
+            SCAN_DEVICE: iPhone 15
             SCAN_SCHEME: Castle-Example
 
       # Upload code coverage results to codecov.io

@@ -7,6 +7,9 @@
 
 #import "AppDelegate.h"
 
+@import AdSupport;
+@import AppTrackingTransparency;
+
 #import <Castle/Castle.h>
 
 @implementation AppDelegate
@@ -19,6 +22,13 @@
     configuration.deviceIDAutoForwardingEnabled = YES;
     configuration.flushLimit = 20;
     configuration.baseURLAllowList = @[ [NSURL URLWithString:@"https://google.com/"] ];
+    [configuration setAdSupportBlock:^NSString* {
+#if TARGET_IPHONE_SIMULATOR
+        return @"00000000-0000-0000-0000-000000000001";
+#else
+        return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+#endif
+    }];
     
     // Setup Castle SDK with provided configuration
     [Castle configure:configuration];

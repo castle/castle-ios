@@ -7,10 +7,10 @@
 
 #import "MainViewController.h"
 
+@import AppTrackingTransparency;
+
 #import <Castle/Castle.h>
 #import <Castle/CASEventStorage.h>
-
-#import "DemoViewController.h"
 
 @interface MainViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *queueCountLabel;
@@ -22,6 +22,10 @@
     [super viewDidAppear:animated];
     
     [self updateQueueCountLabel];
+    
+    [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+        NSLog(@"AppTrackingTransparency status: %lu", status);
+    }];
 }
 
 - (IBAction)screen:(id)sender {
