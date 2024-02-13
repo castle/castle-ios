@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -126,8 +126,8 @@
 			isa = PBXGroup;
 			children = (
 				B69885172612402D009D4CD9 /* Castle.h */,
-				B69885182612402D009D4CD9 /* CastleConfiguration.h */,
 				B69885152612402D009D4CD9 /* Castle.m */,
+				B69885182612402D009D4CD9 /* CastleConfiguration.h */,
 				B69885162612402D009D4CD9 /* CastleConfiguration.m */,
 			);
 			path = Public;
@@ -192,6 +192,7 @@
 				B698853F261243DD009D4CD9 /* CASScreen.h */,
 				B648463F27E0B7A1000A7EDA /* CASCustom.h */,
 				B6988568261244A2009D4CD9 /* Castle+Util.h */,
+				B69885632612445D009D4CD9 /* Util */,
 				B6988538261243DC009D4CD9 /* UIViewController+CASScreen.h */,
 				B6988533261243DC009D4CD9 /* CASEventStorage.m */,
 				B648463D27E0B79A000A7EDA /* CASMonitor.m */,
@@ -204,7 +205,6 @@
 				B698855D261243EB009D4CD9 /* Client */,
 				B69885142612402D009D4CD9 /* Public */,
 				B69885612612443C009D4CD9 /* Reachability */,
-				B69885632612445D009D4CD9 /* Util */,
 			);
 			path = Castle;
 			sourceTree = "<group>";

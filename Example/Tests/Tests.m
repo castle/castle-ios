@@ -103,6 +103,17 @@
     XCTAssertEqual(configuration.flushLimit, 20);
     XCTAssertEqual(configuration.maxQueueLimit, 1000);
     XCTAssertNil(configuration.baseURLAllowList);
+    XCTAssertEqual(configuration.enableAdvertisingTracking, YES);
+    
+    // Check ad tracking state, set ad support block with mock IDFA
+    XCTAssertEqual([Castle isAdTrackingEnabled], NO);
+    [configuration setAdSupportBlock:^NSString* {
+        return @"00000000-0000-0000-0000-000000000000";
+    }];
+    
+    // Update configuration and check ad tracking enabled
+    [Castle configure:configuration];
+    XCTAssertEqual([Castle isAdTrackingEnabled], YES);
     
     // Update configuration
     configuration.screenTrackingEnabled = YES;
@@ -111,7 +122,8 @@
     configuration.flushLimit = 10;
     configuration.maxQueueLimit = 20;
     configuration.baseURLAllowList = baseURLAllowList;
-
+    configuration.enableAdvertisingTracking = NO;
+    
     // Check that all the configuration parameters where set correctly
     XCTAssertTrue([configuration.publishableKey isEqualToString:publishableKey]);
     XCTAssertEqual(configuration.screenTrackingEnabled, YES);
@@ -126,8 +138,13 @@
     [configuration setBaseURLAllowList:@[ [NSURL URLWithString:@"https://google.com/somethingelse"]]];
     XCTAssertFalse([configuration.baseURLAllowList[0].absoluteString isEqualToString:@"https://google.com/somethingelse"]);
 
+    XCTAssertEqual(configuration.enableAdvertisingTracking, NO);
+    
     // Setup Castle SDK with publishable key
     [Castle configureWithPublishableKey:publishableKey];
+    
+    // Ad tracking enabled should now be false, since we reconfigured with the default configuration
+    XCTAssertEqual([Castle isAdTrackingEnabled], NO);
     
     XCTAssertFalse([Castle isAllowlistURL:[NSURL URLWithString:@"https://google.com/somethingelse"]]);
     

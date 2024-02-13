@@ -29,6 +29,7 @@
 		B67B22FE281BD70C0033F1E2 /* Castle+InvalidUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = B67B22FD281BD70C0033F1E2 /* Castle+InvalidUUID.m */; };
 		B6A923FE23C8EF0E004D3AB0 /* Castle_UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A923FD23C8EF0E004D3AB0 /* Castle_UITests.m */; };
 		B6B1A64A23C896AC00263088 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B1A64923C896AC00263088 /* DemoViewController.m */; };
+		B6F552C22B7B6D3900DB4360 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6F552C12B7B6D3900DB4360 /* AdSupport.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		B6A923FF23C8EF0E004D3AB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6B1A64323C882AE00263088 /* DemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
 		B6B1A64923C896AC00263088 /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
+		B6F552C12B7B6D3900DB4360 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		BADFF79494C73F7FB28E4957 /* Pods-Castle_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Castle_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Castle_Example/Pods-Castle_Example.release.xcconfig"; sourceTree = "<group>"; };
 		BFFA8BF39E3B7ABC75954A11 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		C166D83D8DE156D6519ED195 /* Pods-Castle_UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Castle_UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Castle_UITests/Pods-Castle_UITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6F552C22B7B6D3900DB4360 /* AdSupport.framework in Frameworks */,
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
@@ -153,6 +156,7 @@
 		6003F58C195388D20070C39A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B6F552C12B7B6D3900DB4360 /* AdSupport.framework */,
 				6003F58D195388D20070C39A /* Foundation.framework */,
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,

@@ -73,6 +73,11 @@
 + (BOOL)isReady;
 
 /**
+ Determine if ad tracking is enabled
+ */
++ (BOOL)isAdTrackingEnabled;
+
+/**
  Returns a uniue UUID using [[UIDevice currentDevice] identifierForVendor]
  */
 - (nullable NSString *)deviceIdentifier;

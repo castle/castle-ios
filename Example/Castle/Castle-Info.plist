@@ -20,6 +20,8 @@
 	<string>3.0.6</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Needed in order to access IDFA so it can be sent to Castle</string>
 	<key>CFBundleVersion</key>
 	<string>3.0.6</string>
 	<key>LSRequiresIPhoneOS</key>

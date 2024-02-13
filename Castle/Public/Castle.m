@@ -167,7 +167,8 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
                                                  uuid:uuid
                                        publishableKey:configuration.publishableKey
                                             userAgent:CASUserAgent()
-                                                error:&error];
+                                                error:&error
+                                       adSupportBlock:configuration.adSupportBlock];
         
         if(error) {
             if (error.domain == HighwindErrorDomain && error.code == HighwindErrorInvalidPublishableKey) {
@@ -217,32 +218,32 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 + (BOOL)isConfigured
 {
     if (_sharedClient == nil) {
-        return false;
+        return NO;
     }
     
     Castle *castle = _sharedClient;
     if (castle.configuration == nil || castle.reachability == nil || castle.client == nil) {
-        return false;
+        return NO;
     }
     
-    return true;
+    return YES;
 }
 
 + (BOOL)isReady
 {
     // SDK isn't ready if it hasn't been configured
     if (![self isConfigured]) {
-        return false;
+        return NO;
     }
     
     // Check for valid Highwind instance
     Castle *castle = _sharedClient;
     if (castle.highwind == nil) {
-        return false;
+        return NO;
     }
     
     // Validation passed, SDK ready to be used
-    return true;
+    return YES;
 }
 
 + (NSString *)userAgent
@@ -256,6 +257,20 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         return [[UIApplication class] performSelector:@selector(sharedApplication)];
     }
     return nil;
+}
+
++ (BOOL)isAdTrackingEnabled
+{
+    // SDK isn't ready if it hasn't been configured
+    if (![self isReady]) {
+        return NO;
+    }
+    
+    Castle *castle = _sharedClient;
+    if ((castle.configuration.adSupportBlock != nil) && (castle.configuration.enableAdvertisingTracking)) {
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark - Setters

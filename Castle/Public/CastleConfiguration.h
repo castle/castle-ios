@@ -54,6 +54,16 @@
 @property (nonatomic, copy, readonly, getter=baseURL, nonnull) NSURL *baseURL;
 
 /**
+ * Sets a block to be called when IDFA / AdSupport identifier is created.
+ */
+@property (nonatomic, strong, nullable) NSString * _Nonnull (^adSupportBlock)(void);
+
+/**
+ * Whether the analytics client should track advertisting info. `YES` by default.
+ */
+@property (nonatomic, assign) BOOL enableAdvertisingTracking;
+
+/**
  Default configuration with provided publishable key
 
  @param publishableKey Castle publishable key
