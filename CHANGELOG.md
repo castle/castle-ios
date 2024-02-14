@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.0.8 (2023-02-14)
+- Improvement: [#312](https://github.com/castle/castle-ios/pull/102) Add support for providing IDFA.
+
 ## 3.0.7 (2022-08-09)
 - Fixes a bug that could result in the app crashing when the location accuracy is less than 1 meter.
 
