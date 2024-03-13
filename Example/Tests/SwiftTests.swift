@@ -28,7 +28,7 @@ class SwiftTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         
         let fileManager = FileManager.default
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let paths = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)
         let path = paths[0].appending("/castle/events")
         
         if fileManager.fileExists(atPath: path) {
@@ -365,7 +365,7 @@ class SwiftTests: XCTestCase {
 
     func testPersistance() throws {
         let fileManager = FileManager.default
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let paths = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)
         let path = paths[0].appending("/castle/events")
 
         // Track a single event to trigger the persistance
