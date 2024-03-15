@@ -1,0 +1,957 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "TopLevel",
+    "printedName": "TopLevel",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "GeoZip",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "GeoZipError",
+        "printedName": "GeoZipError",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "accuracyNotRepresentable",
+            "printedName": "accuracyNotRepresentable",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(GeoZip.GeoZipError.Type) -> GeoZip.GeoZipError",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GeoZipError",
+                    "printedName": "GeoZip.GeoZipError",
+                    "usr": "s:6GeoZip0aB5ErrorO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "GeoZip.GeoZipError.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "GeoZipError",
+                        "printedName": "GeoZip.GeoZipError",
+                        "usr": "s:6GeoZip0aB5ErrorO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:6GeoZip0aB5ErrorO24accuracyNotRepresentableyA2CmF",
+            "mangledName": "$s6GeoZip0aB5ErrorO24accuracyNotRepresentableyA2CmF",
+            "moduleName": "GeoZip",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "invalidFormat",
+            "printedName": "invalidFormat",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(GeoZip.GeoZipError.Type) -> GeoZip.GeoZipError",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GeoZipError",
+                    "printedName": "GeoZip.GeoZipError",
+                    "usr": "s:6GeoZip0aB5ErrorO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "GeoZip.GeoZipError.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "GeoZipError",
+                        "printedName": "GeoZip.GeoZipError",
+                        "usr": "s:6GeoZip0aB5ErrorO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:6GeoZip0aB5ErrorO13invalidFormatyA2CmF",
+            "mangledName": "$s6GeoZip0aB5ErrorO13invalidFormatyA2CmF",
+            "moduleName": "GeoZip",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "==",
+            "printedName": "==(_:_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "GeoZipError",
+                "printedName": "GeoZip.GeoZipError",
+                "usr": "s:6GeoZip0aB5ErrorO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "GeoZipError",
+                "printedName": "GeoZip.GeoZipError",
+                "usr": "s:6GeoZip0aB5ErrorO"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:6GeoZip0aB5ErrorO2eeoiySbAC_ACtFZ",
+            "mangledName": "$s6GeoZip0aB5ErrorO2eeoiySbAC_ACtFZ",
+            "moduleName": "GeoZip",
+            "static": true,
+            "implicit": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Var",
+            "name": "hashValue",
+            "printedName": "hashValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:6GeoZip0aB5ErrorO9hashValueSivp",
+            "mangledName": "$s6GeoZip0aB5ErrorO9hashValueSivp",
+            "moduleName": "GeoZip",
+            "implicit": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:6GeoZip0aB5ErrorO9hashValueSivg",
+                "mangledName": "$s6GeoZip0aB5ErrorO9hashValueSivg",
+                "moduleName": "GeoZip",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "hash",
+            "printedName": "hash(into:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Hasher",
+                "printedName": "Swift.Hasher",
+                "paramValueOwnership": "InOut",
+                "usr": "s:s6HasherV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:6GeoZip0aB5ErrorO4hash4intoys6HasherVz_tF",
+            "mangledName": "$s6GeoZip0aB5ErrorO4hash4intoys6HasherVz_tF",
+            "moduleName": "GeoZip",
+            "implicit": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:6GeoZip0aB5ErrorO",
+        "mangledName": "$s6GeoZip0aB5ErrorO",
+        "moduleName": "GeoZip",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Error",
+            "printedName": "Error",
+            "usr": "s:s5ErrorP",
+            "mangledName": "$ss5ErrorP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          }
+        ]
+      },
+      {
+        "kind": "Function",
+        "name": "decode",
+        "printedName": "decode(encoded:encoding:)",
+        "children": [
+          {
+            "kind": "TypeNominal",
+            "name": "Location",
+            "printedName": "GeoZip.Location",
+            "usr": "s:6GeoZip8LocationC"
+          },
+          {
+            "kind": "TypeNominal",
+            "name": "String",
+            "printedName": "Swift.String",
+            "usr": "s:SS"
+          },
+          {
+            "kind": "TypeNominal",
+            "name": "Encoding",
+            "printedName": "GeoZip.Encoding",
+            "hasDefaultArg": true,
+            "usr": "s:6GeoZip8EncodingO"
+          }
+        ],
+        "declKind": "Func",
+        "usr": "s:6GeoZip6decode7encoded8encodingAA8LocationCSS_AA8EncodingOtKF",
+        "mangledName": "$s6GeoZip6decode7encoded8encodingAA8LocationCSS_AA8EncodingOtKF",
+        "moduleName": "GeoZip",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "throwing": true,
+        "funcSelfKind": "NonMutating"
+      },
+      {
+        "kind": "Function",
+        "name": "encode",
+        "printedName": "encode(location:precision:encoding:)",
+        "children": [
+          {
+            "kind": "TypeNominal",
+            "name": "String",
+            "printedName": "Swift.String",
+            "usr": "s:SS"
+          },
+          {
+            "kind": "TypeNominal",
+            "name": "Location",
+            "printedName": "GeoZip.Location",
+            "usr": "s:6GeoZip8LocationC"
+          },
+          {
+            "kind": "TypeNominal",
+            "name": "UInt8",
+            "printedName": "Swift.UInt8",
+            "hasDefaultArg": true,
+            "usr": "s:s5UInt8V"
+          },
+          {
+            "kind": "TypeNominal",
+            "name": "Encoding",
+            "printedName": "GeoZip.Encoding",
+            "hasDefaultArg": true,
+            "usr": "s:6GeoZip8EncodingO"
+          }
+        ],
+        "declKind": "Func",
+        "usr": "s:6GeoZip6encode8location9precision8encodingSSAA8LocationC_s5UInt8VAA8EncodingOtKF",
+        "mangledName": "$s6GeoZip6encode8location9precision8encodingSSAA8LocationC_s5UInt8VAA8EncodingOtKF",
+        "moduleName": "GeoZip",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "throwing": true,
+        "funcSelfKind": "NonMutating"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "GeoZip",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "Encoding",
+        "printedName": "Encoding",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "Binary",
+            "printedName": "Binary",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(GeoZip.Encoding.Type) -> GeoZip.Encoding",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Encoding",
+                    "printedName": "GeoZip.Encoding",
+                    "usr": "s:6GeoZip8EncodingO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "GeoZip.Encoding.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Encoding",
+                        "printedName": "GeoZip.Encoding",
+                        "usr": "s:6GeoZip8EncodingO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:6GeoZip8EncodingO6BinaryyA2CmF",
+            "mangledName": "$s6GeoZip8EncodingO6BinaryyA2CmF",
+            "moduleName": "GeoZip",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "Base64",
+            "printedName": "Base64",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(GeoZip.Encoding.Type) -> GeoZip.Encoding",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Encoding",
+                    "printedName": "GeoZip.Encoding",
+                    "usr": "s:6GeoZip8EncodingO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "GeoZip.Encoding.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Encoding",
+                        "printedName": "GeoZip.Encoding",
+                        "usr": "s:6GeoZip8EncodingO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:6GeoZip8EncodingO6Base64yA2CmF",
+            "mangledName": "$s6GeoZip8EncodingO6Base64yA2CmF",
+            "moduleName": "GeoZip",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(rawValue:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "GeoZip.Encoding?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Encoding",
+                    "printedName": "GeoZip.Encoding",
+                    "usr": "s:6GeoZip8EncodingO"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UInt",
+                "printedName": "Swift.UInt",
+                "usr": "s:Su"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:6GeoZip8EncodingO8rawValueACSgSu_tcfc",
+            "mangledName": "$s6GeoZip8EncodingO8rawValueACSgSu_tcfc",
+            "moduleName": "GeoZip",
+            "implicit": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Var",
+            "name": "rawValue",
+            "printedName": "rawValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UInt",
+                "printedName": "Swift.UInt",
+                "usr": "s:Su"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:6GeoZip8EncodingO8rawValueSuvp",
+            "mangledName": "$s6GeoZip8EncodingO8rawValueSuvp",
+            "moduleName": "GeoZip",
+            "implicit": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UInt",
+                    "printedName": "Swift.UInt",
+                    "usr": "s:Su"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:6GeoZip8EncodingO8rawValueSuvg",
+                "mangledName": "$s6GeoZip8EncodingO8rawValueSuvg",
+                "moduleName": "GeoZip",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:6GeoZip8EncodingO",
+        "mangledName": "$s6GeoZip8EncodingO",
+        "moduleName": "GeoZip",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "enumRawTypeName": "UInt",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "RawRepresentable",
+            "printedName": "RawRepresentable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "RawValue",
+                "printedName": "RawValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UInt",
+                    "printedName": "Swift.UInt",
+                    "usr": "s:Su"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:SY",
+            "mangledName": "$sSY"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "GeoZip",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "CoreLocation",
+        "printedName": "CoreLocation",
+        "declKind": "Import",
+        "moduleName": "GeoZip"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "Location",
+        "printedName": "Location",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(location:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Location",
+                "printedName": "GeoZip.Location",
+                "usr": "s:6GeoZip8LocationC"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CLLocation",
+                "printedName": "CoreLocation.CLLocation",
+                "usr": "c:objc(cs)CLLocation"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:6GeoZip8LocationC8locationACSo10CLLocationC_tcfc",
+            "mangledName": "$s6GeoZip8LocationC8locationACSo10CLLocationC_tcfc",
+            "moduleName": "GeoZip",
+            "declAttributes": [
+              "Convenience",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "init_kind": "Convenience"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(lat:lon:accuracy:provider:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Location",
+                "printedName": "GeoZip.Location",
+                "usr": "s:6GeoZip8LocationC"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Double",
+                "printedName": "Swift.Double",
+                "usr": "s:Sd"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Double",
+                "printedName": "Swift.Double",
+                "usr": "s:Sd"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Int32?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int32",
+                    "printedName": "Swift.Int32",
+                    "usr": "s:s5Int32V"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.UInt8?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UInt8",
+                    "printedName": "Swift.UInt8",
+                    "usr": "s:s5UInt8V"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:6GeoZip8LocationC3lat3lon8accuracy8providerACSd_Sds5Int32VSgs5UInt8VSgtcfc",
+            "mangledName": "$s6GeoZip8LocationC3lat3lon8accuracy8providerACSd_Sds5Int32VSgs5UInt8VSgtcfc",
+            "moduleName": "GeoZip",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:6GeoZip8LocationC",
+        "mangledName": "$s6GeoZip8LocationC",
+        "moduleName": "GeoZip",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "GeoZip",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "GeoZip",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "GeoZip",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "Coordinate",
+        "printedName": "Coordinate",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "DEFAULT_PRECISION",
+            "printedName": "DEFAULT_PRECISION",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UInt8",
+                "printedName": "Swift.UInt8",
+                "usr": "s:s5UInt8V"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:6GeoZip10CoordinateC17DEFAULT_PRECISIONs5UInt8VvpZ",
+            "mangledName": "$s6GeoZip10CoordinateC17DEFAULT_PRECISIONs5UInt8VvpZ",
+            "moduleName": "GeoZip",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UInt8",
+                    "printedName": "Swift.UInt8",
+                    "usr": "s:s5UInt8V"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:6GeoZip10CoordinateC17DEFAULT_PRECISIONs5UInt8VvgZ",
+                "mangledName": "$s6GeoZip10CoordinateC17DEFAULT_PRECISIONs5UInt8VvgZ",
+                "moduleName": "GeoZip",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:6GeoZip10CoordinateC",
+        "mangledName": "$s6GeoZip10CoordinateC",
+        "moduleName": "GeoZip",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "hasMissingDesignatedInitializers": true
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Format.swift",
+      "kind": "IntegerLiteral",
+      "offset": 316,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Format.swift",
+      "kind": "IntegerLiteral",
+      "offset": 362,
+      "length": 6,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Format.swift",
+      "kind": "IntegerLiteral",
+      "offset": 316,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Format.swift",
+      "kind": "IntegerLiteral",
+      "offset": 362,
+      "length": 6,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Format.swift",
+      "kind": "IntegerLiteral",
+      "offset": 316,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Format.swift",
+      "kind": "IntegerLiteral",
+      "offset": 362,
+      "length": 6,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Location.swift",
+      "kind": "IntegerLiteral",
+      "offset": 552,
+      "length": 4,
+      "value": "0xA0"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Location.swift",
+      "kind": "IntegerLiteral",
+      "offset": 698,
+      "length": 4,
+      "value": "0xB0"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Location.swift",
+      "kind": "IntegerLiteral",
+      "offset": 798,
+      "length": 4,
+      "value": "0xF0"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 325,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 366,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 411,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 456,
+      "length": 1,
+      "value": "3"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 325,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 366,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 411,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 456,
+      "length": 1,
+      "value": "3"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 325,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 366,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 411,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 456,
+      "length": 1,
+      "value": "3"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 553,
+      "length": 3,
+      "value": "0xF"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
+      "kind": "IntegerLiteral",
+      "offset": 665,
+      "length": 2,
+      "value": "15"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Grid.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2428,
+      "length": 1,
+      "value": "6"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Coordinate.swift",
+      "kind": "Array",
+      "offset": 335,
+      "length": 13,
+      "value": "[-180.0, 180.0]"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Coordinate.swift",
+      "kind": "Array",
+      "offset": 449,
+      "length": 11,
+      "value": "[-90.0, 90.0]"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Coordinate.swift",
+      "kind": "IntegerLiteral",
+      "offset": 554,
+      "length": 1,
+      "value": "6"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Coordinate.swift",
+      "kind": "IntegerLiteral",
+      "offset": 647,
+      "length": 2,
+      "value": "16"
+    }
+  ]
+}
