@@ -7,8 +7,6 @@
 		<dict>
 			<key>BinaryPath</key>
 			<string>Highwind.framework/Highwind</string>
-			<key>BitcodeSymbolMapsPath</key>
-			<string>BCSymbolMaps</string>
 			<key>DebugSymbolsPath</key>
 			<string>dSYMs</string>
 			<key>LibraryIdentifier</key>
@@ -28,8 +26,6 @@
 		<dict>
 			<key>BinaryPath</key>
 			<string>Highwind.framework/Highwind</string>
-			<key>BitcodeSymbolMapsPath</key>
-			<string>BCSymbolMaps</string>
 			<key>DebugSymbolsPath</key>
 			<string>dSYMs</string>
 			<key>LibraryIdentifier</key>
