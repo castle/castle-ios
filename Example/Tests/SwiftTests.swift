@@ -26,9 +26,9 @@ class SwiftTests: XCTestCase {
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-        
+
         let fileManager = FileManager.default
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let paths = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)
         let path = paths[0].appending("/castle/events")
         
         if fileManager.fileExists(atPath: path) {
@@ -119,8 +119,7 @@ class SwiftTests: XCTestCase {
         XCTAssertNotNil(tryBlock { Castle.configure(withPublishableKey: "ab_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA") })
     }
     
-    func testHighwindNilUUID()
-    {
+    func testHighwindNilUUID() {
         Castle.reset()
         
         // Swizzle device identifier to simulate [[UIDevice currentDevice] identifierForVendor] returning nil
@@ -365,7 +364,7 @@ class SwiftTests: XCTestCase {
 
     func testPersistance() throws {
         let fileManager = FileManager.default
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let paths = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)
         let path = paths[0].appending("/castle/events")
 
         // Track a single event to trigger the persistance
@@ -400,6 +399,63 @@ class SwiftTests: XCTestCase {
         Castle.custom(name: "custom event", properties: ["key": "value"])
         queue = CASEventStorage.storedQueue()
         XCTAssertTrue(queue.count == currentQueueSize+3);
+    }
+    
+    func verifyStorage(oldStorageDir: String, oldStoragePath: String, newStorageDir: String, newStoragePath: String) {
+        let fileManager = FileManager.default
+        
+        // Check that old storage directory doesn't exist
+        var isOldStorageDir: ObjCBool = false
+        XCTAssertTrue(!fileManager.fileExists(atPath: oldStorageDir, isDirectory: &isOldStorageDir) && !isOldStorageDir.boolValue)
+        
+        // Check that old storage file doesn't exist
+        XCTAssertTrue(!fileManager.fileExists(atPath: oldStoragePath))
+        
+        // Check that new storage directory exists
+        var isNewStorageDir: ObjCBool = false
+        XCTAssertTrue(fileManager.fileExists(atPath: newStorageDir, isDirectory: &isNewStorageDir) && isNewStorageDir.boolValue)
+        
+        // Check that new storage file exists
+        XCTAssertTrue(fileManager.fileExists(atPath: newStoragePath))
+    }
+    
+    func testStorageMigration() {
+        let fileManager = FileManager.default
+        
+        // Fetch and persist the queue to make sure that the storage structure is correct according to new storage structure
+        CASEventStorage.persistQueue(CASEventStorage.storedQueue())
+        
+        let documentsPaths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let oldStorageDir = documentsPaths[0].appending("/castle")
+        let oldStoragePath = oldStorageDir.appending("/events")
+        
+        let applicationSupportPaths = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)
+        let newStorageDir = applicationSupportPaths[0].appending("/castle")
+        let newStoragePath = newStorageDir.appending("/events")
+        
+        // Verify storage structure, migration should already have happened in earlier tests
+        verifyStorage(oldStorageDir: oldStorageDir, oldStoragePath: oldStoragePath, newStorageDir: newStorageDir, newStoragePath: newStoragePath)
+        
+        // Remove new event storage file and verify deletion
+        try? fileManager.removeItem(atPath: newStoragePath)
+        XCTAssertTrue(!fileManager.fileExists(atPath: newStoragePath))
+        
+        // Copy migration file from bundle to old storage path
+        let bundlePath = Bundle.main.path(forResource: "events_migration_file", ofType: nil)
+        try! fileManager.createDirectory(atPath: oldStorageDir, withIntermediateDirectories: false)
+        try! fileManager.copyItem(atPath: bundlePath!, toPath: oldStoragePath)
+        
+        // Calling storedQueue will trigger the migration, check event count to see that the migration was successful
+        let queue = CASEventStorage.storedQueue()
+        XCTAssertTrue(queue.count == 1)
+        
+        CASEventStorage.persistQueue(queue);
+        
+        // Verify storage structure again to determine that the migration was successful
+        verifyStorage(oldStorageDir: oldStorageDir, oldStoragePath: oldStoragePath, newStorageDir: newStorageDir, newStoragePath: newStoragePath)
+        
+        // Check event count, should be the same after persisting the queue
+        XCTAssertTrue(CASEventStorage.storedQueue().count == 1);
     }
     
     func testRequestTokenUninitialized() throws {
