@@ -12,8 +12,7 @@ This document describes the tasks to perform for tagging and releasing a new ver
  6. `git commit -am "Prepare for release X.Y.Z."` (where X.Y.Z is the new version).
  7. `git tag -a X.Y.Z -m "Version X.Y.Z"` (where X.Y.Z is the new version).
  8. `git push && git push --tags`.
- 9. Create a new version of `Castle.xcframework` by running `fastlane ios xcframework` 
- 10. We're seeing duplicate versions of .bcsymbolmap from `GeoZip` and `Highwind` when building the `xcframework`. So we have to manually ensure that there are no duplicate files included in the `Castle.xcframework` bundle.
+ 9. Create a new version of `Castle.xcframework` by running `fastlane ios xcframework`
  
 ## Publish to CocoaPods
 

@@ -28,9 +28,9 @@ platform :ios do
         workspace: 'Castle.xcworkspace',
         scheme: 'Castle',
         include_BCSymbolMaps: true,
-        include_dSYMs: true,
+        include_dSYMs: false,
         include_debug_symbols: true,
-        include_bitcode: true,
+        include_bitcode: false,
         destinations: ['iOS'],
         xcframework_output_directory: 'Products/xcframeworks',
     )

@@ -17,7 +17,7 @@
     <a title="CastleConfiguration Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">Castle 3.0.8 Docs</a> (100% documented)</p>
+        <p><a href="../index.html">Castle 3.0.9 Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/castle/castle-ios"><img src="../img/gh.png" alt="GitHub"/>View on GitHub</a></p>
         <div class="header-right">
           <form role="search" action="../search.json">
@@ -51,13 +51,13 @@
             <a href="../Constants.html">Constants</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Constants.html#/c:@CastleRequestTokenHeaderName">CastleRequestTokenHeaderName</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Constants.html#/c:@CastleVersionNumber">CastleVersionNumber</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Constants.html#/c:@CastleVersionString">CastleVersionString</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@NSString">NSString</a>
               </li>
             </ul>
           </li>
@@ -69,8 +69,13 @@
             <h1>CastleConfiguration</h1>
               <div class="declaration">
                 <div class="language">
-                  
-                  <pre class="highlight objective_c"><code><span class="k">@interface</span> <span class="nc">CastleConfiguration</span></code></pre>
+                  <p class="aside-title">Objective-C</p>
+                  <pre class="highlight objective_c"><code><span class="k">@interface</span> <span class="nc">CastleConfiguration</span> <span class="p">:</span> <span class="nc">NSObject</span></code></pre>
+
+                </div>
+                <div class="language">
+                  <p class="aside-title">Swift</p>
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">CastleConfiguration</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
 
                 </div>
               </div>
@@ -78,7 +83,7 @@
 Changes to the configuration object won&rsquo;t have any affect on the SDK configuration once configured.</p>
 
               <div class="slightly-smaller">
-                <a href="https://github.com/castle/castle-ios/tree/3.0.8/Castle/Public/CastleConfiguration.h#L14-L77">Show on GitHub</a>
+                <a href="https://github.com/castle/castle-ios/tree/3.0.9/Castle/Public/CastleConfiguration.h#L14-L77">Show on GitHub</a>
               </div>
           </section>
           <section class="section task-group-section">
@@ -104,12 +109,17 @@ Changes to the configuration object won&rsquo;t have any affect on the SDK confi
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight objective_c"><code><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">copy</span><span class="p">,</span> <span class="n">readonly</span><span class="p">)</span> <span class="n"><a href="../Constants.html#/c:@NSString">NSString</a></span> <span class="o">*</span> <span class="n">_Nonnull</span> <span class="n">publishableKey</span></code></pre>
+                          <pre class="highlight objective_c"><code><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">copy</span><span class="p">,</span> <span class="n">readonly</span><span class="p">)</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">_Nonnull</span> <span class="n">publishableKey</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">publishableKey</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/3.0.8/Castle/Public/CastleConfiguration.h#L19">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/3.0.9/Castle/Public/CastleConfiguration.h#L19">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -135,12 +145,17 @@ Changes to the configuration object won&rsquo;t have any affect on the SDK confi
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
                           <pre class="highlight objective_c"><code><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">assign</span><span class="p">,</span> <span class="n">unsafe_unretained</span><span class="p">,</span> <span class="n">readwrite</span><span class="p">,</span>
-          <span class="n">getter</span><span class="o">=</span><span class="n">isScreenTrackingEnabled</span><span class="p">)</span> <span class="kt">int</span> <span class="n">screenTrackingEnabled</span><span class="p">;</span></code></pre>
+          <span class="n">getter</span><span class="o">=</span><span class="n">isScreenTrackingEnabled</span><span class="p">)</span> <span class="n">BOOL</span> <span class="n">screenTrackingEnabled</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">isScreenTrackingEnabled</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/3.0.8/Castle/Public/CastleConfiguration.h#L24">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/3.0.9/Castle/Public/CastleConfiguration.h#L24">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -166,12 +181,17 @@ Changes to the configuration object won&rsquo;t have any affect on the SDK confi
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
                           <pre class="highlight objective_c"><code><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">assign</span><span class="p">,</span> <span class="n">unsafe_unretained</span><span class="p">,</span> <span class="n">readwrite</span><span class="p">,</span>
-          <span class="n">getter</span><span class="o">=</span><span class="n">isDebugLoggingEnabled</span><span class="p">)</span> <span class="kt">int</span> <span class="n">debugLoggingEnabled</span><span class="p">;</span></code></pre>
+          <span class="n">getter</span><span class="o">=</span><span class="n">isDebugLoggingEnabled</span><span class="p">)</span> <span class="n">BOOL</span> <span class="n">debugLoggingEnabled</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">isDebugLoggingEnabled</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/3.0.8/Castle/Public/CastleConfiguration.h#L29">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/3.0.9/Castle/Public/CastleConfiguration.h#L29">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -198,12 +218,17 @@ Changes to the configuration object won&rsquo;t have any affect on the SDK confi
                           <p class="aside-title">Objective-C</p>
                           <pre class="highlight objective_c"><code><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">assign</span><span class="p">,</span> <span class="n">unsafe_unretained</span><span class="p">,</span> <span class="n">readwrite</span><span class="p">,</span>
           <span class="n">getter</span><span class="o">=</span><span class="n">isDeviceIDAutoForwardingEnabled</span><span class="p">)</span>
-    <span class="kt">int</span> <span class="n">deviceIDAutoForwardingEnabled</span><span class="p">;</span></code></pre>
+    <span class="n">BOOL</span> <span class="n">deviceIDAutoForwardingEnabled</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">isDeviceIDAutoForwardingEnabled</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/3.0.8/Castle/Public/CastleConfiguration.h#L34">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/3.0.9/Castle/Public/CastleConfiguration.h#L34">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -228,12 +253,17 @@ Changes to the configuration object won&rsquo;t have any affect on the SDK confi
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight objective_c"><code><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">)</span> <span class="kt">int</span> <span class="n">maxQueueLimit</span><span class="p">;</span></code></pre>
+                          <pre class="highlight objective_c"><code><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">)</span> <span class="n">NSUInteger</span> <span class="n">maxQueueLimit</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">maxQueueLimit</span><span class="p">:</span> <span class="kt">UInt</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/3.0.8/Castle/Public/CastleConfiguration.h#L39">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/3.0.9/Castle/Public/CastleConfiguration.h#L39">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -258,12 +288,52 @@ Changes to the configuration object won&rsquo;t have any affect on the SDK confi
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight objective_c"><code><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">)</span> <span class="kt">int</span> <span class="n">flushLimit</span><span class="p">;</span></code></pre>
+                          <pre class="highlight objective_c"><code><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">)</span> <span class="n">NSUInteger</span> <span class="n">flushLimit</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">flushLimit</span><span class="p">:</span> <span class="kt">UInt</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/3.0.8/Castle/Public/CastleConfiguration.h#L44">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/3.0.9/Castle/Public/CastleConfiguration.h#L44">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)CastleConfiguration(py)baseURLAllowList"></a>
+                    <a name="//apple_ref/objc/Property/baseURLAllowList" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)CastleConfiguration(py)baseURLAllowList">baseURLAllowList</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Base url allowlist</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight objective_c"><code><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">,</span> <span class="n">nullable</span><span class="p">)</span> <span class="n">NSArray</span><span class="o">&lt;</span><span class="n">NSURL</span> <span class="o">*&gt;</span> <span class="o">*</span><span class="n">baseURLAllowList</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">baseURLAllowList</span><span class="p">:</span> <span class="p">[</span><span class="kt">URL</span><span class="p">]?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/castle/castle-ios/tree/3.0.9/Castle/Public/CastleConfiguration.h#L49">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -288,12 +358,17 @@ Changes to the configuration object won&rsquo;t have any affect on the SDK confi
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight objective_c"><code><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">copy</span><span class="p">,</span> <span class="n">readonly</span><span class="p">,</span> <span class="n">getter</span><span class="o">=</span><span class="n">baseURL</span><span class="p">,</span> <span class="n">nonnull</span><span class="p">)</span> <span class="n">NSURL</span> <span class="o">*</span><span class="n">baseURL</span></code></pre>
+                          <pre class="highlight objective_c"><code><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">copy</span><span class="p">,</span> <span class="n">readonly</span><span class="p">,</span> <span class="n">getter</span><span class="o">=</span><span class="n">baseURL</span><span class="p">,</span> <span class="n">nonnull</span><span class="p">)</span> <span class="n">NSURL</span> <span class="o">*</span><span class="n">baseURL</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">baseURL</span><span class="p">:</span> <span class="kt">URL</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/3.0.8/Castle/Public/CastleConfiguration.h#L54">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/3.0.9/Castle/Public/CastleConfiguration.h#L54">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -318,12 +393,17 @@ Changes to the configuration object won&rsquo;t have any affect on the SDK confi
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight objective_c"><code><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">,</span> <span class="n">nullable</span><span class="p">)</span> <span class="kt">int</span> <span class="o">*</span><span class="n">_Nonnull</span> <span class="p">(</span><span class="o">^</span><span class="p">)(</span><span class="kt">void</span><span class="p">)</span> <span class="n">adSupportBlock</span><span class="p">;</span></code></pre>
+                          <pre class="highlight objective_c"><code><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">,</span> <span class="n">nullable</span><span class="p">)</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">_Nonnull</span> <span class="p">(</span><span class="o">^</span><span class="p">)(</span><span class="kt">void</span><span class="p">)</span> <span class="n">adSupportBlock</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">adSupportBlock</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">)?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/3.0.8/Castle/Public/CastleConfiguration.h#L59">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/3.0.9/Castle/Public/CastleConfiguration.h#L59">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -348,12 +428,17 @@ Changes to the configuration object won&rsquo;t have any affect on the SDK confi
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight objective_c"><code><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">)</span> <span class="kt">int</span> <span class="n">enableAdvertisingTracking</span><span class="p">;</span></code></pre>
+                          <pre class="highlight objective_c"><code><span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">)</span> <span class="n">BOOL</span> <span class="n">enableAdvertisingTracking</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">enableAdvertisingTracking</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/3.0.8/Castle/Public/CastleConfiguration.h#L64">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/3.0.9/Castle/Public/CastleConfiguration.h#L64">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -378,7 +463,13 @@ Changes to the configuration object won&rsquo;t have any affect on the SDK confi
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="n">instancetype</span> <span class="n">_Nonnull</span><span class="p">)</span><span class="nf">configurationWithPublishableKey</span><span class="p">:(</span><span class="n">id</span><span class="p">)</span><span class="nv">publishableKey</span><span class="p">;</span></code></pre>
+                          <pre class="highlight objective_c"><code><span class="k">+</span> <span class="p">(</span><span class="n">instancetype</span> <span class="n">_Nonnull</span><span class="p">)</span><span class="nf">configurationWithPublishableKey</span><span class="p">:</span>
+    <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="n">_Nonnull</span><span class="p">)</span><span class="nv">publishableKey</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">publishableKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -409,7 +500,7 @@ CastleConfiguration *configuration = [CastleConfiguration configurationWithPubli
 </code></p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/3.0.8/Castle/Public/CastleConfiguration.h#L75">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/3.0.9/Castle/Public/CastleConfiguration.h#L75">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -419,7 +510,7 @@ CastleConfiguration *configuration = [CastleConfiguration configurationWithPubli
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2024 <a class="link" href="https://castle.io" target="_blank" rel="external noopener">Castle</a>. All rights reserved. (Last updated: 2024-02-14)</p>
+          <p>&copy; 2024 <a class="link" href="https://castle.io" target="_blank" rel="external noopener">Castle</a>. All rights reserved. (Last updated: 2024-03-15)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>

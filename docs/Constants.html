@@ -17,7 +17,7 @@
     <a title="Constants  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">Castle 3.0.8 Docs</a> (100% documented)</p>
+        <p><a href="index.html">Castle 3.0.9 Docs</a> (100% documented)</p>
         <p class="header-right"><a href="https://github.com/castle/castle-ios"><img src="img/gh.png" alt="GitHub"/>View on GitHub</a></p>
         <div class="header-right">
           <form role="search" action="search.json">
@@ -51,13 +51,13 @@
             <a href="Constants.html">Constants</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="Constants.html#/c:@CastleRequestTokenHeaderName">CastleRequestTokenHeaderName</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Constants.html#/c:@CastleVersionNumber">CastleVersionNumber</a>
               </li>
               <li class="nav-group-task">
                 <a href="Constants.html#/c:@CastleVersionString">CastleVersionString</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Constants.html#/c:@NSString">NSString</a>
               </li>
             </ul>
           </li>
@@ -93,12 +93,17 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight objective_c"><code><span class="n">FOUNDATION_EXPORT</span> <span class="kt">double</span> <span class="n">CastleVersionNumber</span></code></pre>
+                          <pre class="highlight objective_c"><code><span class="k">extern</span> <span class="kt">double</span> <span class="n">CastleVersionNumber</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">CastleVersionNumber</span><span class="p">:</span> <span class="kt">Double</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/3.0.8/TMP/Castle.h#L12">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/3.0.9/TMP/Castle.h#L12">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -119,8 +124,21 @@
                         <p>Project version string for Castle.</p>
 
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight objective_c"><code><span class="k">extern</span> <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">CastleVersionString</span><span class="p">[]</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">CastleVersionString</span><span class="p">:</span> <span class="o">&lt;&lt;</span><span class="n">error</span> <span class="n">type</span><span class="o">&gt;&gt;</span></code></pre>
+
+                        </div>
+                      </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/3.0.8/TMP/Castle.h#L16">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/3.0.9/TMP/Castle.h#L16">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -128,9 +146,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@NSString"></a>
-                    <a name="//apple_ref/objc/Constant/NSString" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@NSString">NSString</a>
+                    <a name="/c:@CastleRequestTokenHeaderName"></a>
+                    <a name="//apple_ref/objc/Constant/CastleRequestTokenHeaderName" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CastleRequestTokenHeaderName">CastleRequestTokenHeaderName</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -145,17 +163,17 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight objective_c"><code><span class="n">NS_ASSUME_NONNULL_BEGIN</span>
+                          <pre class="highlight objective_c"><code><span class="k">extern</span> <span class="n">NSString</span> <span class="o">*</span><span class="k">const</span> <span class="n">_Nonnull</span> <span class="n">CastleRequestTokenHeaderName</span></code></pre>
 
-<span class="cm">/**
- Castle request token header name
- */</span>
-<span class="k">extern</span> <span class="n">NSString</span></code></pre>
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">CastleRequestTokenHeaderName</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/castle/castle-ios/tree/3.0.8/TMP/Castle.h#L20-L25">Show on GitHub</a>
+                        <a href="https://github.com/castle/castle-ios/tree/3.0.9/TMP/Castle.h#L25">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -165,7 +183,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2024 <a class="link" href="https://castle.io" target="_blank" rel="external noopener">Castle</a>. All rights reserved. (Last updated: 2024-02-14)</p>
+          <p>&copy; 2024 <a class="link" href="https://castle.io" target="_blank" rel="external noopener">Castle</a>. All rights reserved. (Last updated: 2024-03-15)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
