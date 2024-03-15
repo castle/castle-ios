@@ -461,6 +461,74 @@
     XCTAssertTrue(queue.count == currentQueueSize+3);
 }
 
+- (void)verifyStorageWithOldStorageDir:(NSString *)oldStorageDir
+                         oldStoragePath:(NSString *)oldStoragePath
+                         newStorageDir:(NSString *)newStorageDir
+                         newStoragePath:(NSString *)newStoragePath {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    // Check that old storage directory doesn't exist
+    BOOL isOldStorageDir = NO;
+    XCTAssertTrue(![fileManager fileExistsAtPath:oldStorageDir isDirectory:&isOldStorageDir] && !isOldStorageDir);
+    
+    // Check that old storage file doesn't exist
+    XCTAssertTrue(![fileManager fileExistsAtPath:oldStoragePath]);
+    
+    // Check that new storage directory exists
+    BOOL isNewStorageDir = NO;
+    XCTAssertTrue([fileManager fileExistsAtPath:newStorageDir isDirectory:&isNewStorageDir] && isNewStorageDir);
+    
+    // Check that new storage file exists
+    XCTAssertTrue([fileManager fileExistsAtPath:newStoragePath]);
+}
+
+- (void)testStorageMigration {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    // Fetch and persist the queue to make sure that the storage structure is correct according to new storage structure
+    [CASEventStorage persistQueue:[CASEventStorage storedQueue]];
+    
+    NSArray *documentsPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *oldStorageDir = [documentsPaths[0] stringByAppendingPathComponent:@"castle"];
+    NSString *oldStoragePath = [oldStorageDir stringByAppendingPathComponent:@"events"];
+    
+    NSArray *applicationSupportPaths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+    NSString *newStorageDir = [applicationSupportPaths[0] stringByAppendingPathComponent:@"castle"];
+    NSString *newStoragePath = [newStorageDir stringByAppendingPathComponent:@"events"];
+    
+    // Verify storage structure, migration should already have happened in earlier tests
+    [self verifyStorageWithOldStorageDir:oldStorageDir
+                           oldStoragePath:oldStoragePath
+                           newStorageDir:newStorageDir
+                           newStoragePath:newStoragePath];
+    
+    // Remove new event storage file and verify deletion
+    NSError *error;
+    [fileManager removeItemAtPath:newStoragePath error:&error];
+    XCTAssertTrue(![fileManager fileExistsAtPath:newStoragePath]);
+    
+    // Copy migration file from bundle to old storage path
+    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"events_migration_file" ofType:nil];
+    [fileManager createDirectoryAtPath:oldStorageDir withIntermediateDirectories:NO attributes:nil error:nil];
+    [fileManager copyItemAtPath:bundlePath toPath:oldStoragePath error:nil];
+    
+    // Calling storedQueue will trigger the migration, check event count to see that the migration was successful
+    NSArray *queue = [CASEventStorage storedQueue];
+    XCTAssertTrue([[CASEventStorage storedQueue] count] == 1);
+    
+    // Persist queue
+    [CASEventStorage persistQueue:queue];
+    
+    // Verify storage structure again to determine that the migration was successful
+    [self verifyStorageWithOldStorageDir:oldStorageDir
+                           oldStoragePath:oldStoragePath
+                           newStorageDir:newStorageDir
+                           newStoragePath:newStoragePath];
+    
+    // Check event count, should be the same after persisting the queue
+    XCTAssertTrue([CASEventStorage storedQueue].count == 1);
+}
+
 - (void)testRequestTokenUninitialized
 {
     XCTAssertNotNil([Castle createRequestToken]);
