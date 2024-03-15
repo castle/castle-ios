@@ -22,6 +22,18 @@
 
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
+    [super tearDown];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+    NSString *path = [paths.firstObject stringByAppendingString:@"/castle/events"];
+    
+    // Remove event queue data file
+    NSError *error = nil;
+    if([fileManager fileExistsAtPath:path]) {
+        [fileManager removeItemAtPath:path error:&error];
+        XCTAssertNil(error);
+    }
 }
 
 - (void)testAutomaticScreenTracking {
