@@ -18,6 +18,7 @@ let package = Package(
             name: "Castle",
             dependencies: ["Highwind", "GeoZip"],
             path: "Castle/",
+            resources: [.copy("PrivacyInfo.xcprivacy")],
             exclude: ["Info.plist", "Highwind.xcframework", "GeoZip.xcframework"],
             publicHeadersPath: "Public",
             cSettings: [
