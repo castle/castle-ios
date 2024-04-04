@@ -1,10 +1,13 @@
 # Changelog
 
-## 3.0.9 (2023-03-15)
+## 3.0.10 (2024-04-04)
+- [#110](https://github.com/castle/castle-ios/pull/110) Include Privacy manifest, update internal frameworks
+
+## 3.0.9 (2024-03-15)
 - [#106](https://github.com/castle/castle-ios/pull/106) Update event queue storage path, add migration code and update tests
 - Fix: [#107](https://github.com/castle/castle-ios/pull/107) Update framworks to versions that doesn't include BCSymbolMaps
 
-## 3.0.8 (2023-02-14)
+## 3.0.8 (2024-02-14)
 - Improvement: [#102](https://github.com/castle/castle-ios/pull/102) Add support for providing IDFA.
 
 ## 3.0.7 (2022-08-09)
