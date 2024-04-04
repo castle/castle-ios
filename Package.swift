@@ -19,6 +19,7 @@ let package = Package(
             dependencies: ["Highwind", "GeoZip"],
             path: "Castle/",
             exclude: ["Info.plist", "Highwind.xcframework", "GeoZip.xcframework"],
+            resources: [.copy("PrivacyInfo.xcprivacy")],
             publicHeadersPath: "Public",
             cSettings: [
                 .headerSearchPath("Public"),

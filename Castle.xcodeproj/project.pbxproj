@@ -40,6 +40,8 @@
 		B69885A526124853009D4CD9 /* Castle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6B355DC1ED71D9700C2B817 /* Castle.framework */; platformFilter = ios; };
 		B6988627261348B6009D4CD9 /* GeoZip.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6988625261348B6009D4CD9 /* GeoZip.xcframework */; };
 		B6988628261348B6009D4CD9 /* Highwind.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6988626261348B6009D4CD9 /* Highwind.xcframework */; };
+		B6AED34F2BBC41FA00A41CA9 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B6AED34E2BBC41F800A41CA9 /* PrivacyInfo.xcprivacy */; };
+		B6AED3512BBC421000A41CA9 /* PrivacyInfo.xcprivacy in CopyFiles */ = {isa = PBXBuildFile; fileRef = B6AED34E2BBC41F800A41CA9 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,19 @@
 			remoteInfo = Castle;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B6AED3502BBC420900A41CA9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				B6AED3512BBC421000A41CA9 /* PrivacyInfo.xcprivacy in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B612D060242BD012005B41B7 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
@@ -86,6 +101,7 @@
 		B69885A026124853009D4CD9 /* CastleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CastleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6988625261348B6009D4CD9 /* GeoZip.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = GeoZip.xcframework; path = Castle/GeoZip.xcframework; sourceTree = "<group>"; };
 		B6988626261348B6009D4CD9 /* Highwind.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Highwind.xcframework; path = Castle/Highwind.xcframework; sourceTree = "<group>"; };
+		B6AED34E2BBC41F800A41CA9 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		B6B355DC1ED71D9700C2B817 /* Castle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Castle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6B355E71ED71F9D00C2B817 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -202,6 +218,7 @@
 				B648464127E0B7A9000A7EDA /* CASCustom.m */,
 				B6988536261243DC009D4CD9 /* UIViewController+CASScreen.m */,
 				B6B355E71ED71F9D00C2B817 /* Info.plist */,
+				B6AED34E2BBC41F800A41CA9 /* PrivacyInfo.xcprivacy */,
 				B698855D261243EB009D4CD9 /* Client */,
 				B69885142612402D009D4CD9 /* Public */,
 				B69885612612443C009D4CD9 /* Reachability */,
@@ -263,6 +280,7 @@
 				B6B355D81ED71D9700C2B817 /* Frameworks */,
 				B6B355D91ED71D9700C2B817 /* Headers */,
 				B6B355DA1ED71D9700C2B817 /* Resources */,
+				B6AED3502BBC420900A41CA9 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -323,6 +341,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6AED34F2BBC41FA00A41CA9 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

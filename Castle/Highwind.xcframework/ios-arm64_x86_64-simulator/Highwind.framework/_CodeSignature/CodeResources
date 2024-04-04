@@ -14,11 +14,11 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		PLa+Vy8wfw/WgYglwoV3kyApNOA=
+		yZ4HvuSgNLBhWTdaZOXqglmkynM=
 		</data>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		vCTnKHsd/S81MVoKPo78MLA8yXw=
+		6aNdlTmuU5dxsNiIlWEjCxOOAhc=
 		</data>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -34,11 +34,11 @@
 		</data>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		mNbVQwbmZscrdfOTIlj+f2UA5s0=
+		jLZh6sw8ScVuBLmaiGmhUmDtF5M=
 		</data>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		vCTnKHsd/S81MVoKPo78MLA8yXw=
+		6aNdlTmuU5dxsNiIlWEjCxOOAhc=
 		</data>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -54,11 +54,15 @@
 		</data>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		hlEW1E0OxWLEMJqHH2Kas3o7Jpg=
+		KHQA6g9fQJT0/4V+1OokHUJbw2w=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
 		rrX9kqLB4Dx24BEmzXCr2bhpTIY=
+		</data>
+		<key>PrivacyInfo.xcprivacy</key>
+		<data>
+		K/aVK0p8XR+3jHZDfE5O0LFnKh8=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -89,11 +93,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			vCTnKHsd/S81MVoKPo78MLA8yXw=
+			6aNdlTmuU5dxsNiIlWEjCxOOAhc=
 			</data>
 			<key>hash2</key>
 			<data>
-			btERzM3QLNakKFFmYo36IjMWTH4egcWjiCgCkTx+S7U=
+			Fi72P58ieY+32jrR5uHrWiWvYwdPLVuz4Mq3+h0oHLo=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
@@ -133,22 +137,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			mNbVQwbmZscrdfOTIlj+f2UA5s0=
+			jLZh6sw8ScVuBLmaiGmhUmDtF5M=
 			</data>
 			<key>hash2</key>
 			<data>
-			slrDdMZqVjyCYyB97DxGBVt6jmKDgm4M5Xtqi3scZnI=
+			WOehzBdgJ1R5SSC7v+ZfhKmt8BC+eVguvQWcUIGkxOA=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			vCTnKHsd/S81MVoKPo78MLA8yXw=
+			6aNdlTmuU5dxsNiIlWEjCxOOAhc=
 			</data>
 			<key>hash2</key>
 			<data>
-			btERzM3QLNakKFFmYo36IjMWTH4egcWjiCgCkTx+S7U=
+			Fi72P58ieY+32jrR5uHrWiWvYwdPLVuz4Mq3+h0oHLo=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
@@ -188,11 +192,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			hlEW1E0OxWLEMJqHH2Kas3o7Jpg=
+			KHQA6g9fQJT0/4V+1OokHUJbw2w=
 			</data>
 			<key>hash2</key>
 			<data>
-			T13zzNXimTln5tPavtn8m6W+VGRYXFSSbX/5EQrDrj8=
+			xtrgUW6gblvbxSLpJ+OfwlxsXzAqC5PTZ6jcYsRNBhE=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -204,6 +208,17 @@
 			<key>hash2</key>
 			<data>
 			r/QObAHMwuPNOFhiOZEEy26lN48gKOvXj3SI5F5IBJo=
+			</data>
+		</dict>
+		<key>PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			K/aVK0p8XR+3jHZDfE5O0LFnKh8=
+			</data>
+			<key>hash2</key>
+			<data>
+			kSWYkJ98ZZEt5cgOIQIxjG6Vyw2HEd2q5Qc+aVlLdbI=
 			</data>
 		</dict>
 	</dict>

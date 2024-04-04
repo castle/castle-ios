@@ -21,5 +21,6 @@ Castle for iOS provides a simple way to integrate Castle into your app.
   s.ios.vendored_frameworks = 'Castle/Highwind.xcframework', 'Castle/GeoZip.xcframework'
 
   s.source_files = 'Castle/{Internal,Public}/*{h,m}'
+  s.resource_bundles = {"Castle" => ["Castle/PrivacyInfo.xcprivacy"]}
   s.swift_version = '5.2'
 end
