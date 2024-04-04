@@ -40,8 +40,7 @@
 		B69885A526124853009D4CD9 /* Castle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6B355DC1ED71D9700C2B817 /* Castle.framework */; platformFilter = ios; };
 		B6988627261348B6009D4CD9 /* GeoZip.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6988625261348B6009D4CD9 /* GeoZip.xcframework */; };
 		B6988628261348B6009D4CD9 /* Highwind.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6988626261348B6009D4CD9 /* Highwind.xcframework */; };
-		B6AED34F2BBC41FA00A41CA9 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B6AED34E2BBC41F800A41CA9 /* PrivacyInfo.xcprivacy */; };
-		B6AED3512BBC421000A41CA9 /* PrivacyInfo.xcprivacy in CopyFiles */ = {isa = PBXBuildFile; fileRef = B6AED34E2BBC41F800A41CA9 /* PrivacyInfo.xcprivacy */; };
+		B69AED292BBEC37C005727AE /* PrivacyInfo.xcprivacy in CopyFiles */ = {isa = PBXBuildFile; fileRef = B6AED34E2BBC41F800A41CA9 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +60,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				B6AED3512BBC421000A41CA9 /* PrivacyInfo.xcprivacy in CopyFiles */,
+				B69AED292BBEC37C005727AE /* PrivacyInfo.xcprivacy in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,7 +340,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6AED34F2BBC41FA00A41CA9 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
