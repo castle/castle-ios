@@ -61,7 +61,7 @@
 /**
  * Whether the analytics client should track advertisting info. `YES` by default.
  */
-@property (nonatomic, assign) BOOL enableAdvertisingTracking;
+@property (nonatomic, assign, getter=isAdvertisingTrackingEnabled) BOOL enableAdvertisingTracking;
 
 /**
  Default configuration with provided publishable key
