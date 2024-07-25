@@ -106,6 +106,18 @@ static NSString *CASEventStorageFilename = @"events";
     return queue;
 }
 
++ (BOOL)addSkipBackupAttributeToItemAtPath:(NSString *)path
+{
+    NSError *error = nil;
+    BOOL success = [[NSURL fileURLWithPath:path] setResourceValue:[NSNumber numberWithBool:YES]
+                                                           forKey:NSURLIsExcludedFromBackupKey
+                                                            error:&error];
+    if(error != nil){
+        NSLog(@"Error excluding file (path: %@) from backup %@", path, error);
+    }
+    return success;
+}
+
 + (void)migrateStorageIfNeccessary
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -120,6 +132,10 @@ static NSString *CASEventStorageFilename = @"events";
     // Create new storage path if neccessary
     [self.class createStoragePathIfNeccessary];
     
+    // If the old storage file exists, exclude from backup
+    if (oldStorageFileExists) {
+        [self addSkipBackupAttributeToItemAtPath:oldStorageDirectory];
+    }
     
     // If the old storage file exists but not the new one, move the current file to the new location
     if (oldStorageFileExists && !newStorageFileExists) {
