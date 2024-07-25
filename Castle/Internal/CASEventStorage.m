@@ -110,12 +110,19 @@ static NSString *CASEventStorageFilename = @"events";
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *oldStoragePath = [self.class oldStoragePath];
-    if ([fileManager fileExistsAtPath:oldStoragePath isDirectory:NULL]) {
-        // Create new storage path if neccessary
-        [self.class createStoragePathIfNeccessary];
-        
-        NSString *newStoragePath = [self.class storagePath];
-        NSString *oldStorageDirectory = [self.class oldStorageDirectory];
+    NSString *oldStorageDirectory = [self.class oldStorageDirectory];
+    NSString *newStoragePath = [self.class storagePath];
+    
+    BOOL oldStorageFileExists = [fileManager fileExistsAtPath:oldStoragePath];
+    BOOL oldStorageDirectoryExists = [fileManager fileExistsAtPath:oldStorageDirectory];
+    BOOL newStorageFileExists = [fileManager fileExistsAtPath:newStoragePath];
+    
+    // Create new storage path if neccessary
+    [self.class createStoragePathIfNeccessary];
+    
+    
+    // If the old storage file exists but not the new one, move the current file to the new location
+    if (oldStorageFileExists && !newStorageFileExists) {
         NSError *error = nil;
       
         // Move old events file to new storage path
@@ -123,8 +130,11 @@ static NSString *CASEventStorageFilename = @"events";
         if(error != nil) {
             CASLog(@"Failed to move old storage path: %@, to new storage path: %@, error: %@", oldStoragePath, newStoragePath, error.localizedDescription);
         }
-        
-        // Remove old storage directory
+    }
+    
+    // If the old storage directory exists, remove it from storage
+    if (oldStorageDirectoryExists) {
+        NSError *error = nil;
         [fileManager removeItemAtPath:oldStorageDirectory error:&error];
         if(error != nil) {
             CASLog(@"Failed to move old storage directory: %@", error.localizedDescription);
