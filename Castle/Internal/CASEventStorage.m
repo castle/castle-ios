@@ -21,9 +21,6 @@ static NSString *CASEventStorageFilename = @"events";
 
 + (NSArray *)storedQueue
 {
-    // Migrate storage if neccessary
-    [self.class migrateStorageIfNeccessary];
-    
     // Read queue from file
     NSArray *queue = [self readQueueFromFile:self.storagePath];
     if (queue == nil) {
@@ -35,7 +32,11 @@ static NSString *CASEventStorageFilename = @"events";
 
 + (void)persistQueue:(NSArray *)queue
 {
+    // Create storage path if neccessary
     [self.class createStoragePathIfNeccessary];
+    
+    // Migrate storage if neccessary
+    [self.class migrateStorageIfNeccessary];
     
     BOOL persisted = NO;
     if (@available(iOS 11.0, *)) {
@@ -106,39 +107,17 @@ static NSString *CASEventStorageFilename = @"events";
     return queue;
 }
 
-+ (BOOL)addSkipBackupAttributeToItemAtPath:(NSString *)path
-{
-    NSError *error = nil;
-    BOOL success = [[NSURL fileURLWithPath:path] setResourceValue:[NSNumber numberWithBool:YES]
-                                                           forKey:NSURLIsExcludedFromBackupKey
-                                                            error:&error];
-    if(error != nil){
-        NSLog(@"Error excluding file (path: %@) from backup %@", path, error);
-    }
-    return success;
-}
-
 + (void)migrateStorageIfNeccessary
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *oldStoragePath = [self.class oldStoragePath];
-    NSString *oldStorageDirectory = [self.class oldStorageDirectory];
-    NSString *newStoragePath = [self.class storagePath];
-    
-    BOOL oldStorageFileExists = [fileManager fileExistsAtPath:oldStoragePath];
-    BOOL oldStorageDirectoryExists = [fileManager fileExistsAtPath:oldStorageDirectory];
-    BOOL newStorageFileExists = [fileManager fileExistsAtPath:newStoragePath];
-    
-    // Create new storage path if neccessary
-    [self.class createStoragePathIfNeccessary];
-    
-    // If the old storage file exists, exclude from backup
-    if (oldStorageFileExists) {
-        [self addSkipBackupAttributeToItemAtPath:oldStorageDirectory];
-    }
-    
-    // If the old storage file exists but not the new one, move the current file to the new location
-    if (oldStorageFileExists && !newStorageFileExists) {
+
+    if ([fileManager fileExistsAtPath:oldStoragePath isDirectory:NULL]) {
+        // Create new storage path if neccessary
+        [self.class createStoragePathIfNeccessary];
+        
+        NSString *newStoragePath = [self.class storagePath];
+        NSString *oldStorageDirectory = [self.class oldStorageDirectory];
         NSError *error = nil;
       
         // Move old events file to new storage path
@@ -146,11 +125,8 @@ static NSString *CASEventStorageFilename = @"events";
         if(error != nil) {
             CASLog(@"Failed to move old storage path: %@, to new storage path: %@, error: %@", oldStoragePath, newStoragePath, error.localizedDescription);
         }
-    }
-    
-    // If the old storage directory exists, remove it from storage
-    if (oldStorageDirectoryExists) {
-        NSError *error = nil;
+        
+        // Remove old storage directory
         [fileManager removeItemAtPath:oldStorageDirectory error:&error];
         if(error != nil) {
             CASLog(@"Failed to move old storage directory: %@", error.localizedDescription);
