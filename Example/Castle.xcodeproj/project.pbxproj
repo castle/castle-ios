@@ -30,6 +30,8 @@
 		B6A6F2552BA4466E00D9C3F1 /* events_migration_file in Resources */ = {isa = PBXBuildFile; fileRef = B6A6F2542BA4412C00D9C3F1 /* events_migration_file */; };
 		B6A923FE23C8EF0E004D3AB0 /* Castle_UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A923FD23C8EF0E004D3AB0 /* Castle_UITests.m */; };
 		B6B1A64A23C896AC00263088 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B1A64923C896AC00263088 /* DemoViewController.m */; };
+		B6CD37462C539619008D87D8 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CD37452C539610008D87D8 /* MockURLProtocol.swift */; };
+		B6CD37492C539AD8008D87D8 /* CASAPIClient+MockAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = B6CD37482C539AD8008D87D8 /* CASAPIClient+MockAPI.m */; };
 		B6F552C22B7B6D3900DB4360 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6F552C12B7B6D3900DB4360 /* AdSupport.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +89,9 @@
 		B6A923FF23C8EF0E004D3AB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6B1A64323C882AE00263088 /* DemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
 		B6B1A64923C896AC00263088 /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
+		B6CD37452C539610008D87D8 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		B6CD37472C539AD8008D87D8 /* CASAPIClient+MockAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CASAPIClient+MockAPI.h"; sourceTree = "<group>"; };
+		B6CD37482C539AD8008D87D8 /* CASAPIClient+MockAPI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CASAPIClient+MockAPI.m"; sourceTree = "<group>"; };
 		B6F552C12B7B6D3900DB4360 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		BADFF79494C73F7FB28E4957 /* Pods-Castle_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Castle_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Castle_Example/Pods-Castle_Example.release.xcconfig"; sourceTree = "<group>"; };
 		BFFA8BF39E3B7ABC75954A11 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -206,6 +211,9 @@
 				6003F5BB195388D20070C39A /* Tests.m */,
 				B67B22FC281BD70C0033F1E2 /* Castle+InvalidUUID.h */,
 				B67B22FD281BD70C0033F1E2 /* Castle+InvalidUUID.m */,
+				B6CD37472C539AD8008D87D8 /* CASAPIClient+MockAPI.h */,
+				B6CD37482C539AD8008D87D8 /* CASAPIClient+MockAPI.m */,
+				B6CD37452C539610008D87D8 /* MockURLProtocol.swift */,
 				B66955BD25AEFECC00F473F3 /* SwiftTests.swift */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 				B66955BC25AEFECB00F473F3 /* Castle_Tests-Bridging-Header.h */,
@@ -512,7 +520,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6CD37462C539619008D87D8 /* MockURLProtocol.swift in Sources */,
 				6003F5BC195388D20070C39A /* Tests.m in Sources */,
+				B6CD37492C539AD8008D87D8 /* CASAPIClient+MockAPI.m in Sources */,
 				B66955BE25AEFECC00F473F3 /* SwiftTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
