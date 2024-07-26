@@ -336,15 +336,15 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         return;
     }
     
+    if(castle.task != nil) {
+        CASLog(@"Queue is already being flushed. Won't flush again.");
+        return;
+    }
+    
     if(castle.userJwt == nil) {
         CASLog(@"No user jwt set, clearing the queue.");
         castle.eventQueue = [[NSMutableArray alloc] init];
         [castle persistQueue];
-        return;
-    }
-    
-    if(castle.task != nil) {
-        CASLog(@"Queue is already being flushed. Won't flush again.");
         return;
     }
     

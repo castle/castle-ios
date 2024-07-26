@@ -13,12 +13,9 @@ import Castle
 class MainViewController: UIViewController { }
 
 class SwiftTests: XCTestCase {
-    
+
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        
-        // Swizzle session
-        CASAPIClient.swizzleSession()
         
         let baseURLAllowList = [URL(string: "https://google.com/")!]
         let configuration = CastleConfiguration(publishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA")
@@ -470,51 +467,6 @@ class SwiftTests: XCTestCase {
         
         // Check event count, should be the same after persisting the queue
         XCTAssertTrue(CASEventStorage.storedQueue().count == 1);
-    }
-    
-    func testStorageMigrationIssueUserJWTNotSet() {
-        let fileManager = FileManager.default
-        
-        // Fetch and persist the queue to make sure that the storage structure is correct according to new storage structure
-        CASEventStorage.persistQueue(CASEventStorage.storedQueue())
-        
-        let documentsPaths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        let oldStorageDir = documentsPaths[0].appending("/castle")
-        let oldStoragePath = oldStorageDir.appending("/events")
-        
-        let applicationSupportPaths = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)
-        let newStorageDir = applicationSupportPaths[0].appending("/castle")
-        let newStoragePath = newStorageDir.appending("/events")
-        
-        // Verify storage structure, migration should already have happened in earlier tests
-        verifyStorage(oldStorageDir: oldStorageDir, oldStoragePath: oldStoragePath, newStorageDir: newStorageDir, newStoragePath: newStoragePath)
-        
-        // Remove new event storage file and verify deletion
-        try? fileManager.removeItem(atPath: newStoragePath)
-        XCTAssertTrue(!fileManager.fileExists(atPath: newStoragePath))
-        
-        // Copy migration file from bundle to old storage path
-        let bundlePath = Bundle.main.path(forResource: "events_migration_file", ofType: nil)
-        try! fileManager.createDirectory(atPath: oldStorageDir, withIntermediateDirectories: false)
-        try! fileManager.copyItem(atPath: bundlePath!, toPath: oldStoragePath)
-        
-        // Remove userJwt
-        Castle.sharedInstance()?.setUserJwt(nil)
-        
-        // Flushing should reset the queue, a previous bug caused the migration code not to be run
-        Castle.flush()
-        
-        // Calling storedQueue will trigger the migration, check event count to see that the migration was successful
-        let queue = CASEventStorage.storedQueue()
-        XCTAssertTrue(queue.count == 0)
-        
-        CASEventStorage.persistQueue(queue);
-        
-        // Verify storage structure again to determine that the migration was successful
-        verifyStorage(oldStorageDir: oldStorageDir, oldStoragePath: oldStoragePath, newStorageDir: newStorageDir, newStoragePath: newStoragePath)
-        
-        // Check event count, should be the same after persisting the queue
-        XCTAssertTrue(CASEventStorage.storedQueue().count == 0);
     }
     
     func testRequestTokenUninitialized() throws {

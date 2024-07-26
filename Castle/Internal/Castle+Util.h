@@ -82,9 +82,4 @@
  */
 - (nullable NSString *)deviceIdentifier;
 
-/**
-  Directly set and store user JWT independant of nil or empty string
- */
-- (void)setUserJwt:(nullable NSString *)userJwt;
-
 @end
