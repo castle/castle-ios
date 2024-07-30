@@ -21,9 +21,6 @@ static NSString *CASEventStorageFilename = @"events";
 
 + (NSArray *)storedQueue
 {
-    // Migrate storage if neccessary
-    [self.class migrateStorageIfNeccessary];
-    
     // Read queue from file
     NSArray *queue = [self readQueueFromFile:self.storagePath];
     if (queue == nil) {
@@ -35,7 +32,11 @@ static NSString *CASEventStorageFilename = @"events";
 
 + (void)persistQueue:(NSArray *)queue
 {
+    // Create storage path if neccessary
     [self.class createStoragePathIfNeccessary];
+    
+    // Migrate storage if neccessary
+    [self.class migrateStorageIfNeccessary];
     
     BOOL persisted = NO;
     if (@available(iOS 11.0, *)) {
@@ -110,6 +111,7 @@ static NSString *CASEventStorageFilename = @"events";
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *oldStoragePath = [self.class oldStoragePath];
+
     if ([fileManager fileExistsAtPath:oldStoragePath isDirectory:NULL]) {
         // Create new storage path if neccessary
         [self.class createStoragePathIfNeccessary];
