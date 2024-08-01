@@ -21,6 +21,12 @@ static NSString *CASEventStorageFilename = @"events";
 
 + (NSArray *)storedQueue
 {
+    // Create storage path if neccessary
+    [self.class createStoragePathIfNeccessary];
+    
+    // Migrate storage if neccessary
+    [self.class migrateStorageIfNeccessary];
+    
     // Read queue from file
     NSArray *queue = [self readQueueFromFile:self.storagePath];
     if (queue == nil) {
