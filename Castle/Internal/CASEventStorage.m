@@ -131,7 +131,11 @@ static NSString *CASEventStorageFilename = @"events";
         if(error != nil) {
             CASLog(@"Failed to move old storage directory: %@", error.localizedDescription);
         }
+        
+        return;
     }
+    
+    [self.class createStoragePathIfNeccessary];
 }
 
 + (NSString *)oldStorageDirectory
