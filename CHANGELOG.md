@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.11 (2024-08-01)
+- [#117](https://github.com/castle/castle-ios/pull/117) Storage migration old file still exists.
+- [#116](https://github.com/castle/castle-ios/pull/116) Advertising identifier swift improvements.
+
 ## 3.0.10 (2024-04-04)
 - [#110](https://github.com/castle/castle-ios/pull/110) Include Privacy manifest, update internal frameworks
 
