@@ -20,10 +20,7 @@ static NSString *CASEventStorageFilename = @"events";
 #pragma mark - Storage
 
 + (NSArray *)storedQueue
-{
-    // Create storage path if neccessary
-    [self.class createStoragePathIfNeccessary];
-    
+{    
     // Migrate storage if neccessary
     [self.class migrateStorageIfNeccessary];
     
@@ -38,9 +35,6 @@ static NSString *CASEventStorageFilename = @"events";
 
 + (void)persistQueue:(NSArray *)queue
 {
-    // Create storage path if neccessary
-    [self.class createStoragePathIfNeccessary];
-    
     // Migrate storage if neccessary
     [self.class migrateStorageIfNeccessary];
     
