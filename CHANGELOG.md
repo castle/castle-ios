@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.0.12 (2024-09-16)
+- Internal enhancements and stability improvements.
+
 ## 3.0.11 (2024-08-01)
 - [#117](https://github.com/castle/castle-ios/pull/117) Storage migration old file still exists.
 - [#116](https://github.com/castle/castle-ios/pull/116) Advertising identifier swift improvements.
