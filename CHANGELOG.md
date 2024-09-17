@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.0.13 (2024-09-16)
+- Internal enhancements and stability improvements.
+
 ## 3.0.12 (2024-09-16)
 - Internal enhancements and stability improvements.
 
