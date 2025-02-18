@@ -280,7 +280,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         return NO;
     }
     
-    return _sharedClient.configuration.enableAdvertisingTracking;
+    return _sharedClient.configuration.enableApplicationLifecycleTracking;
 }
 
 #pragma mark - Setters
