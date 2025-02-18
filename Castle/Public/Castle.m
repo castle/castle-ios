@@ -273,6 +273,16 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return NO;
 }
 
++ (BOOL)isApplicationLifecycleTrackingEnabled
+{
+    // SDK isn't ready if it hasn't been configured
+    if (![self isReady]) {
+        return NO;
+    }
+    
+    return _sharedClient.configuration.enableAdvertisingTracking;
+}
+
 #pragma mark - Setters
 
 - (void)setUserJwt:(nullable NSString *)userJwt
@@ -529,8 +539,10 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         return;
     }
     
-    CASLog(@"Application life cycle event detected: Will track application did become active event");
-    [Castle customWithName:@"Application Did Become Active"];
+    if ([Castle isApplicationLifecycleTrackingEnabled]) {
+        CASLog(@"Application life cycle event detected: Will track application did become active event");
+        [Castle customWithName:@"Application Did Become Active"];
+    }
     
     // Flush the event queue when a application did become active event is triggered
     [Castle flush];
@@ -542,8 +554,10 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         return;
     }
     
-    CASLog(@"Application life cycle event detected: Will track application did enter background event");
-    [Castle customWithName:@"Application Did Enter Background"];
+    if ([Castle isApplicationLifecycleTrackingEnabled]) {
+        CASLog(@"Application life cycle event detected: Will track application did enter background event");
+        [Castle customWithName:@"Application Did Enter Background"];
+    }
     
     // Flush the event queue when a application did enter background event is triggered
     [Castle flush];
@@ -555,8 +569,10 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
         return;
     }
     
-    CASLog(@"Application life cycle event detected: Will track application will terminate event");
-    [Castle customWithName:@"Application Will Terminate"];
+    if ([Castle isApplicationLifecycleTrackingEnabled]) {
+        CASLog(@"Application life cycle event detected: Will track application will terminate event");
+        [Castle customWithName:@"Application Will Terminate"];
+    }
     
     // Flush the event queue when a application will terminate event is triggered
     [Castle flush];

@@ -104,6 +104,7 @@
     XCTAssertEqual(configuration.maxQueueLimit, 1000);
     XCTAssertNil(configuration.baseURLAllowList);
     XCTAssertEqual(configuration.enableAdvertisingTracking, YES);
+    XCTAssertEqual(configuration.enableApplicationLifecycleTracking, YES);
     
     // Check ad tracking state, set ad support block with mock IDFA
     XCTAssertEqual([Castle isAdTrackingEnabled], NO);
@@ -123,6 +124,7 @@
     configuration.maxQueueLimit = 20;
     configuration.baseURLAllowList = baseURLAllowList;
     configuration.enableAdvertisingTracking = NO;
+    configuration.enableApplicationLifecycleTracking = NO;
     
     // Check that all the configuration parameters where set correctly
     XCTAssertTrue([configuration.publishableKey isEqualToString:publishableKey]);
@@ -139,6 +141,7 @@
     XCTAssertFalse([configuration.baseURLAllowList[0].absoluteString isEqualToString:@"https://google.com/somethingelse"]);
 
     XCTAssertEqual(configuration.enableAdvertisingTracking, NO);
+    XCTAssertEqual(configuration.enableApplicationLifecycleTracking, NO);
     
     // Setup Castle SDK with publishable key
     [Castle configureWithPublishableKey:publishableKey];

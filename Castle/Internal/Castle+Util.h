@@ -78,6 +78,11 @@
 + (BOOL)isAdTrackingEnabled;
 
 /**
+  Determine if application life cycle tracking is enabled
+ */
++ (BOOL)isApplicationLifecycleTrackingEnabled;
+
+/**
  Returns a uniue UUID using [[UIDevice currentDevice] identifierForVendor]
  */
 - (nullable NSString *)deviceIdentifier;
