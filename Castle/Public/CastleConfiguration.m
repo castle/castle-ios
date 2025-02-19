@@ -27,6 +27,7 @@ static NSString *CastleConfigurationCastleAPIPath = @"v1/";
     configuration.flushLimit = 20;
     configuration.maxQueueLimit = 1000;
     configuration.enableAdvertisingTracking = YES;
+    configuration.enableApplicationLifecycleTracking = YES;
     return configuration;
 }
 
