@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.0.14 (2025-03-24)
+- [#127](https://github.com/castle/castle-ios/pull/127) Add option to opt-out of application life cycle events.
+
 ## 3.0.13 (2024-09-16)
 - Internal enhancements and stability improvements.
 
