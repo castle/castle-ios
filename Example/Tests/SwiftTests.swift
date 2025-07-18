@@ -78,6 +78,7 @@ class SwiftTests: XCTestCase {
         XCTAssertEqual(configuration.maxQueueLimit, 1000);
         XCTAssertNil(configuration.baseURLAllowList);
         XCTAssertEqual(configuration.isAdvertisingTrackingEnabled, true);
+        XCTAssertEqual(configuration.isApplicationLifecycleTrackingEnabled, true);
         
         // Check ad tracking state, set ad support block with mock IDFA
         XCTAssertEqual(Castle.isAdTrackingEnabled(), false);
