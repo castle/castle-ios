@@ -78,6 +78,7 @@ class SwiftTests: XCTestCase {
         XCTAssertEqual(configuration.maxQueueLimit, 1000);
         XCTAssertNil(configuration.baseURLAllowList);
         XCTAssertEqual(configuration.isAdvertisingTrackingEnabled, true);
+        XCTAssertEqual(configuration.isApplicationLifecycleTrackingEnabled, true);
         
         // Check ad tracking state, set ad support block with mock IDFA
         XCTAssertEqual(Castle.isAdTrackingEnabled(), false);
@@ -96,6 +97,8 @@ class SwiftTests: XCTestCase {
         configuration.flushLimit = 10;
         configuration.maxQueueLimit = 20;
         configuration.baseURLAllowList = baseURLAllowList;
+        configuration.isAdvertisingTrackingEnabled = false;
+        configuration.isApplicationLifecycleTrackingEnabled = false;
 
         // Check that all the configuration parameters where set correctly
         XCTAssertTrue(configuration.publishableKey == publishableKey)
@@ -111,6 +114,9 @@ class SwiftTests: XCTestCase {
         configuration.baseURLAllowList = [URL(string: "https://google.com/somethingelse")!]
         XCTAssertFalse(configuration.baseURLAllowList![0].absoluteString  == "https://google.com/somethingelse")
 
+        XCTAssertEqual(configuration.isAdvertisingTrackingEnabled, false);
+        XCTAssertEqual(configuration.isApplicationLifecycleTrackingEnabled, false);
+        
         // Setup Castle SDK with publishable key
         Castle.configure(withPublishableKey: publishableKey)
 
