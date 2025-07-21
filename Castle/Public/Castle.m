@@ -184,7 +184,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 + (NSString *)versionString
 {
-    return @"3.0.14";
+    return @"3.1.0";
 }
 
 - (nullable NSString *)deviceIdentifier
