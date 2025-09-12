@@ -1,8 +1,8 @@
 {
   "ABIRoot": {
     "kind": "Root",
-    "name": "TopLevel",
-    "printedName": "TopLevel",
+    "name": "GeoZip",
+    "printedName": "GeoZip",
     "children": [
       {
         "kind": "Import",
@@ -205,6 +205,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -494,6 +508,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -653,6 +681,22 @@
         "declAttributes": [
           "AccessControl",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
         ]
       },
       {
@@ -751,40 +795,28 @@
           "AccessControl",
           "RawDocComment"
         ],
-        "hasMissingDesignatedInitializers": true
+        "hasMissingDesignatedInitializers": true,
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
+        ]
       }
     ],
     "json_format_version": 8
   },
   "ConstValues": [
-    {
-      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Format.swift",
-      "kind": "IntegerLiteral",
-      "offset": 316,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Format.swift",
-      "kind": "IntegerLiteral",
-      "offset": 362,
-      "length": 6,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Format.swift",
-      "kind": "IntegerLiteral",
-      "offset": 316,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Format.swift",
-      "kind": "IntegerLiteral",
-      "offset": 362,
-      "length": 6,
-      "value": "1"
-    },
     {
       "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Format.swift",
       "kind": "IntegerLiteral",
@@ -819,62 +851,6 @@
       "offset": 798,
       "length": 4,
       "value": "0xF0"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
-      "kind": "IntegerLiteral",
-      "offset": 325,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
-      "kind": "IntegerLiteral",
-      "offset": 366,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
-      "kind": "IntegerLiteral",
-      "offset": 411,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
-      "kind": "IntegerLiteral",
-      "offset": 456,
-      "length": 1,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
-      "kind": "IntegerLiteral",
-      "offset": 325,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
-      "kind": "IntegerLiteral",
-      "offset": 366,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
-      "kind": "IntegerLiteral",
-      "offset": 411,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",
-      "kind": "IntegerLiteral",
-      "offset": 456,
-      "length": 1,
-      "value": "3"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/GeoZip\/GeoZip\/Provider.swift",

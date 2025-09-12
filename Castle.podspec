@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Castle'
-  s.version          = '3.1.0'
+  s.version          = '3.1.1'
   s.summary          = 'Castle SDK for iOS'
 
   s.description      = <<-DESC
@@ -16,7 +16,7 @@ Castle for iOS provides a simple way to integrate Castle into your app.
   s.platform = :ios
   s.requires_arc = true
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '12.0'
   s.ios.frameworks = 'Security', 'CoreTelephony', 'UIKit', 'SystemConfiguration', 'CoreMotion', 'CoreLocation'
   s.ios.vendored_frameworks = 'Castle/Highwind.xcframework', 'Castle/GeoZip.xcframework'
 
