@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.1.1 (2025-09-12)
+- Internal enhancements and stability improvements.
+
 ## 3.1.0 (2025-07-20)
 - Internal enhancements and stability improvements.
 
