@@ -12,7 +12,6 @@ SOURCE_TMP='TMP'
 mkdir $SOURCE_TMP
 mkdir "$SOURCE_TMP"/Castle
 cp "$SOURCE_PUBLIC"/Castle.h "$SOURCE_TMP"/Castle.h
-cp "$SOURCE_PUBLIC"/CastleConfiguration.h "$SOURCE_TMP"/Castle/CastleConfiguration.h
 
 jazzy \
 	--objc \

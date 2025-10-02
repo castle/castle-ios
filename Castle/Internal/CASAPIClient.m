@@ -10,7 +10,6 @@
 #import <UIKit/UIKit.h>
 
 #import "Castle.h"
-#import "CastleConfiguration.h"
 #import "CASUtils.h"
 #import "CASEvent.h"
 
