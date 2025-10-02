@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.2 (2025-10-02)
+- [#133](https://github.com/castle/castle-ios/pull/133) Remove quoted include in framework header.
+- Internal enhancements and stability improvements.
+
 ## 3.1.1 (2025-09-12)
 - Internal enhancements and stability improvements.
 

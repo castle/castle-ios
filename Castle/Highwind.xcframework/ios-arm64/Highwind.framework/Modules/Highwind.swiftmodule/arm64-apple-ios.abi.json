@@ -1100,15 +1100,36 @@
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/System.swift",
+      "kind": "StringLiteral",
+      "offset": 357,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/System.swift",
+      "kind": "BooleanLiteral",
+      "offset": 459,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/System.swift",
+      "kind": "BooleanLiteral",
+      "offset": 526,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/System.swift",
       "kind": "IntegerLiteral",
-      "offset": 7831,
+      "offset": 9419,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/System.swift",
       "kind": "IntegerLiteral",
-      "offset": 7874,
+      "offset": 9462,
       "length": 1,
       "value": "1"
     },
