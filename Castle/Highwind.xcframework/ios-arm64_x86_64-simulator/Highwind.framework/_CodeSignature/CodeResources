@@ -14,11 +14,11 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		E+Bn1rYhEgjD+XhM4QFWOSSj3Mo=
+		T1F7V6Lk8iyOkCNCVMyX/YCyqNQ=
 		</data>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		4J50MucDQBvv5nF1rMKV4yIUAmg=
+		iR3f72IFQsGHJqmURl6KKR8/b40=
 		</data>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -34,11 +34,11 @@
 		</data>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		wMM97vTGX2d2ONwRfXF0psttvcI=
+		N53oNP+my1lnzeNoLChzBbFhdI4=
 		</data>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		4J50MucDQBvv5nF1rMKV4yIUAmg=
+		iR3f72IFQsGHJqmURl6KKR8/b40=
 		</data>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		dfN+35jNYDW5PzxQ472u787Jm8s=
+		Y9kQHuJJwcDJI1MT9T6SyKYMxKo=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -85,7 +85,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			lWGuzVrhhlMqCiSzfVqjh+3ssjNRTFDW7/KsxhVbQuk=
+			rSGRuv5YcYCXW+8xzBBZyqpRcU8mfu5zQE4jdSJnUu8=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
@@ -113,14 +113,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			LlocFpogD2seyQc0q7sxqm7AI2kZUiD7y2FbxLgZZTQ=
+			wukJ9F3dKxtQrVb0VOs4JEntKuhMYz+SwlK/xOWdqY8=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			lWGuzVrhhlMqCiSzfVqjh+3ssjNRTFDW7/KsxhVbQuk=
+			rSGRuv5YcYCXW+8xzBBZyqpRcU8mfu5zQE4jdSJnUu8=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
@@ -148,7 +148,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			HApjt79eJC0gftomBi7Y3Eu7v1xVFQwuB9xLjKKJCns=
+			3pqEmTtquolfGCG2JWFqgnUYvF+dBIRvoYrT3K/UCAw=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
