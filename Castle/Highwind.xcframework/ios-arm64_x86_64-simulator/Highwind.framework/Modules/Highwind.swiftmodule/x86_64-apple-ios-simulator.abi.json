@@ -1199,21 +1199,21 @@
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Reachability.swift",
       "kind": "BooleanLiteral",
-      "offset": 3049,
+      "offset": 3170,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Reachability.swift",
       "kind": "BooleanLiteral",
-      "offset": 4150,
+      "offset": 4272,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Reachability.swift",
       "kind": "BooleanLiteral",
-      "offset": 4256,
+      "offset": 4383,
       "length": 5,
       "value": "false"
     },
@@ -1227,7 +1227,7 @@
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Highwind.swift",
       "kind": "StringLiteral",
-      "offset": 830,
+      "offset": 836,
       "length": 12,
       "value": "\"google.com\""
     },
@@ -1430,28 +1430,28 @@
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
       "kind": "IntegerLiteral",
-      "offset": 16003,
+      "offset": 16005,
       "length": 6,
       "value": "1"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
       "kind": "IntegerLiteral",
-      "offset": 16045,
+      "offset": 16047,
       "length": 5,
       "value": "2"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
       "kind": "IntegerLiteral",
-      "offset": 16087,
+      "offset": 16089,
       "length": 6,
       "value": "3"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
       "kind": "IntegerLiteral",
-      "offset": 16124,
+      "offset": 16126,
       "length": 12,
       "value": "4"
     },
