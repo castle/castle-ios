@@ -46,6 +46,7 @@ static NSString *CastleConfigurationCastleAPIPath = @"v1/";
     configuration.debugLoggingEnabled = NO;
     configuration.flushLimit = 20;
     configuration.maxQueueLimit = 1000;
+    configuration.setCustomUserAgent = YES;
     configuration.enableAdvertisingTracking = YES;
     configuration.enableApplicationLifecycleTracking = YES;
     return configuration;

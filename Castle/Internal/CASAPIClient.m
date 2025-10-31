@@ -126,10 +126,12 @@
     
     // Set HTTP method
     request.HTTPMethod = method;
-    
-    // Set custom User Agent
-    [request setValue:[Castle userAgent] forHTTPHeaderField:@"User-Agent"];
-    
+
+    // Set custom User Agent if enabled
+    if (self.configuration.setCustomUserAgent) {
+        [request setValue:[Castle userAgent] forHTTPHeaderField:@"User-Agent"];
+    }
+
     // Set timeout
     [request setTimeoutInterval:10.0f];
     

@@ -79,6 +79,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, getter=isApplicationLifecycleTrackingEnabled) BOOL enableApplicationLifecycleTracking;
 
 /**
+  Set custom User Agent for Web Requests. `YES` by default.
+ */
+ @property (nonatomic, assign) BOOL setCustomUserAgent;
+
+/**
  Default configuration with provided publishable key
 
  @param publishableKey Castle publishable key
