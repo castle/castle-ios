@@ -220,24 +220,26 @@ static dispatch_queue_t CASEventStorageQueue(void) {
         }
         
         self.task = [self.client dataTaskWithPath:@"monitor" postData:[monitorModel JSONData] completion:^(id responseObject, NSURLResponse *response, NSError *error) {
-            if(error != nil) {
-                CASLog(@"Flush failed with error: %@", error);
+            dispatch_async(CASEventStorageQueue(), ^{
+                if(error != nil) {
+                    CASLog(@"Flush failed with error: %@", error);
+                    self.task = nil;
+                    return;
+                }
+                
+                // Remove successfully flushed events from queue and persist
+                [self.eventQueue removeObjectsInArray:monitorModel.events];
+                [self persistQueue:self.eventQueue];
+                
                 self.task = nil;
-                return;
-            }
-            
-            // Remove successfully flushed events from queue and persist
-            [self.eventQueue removeObjectsInArray:monitorModel.events];
-            [self persistQueue:self.eventQueue];
-            
-            self.task = nil;
-            
-            CASLog(@"Successfully flushed (%ld) events: %@", monitorModel.events.count, [monitorModel JSONPayload]);
-            
-            if ([self eventQueueExceedsFlushLimit] && self.eventQueue.count > 0) {
-                CASLog(@"Current event queue still exceeds flush limit. Flush again");
-                [self flush];
-            }
+                
+                CASLog(@"Successfully flushed (%ld) events: %@", monitorModel.events.count, [monitorModel JSONPayload]);
+                
+                if ([self eventQueueExceedsFlushLimit] && self.eventQueue.count > 0) {
+                    CASLog(@"Current event queue still exceeds flush limit. Flush again");
+                    [self flush];
+                }
+            });
         }];
         
         [self.task resume];
