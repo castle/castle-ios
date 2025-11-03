@@ -7,12 +7,16 @@
 
 #import <Foundation/Foundation.h>
 
+#import "CASEvent.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CASEventStorage : NSObject
+@interface CASEventQueue : NSObject
 
-+ (NSArray *)storedQueue;
-+ (void)persistQueue:(NSArray *)queue;
+@property (readonly, nonatomic) NSUInteger count;
+
+- (void)queueEvent:(CASEvent *)event;
+- (void)flush;
 
 @end
 

@@ -21,6 +21,13 @@
 + (nullable Highwind *)highwind;
 
 /**
+  Get configuration object
+ 
+  @return Configuration object
+ */
++ (nullable CastleConfiguration *)configuration;
+
+/**
  Get publishable key
  
  @return Publishable key
