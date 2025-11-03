@@ -41,16 +41,13 @@ static dispatch_queue_t CASEventStorageQueue(void) {
 {
     self = [super init];
     if (self) {
-        // Initialize eventQueue to empty array
-        self.eventQueue = [[NSMutableArray alloc] init];
-        
-        // Initialize API client
-        self.client = [CASAPIClient clientWithConfiguration:[Castle configuration]];
-        
-        // Asynchronously load persisted queue
-        [self storedQueueWithCompletion:^(NSArray *queue) {
-            self.eventQueue = [queue mutableCopy];
-        }];
+        dispatch_sync(CASEventStorageQueue(), ^{
+            // Read stored queue from disk
+            self.eventQueue = [self storedQueue].mutableCopy;
+            
+            // Initialize API client
+            self.client = [CASAPIClient clientWithConfiguration:[Castle configuration]];
+        });
     }
     return self;
 }
