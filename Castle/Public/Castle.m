@@ -389,6 +389,8 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 + (void)reset
 {
+    if (![Castle isConfigured]) { return; }
+
     [Castle flush];
     [Castle sharedInstance].userJwt = nil;
 }
