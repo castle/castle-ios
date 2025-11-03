@@ -8,7 +8,7 @@
 @import XCTest;
 
 #import <Castle/Castle.h>
-#import <Castle/CASEventStorage.h>
+#import <Castle/CASEventQueue.h>
 #import <Castle/CASScreen.h>
 #import <Castle/CASMonitor.h>
 #import <Castle/CASCustom.h>
@@ -21,6 +21,7 @@
 
 #import "MainViewController.h"
 #import "Castle+InvalidUUID.h"
+#import "Castle+Test.h"
 
 @interface Tests : XCTestCase
 
@@ -177,13 +178,13 @@
     [Castle configureWithPublishableKey:publishableKey];
     [Castle setUserJwt:jwt];
     
-    NSUInteger count = [CASEventStorage storedQueue].count;
+    NSUInteger count = Castle.queueSize;
     XCTAssertEqual(count, 0);
     
     // Tracking a custom event with the device identifier being nil should not add the event to the queue
     [Castle customWithName:@"custom event"];
     
-    NSUInteger newCount = [CASEventStorage storedQueue].count;
+    NSUInteger newCount = Castle.queueSize;
     XCTAssertEqual(newCount, 0);
     
     // Disable swizzle, deviceIdentifier should now return a valid UUID
@@ -192,7 +193,7 @@
     // Track another event, Highwind instance should now be initialized (deviceIdentifier returned non-null UUID)
     [Castle customWithName:@"custom event"];
     
-    NSUInteger finalCount = [CASEventStorage storedQueue].count;
+    NSUInteger finalCount = Castle.queueSize;
     XCTAssertGreaterThan(finalCount, 0);
 }
 
@@ -223,24 +224,26 @@
 - (void)testTracking
 {
     [Castle reset];
+    
+    CASEventQueue *eventQueue = [[CASEventQueue alloc] init];
 
     // This should lead to no event being tracked since empty string isn't a valid name
-    NSUInteger count = [CASEventStorage storedQueue].count;
+    NSUInteger count = [eventQueue storedQueueSync].count;
     [Castle screenWithName:@""];
-    NSUInteger newCount = [CASEventStorage storedQueue].count;
+    NSUInteger newCount = [eventQueue storedQueueSync].count;
     XCTAssertTrue(count == newCount);
 
     // This should lead to no event being tracked since identity can't be an empty string
-    count = [CASEventStorage storedQueue].count;
+    count = [eventQueue storedQueueSync].count;
     [Castle setUserJwt:@""];
-    newCount = [CASEventStorage storedQueue].count;
+    newCount = [eventQueue storedQueueSync].count;
     XCTAssertTrue(count == newCount); // Count should be unchanced
     XCTAssertNil([Castle userJwt]); // User jwt should be nil
 
     // This should lead to no event being tracked properties can't be nil
-    count = [CASEventStorage storedQueue].count;
+    count = [eventQueue storedQueueSync].count;
     [Castle setUserJwt:@"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"];
-    newCount = [CASEventStorage storedQueue].count;
+    newCount = [eventQueue storedQueueSync].count;
     XCTAssertTrue(count == newCount); // Count should be unchanced
     XCTAssertNotNil([Castle userJwt]); // User jwt should not be nil
 
@@ -428,9 +431,13 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
     NSString *path = [paths.firstObject stringByAppendingString:@"/castle/events"];
 
+    CASEventQueue *eventQueue = [[CASEventQueue alloc] init];
+    
     // Track a single event to trigger the persistance
     [Castle screenWithName:@"example screen"];
-    XCTAssertTrue([fileManager fileExistsAtPath:path]);
+    waitForEventPersistenceWithQueue(eventQueue, 1.0, 0.2, self, ^(NSArray<CASEvent *> * _Nonnull queue) {
+        XCTAssertTrue([fileManager fileExistsAtPath:path]);
+    });
 
     // Remove event queue data file and verify
     NSError *error = nil;
@@ -440,28 +447,34 @@
 
     // Track a single event to trigger the persistance
     [Castle screenWithName:@"example screen"];
-    XCTAssertTrue([fileManager fileExistsAtPath:path]);
+    waitForEventPersistenceWithQueue(eventQueue, 1.0, 0.2, self, ^(NSArray<CASEvent *> * _Nonnull queue) {
+        XCTAssertTrue([fileManager fileExistsAtPath:path]);
+    });
     
     NSUInteger currentQueueSize = [Castle queueSize];
     
     // Unarchive stored event queue and check that the queue count is the same as the current size of the in memory queue
-    NSArray *queue = [CASEventStorage storedQueue];
-    XCTAssertEqual(currentQueueSize, queue.count);
+    waitForEventPersistenceWithQueue(eventQueue, 1.0, 0.2, self, ^(NSArray<CASEvent *> * _Nonnull queue) {
+        XCTAssertEqual(currentQueueSize, queue.count);
+    });
     
     // Tracking a new event should increase queue size by one
     [Castle screenWithName:@"example screen"];
-    queue = [CASEventStorage storedQueue];
-    XCTAssertTrue(queue.count == currentQueueSize+1);
+    waitForEventPersistenceWithQueue(eventQueue, 1.0, 0.2, self, ^(NSArray<CASEvent *> * _Nonnull queue) {
+        XCTAssertTrue(queue.count == currentQueueSize + 1);
+    });
     
     // Tracking a new event should increase queue size by one
     [Castle customWithName:@"custom event"];
-    queue = [CASEventStorage storedQueue];
-    XCTAssertTrue(queue.count == currentQueueSize+2);
+    waitForEventPersistenceWithQueue(eventQueue, 1.0, 0.2, self, ^(NSArray<CASEvent *> * _Nonnull queue) {
+        XCTAssertTrue(queue.count == currentQueueSize + 2);
+    });
     
     // Tracking a new event should increase queue size by one
     [Castle customWithName:@"custom event" properties:@{ @"key": @"value" }];
-    queue = [CASEventStorage storedQueue];
-    XCTAssertTrue(queue.count == currentQueueSize+3);
+    waitForEventPersistenceWithQueue(eventQueue, 1.0, 0.2, self, ^(NSArray<CASEvent *> * _Nonnull queue) {
+        XCTAssertTrue(queue.count == currentQueueSize + 3);
+    });
 }
 
 - (void)verifyStorageWithOldStorageDir:(NSString *)oldStorageDir
@@ -469,6 +482,7 @@
                          newStorageDir:(NSString *)newStorageDir
                          newStoragePath:(NSString *)newStoragePath {
     NSFileManager *fileManager = [NSFileManager defaultManager];
+    CASEventQueue *eventQueue = [[CASEventQueue alloc] init];
     
     // Check that old storage directory doesn't exist
     BOOL isOldStorageDir = NO;
@@ -482,14 +496,19 @@
     XCTAssertTrue([fileManager fileExistsAtPath:newStorageDir isDirectory:&isNewStorageDir] && isNewStorageDir);
     
     // Check that new storage file exists
-    XCTAssertTrue([fileManager fileExistsAtPath:newStoragePath]);
+    waitForEventPersistenceWithQueue(eventQueue, 1.0, 0.2, self, ^(NSArray<CASEvent *> * _Nonnull queue) {
+        XCTAssertTrue([fileManager fileExistsAtPath:newStoragePath]);
+    });
 }
 
 - (void)testStorageMigration {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
+    CASEventQueue *eventQueue = [[CASEventQueue alloc] init];
+    NSArray *queue = eventQueue.storedQueueSync;
+    
     // Fetch and persist the queue to make sure that the storage structure is correct according to new storage structure
-    [CASEventStorage persistQueue:[CASEventStorage storedQueue]];
+    [eventQueue persistQueue:[eventQueue storedQueueSync]];
     
     NSArray *documentsPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *oldStorageDir = [documentsPaths[0] stringByAppendingPathComponent:@"castle"];
@@ -516,11 +535,11 @@
     [fileManager copyItemAtPath:bundlePath toPath:oldStoragePath error:nil];
     
     // Calling storedQueue will trigger the migration, check event count to see that the migration was successful
-    NSArray *queue = [CASEventStorage storedQueue];
-    XCTAssertTrue([[CASEventStorage storedQueue] count] == 1);
+    queue = [eventQueue storedQueueSync];
+    XCTAssertTrue([[eventQueue storedQueueSync] count] == 1);
     
     // Persist queue
-    [CASEventStorage persistQueue:queue];
+    [eventQueue persistQueue:queue];
     
     // Verify storage structure again to determine that the migration was successful
     [self verifyStorageWithOldStorageDir:oldStorageDir
@@ -529,7 +548,7 @@
                            newStoragePath:newStoragePath];
     
     // Check event count, should be the same after persisting the queue
-    XCTAssertTrue([CASEventStorage storedQueue].count == 1);
+    XCTAssertTrue([eventQueue storedQueueSync].count == 1);
 }
 
 - (void)testRequestTokenUninitialized

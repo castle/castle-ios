@@ -8,7 +8,7 @@
 
 import XCTest
 
-import Castle
+@testable import Castle
 
 class MainViewController: UIViewController { }
 
@@ -147,13 +147,13 @@ class SwiftTests: XCTestCase {
         Castle.configure(withPublishableKey: publishableKey)
         Castle.userJwt(jwt)
         
-        let count = CASEventStorage.storedQueue().count
+        let count = Castle.queueSize()
         XCTAssertEqual(count, 0)
         
         // Tracking a custom event with the device identifier being nil should not add the event to the queue
         Castle.custom(name: "custom event")
         
-        let newCount = CASEventStorage.storedQueue().count
+        let newCount = Castle.queueSize()
         XCTAssertEqual(newCount, 0)
         
         // Disable swizzle, deviceIdentifier should now return a valid UUID
@@ -162,7 +162,7 @@ class SwiftTests: XCTestCase {
         // Track another event, Highwind instance should now be initialized (deviceIdentifier returned non-null UUID)
         Castle.custom(name: "custom event")
         
-        let finalCount = CASEventStorage.storedQueue().count
+        let finalCount = Castle.queueSize()
         XCTAssertGreaterThan(finalCount, 0)
     }
 
@@ -191,22 +191,22 @@ class SwiftTests: XCTestCase {
         Castle.reset()
 
         // This should lead to no event being tracked since empty string isn't a valid name
-        var count = CASEventStorage.storedQueue().count
+        var count = Castle.queueSize()
         Castle.screen(name: "")
-        var newCount = CASEventStorage.storedQueue().count
+        var newCount = Castle.queueSize()
         XCTAssertTrue(count == newCount);
 
         // This should lead to no event being tracked since identity can't be an empty string
-        count = CASEventStorage.storedQueue().count
+        count = Castle.queueSize()
         Castle.userJwt("")
-        newCount = CASEventStorage.storedQueue().count
+        newCount = Castle.queueSize()
         XCTAssertTrue(count == newCount) // Count should be unchanced
         XCTAssertNil(Castle.userJwt()) // User jwt should be nil
 
         // This should lead to no event being tracked properties can't be nil
-        count = CASEventStorage.storedQueue().count
+        count = Castle.queueSize()
         Castle.userJwt( "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
-        newCount = CASEventStorage.storedQueue().count
+        newCount = Castle.queueSize()
         XCTAssertTrue(count == newCount) // Count should be unchanced
         XCTAssertNotNil(Castle.userJwt()) // User jwt should not be nil
 
@@ -384,9 +384,13 @@ class SwiftTests: XCTestCase {
         let paths = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)
         let path = paths[0].appending("/castle/events")
 
+        let eventQueue = CASEventQueue()
+        
         // Track a single event to trigger the persistance
         Castle.screen(name: "example screen")
-        XCTAssertTrue(fileManager.fileExists(atPath: path));
+        waitForEventPersistenceWithQueue(eventQueue, 1.0, 0.2, self) { queue in
+            XCTAssertTrue(fileManager.fileExists(atPath: path))
+        }
 
         // Remove event queue data file and verify
         XCTAssertNoThrow(try fileManager.removeItem(atPath: path))
@@ -394,32 +398,34 @@ class SwiftTests: XCTestCase {
 
         // Track a single event to trigger the persistance
         Castle.screen(name: "example screen")
-        XCTAssertTrue(fileManager.fileExists(atPath: path))
+        waitForEventPersistenceWithQueue(eventQueue, 1.0, 0.2, self) { queue in
+            XCTAssertTrue(fileManager.fileExists(atPath: path))
+        }
 
         let currentQueueSize = Castle.queueSize()
 
         // Unarchive stored event queue and check that the queue count is the same as the current size of the in memory queue
-        var queue = CASEventStorage.storedQueue()
-        XCTAssertTrue(currentQueueSize == queue.count);
+        waitForEventPersistenceWithQueue(eventQueue, 1.0, 0.2, self) { queue in
+            let currentQueueSize = Castle.queueSize()
+            XCTAssertTrue(currentQueueSize == queue.count)
+        }
 
         // Tracking a new event should increase queue size by one
         Castle.screen(name: "example screen")
-        queue = CASEventStorage.storedQueue()
-        XCTAssertTrue(queue.count == currentQueueSize+1);
+        XCTAssertTrue(Castle.queueSize() == currentQueueSize + 1)
         
         // Tracking a new event should increase queue size by one
         Castle.custom(name: "custom event")
-        queue = CASEventStorage.storedQueue()
-        XCTAssertTrue(queue.count == currentQueueSize+2);
+        XCTAssertTrue(Castle.queueSize() == currentQueueSize + 2)
         
         // Tracking a new event should increase queue size by one
         Castle.custom(name: "custom event", properties: ["key": "value"])
-        queue = CASEventStorage.storedQueue()
-        XCTAssertTrue(queue.count == currentQueueSize+3);
+        XCTAssertTrue(Castle.queueSize() == currentQueueSize + 3)
     }
     
     func verifyStorage(oldStorageDir: String, oldStoragePath: String, newStorageDir: String, newStoragePath: String) {
         let fileManager = FileManager.default
+        let eventQueue = CASEventQueue()
         
         // Check that old storage directory doesn't exist
         var isOldStorageDir: ObjCBool = false
@@ -433,14 +439,18 @@ class SwiftTests: XCTestCase {
         XCTAssertTrue(fileManager.fileExists(atPath: newStorageDir, isDirectory: &isNewStorageDir) && isNewStorageDir.boolValue)
         
         // Check that new storage file exists
-        XCTAssertTrue(fileManager.fileExists(atPath: newStoragePath))
+        waitForEventPersistenceWithQueue(eventQueue, 1.0, 0.2, self) { queue in
+            XCTAssertTrue(fileManager.fileExists(atPath: newStoragePath))
+        }
     }
     
     func testStorageMigration() {
         let fileManager = FileManager.default
+        let eventQueue = CASEventQueue()
+        let _ = eventQueue.storedQueueSync()
         
         // Fetch and persist the queue to make sure that the storage structure is correct according to new storage structure
-        CASEventStorage.persistQueue(CASEventStorage.storedQueue())
+        eventQueue.persistQueue(eventQueue.storedQueueSync())
         
         let documentsPaths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let oldStorageDir = documentsPaths[0].appending("/castle")
@@ -463,16 +473,16 @@ class SwiftTests: XCTestCase {
         try! fileManager.copyItem(atPath: bundlePath!, toPath: oldStoragePath)
         
         // Calling storedQueue will trigger the migration, check event count to see that the migration was successful
-        let queue = CASEventStorage.storedQueue()
+        let queue = eventQueue.storedQueueSync()
         XCTAssertTrue(queue.count == 1)
         
-        CASEventStorage.persistQueue(queue);
+        eventQueue.persistQueue(queue);
         
         // Verify storage structure again to determine that the migration was successful
         verifyStorage(oldStorageDir: oldStorageDir, oldStoragePath: oldStoragePath, newStorageDir: newStorageDir, newStoragePath: newStoragePath)
         
         // Check event count, should be the same after persisting the queue
-        XCTAssertTrue(CASEventStorage.storedQueue().count == 1);
+        XCTAssertTrue(queue.count == 1);
     }
     
     func testRequestTokenUninitialized() throws {
