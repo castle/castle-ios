@@ -194,11 +194,6 @@ static dispatch_queue_t CASEventStorageQueue(void) {
         return;
     }
     
-    if(self.task != nil) {
-        CASLog(@"Queue is already being flushed. Won't flush again.");
-        return;
-    }
-    
     if([Castle userJwt] == nil) {
         CASLog(@"No user jwt set, clearing the queue.");
         [self clearQueue];
@@ -206,6 +201,11 @@ static dispatch_queue_t CASEventStorageQueue(void) {
     }
     
     dispatch_async(CASEventStorageQueue(), ^{
+        if(self.task != nil) {
+            CASLog(@"Queue is already being flushed. Won't flush again.");
+            return;
+        }
+        
         NSArray *batch = @[];
         if (self.eventQueue.count >= CASMonitorMaxBatchSize) {
             batch = [self.eventQueue subarrayWithRange:NSMakeRange(0, CASMonitorMaxBatchSize)];
