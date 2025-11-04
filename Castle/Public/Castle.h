@@ -210,7 +210,7 @@ extern NSString * const CastleRequestTokenHeaderName;
  [Castle flushIfNeeded:[NSURL urlWithString:@"https://google.com/foobar"];
  @endcode
  */
-+ (void)flushIfNeeded:(NSURL *)url;
++ (void)flushIfNeeded:(nonnull NSURL *)url;
 
 /**
  Reset any stored user information and flush the event queue
