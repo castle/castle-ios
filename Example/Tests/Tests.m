@@ -237,14 +237,14 @@
     count = [eventQueue storedQueueSync].count;
     [Castle setUserJwt:@""];
     newCount = [eventQueue storedQueueSync].count;
-    XCTAssertTrue(count == newCount); // Count should be unchanced
+    XCTAssertTrue(count == newCount); // Count should be unchanged
     XCTAssertNil([Castle userJwt]); // User jwt should be nil
 
     // This should lead to no event being tracked properties can't be nil
     count = [eventQueue storedQueueSync].count;
     [Castle setUserJwt:@"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"];
     newCount = [eventQueue storedQueueSync].count;
-    XCTAssertTrue(count == newCount); // Count should be unchanced
+    XCTAssertTrue(count == newCount); // Count should be unchanged
     XCTAssertNotNil([Castle userJwt]); // User jwt should not be nil
 
     CASScreen *screen = [CASScreen eventWithName:@"Main"];
