@@ -8,6 +8,7 @@
 #import "MainViewController.h"
 
 @import AppTrackingTransparency;
+@import AdSupport;
 
 #import <Castle/Castle.h>
 
