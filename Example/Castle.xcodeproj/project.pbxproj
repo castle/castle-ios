@@ -27,6 +27,7 @@
 		B57E62FEBC6CF4810F6140EA /* Pods_Castle_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A1668A76E46B0EEF7D3169 /* Pods_Castle_Example.framework */; };
 		B66955BE25AEFECC00F473F3 /* SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66955BD25AEFECC00F473F3 /* SwiftTests.swift */; };
 		B67B22FE281BD70C0033F1E2 /* Castle+InvalidUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = B67B22FD281BD70C0033F1E2 /* Castle+InvalidUUID.m */; };
+		B697B9AF2EB8FEA40083187B /* Castle+Test.m in Sources */ = {isa = PBXBuildFile; fileRef = B697B9AE2EB8FEA40083187B /* Castle+Test.m */; };
 		B6A6F2552BA4466E00D9C3F1 /* events_migration_file in Resources */ = {isa = PBXBuildFile; fileRef = B6A6F2542BA4412C00D9C3F1 /* events_migration_file */; };
 		B6A923FE23C8EF0E004D3AB0 /* Castle_UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A923FD23C8EF0E004D3AB0 /* Castle_UITests.m */; };
 		B6B1A64A23C896AC00263088 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B1A64923C896AC00263088 /* DemoViewController.m */; };
@@ -81,6 +82,8 @@
 		B66955BD25AEFECC00F473F3 /* SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTests.swift; sourceTree = "<group>"; };
 		B67B22FC281BD70C0033F1E2 /* Castle+InvalidUUID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Castle+InvalidUUID.h"; sourceTree = "<group>"; };
 		B67B22FD281BD70C0033F1E2 /* Castle+InvalidUUID.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Castle+InvalidUUID.m"; sourceTree = "<group>"; };
+		B697B9AD2EB8F28F0083187B /* Castle+Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Castle+Test.h"; sourceTree = "<group>"; };
+		B697B9AE2EB8FEA40083187B /* Castle+Test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Castle+Test.m"; sourceTree = "<group>"; };
 		B6A6F2542BA4412C00D9C3F1 /* events_migration_file */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = events_migration_file; sourceTree = "<group>"; };
 		B6A923FB23C8EF0E004D3AB0 /* Castle_UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Castle_UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A923FD23C8EF0E004D3AB0 /* Castle_UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Castle_UITests.m; sourceTree = "<group>"; };
@@ -206,6 +209,8 @@
 				6003F5BB195388D20070C39A /* Tests.m */,
 				B67B22FC281BD70C0033F1E2 /* Castle+InvalidUUID.h */,
 				B67B22FD281BD70C0033F1E2 /* Castle+InvalidUUID.m */,
+				B697B9AD2EB8F28F0083187B /* Castle+Test.h */,
+				B697B9AE2EB8FEA40083187B /* Castle+Test.m */,
 				B66955BD25AEFECC00F473F3 /* SwiftTests.swift */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 				B66955BC25AEFECB00F473F3 /* Castle_Tests-Bridging-Header.h */,
@@ -514,6 +519,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F5BC195388D20070C39A /* Tests.m in Sources */,
+				B697B9AF2EB8FEA40083187B /* Castle+Test.m in Sources */,
 				B66955BE25AEFECC00F473F3 /* SwiftTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

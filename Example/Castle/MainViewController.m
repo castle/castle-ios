@@ -10,7 +10,6 @@
 @import AppTrackingTransparency;
 
 #import <Castle/Castle.h>
-#import <Castle/CASEventStorage.h>
 
 @interface MainViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *queueCountLabel;
@@ -69,6 +68,30 @@
     [self updateQueueCountLabel];
 }
 
+- (IBAction)resetConfiguration:(id)sender {
+    [Castle resetConfiguration];
+}
+
+- (IBAction)configure:(id)sender {
+    // Create configuration object
+    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
+    configuration.screenTrackingEnabled = YES;
+    configuration.debugLoggingEnabled = YES;
+    configuration.deviceIDAutoForwardingEnabled = YES;
+    configuration.flushLimit = 20;
+    configuration.baseURLAllowList = @[ [NSURL URLWithString:@"https://google.com/"] ];
+    [configuration setAdSupportBlock:^NSString* {
+#if TARGET_IPHONE_SIMULATOR
+        return @"00000000-0000-0000-0000-000000000001";
+#else
+        return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+#endif
+    }];
+    
+    // Setup Castle SDK with provided configuration
+    [Castle configure:configuration];
+}
+
 - (IBAction)pushViewController:(id)sender {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MainViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"main"];
@@ -85,7 +108,7 @@
 #pragma mark - Private
 
 - (void)updateQueueCountLabel {
-    self.queueCountLabel.text = [NSString stringWithFormat:@"Queue size: %ld", [CASEventStorage storedQueue].count];
+    self.queueCountLabel.text = [NSString stringWithFormat:@"Queue size: %ld", [Castle queueSize]];
 }
 
 @end

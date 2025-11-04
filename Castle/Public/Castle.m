@@ -19,7 +19,7 @@
 #import "CASScreen.h"
 #import "CASCustom.h"
 #import "CASMonitor.h"
-#import "CASEventStorage.h"
+#import "CASEventQueue.h"
 #import "CASRequestInterceptor.h"
 #import "UIViewController+CASScreen.h"
 
@@ -85,12 +85,9 @@ NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
 static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 @interface Castle ()
-@property (nonatomic, strong, nullable) CASAPIClient *client;
 @property (nonatomic, strong, nullable) CastleConfiguration *configuration;
-@property (nonatomic, strong, nullable) NSURLSessionDataTask *task;
-@property (nonatomic, strong) NSMutableArray *eventQueue;
+@property (nonatomic, strong, nullable) CASEventQueue *eventQueue;
 @property (nonatomic, copy, readwrite, nullable) NSString *userJwt;
-@property (nonatomic, assign, readonly) NSUInteger maxBatchSize;
 @property (nonatomic, strong, readwrite, nullable) CASReachability *reachability;
 @property (nonatomic, strong, readwrite, nullable) Highwind *highwind;
 @end
@@ -141,11 +138,14 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     
     // Setup shared instance using provided configuration
     Castle *castle = _sharedClient;
-    castle.client = [CASAPIClient clientWithConfiguration:configuration];
     castle.configuration = configuration;
-    
+
+    // Initialize reachability
     castle.reachability = [CASReachability reachabilityWithHostname:@"google.com"];
     [castle.reachability startNotifier];
+    
+    // Initialize event queue, must be done after setting configuration and initializing reachability
+    castle.eventQueue = [[CASEventQueue alloc] init];
     
     // Initialize interceptor
     if(configuration.isDeviceIDAutoForwardingEnabled) {
@@ -181,7 +181,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     CastleConfiguration *configuration = castle.configuration;
     
     // Reset Castle shared instance properties
-    castle.client = nil;
+    castle.eventQueue = nil;
     castle.configuration = nil;
     castle.reachability = nil;
     castle.highwind = nil;
@@ -240,20 +240,6 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     return [[[UIDevice currentDevice] identifierForVendor] UUIDString];
 }
 
-- (NSMutableArray *)eventQueue
-{
-    if(!_eventQueue) {
-        NSArray *persistedQueue = [CASEventStorage storedQueue];
-        _eventQueue = [persistedQueue != nil && persistedQueue.count > 0 ? persistedQueue.copy : @[] mutableCopy];
-    }
-    return _eventQueue;
-}
-
-- (NSUInteger)maxBatchSize
-{
-    return 20;
-}
-
 - (nullable NSString *)userJwt
 {
     // If there's no user jwt: try fetching it from settings
@@ -270,7 +256,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     }
     
     Castle *castle = _sharedClient;
-    if (castle.configuration == nil || castle.reachability == nil || castle.client == nil) {
+    if (castle.configuration == nil || castle.reachability == nil) {
         return NO;
     }
     
@@ -359,7 +345,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     
     Castle *castle = [Castle sharedInstance];
     CASCustom *event = [CASCustom eventWithName:name properties: properties];
-    [castle queueEvent:event];
+    [castle.eventQueue queueEvent:event];
 }
 
 + (void)screenWithName:(NSString *)name
@@ -371,7 +357,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     
     Castle *castle = [Castle sharedInstance];
     CASScreen *screen = [CASScreen eventWithName:name];
-    [castle queueEvent:screen];
+    [castle.eventQueue queueEvent:screen];
 }
 
 + (void)setUserJwt:(nullable NSString *)userJwt
@@ -387,63 +373,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 + (void)flush
 {
-    __block Castle *castle = [Castle sharedInstance];
-    
-    if(![Castle isReady]) {
-        CASLog(@"SDK not yet ready, won't flush events.");
-        return;
-    }
-    
-    if(castle.task != nil) {
-        CASLog(@"Queue is already being flushed. Won't flush again.");
-        return;
-    }
-    
-    if(castle.userJwt == nil) {
-        CASLog(@"No user jwt set, clearing the queue.");
-        castle.eventQueue = [[NSMutableArray alloc] init];
-        [castle persistQueue];
-        return;
-    }
-    
-    NSArray *batch = @[];
-    if ([castle.eventQueue count] >= castle.maxBatchSize) {
-        batch = [castle.eventQueue subarrayWithRange:NSMakeRange(0, castle.maxBatchSize)];
-    } else {
-        batch = [NSArray arrayWithArray:castle.eventQueue];
-    }
-    
-    CASLog(@"Flushing %ld of %ld queued events", batch.count, castle.eventQueue.count);
-    
-    __block CASMonitor *monitorModel = [CASMonitor monitorWithEvents:batch];
-    
-    // Nil monitor model object means there's no events to flush
-    if(!monitorModel) {
-        return;
-    }
-    
-    castle.task = [castle.client dataTaskWithPath:@"monitor" postData:[monitorModel JSONData] completion:^(id responseObject, NSURLResponse *response, NSError *error) {
-        if(error != nil) {
-            CASLog(@"Flush failed with error: %@", error);
-            castle.task = nil;
-            return;
-        }
-        
-        // Remove successfully flushed events from queue and persist
-        [castle.eventQueue removeObjectsInArray:monitorModel.events];
-        [castle persistQueue];
-        
-        castle.task = nil;
-        
-        CASLog(@"Successfully flushed (%ld) events: %@", monitorModel.events.count, [monitorModel JSONPayload]);
-        
-        if ([castle eventQueueExceedsFlushLimit] && castle.eventQueue.count > 0) {
-            CASLog(@"Current event queue still exceeds flush limit. Flush again");
-            [Castle flush];
-        }
-    }];
-    
-    [castle.task resume];
+    [[Castle sharedInstance].eventQueue flush];
 }
 
 + (void)flushIfNeeded:(NSURL *)url
@@ -455,18 +385,10 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 + (void)reset
 {
-    Castle *castle = [Castle sharedInstance];
-    CASLog(@"(%ld) event in queue. Resetting event queue.", castle.eventQueue.count);
-    
-    // Cancel any running flush task
-    [castle.task cancel];
-    castle.task = nil;
-    
-    // Flush queue
+    if (![Castle isConfigured]) { return; }
+
     [Castle flush];
-    
-    // Reset cached user id
-    castle.userJwt = nil;
+    [Castle sharedInstance].userJwt = nil;
 }
 
 + (BOOL)isAllowlistURL:(nullable NSURL *)url
@@ -488,68 +410,6 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 }
 
 #pragma mark - Private
-
-- (BOOL)eventQueueExceedsFlushLimit
-{
-    return [self.eventQueue count] >= self.configuration.flushLimit;
-}
-
-- (void)queueEvent:(CASEvent *)event
-{
-    if(!event) {
-        CASLog(@"Can't enqueue nil event");
-        return;
-    }
-    
-    if([Castle userJwt] == nil) {
-        CASLog(@"No user jwt set, won't queue event");
-        return;
-    }
-    
-    if(![Castle isReady]) {
-        CASLog(@"SDK not yet ready, won't queue event: %@, of type: %@", event.name, event.type);
-        return;
-    }
-    
-    // Trim queue before adding element to make sure it never exceeds maxQueueLimit
-    [self trimQueue];
-    
-    // Add event to the queue
-    CASLog(@"Queing event: %@", event);
-    [self.eventQueue addObject:event];
-    
-    // Persist queue to disk
-    [self persistQueue];
-    
-    // Flush queue if the number of events exceeds the flush limit
-    if(self.eventQueue.count >= self.configuration.flushLimit) {
-        // very first event should be fired immediately
-        CASLog(@"Event queue exceeded flush limit (%ld). Flushing events.", [Castle sharedInstance].configuration.flushLimit);
-        [self.class flush];
-    }
-}
-
-- (void)trimQueue
-{
-    // Trim queue to maxQueueLimit - 1. This method is only called when queuing an event
-    NSUInteger maxQueueLimit = self.configuration.maxQueueLimit - 1;
-    
-    // If the queue doesn't exceed maxQueueLimit just return
-    if(self.eventQueue.count < maxQueueLimit) {
-        return;
-    }
-    
-    // Remove the oldest excess events from the queue
-    NSRange trimRange = NSMakeRange(0, self.eventQueue.count - maxQueueLimit);
-    CASLog(@"Queue (size %ld) will exceed maxQueueLimit (%ld). Will trim %ld events from queue.", self.eventQueue.count, self.configuration.maxQueueLimit, trimRange.length);
-    [self.eventQueue removeObjectsInRange:trimRange];
-}
-
-- (void)persistQueue
-{
-    CASLog(@"Will persist queue with %ld events.", self.eventQueue.count);
-    [CASEventStorage persistQueue:self.eventQueue.copy];
-}
 
 - (void)trackApplicationUpdated
 {
@@ -641,6 +501,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 + (nullable Highwind *)highwind
 {
     return [Castle sharedInstance].highwind;
+}
+
++ (nullable CastleConfiguration *)configuration
+{
+    return [Castle sharedInstance].configuration;
 }
 
 + (nullable NSString *)publishableKey
