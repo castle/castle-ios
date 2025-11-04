@@ -232,7 +232,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 + (NSString *)versionString
 {
-    return @"3.1.3";
+    return @"3.1.4";
 }
 
 - (nullable NSString *)deviceIdentifier

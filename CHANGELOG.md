@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.4 (2025-11-04)
+- [#139](https://github.com/castle/castle-ios/pull/139) Async events storage and flushing.
+- Internal enhancements and stability improvements.
+
 ## 3.1.3 (2025-10-20)
 - Internal enhancements and stability improvements.
 
