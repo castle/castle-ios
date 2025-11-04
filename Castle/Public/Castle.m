@@ -97,9 +97,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 @synthesize userJwt = _userJwt;
 
 + (instancetype)sharedInstance {
-    if (![Castle isConfigured]) {
-        CASLog(@"[WARNING] Castle SDK has not been configured. Please call Castle.configure before using the SDK.");
-    }
+    NSAssert([Castle isConfigured], @"Castle SDK must be configured before calling this method");
     return _sharedClient;
 }
 
