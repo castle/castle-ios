@@ -376,13 +376,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     [[Castle sharedInstance].eventQueue flush];
 }
 
-+ (BOOL)flushIfNeeded:(NSURL *)url
++ (void)flushIfNeeded:(NSURL *)url
 {
     if([self isAllowlistURL:url]) {
         [self flush];
-        return YES;
     }
-    return NO;
 }
 
 + (void)reset
