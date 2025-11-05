@@ -14,11 +14,11 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		D9FChnULITKesw9F2hufu0249mc=
+		NVz/HDIMoP03Xbwri6XcjJ+BJ14=
 		</data>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		j18dCxtPVSQFpDzUy/WPricIBtQ=
+		aK6OBOKv+0m7yfGgT6sZC7NrdwU=
 		</data>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -34,11 +34,11 @@
 		</data>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		A16sJkptq1DEKeiP2SGnzadQHqY=
+		j5DUS2iVPuyPyWztpJ7CTL68eyA=
 		</data>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		j18dCxtPVSQFpDzUy/WPricIBtQ=
+		aK6OBOKv+0m7yfGgT6sZC7NrdwU=
 		</data>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		FG/ql/7NLc7o6Y9CbL70obSwnXs=
+		6CXZdScgF7rME//OMHFzFIfpugI=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -85,7 +85,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			70s1jWa8eLbkTNbKSSB3pwWey8wha0US2F/SosTGtXc=
+			SadOD0+A9OsHQJPRRSeXyIbwWjSlluaG6GYfGIHr4hg=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
@@ -113,14 +113,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			aAojM4yVdktv7MtOUYYxSIsZD9gHTMT3uV4Od1Ywam8=
+			TbD3frUnUYt4iP07McsGZsm4kSlq7YLpKB11NcMafVo=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			70s1jWa8eLbkTNbKSSB3pwWey8wha0US2F/SosTGtXc=
+			SadOD0+A9OsHQJPRRSeXyIbwWjSlluaG6GYfGIHr4hg=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
@@ -148,7 +148,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZBPPLiaoAdnipYilllRVcmSnC7aesEce0zdH8pKrakE=
+			CyhZKkO1hsPnmpNsP4OyO0zXAwpWDL3vTo8hiNITSKo=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
