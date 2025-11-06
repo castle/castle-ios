@@ -1025,14 +1025,14 @@
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Tracker.swift",
       "kind": "StringLiteral",
-      "offset": 13731,
+      "offset": 13769,
       "length": 11,
       "value": "\"immediate\""
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Tracker.swift",
       "kind": "StringLiteral",
-      "offset": 13822,
+      "offset": 13860,
       "length": 15,
       "value": "\"last10Seconds\""
     },
