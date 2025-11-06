@@ -14,11 +14,11 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		NVz/HDIMoP03Xbwri6XcjJ+BJ14=
+		TqUwtsXLS5uvYhCrl0TIwXFSPj8=
 		</data>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		aK6OBOKv+0m7yfGgT6sZC7NrdwU=
+		Tm+QWb5BMvtM+zBwx1/x4dwFxjE=
 		</data>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -38,7 +38,7 @@
 		</data>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		aK6OBOKv+0m7yfGgT6sZC7NrdwU=
+		Tm+QWb5BMvtM+zBwx1/x4dwFxjE=
 		</data>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -85,7 +85,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			SadOD0+A9OsHQJPRRSeXyIbwWjSlluaG6GYfGIHr4hg=
+			50Np9isdvRC3mCK3v3DkQ1MBh+LkwH9jcuCnsbr7pkg=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
@@ -120,7 +120,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			SadOD0+A9OsHQJPRRSeXyIbwWjSlluaG6GYfGIHr4hg=
+			50Np9isdvRC3mCK3v3DkQ1MBh+LkwH9jcuCnsbr7pkg=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
