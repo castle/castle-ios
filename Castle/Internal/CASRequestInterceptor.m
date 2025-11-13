@@ -43,19 +43,15 @@ static NSString *CASRecursiveRequestFlagProperty = @"com.castle.CASRequestInterc
 
 - (void)startLoading
 {
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        // Always flush the queue when a request is intercepted
-        [Castle flush];
-    });
-    
+    // Always flush the queue when a request is intercepted
+    [Castle flush];
+
     NSMutableURLRequest *newRequest = [self.request mutableCopy];
     [NSURLProtocol setProperty:@YES forKey:CASRecursiveRequestFlagProperty inRequest:newRequest];
     
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        // Set custom header
-        [newRequest setValue:[Castle createRequestToken] forHTTPHeaderField:CastleRequestTokenHeaderName];
-    });
-    
+    // Set custom header
+    [newRequest setValue:[Castle createRequestToken] forHTTPHeaderField:CastleRequestTokenHeaderName];
+
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     config.protocolClasses = [config.protocolClasses arrayByAddingObject:self.class];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
