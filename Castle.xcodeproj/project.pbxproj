@@ -31,8 +31,6 @@
 		B698856F261244B7009D4CD9 /* CASAPIClient.h in Headers */ = {isa = PBXBuildFile; fileRef = B698856D261244B7009D4CD9 /* CASAPIClient.h */; };
 		B6988573261244C1009D4CD9 /* CASEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = B6988571261244C1009D4CD9 /* CASEvent.m */; };
 		B6988574261244C1009D4CD9 /* CASEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = B6988572261244C1009D4CD9 /* CASEvent.h */; };
-		B6988579261244CF009D4CD9 /* CASReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = B6988577261244CF009D4CD9 /* CASReachability.h */; };
-		B698857A261244CF009D4CD9 /* CASReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B6988578261244CF009D4CD9 /* CASReachability.m */; };
 		B698857F261244DE009D4CD9 /* CASUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B698857D261244DE009D4CD9 /* CASUtils.m */; };
 		B6988580261244DE009D4CD9 /* CASUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = B698857E261244DE009D4CD9 /* CASUtils.h */; };
 		B69885A526124853009D4CD9 /* Castle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6B355DC1ED71D9700C2B817 /* Castle.framework */; platformFilter = ios; };
@@ -89,8 +87,6 @@
 		B698856D261244B7009D4CD9 /* CASAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASAPIClient.h; path = Internal/CASAPIClient.h; sourceTree = "<group>"; };
 		B6988571261244C1009D4CD9 /* CASEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CASEvent.m; path = Internal/CASEvent.m; sourceTree = "<group>"; };
 		B6988572261244C1009D4CD9 /* CASEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASEvent.h; path = Internal/CASEvent.h; sourceTree = "<group>"; };
-		B6988577261244CF009D4CD9 /* CASReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASReachability.h; path = Internal/CASReachability.h; sourceTree = "<group>"; };
-		B6988578261244CF009D4CD9 /* CASReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CASReachability.m; path = Internal/CASReachability.m; sourceTree = "<group>"; };
 		B698857D261244DE009D4CD9 /* CASUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CASUtils.m; path = Internal/CASUtils.m; sourceTree = "<group>"; };
 		B698857E261244DE009D4CD9 /* CASUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASUtils.h; path = Internal/CASUtils.h; sourceTree = "<group>"; };
 		B69885A026124853009D4CD9 /* CastleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CastleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,15 +151,6 @@
 			name = Client;
 			sourceTree = "<group>";
 		};
-		B69885612612443C009D4CD9 /* Reachability */ = {
-			isa = PBXGroup;
-			children = (
-				B6988577261244CF009D4CD9 /* CASReachability.h */,
-				B6988578261244CF009D4CD9 /* CASReachability.m */,
-			);
-			name = Reachability;
-			sourceTree = "<group>";
-		};
 		B69885632612445D009D4CD9 /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,7 +201,6 @@
 				B6AED34E2BBC41F800A41CA9 /* PrivacyInfo.xcprivacy */,
 				B698855D261243EB009D4CD9 /* Client */,
 				B69885142612402D009D4CD9 /* Public */,
-				B69885612612443C009D4CD9 /* Reachability */,
 			);
 			path = Castle;
 			sourceTree = "<group>";
@@ -234,7 +220,6 @@
 				B648464027E0B7A1000A7EDA /* CASCustom.h in Headers */,
 				B6988541261243DD009D4CD9 /* CASModel.h in Headers */,
 				B698854A261243DD009D4CD9 /* CASRequestInterceptor.h in Headers */,
-				B6988579261244CF009D4CD9 /* CASReachability.h in Headers */,
 				B698855A261243DD009D4CD9 /* CASScreen.h in Headers */,
 				B6988569261244A2009D4CD9 /* Castle+Util.h in Headers */,
 				B648464427E0B7B4000A7EDA /* CASUserJwt.h in Headers */,
@@ -350,7 +335,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B698857A261244CF009D4CD9 /* CASReachability.m in Sources */,
 				B648464627E0B7BA000A7EDA /* CASUserJwt.m in Sources */,
 				B698854E261243DD009D4CD9 /* CASEventQueue.m in Sources */,
 				B6988545261243DD009D4CD9 /* CASScreen.m in Sources */,

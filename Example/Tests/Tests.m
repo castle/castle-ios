@@ -15,7 +15,6 @@
 #import <Castle/CASRequestInterceptor.h>
 #import <Castle/CASAPIClient.h>
 #import <Castle/UIViewController+CASScreen.h>
-#import <Castle/CASReachability.h>
 #import <Castle/Castle+Util.h>
 #import <Castle/CASUserJwt.h>
 
@@ -718,66 +717,6 @@
     NSString *currentVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     NSString *installedVersion = [defaults objectForKey:@"CastleAppVersionKey"];
     XCTAssertEqual(currentVersion, installedVersion);
-}
-
-- (void)testReachabilityValidHost
-{
-    NSString *validHostName = @"google.com";
-    
-    CASReachability *reachability = [CASReachability reachabilityWithHostname:validHostName];
-    
-    if (reachability == nil) {
-        XCTFail(@"Unable to create reachability");
-    }
-    
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Check valid host"];
-    [reachability setReachableBlock:^(CASReachability *reachability) {
-        NSLog(@"Pass: %@ is reachable - %@", validHostName, reachability);
-        [expectation fulfill];
-    }];
-    
-    [reachability setUnreachableBlock:^(CASReachability *reachability) {
-        NSLog(@"%@ is initially unreachable - %@", validHostName, reachability);
-    }];
-    
-    @try {
-        [reachability startNotifier];
-    } @catch (NSException *exception) {
-        return XCTFail(@"Unable to start notifier");
-    }
-    
-    [self waitForExpectationsWithTimeout:5.0 handler:nil];
-    [reachability stopNotifier];
-}
-
-- (void)testReachabilityInvalidHost
-{
-    NSString *validHostName = @"invalidhost";
-    
-    CASReachability *reachability = [CASReachability reachabilityWithHostname:validHostName];
-    
-    if (reachability == nil) {
-        XCTFail(@"Unable to create reachability");
-    }
-    
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Check invalid host"];
-    [reachability setReachableBlock:^(CASReachability *reachability) {
-        NSLog(@"Pass: %@ is reachable - %@", validHostName, reachability);
-    }];
-    
-    [reachability setUnreachableBlock:^(CASReachability *reachability) {
-        NSLog(@"%@ is initially unreachable - %@", validHostName, reachability);
-        [expectation fulfill];
-    }];
-    
-    @try {
-        [reachability startNotifier];
-    } @catch (NSException *exception) {
-        return XCTFail(@"Unable to start notifier");
-    }
-    
-    [self waitForExpectationsWithTimeout:5.0 handler:nil];
-    [reachability stopNotifier];
 }
 
 @end
