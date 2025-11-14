@@ -13,7 +13,6 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 
 #import "CASAPIClient.h"
-#import "CASReachability.h"
 #import "CASUtils.h"
 #import "CASEvent.h"
 #import "CASScreen.h"
@@ -88,7 +87,6 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 @property (nonatomic, strong, nullable) CastleConfiguration *configuration;
 @property (nonatomic, strong, nullable) CASEventQueue *eventQueue;
 @property (nonatomic, copy, readwrite, nullable) NSString *userJwt;
-@property (nonatomic, strong, readwrite, nullable) CASReachability *reachability;
 @property (nonatomic, strong, readwrite, nullable) Highwind *highwind;
 @end
 
@@ -139,12 +137,8 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     // Setup shared instance using provided configuration
     Castle *castle = _sharedClient;
     castle.configuration = configuration;
-
-    // Initialize reachability
-    castle.reachability = [CASReachability reachabilityWithHostname:@"google.com"];
-    [castle.reachability startNotifier];
     
-    // Initialize event queue, must be done after setting configuration and initializing reachability
+    // Initialize event queue, must be done after setting configuration
     castle.eventQueue = [[CASEventQueue alloc] init];
     
     // Initialize interceptor
@@ -183,7 +177,6 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     // Reset Castle shared instance properties
     castle.eventQueue = nil;
     castle.configuration = nil;
-    castle.reachability = nil;
     castle.highwind = nil;
     CASEnableDebugLogging(NO);
     
@@ -256,7 +249,7 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     }
     
     Castle *castle = _sharedClient;
-    if (castle.configuration == nil || castle.reachability == nil) {
+    if (castle.configuration == nil) {
         return NO;
     }
     
