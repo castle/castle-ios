@@ -9,8 +9,8 @@ import Foundation
 import GeoZip
 @_exported import Highwind
 import LocalAuthentication
+import Network
 import Swift
-import SystemConfiguration
 import UIKit
 import _Concurrency
 import _StringProcessing
