@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.6 (2025-11-17)
+- [#144](https://github.com/castle/castle-ios/pull/144) Remove Reachability.
+- Internal enhancements and stability improvements.
+
 ## 3.1.5 (2025-11-06)
 - Internal enhancements and stability improvements.
 
