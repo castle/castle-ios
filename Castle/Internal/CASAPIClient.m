@@ -66,7 +66,6 @@
         
         // Parse response data
         if(data) {
-            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
             NSString *contentType = httpResponse.allHeaderFields[@"Content-Type"];
             
             // Check for application/json content-type and parse response
