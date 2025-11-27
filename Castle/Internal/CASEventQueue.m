@@ -21,7 +21,7 @@ static NSUInteger CASMonitorMaxBatchSize = 20;
 
 @interface CASEventQueue ()
 @property (nonatomic, strong, nullable) CASAPIClient *client;
-@property (nonatomic, strong) NSMutableArray<CASEvent *> *eventQueue;
+@property (atomic, strong) NSMutableArray<CASEvent *> *eventQueue;  // thread-safe init
 @property (nonatomic, strong, nullable) NSURLSessionDataTask *task;
 @property (nonatomic, copy, readwrite, nullable) NSString *userJwt;
 @end
@@ -41,12 +41,18 @@ static dispatch_queue_t CASEventStorageQueue(void) {
 {
     self = [super init];
     if (self) {
-        dispatch_sync(CASEventStorageQueue(), ^{
-            // Read stored queue from disk
-            self.eventQueue = [self storedQueue].mutableCopy;
-            
-            // Initialize API client
-            self.client = [CASAPIClient clientWithConfiguration:[Castle configuration]];
+        // immediate initialize
+        self.eventQueue = [[NSMutableArray alloc] init];
+        self.client = [CASAPIClient clientWithConfiguration:[Castle configuration]];
+
+        dispatch_async(CASEventStorageQueue(), ^{
+            NSArray *storedEvents = [self storedQueue];
+            if (storedEvents.count > 0) {
+                // prepend to current queue
+                NSMutableArray *combined = [storedEvents mutableCopy];
+                [combined addObjectsFromArray:self.eventQueue];
+                self.eventQueue = combined;
+            }
         });
     }
     return self;
