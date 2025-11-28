@@ -50,7 +50,6 @@ static NSString *CASRecursiveRequestFlagProperty = @"com.castle.CASRequestInterc
     [newRequest setValue:[Castle createRequestToken] forHTTPHeaderField:CastleRequestTokenHeaderName];
     
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-    config.protocolClasses = [config.protocolClasses arrayByAddingObject:self.class];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
     
     self.task = [session dataTaskWithRequest:newRequest];
