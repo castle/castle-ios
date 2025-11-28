@@ -41,14 +41,14 @@ static dispatch_queue_t CASEventStorageQueue(void) {
 {
     self = [super init];
     if (self) {
-        // immediate initialize
+        // Immediate initialize
         self.eventQueue = [[NSMutableArray alloc] init];
         self.client = [CASAPIClient clientWithConfiguration:[Castle configuration]];
 
         dispatch_async(CASEventStorageQueue(), ^{
             NSArray *storedEvents = [self storedQueue];
             if (storedEvents.count > 0) {
-                // prepend to current queue
+                // Prepend to current queue
                 NSMutableArray *combined = [storedEvents mutableCopy];
                 [combined addObjectsFromArray:self.eventQueue];
                 self.eventQueue = combined;

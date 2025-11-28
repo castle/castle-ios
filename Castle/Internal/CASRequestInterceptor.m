@@ -69,7 +69,7 @@ static NSString *CASRecursiveRequestFlagProperty = @"com.castle.CASRequestInterc
     if (response) {
         NSMutableURLRequest *redirectRequest = [newRequest mutableCopy];
         
-        // Token generation is now thread-safe (via FeatureCache)
+        // Set custom header
         [redirectRequest setValue:[Castle createRequestToken] forHTTPHeaderField:CastleRequestTokenHeaderName];
         
         [[self client] URLProtocol:self wasRedirectedToRequest:redirectRequest redirectResponse:response];
