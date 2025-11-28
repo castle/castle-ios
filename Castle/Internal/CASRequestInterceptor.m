@@ -53,8 +53,8 @@ static NSString *CASRecursiveRequestFlagProperty = @"com.castle.CASRequestInterc
     config.protocolClasses = [config.protocolClasses arrayByAddingObject:self.class];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
     
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:newRequest];
-    [task resume];
+    self.task = [session dataTaskWithRequest:newRequest];
+    [self.task resume];
 }
 
 - (void)stopLoading
