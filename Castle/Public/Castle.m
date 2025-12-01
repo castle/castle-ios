@@ -9,9 +9,6 @@
 
 #import <UIKit/UIKit.h>
 
-#import <CoreTelephony/CTCarrier.h>
-#import <CoreTelephony/CTTelephonyNetworkInfo.h>
-
 #import "CASAPIClient.h"
 #import "CASUtils.h"
 #import "CASEvent.h"
@@ -80,8 +77,6 @@ NSString *const CastleUserJwtKey = @"CastleUserJwtKey";
 NSString *const CastleAppVersionKey = @"CastleAppVersionKey";
 
 NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
-
-static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 
 @interface Castle ()
 @property (nonatomic, strong, nullable) CastleConfiguration *configuration;
