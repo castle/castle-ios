@@ -50,13 +50,6 @@
       },
       {
         "kind": "Import",
-        "name": "UIKit",
-        "printedName": "UIKit",
-        "declKind": "Import",
-        "moduleName": "Highwind"
-      },
-      {
-        "kind": "Import",
         "name": "CoreTelephony",
         "printedName": "CoreTelephony",
         "declKind": "Import",
@@ -843,13 +836,6 @@
       },
       {
         "kind": "Import",
-        "name": "UIKit",
-        "printedName": "UIKit",
-        "declKind": "Import",
-        "moduleName": "Highwind"
-      },
-      {
-        "kind": "Import",
         "name": "CoreMotion",
         "printedName": "CoreMotion",
         "declKind": "Import",
@@ -894,13 +880,6 @@
       },
       {
         "kind": "Import",
-        "name": "UIKit",
-        "printedName": "UIKit",
-        "declKind": "Import",
-        "moduleName": "Highwind"
-      },
-      {
-        "kind": "Import",
         "name": "Foundation",
         "printedName": "Foundation",
         "declKind": "Import",
@@ -924,40 +903,7 @@
         "name": "Foundation",
         "printedName": "Foundation",
         "declKind": "Import",
-        "moduleName": "Highwind",
-        "declAttributes": [
-          "RawDocComment"
-        ]
-      },
-      {
-        "kind": "Import",
-        "name": "Foundation",
-        "printedName": "Foundation",
-        "declKind": "Import",
-        "moduleName": "Highwind",
-        "declAttributes": [
-          "RawDocComment"
-        ]
-      },
-      {
-        "kind": "Import",
-        "name": "Foundation",
-        "printedName": "Foundation",
-        "declKind": "Import",
-        "moduleName": "Highwind",
-        "declAttributes": [
-          "RawDocComment"
-        ]
-      },
-      {
-        "kind": "Import",
-        "name": "Foundation",
-        "printedName": "Foundation",
-        "declKind": "Import",
-        "moduleName": "Highwind",
-        "declAttributes": [
-          "RawDocComment"
-        ]
+        "moduleName": "Highwind"
       },
       {
         "kind": "Import",
@@ -965,6 +911,46 @@
         "printedName": "UIKit",
         "declKind": "Import",
         "moduleName": "Highwind"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "Highwind",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "Highwind",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "Highwind",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "Highwind",
+        "declAttributes": [
+          "RawDocComment"
+        ]
       }
     ],
     "json_format_version": 8
@@ -973,28 +959,28 @@
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Tracker.swift",
       "kind": "IntegerLiteral",
-      "offset": 383,
+      "offset": 393,
       "length": 2,
       "value": "25"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Tracker.swift",
       "kind": "IntegerLiteral",
-      "offset": 519,
+      "offset": 529,
       "length": 1,
       "value": "5"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Tracker.swift",
       "kind": "IntegerLiteral",
-      "offset": 697,
+      "offset": 707,
       "length": 2,
       "value": "30"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Tracker.swift",
       "kind": "StringLiteral",
-      "offset": 1443,
+      "offset": 1439,
       "length": 33,
       "value": "\"com.castle.highwind.sensorQueue\""
     },
@@ -1036,84 +1022,84 @@
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/System.swift",
       "kind": "StringLiteral",
-      "offset": 357,
+      "offset": 344,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/System.swift",
       "kind": "BooleanLiteral",
-      "offset": 459,
+      "offset": 446,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/System.swift",
       "kind": "BooleanLiteral",
-      "offset": 526,
+      "offset": 513,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/System.swift",
       "kind": "Array",
-      "offset": 7881,
+      "offset": 7869,
       "length": 190,
       "value": "[\"\/Applications\/Cydia.app\", \"\/Library\/MobileSubstrate\/MobileSubstrate.dylib\", \"\/bin\/bash\", \"\/usr\/sbin\/sshd\", \"\/etc\/apt\", \"\/usr\/bin\/ssh\"]"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/System.swift",
       "kind": "BooleanLiteral",
-      "offset": 8338,
+      "offset": 8326,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/System.swift",
       "kind": "StringLiteral",
-      "offset": 8486,
+      "offset": 8474,
       "length": 16,
       "value": "\"\/private\/t.txt\""
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/System.swift",
       "kind": "StringLiteral",
-      "offset": 8519,
+      "offset": 8507,
       "length": 3,
       "value": "\".\""
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/System.swift",
       "kind": "BooleanLiteral",
-      "offset": 8555,
+      "offset": 8543,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/System.swift",
       "kind": "BooleanLiteral",
-      "offset": 8659,
+      "offset": 8647,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/System.swift",
       "kind": "BooleanLiteral",
-      "offset": 8708,
+      "offset": 8696,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/System.swift",
       "kind": "IntegerLiteral",
-      "offset": 9149,
+      "offset": 9137,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/System.swift",
       "kind": "IntegerLiteral",
-      "offset": 9192,
+      "offset": 9180,
       "length": 1,
       "value": "1"
     },
@@ -1204,126 +1190,28 @@
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
       "kind": "IntegerLiteral",
-      "offset": 422,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
-      "kind": "IntegerLiteral",
-      "offset": 476,
-      "length": 8,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
-      "kind": "IntegerLiteral",
-      "offset": 530,
-      "length": 4,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
-      "kind": "IntegerLiteral",
-      "offset": 584,
-      "length": 9,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
-      "kind": "IntegerLiteral",
-      "offset": 738,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
-      "kind": "IntegerLiteral",
-      "offset": 774,
-      "length": 8,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
-      "kind": "IntegerLiteral",
-      "offset": 830,
-      "length": 18,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
-      "kind": "IntegerLiteral",
-      "offset": 890,
-      "length": 13,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
-      "kind": "IntegerLiteral",
-      "offset": 946,
-      "length": 14,
-      "value": "4"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1096,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1164,
-      "length": 7,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1235,
-      "length": 4,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1290,
-      "length": 7,
-      "value": "3"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1432,
-      "length": 8,
-      "value": "4"
-    },
-    {
-      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
-      "kind": "IntegerLiteral",
-      "offset": 15994,
+      "offset": 10686,
       "length": 6,
       "value": "1"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
       "kind": "IntegerLiteral",
-      "offset": 16036,
+      "offset": 10728,
       "length": 5,
       "value": "2"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
       "kind": "IntegerLiteral",
-      "offset": 16078,
+      "offset": 10770,
       "length": 6,
       "value": "3"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Hardware.swift",
       "kind": "IntegerLiteral",
-      "offset": 16115,
+      "offset": 10807,
       "length": 12,
       "value": "4"
     },
@@ -1414,406 +1302,406 @@
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "Array",
-      "offset": 498,
+      "offset": 485,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10163,
+      "offset": 10150,
       "length": 3,
       "value": "0x0"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10229,
+      "offset": 10216,
       "length": 3,
       "value": "0x1"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10282,
+      "offset": 10269,
       "length": 3,
       "value": "0x2"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10328,
+      "offset": 10315,
       "length": 3,
       "value": "0x3"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10374,
+      "offset": 10361,
       "length": 3,
       "value": "0x4"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10420,
+      "offset": 10407,
       "length": 3,
       "value": "0x5"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10468,
+      "offset": 10455,
       "length": 3,
       "value": "0x6"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10518,
+      "offset": 10505,
       "length": 3,
       "value": "0x7"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10563,
+      "offset": 10550,
       "length": 3,
       "value": "0x8"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10609,
+      "offset": 10596,
       "length": 3,
       "value": "0x9"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10657,
+      "offset": 10644,
       "length": 3,
       "value": "0xA"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10698,
+      "offset": 10685,
       "length": 3,
       "value": "0xB"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10740,
+      "offset": 10727,
       "length": 3,
       "value": "0xC"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10792,
+      "offset": 10779,
       "length": 3,
       "value": "0xD"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10850,
+      "offset": 10837,
       "length": 3,
       "value": "0xE"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10894,
+      "offset": 10881,
       "length": 3,
       "value": "0xF"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10944,
+      "offset": 10931,
       "length": 4,
       "value": "0x11"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10999,
+      "offset": 10986,
       "length": 4,
       "value": "0x12"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11058,
+      "offset": 11045,
       "length": 4,
       "value": "0x13"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11096,
+      "offset": 11083,
       "length": 4,
       "value": "0x14"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11152,
+      "offset": 11139,
       "length": 4,
       "value": "0x15"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11198,
+      "offset": 11185,
       "length": 4,
       "value": "0x16"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11244,
+      "offset": 11231,
       "length": 4,
       "value": "0x17"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11294,
+      "offset": 11281,
       "length": 4,
       "value": "0x18"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11356,
+      "offset": 11343,
       "length": 4,
       "value": "0x19"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11414,
+      "offset": 11401,
       "length": 4,
       "value": "0x1A"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11478,
+      "offset": 11465,
       "length": 4,
       "value": "0x1B"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11539,
+      "offset": 11526,
       "length": 4,
       "value": "0x1C"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11591,
+      "offset": 11578,
       "length": 4,
       "value": "0x1D"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11659,
+      "offset": 11646,
       "length": 4,
       "value": "0x1E"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11707,
+      "offset": 11694,
       "length": 4,
       "value": "0x1F"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 12790,
+      "offset": 12777,
       "length": 3,
       "value": "0x0"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 12845,
+      "offset": 12832,
       "length": 3,
       "value": "0x1"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 12908,
+      "offset": 12895,
       "length": 3,
       "value": "0x2"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 12969,
+      "offset": 12956,
       "length": 3,
       "value": "0x3"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13034,
+      "offset": 13021,
       "length": 3,
       "value": "0x4"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13089,
+      "offset": 13076,
       "length": 3,
       "value": "0x5"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13136,
+      "offset": 13123,
       "length": 3,
       "value": "0x6"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13193,
+      "offset": 13180,
       "length": 3,
       "value": "0x7"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13292,
+      "offset": 13279,
       "length": 3,
       "value": "0x8"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13355,
+      "offset": 13342,
       "length": 3,
       "value": "0x9"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13410,
+      "offset": 13397,
       "length": 3,
       "value": "0xA"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13471,
+      "offset": 13458,
       "length": 3,
       "value": "0xB"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13528,
+      "offset": 13515,
       "length": 3,
       "value": "0xC"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13583,
+      "offset": 13570,
       "length": 3,
       "value": "0xD"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13664,
+      "offset": 13651,
       "length": 3,
       "value": "0xE"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13749,
+      "offset": 13736,
       "length": 3,
       "value": "0xF"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13832,
+      "offset": 13819,
       "length": 4,
       "value": "0x10"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13943,
+      "offset": 13930,
       "length": 4,
       "value": "0x11"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 14518,
+      "offset": 14505,
       "length": 3,
       "value": "0x0"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 14588,
+      "offset": 14575,
       "length": 3,
       "value": "0x1"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 14655,
+      "offset": 14642,
       "length": 3,
       "value": "0x2"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 14714,
+      "offset": 14701,
       "length": 3,
       "value": "0x3"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 14779,
+      "offset": 14766,
       "length": 3,
       "value": "0x4"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 14847,
+      "offset": 14834,
       "length": 3,
       "value": "0x5"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 14915,
+      "offset": 14902,
       "length": 3,
       "value": "0x6"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 14980,
+      "offset": 14967,
       "length": 3,
       "value": "0x7"
     },
@@ -1844,6 +1732,195 @@
       "offset": 685,
       "length": 18,
       "value": "\"userAcceleration\""
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 76,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 87,
+      "length": 8,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 105,
+      "length": 4,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 119,
+      "length": 9,
+      "value": "3"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 181,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 192,
+      "length": 8,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 210,
+      "length": 18,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 238,
+      "length": 13,
+      "value": "3"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 261,
+      "length": 14,
+      "value": "4"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 323,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 334,
+      "length": 7,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 351,
+      "length": 4,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 365,
+      "length": 7,
+      "value": "3"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 382,
+      "length": 8,
+      "value": "4"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "Array",
+      "offset": 532,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 637,
+      "length": 3,
+      "value": "391"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 678,
+      "length": 3,
+      "value": "843"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "FloatLiteral",
+      "offset": 721,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "StringLiteral",
+      "offset": 763,
+      "length": 8,
+      "value": "\"iphone\""
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "BooleanLiteral",
+      "offset": 811,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "BooleanLiteral",
+      "offset": 865,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 907,
+      "length": 2,
+      "value": "-1"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 947,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 985,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1025,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1064,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1113,
+      "length": 5,
+      "value": "false"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Minifloat.swift",
@@ -1939,56 +2016,56 @@
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Generator.swift",
       "kind": "IntegerLiteral",
-      "offset": 756,
+      "offset": 646,
       "length": 3,
       "value": "0xA"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Generator.swift",
       "kind": "IntegerLiteral",
-      "offset": 899,
+      "offset": 789,
       "length": 4,
       "value": "0xFF"
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Generator.swift",
       "kind": "StringLiteral",
-      "offset": 1139,
+      "offset": 1029,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Generator.swift",
       "kind": "StringLiteral",
-      "offset": 1553,
+      "offset": 1510,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Generator.swift",
       "kind": "StringLiteral",
-      "offset": 1613,
+      "offset": 1570,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Generator.swift",
       "kind": "StringLiteral",
-      "offset": 1695,
+      "offset": 1652,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Generator.swift",
       "kind": "StringLiteral",
-      "offset": 1764,
+      "offset": 1721,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Generator.swift",
       "kind": "StringLiteral",
-      "offset": 1828,
+      "offset": 1785,
       "length": 2,
       "value": "\"\""
     }
