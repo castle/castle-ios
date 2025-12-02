@@ -41,12 +41,18 @@ static dispatch_queue_t CASEventStorageQueue(void) {
 {
     self = [super init];
     if (self) {
-        dispatch_sync(CASEventStorageQueue(), ^{
-            // Read stored queue from disk
-            self.eventQueue = [self storedQueue].mutableCopy;
-            
-            // Initialize API client
-            self.client = [CASAPIClient clientWithConfiguration:[Castle configuration]];
+        // Immediate initialize
+        self.eventQueue = [[NSMutableArray alloc] init];
+        self.client = [CASAPIClient clientWithConfiguration:[Castle configuration]];
+
+        dispatch_async(CASEventStorageQueue(), ^{
+            NSArray *storedEvents = [self storedQueue];
+            if (storedEvents.count > 0) {
+                // Prepend to current queue
+                NSMutableArray *combined = [storedEvents mutableCopy];
+                [combined addObjectsFromArray:self.eventQueue];
+                self.eventQueue = combined;
+            }
         });
     }
     return self;
@@ -233,7 +239,7 @@ static dispatch_queue_t CASEventStorageQueue(void) {
                 
                 self.task = nil;
                 
-                CASLog(@"Successfully flushed (%ld) events: %@", monitorModel.events.count, [monitorModel JSONPayload]);
+                CASLog(@"Successfully flushed (%ld) events", monitorModel.events.count);
                 
                 if ([self eventQueueExceedsFlushLimit] && self.eventQueue.count > 0) {
                     CASLog(@"Current event queue still exceeds flush limit. Flush again");

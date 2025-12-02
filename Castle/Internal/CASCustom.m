@@ -37,10 +37,16 @@ NS_ASSUME_NONNULL_BEGIN
         CASLog(@"Event name can't be nil.");
         return nil;
     }
-    
+
     if([name isEqualToString:@""]) {
         CASLog(@"Event names must be at least one (1) character long.");
         return nil;
+    }
+
+    if(!properties) {
+        // prevent dropping from nil properties in event, as it is allowed
+        // per signature
+        properties = @{};
     }
     
     BOOL valid = [CASEvent propertiesContainValidData:properties];
