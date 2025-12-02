@@ -239,7 +239,7 @@ static dispatch_queue_t CASEventStorageQueue(void) {
                 
                 self.task = nil;
                 
-                CASLog(@"Successfully flushed (%ld) events: %@", monitorModel.events.count, [monitorModel JSONPayload]);
+                CASLog(@"Successfully flushed (%ld) events", monitorModel.events.count);
                 
                 if ([self eventQueueExceedsFlushLimit] && self.eventQueue.count > 0) {
                     CASLog(@"Current event queue still exceeds flush limit. Flush again");
