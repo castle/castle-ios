@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.7-pre (2025-12-02)
+- [#146](https://github.com/castle/castle-ios/pull/146) Improvements to request interceptor and event queue init, remove unused CoreTelephony references.
+- Internal enhancements and stability improvements.
+
 ## 3.1.6 (2025-11-17)
 - [#144](https://github.com/castle/castle-ios/pull/144) Remove Reachability.
 - Internal enhancements and stability improvements.
