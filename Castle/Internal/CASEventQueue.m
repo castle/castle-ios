@@ -21,7 +21,7 @@ static NSUInteger CASMonitorMaxBatchSize = 20;
 
 @interface CASEventQueue ()
 @property (nonatomic, strong, nullable) CASAPIClient *client;
-@property (atomic, strong) NSMutableArray<CASEvent *> *eventQueue;  // thread-safe init
+@property (nonatomic, strong) NSMutableArray<CASEvent *> *eventQueue;
 @property (nonatomic, strong, nullable) NSURLSessionDataTask *task;
 @property (nonatomic, copy, readwrite, nullable) NSString *userJwt;
 @end
