@@ -331,6 +331,11 @@ NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
         return;
     }
     
+    if([Castle userJwt] == nil) {
+        CASLog(@"No user jwt set. Will cancel track event operation.");
+        return;
+    }
+    
     Castle *castle = [Castle sharedInstance];
     CASCustom *event = [CASCustom eventWithName:name properties: properties];
     [castle.eventQueue queueEvent:event];
@@ -340,6 +345,11 @@ NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
 {
     if(!name || [name isEqualToString:@""]) {
         CASLog(@"No screen name provided. Will cancel track event operation.");
+        return;
+    }
+    
+    if([Castle userJwt] == nil) {
+        CASLog(@"No user jwt set. Will cancel track event operation.");
         return;
     }
     
