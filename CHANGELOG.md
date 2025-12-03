@@ -1,6 +1,8 @@
 # Changelog
 
-## 3.1.7-pre (2025-12-02)
+## 3.1.7 (2025-12-03)
+- [#149](https://github.com/castle/castle-ios/pull/149) Don't create event models if no userJwt is set.
+- [#148](https://github.com/castle/castle-ios/pull/148) No need to clear and persist the event queue if it's already empty.
 - [#146](https://github.com/castle/castle-ios/pull/146) Improvements to request interceptor and event queue init, remove unused CoreTelephony references.
 - Internal enhancements and stability improvements.
 
