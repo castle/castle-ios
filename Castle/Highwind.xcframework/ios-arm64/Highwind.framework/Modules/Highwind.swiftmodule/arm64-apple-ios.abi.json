@@ -980,7 +980,7 @@
     {
       "filePath": "\/Users\/aLxx\/castle\/highwind-all\/ios\/Highwind\/Tracker.swift",
       "kind": "StringLiteral",
-      "offset": 1439,
+      "offset": 1479,
       "length": 33,
       "value": "\"com.castle.highwind.sensorQueue\""
     },
