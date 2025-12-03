@@ -142,6 +142,11 @@ static dispatch_queue_t CASEventStorageQueue(void) {
 - (void)clearQueue
 {
     dispatch_async(CASEventStorageQueue(), ^{
+        if (self.eventQueue.count == 0) {
+            CASLog(@"Queue doesn't contain any events no need to clear.");
+            return;
+        }
+        
         self.eventQueue = [[NSMutableArray alloc] init];
         [self persistQueue:self.eventQueue];
     });
