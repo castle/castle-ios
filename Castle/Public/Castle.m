@@ -149,6 +149,9 @@ NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
     // Update debug logging setting
     CASEnableDebugLogging([configuration isDebugLoggingEnabled]);
     
+    // trigger lazy init, to avoid init on first access
+    __unused Highwind *hw = castle.highwind;
+
     // Track application update/install
     [castle trackApplicationUpdated];
 }
@@ -260,7 +263,7 @@ NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
     
     // Check for valid Highwind instance
     Castle *castle = _sharedClient;
-    if (castle.highwind == nil) {
+    if (castle->_highwind == nil) {
         return NO;
     }
     
