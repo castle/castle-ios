@@ -6,7 +6,7 @@ This document describes the tasks to perform for tagging and releasing a new ver
 
  1. Update the version in `Castle.m`, `Castle.podspec` and `README.md`.
  2. Update `GeoZip.xcframwork` and `Highwind.xcframework`
- 3. Update `github_file_prefix` in jazzy.yaml to point to the new release tag 
+ 3. Update `github_file_prefix` in `.jazzy.yaml` to point to the new release tag 
  4. Update documentation by running `scripts/generate_docs.sh` in the project root.
  5. Update the `CHANGELOG.md` for the impending release.
  6. `git commit -am "Prepare for release X.Y.Z."` (where X.Y.Z is the new version).

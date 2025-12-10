@@ -223,7 +223,7 @@ NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
 
 + (NSString *)versionString
 {
-    return @"3.1.7";
+    return @"3.1.8";
 }
 
 - (nullable NSString *)deviceIdentifier
