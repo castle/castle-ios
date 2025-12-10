@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.1.8 (2025-12-10)
+- [#151](https://github.com/castle/castle-ios/pull/151) Remove Lazy Init to avoid execution during move to background.
+
 ## 3.1.7 (2025-12-03)
 - [#149](https://github.com/castle/castle-ios/pull/149) Don't create event models if no userJwt is set.
 - [#148](https://github.com/castle/castle-ios/pull/148) No need to clear and persist the event queue if it's already empty.

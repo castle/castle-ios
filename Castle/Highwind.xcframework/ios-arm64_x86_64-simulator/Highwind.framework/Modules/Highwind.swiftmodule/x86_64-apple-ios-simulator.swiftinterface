@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.3.3.20 clang-1700.6.3.2)
 // swift-module-flags: -target x86_64-apple-ios12.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name Highwind
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1.2
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import CoreLocation
 import CoreMotion
 import CoreTelephony
@@ -18,7 +18,9 @@ import _SwiftConcurrencyShims
 @objc public enum HighwindError : Swift.Int, Swift.Error, Swift.Equatable, Swift.Hashable, Swift.RawRepresentable {
   case invalidPublishableKey
   case invalidUUID
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public typealias RawValue = Swift.Int
   public static var _nsErrorDomain: Swift.String {
     get
@@ -28,9 +30,13 @@ import _SwiftConcurrencyShims
   }
 }
 @objc public class Highwind : ObjectiveC.NSObject {
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public init(version: Swift.String, uuid: Swift.String, publishableKey: Swift.String, userAgent: Swift.String, adSupportBlock: (() -> Swift.String)? = nil) throws
+  #endif
   @objc public func token() -> Swift.String
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc public func encodePayload(publishableKey: Swift.String, encodedUserPayload: Swift.String, encodedEventPayloads: Swift.Array<Swift.String>) -> Swift.String?
+  #endif
   @objc public func encodeScreenEvent(requestToken: Swift.String, payload: Swift.String) -> Swift.String
   @objc public func encodeCustomEvent(requestToken: Swift.String, payload: Swift.String) -> Swift.String
   @objc public func encodeUserPayloadSet(payload: Swift.String) -> Swift.String
