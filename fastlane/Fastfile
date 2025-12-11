@@ -20,6 +20,7 @@ platform :ios do
   lane :xcframework do
     clean_build_artifacts
 
+    FileUtils.rm_rf(File.expand_path("../Products/Castle.framework"))
     FileUtils.mkdir_p(File.expand_path("../Products/Castle.framework"))
     FileUtils.cp_r(File.expand_path("../Castle/Highwind.xcframework"), File.expand_path("../Products/Castle.framework/Highwind.xcframework"))
     FileUtils.cp_r(File.expand_path("../Castle/GeoZip.xcframework"), File.expand_path("../Products/Castle.framework/GeoZip.xcframework"))
