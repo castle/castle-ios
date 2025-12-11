@@ -14,11 +14,11 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		54bGJNI5vagfXLQMx/P8eYNeHDA=
+		ggMeAiXZ0coPlGDaCeYeurujwCo=
 		</data>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		kjM3Cv9uwC1WYitAH7gK05UbMlI=
+		Wxt4eRQJvXoNo2qx8nZTpu6pixE=
 		</data>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -34,11 +34,11 @@
 		</data>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		KzTlcac5yalb+IzYxM9qCXN+vL0=
+		O/wwOQkwFY923IPOL1Ew6+UL0Zc=
 		</data>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		kjM3Cv9uwC1WYitAH7gK05UbMlI=
+		Wxt4eRQJvXoNo2qx8nZTpu6pixE=
 		</data>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		CIfH7X0yJ2dnDWEmwiK5GxkQCB0=
+		mda6xdjrb6y8nZlEqOebSi0Jzvc=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -85,7 +85,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			rE8UPF2qnz0SGhWOvTl6CTNGNbT5nb6Sv/6Mh9Rmr0M=
+			V7nUCvqtAVk+4z6/x4XWgl49Dw/vu7N+V8telgfi4lg=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
@@ -113,14 +113,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			VtETzN0cHRNrTLc0ebcJcJ/I6SgW+BNhoKuybO04MRI=
+			UlQ/q9ChDTPO0jKyz8UYTxuGckjfj+6BXp3YR647/Ck=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			rE8UPF2qnz0SGhWOvTl6CTNGNbT5nb6Sv/6Mh9Rmr0M=
+			V7nUCvqtAVk+4z6/x4XWgl49Dw/vu7N+V8telgfi4lg=
 			</data>
 		</dict>
 		<key>Modules/Highwind.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
@@ -148,7 +148,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			6vVVZh8E5lAwxh97IWaMzo2dMqVdrez5knXCVkGoD+8=
+			4SlzdOSVMfUsbGioanXHfm5Vj9T54a/B2OikcECPPwM=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
