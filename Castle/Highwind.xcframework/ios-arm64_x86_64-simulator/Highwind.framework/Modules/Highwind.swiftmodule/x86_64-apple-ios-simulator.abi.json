@@ -1027,6 +1027,13 @@
       "value": "2147483647"
     },
     {
+      "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Encoder.swift",
+      "kind": "FloatLiteral",
+      "offset": 1585,
+      "length": 8,
+      "value": "100000.0"
+    },
+    {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "StringLiteral",
       "offset": 344,
@@ -1050,28 +1057,28 @@
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "Array",
-      "offset": 7869,
+      "offset": 7427,
       "length": 190,
       "value": "[\"\/Applications\/Cydia.app\", \"\/Library\/MobileSubstrate\/MobileSubstrate.dylib\", \"\/bin\/bash\", \"\/usr\/sbin\/sshd\", \"\/etc\/apt\", \"\/usr\/bin\/ssh\"]"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "BooleanLiteral",
-      "offset": 8204,
+      "offset": 7762,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "IntegerLiteral",
-      "offset": 9137,
+      "offset": 8695,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "IntegerLiteral",
-      "offset": 9180,
+      "offset": 8738,
       "length": 1,
       "value": "1"
     },
@@ -1925,16 +1932,9 @@
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Minifloat.swift",
       "kind": "IntegerLiteral",
-      "offset": 891,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Minifloat.swift",
-      "kind": "IntegerLiteral",
-      "offset": 894,
-      "length": 2,
-      "value": "16"
+      "offset": 887,
+      "length": 5,
+      "value": "65536"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/NumConversions.swift",

@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.1.9 (2025-12-11)
+- Internal enhancements and stability improvements.
+
 ## 3.1.8 (2025-12-10)
 - [#151](https://github.com/castle/castle-ios/pull/151) Remove Lazy Init to avoid execution during move to background.
 
