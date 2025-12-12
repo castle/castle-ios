@@ -1036,49 +1036,56 @@
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "StringLiteral",
-      "offset": 344,
+      "offset": 339,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
+      "kind": "StringLiteral",
+      "offset": 388,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "BooleanLiteral",
-      "offset": 446,
+      "offset": 631,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "BooleanLiteral",
-      "offset": 513,
+      "offset": 698,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "Array",
-      "offset": 7427,
+      "offset": 7992,
       "length": 190,
       "value": "[\"\/Applications\/Cydia.app\", \"\/Library\/MobileSubstrate\/MobileSubstrate.dylib\", \"\/bin\/bash\", \"\/usr\/sbin\/sshd\", \"\/etc\/apt\", \"\/usr\/bin\/ssh\"]"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "BooleanLiteral",
-      "offset": 7762,
+      "offset": 8327,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "IntegerLiteral",
-      "offset": 8695,
+      "offset": 9260,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "IntegerLiteral",
-      "offset": 8738,
+      "offset": 9303,
       "length": 1,
       "value": "1"
     },
