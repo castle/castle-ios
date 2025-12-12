@@ -708,7 +708,6 @@
     // Set current app version to semething old
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:@"0.1.1" forKey:@"CastleAppVersionKey"];
-    [defaults synchronize];
     
     [Castle resetConfiguration];
     [Castle configureWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];

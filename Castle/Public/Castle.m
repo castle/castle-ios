@@ -317,7 +317,6 @@ NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
     // Store user jwt in user defaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:userJwt forKey:CastleUserJwtKey];
-    [defaults synchronize];
 }
 
 #pragma mark - Tracking
@@ -437,7 +436,6 @@ NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
     }
     
     [defaults setObject:currentVersion forKey:CastleAppVersionKey];
-    [defaults synchronize];
 }
 
 #pragma mark - Application Lifecycle
