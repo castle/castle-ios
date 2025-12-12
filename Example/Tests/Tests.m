@@ -705,7 +705,7 @@
 
 - (void)testAppUpdateDetection
 {
-    // Set current app version to semething old
+    // Set current app version to something old
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:@"0.1.1" forKey:@"CastleAppVersionKey"];
     
@@ -713,9 +713,24 @@
     [Castle configureWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
     
     // Check to see if the installed version was updated correctly i.e. the SDK detected an app update.
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for app version update"];
     NSString *currentVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        for (int i = 0; i < 20; i++) { // Wait up to 2 seconds
+            NSString *installedVersion = [defaults objectForKey:@"CastleAppVersionKey"];
+            if ([installedVersion isEqualToString:currentVersion]) {
+                [expectation fulfill];
+                break;
+            }
+            [NSThread sleepForTimeInterval:0.1];
+        }
+    });
+    
+    [self waitForExpectationsWithTimeout:2.5 handler:nil];
+    
     NSString *installedVersion = [defaults objectForKey:@"CastleAppVersionKey"];
-    XCTAssertEqual(currentVersion, installedVersion);
+    XCTAssertEqualObjects(currentVersion, installedVersion);
 }
 
 @end

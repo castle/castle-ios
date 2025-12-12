@@ -81,13 +81,22 @@ NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
 @interface Castle ()
 @property (nonatomic, strong, nullable) CastleConfiguration *configuration;
 @property (nonatomic, strong, nullable) CASEventQueue *eventQueue;
-@property (nonatomic, copy, readwrite, nullable) NSString *userJwt;
+@property (atomic, copy, readwrite, nullable) NSString *userJwt;
 @property (nonatomic, strong, readwrite, nullable) Highwind *highwind;
 @end
 
 @implementation Castle
 
 @synthesize userJwt = _userJwt;
+
+static dispatch_queue_t CASUserDefaultsQueue(void) {
+    static dispatch_queue_t queue;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        queue = dispatch_queue_create("com.castle.CASUserDefaults", DISPATCH_QUEUE_SERIAL);
+    });
+    return queue;
+}
 
 + (instancetype)sharedInstance {
     NSAssert([Castle isConfigured], @"Castle SDK must be configured before calling this method");
@@ -132,6 +141,9 @@ NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
     // Setup shared instance using provided configuration
     Castle *castle = _sharedClient;
     castle.configuration = configuration;
+    
+    // Fetch stored user jwt
+    [castle fetchStoredUserJwt];
     
     // Initialize event queue, must be done after setting configuration
     castle.eventQueue = [[CASEventQueue alloc] init];
@@ -233,11 +245,14 @@ NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
 
 - (nullable NSString *)userJwt
 {
-    // If there's no user jwt: try fetching it from settings
-    if(!_userJwt) {
-        _userJwt = [[NSUserDefaults standardUserDefaults] objectForKey:CastleUserJwtKey];
-    }
     return _userJwt;
+}
+
+- (void)fetchStoredUserJwt
+{
+    dispatch_async(CASUserDefaultsQueue(), ^{
+        self.userJwt = [[NSUserDefaults standardUserDefaults] objectForKey:CastleUserJwtKey];
+    });
 }
 
 + (BOOL)isConfigured
@@ -318,9 +333,11 @@ NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
     
     _userJwt = userJwt;
     
-    // Store user jwt in user defaults
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:userJwt forKey:CastleUserJwtKey];
+    dispatch_async(CASUserDefaultsQueue(), ^{
+        // Store user jwt in user defaults
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:userJwt forKey:CastleUserJwtKey];
+    });
 }
 
 #pragma mark - Tracking
@@ -417,29 +434,31 @@ NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
 
 - (void)trackApplicationUpdated
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *currentVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-    NSString *installedVersion = [defaults objectForKey:CastleAppVersionKey];
-    
-    if (installedVersion == nil) {
-        // This means that the application was just installed.
-        CASLog(@"No app version was stored in settings: the application was just installed.");
-        CASLog(@"Application life cycle event detected: Will track install event");
-        [Castle customWithName:@"Application installed"];
+    dispatch_async(CASUserDefaultsQueue(), ^{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *currentVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+        NSString *installedVersion = [defaults objectForKey:CastleAppVersionKey];
         
-        // Flush the event queue when a application installed event is triggered
-        [Castle flush];
-    } else if (![installedVersion isEqualToString:currentVersion]) {
-        // App version changed since the application was last run: application was updated
-        CASLog(@"App version stored in settings is different from current version string: the application was just updated.");
-        CASLog(@"Application life cycle event detected: Will track update event");
-        [Castle customWithName:@"Application updated"];
+        if (installedVersion == nil) {
+            // This means that the application was just installed.
+            CASLog(@"No app version was stored in settings: the application was just installed.");
+            CASLog(@"Application life cycle event detected: Will track install event");
+            [Castle customWithName:@"Application installed"];
+            
+            // Flush the event queue when a application installed event is triggered
+            [Castle flush];
+        } else if (![installedVersion isEqualToString:currentVersion]) {
+            // App version changed since the application was last run: application was updated
+            CASLog(@"App version stored in settings is different from current version string: the application was just updated.");
+            CASLog(@"Application life cycle event detected: Will track update event");
+            [Castle customWithName:@"Application updated"];
+            
+            // Flush the event queue when a application updated event is triggered
+            [Castle flush];
+        }
         
-        // Flush the event queue when a application updated event is triggered
-        [Castle flush];
-    }
-    
-    [defaults setObject:currentVersion forKey:CastleAppVersionKey];
+        [defaults setObject:currentVersion forKey:CastleAppVersionKey];
+    });
 }
 
 #pragma mark - Application Lifecycle
