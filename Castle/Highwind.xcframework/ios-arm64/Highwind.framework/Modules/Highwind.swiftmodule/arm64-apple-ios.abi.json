@@ -1036,84 +1036,91 @@
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "StringLiteral",
-      "offset": 344,
+      "offset": 339,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
+      "kind": "StringLiteral",
+      "offset": 388,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "BooleanLiteral",
-      "offset": 446,
+      "offset": 631,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "BooleanLiteral",
-      "offset": 513,
+      "offset": 698,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "Array",
-      "offset": 7427,
+      "offset": 7992,
       "length": 190,
       "value": "[\"\/Applications\/Cydia.app\", \"\/Library\/MobileSubstrate\/MobileSubstrate.dylib\", \"\/bin\/bash\", \"\/usr\/sbin\/sshd\", \"\/etc\/apt\", \"\/usr\/bin\/ssh\"]"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "BooleanLiteral",
-      "offset": 7884,
+      "offset": 8449,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "StringLiteral",
-      "offset": 8032,
+      "offset": 8597,
       "length": 16,
       "value": "\"\/private\/t.txt\""
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "StringLiteral",
-      "offset": 8065,
+      "offset": 8630,
       "length": 3,
       "value": "\".\""
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "BooleanLiteral",
-      "offset": 8101,
+      "offset": 8666,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "BooleanLiteral",
-      "offset": 8205,
+      "offset": 8770,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "BooleanLiteral",
-      "offset": 8254,
+      "offset": 8819,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "IntegerLiteral",
-      "offset": 8695,
+      "offset": 9260,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "IntegerLiteral",
-      "offset": 8738,
+      "offset": 9303,
       "length": 1,
       "value": "1"
     },

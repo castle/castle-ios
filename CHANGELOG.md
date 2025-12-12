@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.1.10 (2025-12-12) 
+- [#156](https://github.com/castle/castle-ios/pull/156) Make NSUserDefaults access async.
+- [#155](https://github.com/castle/castle-ios/pull/155) Remove deprecated synchronize calls. 
+- Internal enhancements and stability improvements.
+
 ## 3.1.9 (2025-12-11)
 - Internal enhancements and stability improvements.
 
