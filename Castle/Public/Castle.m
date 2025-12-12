@@ -312,6 +312,10 @@ NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
 
 - (void)setUserJwt:(nullable NSString *)userJwt
 {
+    if ((userJwt == nil && _userJwt == nil) || [userJwt isEqualToString:_userJwt]) {
+        return;
+    }
+    
     _userJwt = userJwt;
     
     // Store user jwt in user defaults
