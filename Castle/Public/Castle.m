@@ -79,9 +79,13 @@ NSString *const CastleAppVersionKey = @"CastleAppVersionKey";
 NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
 
 @interface Castle ()
+{
+    dispatch_queue_t _userJwtQueue;
+    NSString *_userJwt;
+}
 @property (nonatomic, strong, nullable) CastleConfiguration *configuration;
 @property (nonatomic, strong, nullable) CASEventQueue *eventQueue;
-@property (atomic, copy, readwrite, nullable) NSString *userJwt;
+@property (nonatomic, copy, readonly, nullable) NSString *userJwt;
 @property (nonatomic, strong, readwrite, nullable) Highwind *highwind;
 @end
 
@@ -107,6 +111,8 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 {
     self = [super init];
     if(self) {
+        _userJwtQueue = dispatch_queue_create("com.castle.CASUserJwt", DISPATCH_QUEUE_SERIAL);
+        
         NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
         [defaultCenter addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
         [defaultCenter addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
@@ -245,13 +251,23 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 - (nullable NSString *)userJwt
 {
-    return _userJwt;
+    __block NSString *jwt;
+    dispatch_sync(_userJwtQueue, ^{
+        jwt = _userJwt;
+    });
+    return jwt;
 }
 
 - (void)fetchStoredUserJwt
 {
     dispatch_async(CASUserDefaultsQueue(), ^{
-        self.userJwt = [[NSUserDefaults standardUserDefaults] objectForKey:CastleUserJwtKey];
+        NSString *storedJwt = [[NSUserDefaults standardUserDefaults] objectForKey:CastleUserJwtKey];
+
+        dispatch_async(self->_userJwtQueue, ^{
+            if (self->_userJwt == nil) {
+                self->_userJwt = [storedJwt copy];
+            }
+        });
     });
 }
 
@@ -327,16 +343,19 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 - (void)setUserJwt:(nullable NSString *)userJwt
 {
-    if ((userJwt == nil && _userJwt == nil) || [userJwt isEqualToString:_userJwt]) {
-        return;
-    }
-    
-    _userJwt = userJwt;
-    
-    dispatch_async(CASUserDefaultsQueue(), ^{
-        // Store user jwt in user defaults
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:userJwt forKey:CastleUserJwtKey];
+    dispatch_async(_userJwtQueue, ^{
+        if ((userJwt == nil && self->_userJwt == nil) ||
+            [userJwt isEqualToString:self->_userJwt]) {
+            return;
+        }
+
+        self->_userJwt = [userJwt copy];
+
+        // Persist asynchronously on the existing UserDefaults queue
+        dispatch_async(CASUserDefaultsQueue(), ^{
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:userJwt forKey:CastleUserJwtKey];
+        });
     });
 }
 
