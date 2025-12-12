@@ -640,7 +640,6 @@ class SwiftTests: XCTestCase {
         // Set current app version to semething old
         let defaults = UserDefaults.standard
         defaults.setValue("0.1.1", forKey: "CastleAppVersionKey")
-        defaults.synchronize()
 
         Castle.resetConfiguration()
         Castle.configure(withPublishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA")
