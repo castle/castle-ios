@@ -637,15 +637,30 @@ class SwiftTests: XCTestCase {
     }
 
     func testAppUpdateDetection() throws {
-        // Set current app version to semething old
+        // Set current app version to something old
         let defaults = UserDefaults.standard
         defaults.setValue("0.1.1", forKey: "CastleAppVersionKey")
 
         Castle.resetConfiguration()
         Castle.configure(withPublishableKey: "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA")
 
-        // Check to see if the installed version was updated correctly i.e. the SDK detected an app update.
+        // Wait for async update
+        let expectation = self.expectation(description: "Wait for app version update")
         let currentVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+
+        DispatchQueue.global().async {
+            for _ in 0..<20 {
+                let installedVersion = defaults.value(forKey: "CastleAppVersionKey") as? String
+                if installedVersion == currentVersion {
+                    expectation.fulfill()
+                    return
+                }
+                Thread.sleep(forTimeInterval: 0.1)
+            }
+        }
+
+        waitForExpectations(timeout: 2.5, handler: nil)
+
         let installedVersion = defaults.value(forKey: "CastleAppVersionKey") as! String
         XCTAssertEqual(currentVersion, installedVersion)
     }
