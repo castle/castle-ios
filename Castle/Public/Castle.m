@@ -79,19 +79,13 @@ NSString *const CastleAppVersionKey = @"CastleAppVersionKey";
 NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
 
 @interface Castle ()
-{
-    dispatch_queue_t _userJwtQueue;
-    NSString *_userJwt;
-}
 @property (nonatomic, strong, nullable) CastleConfiguration *configuration;
 @property (nonatomic, strong, nullable) CASEventQueue *eventQueue;
-@property (nonatomic, copy, readonly, nullable) NSString *userJwt;
+@property (atomic, copy, nullable) NSString *userJwt;
 @property (nonatomic, strong, readwrite, nullable) Highwind *highwind;
 @end
 
 @implementation Castle
-
-@synthesize userJwt = _userJwt;
 
 static dispatch_queue_t CASUserDefaultsQueue(void) {
     static dispatch_queue_t queue;
@@ -111,8 +105,6 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 {
     self = [super init];
     if(self) {
-        _userJwtQueue = dispatch_queue_create("com.castle.CASUserJwt", DISPATCH_QUEUE_SERIAL);
-        
         NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
         [defaultCenter addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
         [defaultCenter addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
@@ -148,8 +140,11 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
     Castle *castle = _sharedClient;
     castle.configuration = configuration;
     
-    // Fetch stored user jwt
-    [castle fetchStoredUserJwt];
+    // Load stored user JWT if present
+    NSString *storedJwt = [[NSUserDefaults standardUserDefaults] objectForKey:CastleUserJwtKey];
+    if (storedJwt.length > 0) {
+        castle.userJwt = storedJwt;
+    }
     
     // Initialize event queue, must be done after setting configuration
     castle.eventQueue = [[CASEventQueue alloc] init];
@@ -170,7 +165,7 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
     // trigger lazy init, to avoid init on first access
     __unused Highwind *hw = castle.highwind;
 
-    // Track application update/install
+    // Track application updated
     [castle trackApplicationUpdated];
 }
 
@@ -215,17 +210,14 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 {
     // Create a new Highwind instance if there is none and the SDK has been configured
     if (_highwind == nil && [[self class] isConfigured]) {
-        Castle *castle = [Castle sharedInstance];
-        CastleConfiguration *configuration = castle.configuration;
-        
-        NSString *uuid = [castle deviceIdentifier];
+        NSString *uuid = [self deviceIdentifier];
         NSError *error = nil;
         _highwind = [[Highwind alloc] initWithVersion:Castle.versionString
                                                  uuid:uuid
-                                       publishableKey:configuration.publishableKey
+                                       publishableKey:self.configuration.publishableKey
                                             userAgent:CASUserAgent()
                                                 error:&error
-                                       adSupportBlock:configuration.adSupportBlock];
+                                       adSupportBlock:self.configuration.adSupportBlock];
         
         if(error) {
             if (error.domain == HighwindErrorDomain && error.code == HighwindErrorInvalidPublishableKey) {
@@ -247,28 +239,6 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 - (nullable NSString *)deviceIdentifier
 {
     return [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-}
-
-- (nullable NSString *)userJwt
-{
-    __block NSString *jwt;
-    dispatch_sync(_userJwtQueue, ^{
-        jwt = _userJwt;
-    });
-    return jwt;
-}
-
-- (void)fetchStoredUserJwt
-{
-    dispatch_async(CASUserDefaultsQueue(), ^{
-        NSString *storedJwt = [[NSUserDefaults standardUserDefaults] objectForKey:CastleUserJwtKey];
-
-        dispatch_async(self->_userJwtQueue, ^{
-            if (self->_userJwt == nil) {
-                self->_userJwt = [storedJwt copy];
-            }
-        });
-    });
 }
 
 + (BOOL)isConfigured
@@ -339,26 +309,6 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
     return _sharedClient.configuration.enableApplicationLifecycleTracking;
 }
 
-#pragma mark - Setters
-
-- (void)setUserJwt:(nullable NSString *)userJwt
-{
-    dispatch_async(_userJwtQueue, ^{
-        if ((userJwt == nil && self->_userJwt == nil) ||
-            [userJwt isEqualToString:self->_userJwt]) {
-            return;
-        }
-
-        self->_userJwt = [userJwt copy];
-
-        // Persist asynchronously on the existing UserDefaults queue
-        dispatch_async(CASUserDefaultsQueue(), ^{
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:userJwt forKey:CastleUserJwtKey];
-        });
-    });
-}
-
 #pragma mark - Tracking
 
 + (void)customWithName:(NSString *)name
@@ -368,7 +318,7 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 + (void)customWithName:(NSString *)name properties:(NSDictionary *)properties
 {
-    if(!name || [name isEqualToString:@""]) {
+    if(name.length == 0) {
         CASLog(@"No event name provided. Will cancel track event operation.");
         return;
     }
@@ -385,7 +335,7 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 + (void)screenWithName:(NSString *)name
 {
-    if(!name || [name isEqualToString:@""]) {
+    if(name.length == 0) {
         CASLog(@"No screen name provided. Will cancel track event operation.");
         return;
     }
@@ -402,13 +352,16 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 + (void)setUserJwt:(nullable NSString *)userJwt
 {
-    if(!userJwt || [userJwt isEqualToString:@""]) {
+    if(!userJwt || userJwt.length == 0) {
         CASLog(@"No user jwt provided.");
         return;
     }
     
-    Castle *castle = [Castle sharedInstance];
-    [castle setUserJwt:userJwt];
+    [Castle sharedInstance].userJwt = userJwt;
+
+    dispatch_async(CASUserDefaultsQueue(), ^{
+        [[NSUserDefaults standardUserDefaults] setObject:userJwt forKey:CastleUserJwtKey];
+    });
 }
 
 + (void)flush
@@ -429,6 +382,10 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
     [Castle flush];
     [Castle sharedInstance].userJwt = nil;
+
+    dispatch_async(CASUserDefaultsQueue(), ^{
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:CastleUserJwtKey];
+    });
 }
 
 + (BOOL)isAllowlistURL:(nullable NSURL *)url
@@ -458,20 +415,12 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
         NSString *currentVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
         NSString *installedVersion = [defaults objectForKey:CastleAppVersionKey];
         
-        if (installedVersion == nil) {
-            // This means that the application was just installed.
-            CASLog(@"No app version was stored in settings: the application was just installed.");
-            CASLog(@"Application life cycle event detected: Will track install event");
-            [Castle customWithName:@"Application installed"];
-            
-            // Flush the event queue when a application installed event is triggered
-            [Castle flush];
-        } else if (![installedVersion isEqualToString:currentVersion]) {
+        if (installedVersion != nil && ![installedVersion isEqualToString:currentVersion]) {
             // App version changed since the application was last run: application was updated
             CASLog(@"App version stored in settings is different from current version string: the application was just updated.");
             CASLog(@"Application life cycle event detected: Will track update event");
             [Castle customWithName:@"Application updated"];
-            
+
             // Flush the event queue when a application updated event is triggered
             [Castle flush];
         }
