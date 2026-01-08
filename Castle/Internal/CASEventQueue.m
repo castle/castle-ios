@@ -295,10 +295,14 @@ static dispatch_queue_t CASEventStorageQueue(void) {
 
 - (NSArray<CASEvent *> *)readQueueFromFile:(NSString *)filePath
 {
+    NSData *data = [NSData dataWithContentsOfFile:filePath];
+    if (data.length == 0) {
+        return @[];
+    }
+
     NSArray *queue = @[];
     if (@available(iOS 14.0, *)) {
         NSError *error = nil;
-        NSData *data = [NSData dataWithContentsOfFile:filePath];
         NSSet *classes = [NSSet setWithArray:@[CASEvent.self, CASScreen.self, CASCustom.self]];
         queue = [NSKeyedUnarchiver unarchivedArrayOfObjectsOfClasses:classes fromData:data error:&error];
         if(error != nil) {
@@ -309,14 +313,14 @@ static dispatch_queue_t CASEventStorageQueue(void) {
         @try {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-            queue = [NSKeyedUnarchiver unarchiveObjectWithFile:self.storagePath];
+            queue = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
 #pragma clang diagnostic pop
         } @catch (NSException *exception) {
             CASLog(@"Failed to load events from file, error: %@", [exception callStackSymbols]);
             queue = @[];
         }
     }
-    CASLog(@"%ld events read from: %@", queue.count, self.storagePath);
+    CASLog(@"%ld events read from: %@", queue.count, filePath);
     return queue;
 }
 
