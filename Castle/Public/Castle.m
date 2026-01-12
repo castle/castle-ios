@@ -44,6 +44,7 @@ static NSString *CastleConfigurationCastleAPIPath = @"v1/";
     configuration.maxQueueLimit = 1000;
     configuration.enableAdvertisingTracking = YES;
     configuration.enableApplicationLifecycleTracking = YES;
+    configuration.enableSensorTracking = YES;
     return configuration;
 }
 
@@ -216,8 +217,9 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
                                                  uuid:uuid
                                        publishableKey:self.configuration.publishableKey
                                             userAgent:CASUserAgent()
-                                                error:&error
-                                       adSupportBlock:self.configuration.adSupportBlock];
+                                       adSupportBlock:self.configuration.adSupportBlock
+                                       sensorTracking:self.configuration.enableSensorTracking
+                                                error:&error];
         
         if(error) {
             if (error.domain == HighwindErrorDomain && error.code == HighwindErrorInvalidPublishableKey) {
@@ -307,6 +309,16 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
     }
     
     return _sharedClient.configuration.enableApplicationLifecycleTracking;
+}
+
++ (BOOL)isSensorTrackingEnabled
+{
+    // SDK isn't ready if it hasn't been configured
+    if (![self isReady]) {
+        return NO;
+    }
+
+    return _sharedClient.configuration.enableSensorTracking;
 }
 
 #pragma mark - Tracking

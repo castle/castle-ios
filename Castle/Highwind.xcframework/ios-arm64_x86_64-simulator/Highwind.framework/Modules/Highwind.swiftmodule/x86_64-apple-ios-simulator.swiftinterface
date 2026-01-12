@@ -31,7 +31,7 @@ import _SwiftConcurrencyShims
 }
 @objc public class Highwind : ObjectiveC.NSObject {
   #if compiler(>=5.3) && $NonescapableTypes
-  @objc public init(version: Swift.String, uuid: Swift.String, publishableKey: Swift.String, userAgent: Swift.String, adSupportBlock: (() -> Swift.String)? = nil) throws
+  @objc public init(version: Swift.String, uuid: Swift.String, publishableKey: Swift.String, userAgent: Swift.String, adSupportBlock: (() -> Swift.String)? = nil, sensorTracking: Swift.Bool = true) throws
   #endif
   @objc public func token() -> Swift.String
   #if compiler(>=5.3) && $NonescapableTypes
