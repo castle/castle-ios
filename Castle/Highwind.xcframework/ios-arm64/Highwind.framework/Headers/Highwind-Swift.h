@@ -316,7 +316,9 @@ SWIFT_CLASS("_TtC8Highwind8Highwind")
 ///
 /// \param userAgent User Agent string
 ///
-- (nullable instancetype)initWithVersion:(NSString * _Nonnull)version uuid:(NSString * _Nonnull)uuid publishableKey:(NSString * _Nonnull)publishableKey userAgent:(NSString * _Nonnull)userAgent error:(NSError * _Nullable * _Nullable)error adSupportBlock:(NSString * _Nonnull (^ _Nullable)(void))adSupportBlock OBJC_DESIGNATED_INITIALIZER;
+/// \param sensorTracking Enable or disable sensor tracking
+///
+- (nullable instancetype)initWithVersion:(NSString * _Nonnull)version uuid:(NSString * _Nonnull)uuid publishableKey:(NSString * _Nonnull)publishableKey userAgent:(NSString * _Nonnull)userAgent adSupportBlock:(NSString * _Nonnull (^ _Nullable)(void))adSupportBlock sensorTracking:(BOOL)sensorTracking error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 /// Get client token string
 ///
 /// returns:

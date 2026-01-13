@@ -79,6 +79,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, getter=isApplicationLifecycleTrackingEnabled) BOOL enableApplicationLifecycleTracking;
 
 /**
+ Whether the analytics client should track sensor data. `YES` by default.
+ */
+@property (nonatomic, assign, getter=isSensorTrackingEnabled) BOOL enableSensorTracking;
+
+/**
  Default configuration with provided publishable key
 
  @param publishableKey Castle publishable key

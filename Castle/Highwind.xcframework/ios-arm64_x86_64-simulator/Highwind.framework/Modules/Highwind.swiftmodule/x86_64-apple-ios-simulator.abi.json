@@ -388,7 +388,7 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(version:uuid:publishableKey:userAgent:adSupportBlock:)",
+            "printedName": "init(version:uuid:publishableKey:userAgent:adSupportBlock:sensorTracking:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -446,13 +446,20 @@
                 ],
                 "hasDefaultArg": true,
                 "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "hasDefaultArg": true,
+                "usr": "s:Sb"
               }
             ],
             "declKind": "Constructor",
-            "usr": "c:@M@Highwind@objc(cs)Highwind(im)initWithVersion:uuid:publishableKey:userAgent:error:adSupportBlock:",
-            "mangledName": "$s8HighwindAAC7version4uuid14publishableKey9userAgent14adSupportBlockABSS_S4SycSgtKcfc",
+            "usr": "c:@M@Highwind@objc(cs)Highwind(im)initWithVersion:uuid:publishableKey:userAgent:adSupportBlock:sensorTracking:error:",
+            "mangledName": "$s8HighwindAAC7version4uuid14publishableKey9userAgent14adSupportBlock14sensorTrackingABSS_S4SycSgSbtKcfc",
             "moduleName": "Highwind",
-            "objc_name": "initWithVersion:uuid:publishableKey:userAgent:error:adSupportBlock:",
+            "objc_name": "initWithVersion:uuid:publishableKey:userAgent:adSupportBlock:sensorTracking:error:",
             "declAttributes": [
               "AccessControl",
               "ObjC",
@@ -992,6 +999,20 @@
       "value": "\"com.castle.highwind.sensorQueue\""
     },
     {
+      "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Tracker.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2250,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Tracker.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2506,
+      "length": 4,
+      "value": "true"
+    },
+    {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Encoder.swift",
       "kind": "IntegerLiteral",
       "offset": 320,
@@ -1064,28 +1085,28 @@
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "Array",
-      "offset": 7992,
+      "offset": 7806,
       "length": 190,
       "value": "[\"\/Applications\/Cydia.app\", \"\/Library\/MobileSubstrate\/MobileSubstrate.dylib\", \"\/bin\/bash\", \"\/usr\/sbin\/sshd\", \"\/etc\/apt\", \"\/usr\/bin\/ssh\"]"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "BooleanLiteral",
-      "offset": 8327,
+      "offset": 8141,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "IntegerLiteral",
-      "offset": 9260,
+      "offset": 9074,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/System.swift",
       "kind": "IntegerLiteral",
-      "offset": 9303,
+      "offset": 9117,
       "length": 1,
       "value": "1"
     },
@@ -1095,6 +1116,13 @@
       "offset": 467,
       "length": 11,
       "value": "1"
+    },
+    {
+      "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Highwind.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1081,
+      "length": 4,
+      "value": "true"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Metric.swift",
@@ -1909,6 +1937,20 @@
       "value": "false"
     },
     {
+      "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "StringLiteral",
+      "offset": 1160,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/FeatureCache.swift",
+      "kind": "StringLiteral",
+      "offset": 1201,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Minifloat.swift",
       "kind": "IntegerLiteral",
       "offset": 338,
@@ -2047,6 +2089,13 @@
       "offset": 1785,
       "length": 2,
       "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Generator.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2144,
+      "length": 4,
+      "value": "true"
     }
   ]
 }
