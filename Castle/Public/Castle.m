@@ -235,7 +235,7 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 + (NSString *)versionString
 {
-    return @"3.1.10";
+    return @"3.1.11";
 }
 
 - (nullable NSString *)deviceIdentifier

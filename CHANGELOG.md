@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.1.11 (2026-01-13) 
+- [#159](https://github.com/castle/castle-ios/pull/159) Add SensorTracking enabling option.
+- [#158](https://github.com/castle/castle-ios/pull/158) Simplify JWT Usage.
+- Internal enhancements and stability improvements.
+
 ## 3.1.10 (2025-12-12) 
 - [#156](https://github.com/castle/castle-ios/pull/156) Make NSUserDefaults access async.
 - [#155](https://github.com/castle/castle-ios/pull/155) Remove deprecated synchronize calls. 
