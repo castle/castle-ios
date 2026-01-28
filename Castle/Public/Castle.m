@@ -147,8 +147,10 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
         castle.userJwt = storedJwt;
     }
     
-    // Initialize event queue, must be done after setting configuration
-    castle.eventQueue = [[CASEventQueue alloc] init];
+    // Initialize event queue only if sensor tracking is enabled
+    if (configuration.enableSensorTracking) {
+        castle.eventQueue = [[CASEventQueue alloc] init];
+    }
     
     // Initialize interceptor
     if(configuration.isDeviceIDAutoForwardingEnabled) {
@@ -330,6 +332,10 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 + (void)customWithName:(NSString *)name properties:(NSDictionary *)properties
 {
+    if (![Castle isSensorTrackingEnabled]) {
+        return;
+    }
+    
     if(name.length == 0) {
         CASLog(@"No event name provided. Will cancel track event operation.");
         return;
@@ -347,6 +353,10 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 + (void)screenWithName:(NSString *)name
 {
+    if (![Castle isSensorTrackingEnabled]) {
+        return;
+    }
+
     if(name.length == 0) {
         CASLog(@"No screen name provided. Will cancel track event operation.");
         return;
@@ -378,6 +388,14 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 + (void)flush
 {
+    if (![Castle isConfigured]) {
+        return;
+    }
+
+    if (![Castle isSensorTrackingEnabled]) {
+        return;
+    }
+
     [[Castle sharedInstance].eventQueue flush];
 }
 
@@ -422,6 +440,14 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 - (void)trackApplicationUpdated
 {
+    if (![Castle isConfigured]) {
+        return;
+    }
+
+    if (!_configuration.enableSensorTracking) {
+        return;
+    }
+
     dispatch_async(CASUserDefaultsQueue(), ^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *currentVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
@@ -517,6 +543,14 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 + (NSUInteger)queueSize
 {
+    if (![Castle isConfigured]) {
+        return 0;
+    }
+
+    if (![Castle isSensorTrackingEnabled]) {
+        return 0;
+    }
+    
     return [Castle sharedInstance].eventQueue.count;
 }
 
