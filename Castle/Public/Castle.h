@@ -242,9 +242,9 @@ extern NSString * const CastleRequestTokenHeaderName;
 /**
  Get request token
 
- @return request token
+ @return request token, or nil if device UUID is unavailable
  */
-+ (NSString *)createRequestToken;
++ (nullable NSString *)createRequestToken;
 
 /**
  Get the User Agent for used in all requests to the Castle API.

@@ -84,6 +84,7 @@ NSString *const CastleRequestTokenHeaderName = @"X-Castle-Request-Token";
 @property (nonatomic, strong, nullable) CASEventQueue *eventQueue;
 @property (atomic, copy, nullable) NSString *userJwt;
 @property (nonatomic, strong, readwrite, nullable) Highwind *highwind;
+@property (nonatomic, copy, nullable) NSString *deviceUUID;
 @end
 
 @implementation Castle
@@ -168,6 +169,9 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
     // trigger lazy init, to avoid init on first access
     __unused Highwind *hw = castle.highwind;
 
+    // Try to get device UUID (may be nil if device not yet unlocked)
+    castle.deviceUUID = [castle deviceIdentifier];
+
     // Track application updated
     [castle trackApplicationUpdated];
 }
@@ -213,10 +217,8 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 {
     // Create a new Highwind instance if there is none and the SDK has been configured
     if (_highwind == nil && [[self class] isConfigured]) {
-        NSString *uuid = [self deviceIdentifier];
         NSError *error = nil;
         _highwind = [[Highwind alloc] initWithVersion:Castle.versionString
-                                                 uuid:uuid
                                        publishableKey:self.configuration.publishableKey
                                             userAgent:CASUserAgent()
                                        adSupportBlock:self.configuration.adSupportBlock
@@ -226,8 +228,6 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
         if(error) {
             if (error.domain == HighwindErrorDomain && error.code == HighwindErrorInvalidPublishableKey) {
                 NSAssert(true, @"You must provide a valid Castle publishable key when initializing the SDK.");
-            } else if (error.domain == HighwindErrorDomain && error.code == HighwindErrorInvalidUUID) {
-                CASLog(@"[WARNING] Invalid uuid detected (%@). Will try to recover.", uuid);
             }
             NSAssert(true, @"Unknown unrecoverable error occurred: %@", error);
         }
@@ -242,7 +242,11 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 - (nullable NSString *)deviceIdentifier
 {
-    return [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    NSString *uuid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    if (uuid == nil) {
+        return nil;
+    }
+    return [uuid stringByReplacingOccurrencesOfString:@"-" withString:@""];
 }
 
 + (BOOL)isConfigured
@@ -261,7 +265,6 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 + (BOOL)isReady
 {
-    // SDK isn't ready if it hasn't been configured
     if (![self isConfigured]) {
         return NO;
     }
@@ -333,6 +336,7 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 + (void)customWithName:(NSString *)name properties:(NSDictionary *)properties
 {
     if (![Castle isSensorTrackingEnabled]) {
+        CASLog(@"SensorTracking disabled, no event queued!");
         return;
     }
     
@@ -388,11 +392,7 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 + (void)flush
 {
-    if (![Castle isConfigured]) {
-        return;
-    }
-
-    if (![Castle isSensorTrackingEnabled]) {
+    if (![Castle isConfigured] || ![Castle isSensorTrackingEnabled]) {
         return;
     }
 
@@ -516,9 +516,29 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 #pragma mark - Metadata
 
-+ (NSString *)createRequestToken
++ (nullable NSString *)createRequestToken
 {
-    return [[Castle sharedInstance].highwind token];
+    Castle *castle = [Castle sharedInstance];
+
+    // Try to get UUID if we don't have one
+    if (castle.deviceUUID == nil) {
+        castle.deviceUUID = [castle deviceIdentifier];
+
+        if (castle.deviceUUID == nil) {
+           CASLog(@"Cannot create request token: device UUID unavailable");
+            return nil;
+        }
+    }
+
+    NSLog(@"Creating request token with UUID: %@", castle.deviceUUID);
+
+    @try {
+        return [castle.highwind tokenWithUuid:castle.deviceUUID];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Exception creating request token: %@ - %@", exception.name, exception.reason);
+        return nil;
+    }
 }
 
 + (NSString *)userJwt
@@ -543,11 +563,7 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 + (NSUInteger)queueSize
 {
-    if (![Castle isConfigured]) {
-        return 0;
-    }
-
-    if (![Castle isSensorTrackingEnabled]) {
+    if (![Castle isConfigured] || ![Castle isSensorTrackingEnabled]) {
         return 0;
     }
     
