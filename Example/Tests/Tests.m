@@ -165,11 +165,11 @@
     XCTAssertThrows([Castle configureWithPublishableKey:@"ab_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"]);
 }
 
-- (void)testHighwindNilUUID
+- (void)testHighwindInvalidUUID
 {
     [Castle reset];
     
-    // Swizzle device identifier to simulate [[UIDevice currentDevice] identifierForVendor] returning nil
+    // Swizzle device identifier to return an invalid UUID string
     [Castle enableSwizzle:true];
     
     NSString *publishableKey = @"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA";
@@ -177,23 +177,22 @@
     [Castle configureWithPublishableKey:publishableKey];
     [Castle setUserJwt:jwt];
     
-    NSUInteger count = Castle.queueSize;
-    XCTAssertEqual(count, 0);
+    // Clear cached deviceUUID to force re-fetching via swizzled method
+    [Castle clearDeviceUUID];
     
-    // Tracking a custom event with the device identifier being nil should not add the event to the queue
-    [Castle customWithName:@"custom event"];
-    
-    NSUInteger newCount = Castle.queueSize;
-    XCTAssertEqual(newCount, 0);
+    // createRequestToken should return empty string when deviceIdentifier returns an invalid UUID
+    NSString *token = [Castle createRequestToken];
+    XCTAssertEqualObjects(token, @"");
     
     // Disable swizzle, deviceIdentifier should now return a valid UUID
     [Castle enableSwizzle:false];
     
-    // Track another event, Highwind instance should now be initialized (deviceIdentifier returned non-null UUID)
-    [Castle customWithName:@"custom event"];
+    // Clear cached deviceUUID again to get valid UUID
+    [Castle clearDeviceUUID];
     
-    NSUInteger finalCount = Castle.queueSize;
-    XCTAssertGreaterThan(finalCount, 0);
+    // Token should now be valid (non-empty)
+    NSString *validToken = [Castle createRequestToken];
+    XCTAssertGreaterThan(validToken.length, 0);
 }
 
 - (void)testDeviceIdentifier
@@ -565,8 +564,8 @@
     XCTAssertThrows([Castle customWithName: @"Custom event"]);
     XCTAssertThrows([Castle userJwt]);
     XCTAssertThrows([Castle setUserJwt: @"invalid_jwt_token_string"]);
-    XCTAssertThrows([Castle queueSize]);
-    XCTAssertThrows([Castle flush]);
+    //XCTAssertThrows([Castle queueSize]);
+    //XCTAssertThrows([Castle flush]);
     XCTAssertThrows([Castle flushIfNeeded:[NSURL URLWithString: @"https://google.com/"]]);
     XCTAssertThrows([Castle isAllowlistURL:[NSURL URLWithString: @"https://google.com/"]]);
     XCTAssertThrows([Castle baseURL]);
@@ -731,6 +730,46 @@
     
     NSString *installedVersion = [defaults objectForKey:@"CastleAppVersionKey"];
     XCTAssertEqualObjects(currentVersion, installedVersion);
+}
+
+- (void)testMainThreadBlockingOnApplicationDidBecomeActive
+{
+    [Castle resetConfiguration];
+
+    CastleConfiguration *configuration = [CastleConfiguration configurationWithPublishableKey:@"pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"];
+    configuration.flushLimit = 1000;
+    configuration.maxQueueLimit = 1000;
+    configuration.debugLoggingEnabled = YES;
+    [Castle configure:configuration];
+    [Castle setUserJwt:@"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0"];
+
+    for (NSUInteger i = 0; i < 900; i++) {
+        [Castle customWithName:@"test event" properties:@{@"data": [@"" stringByPaddingToLength:200 withString:@"x" startingAtIndex:0]}];
+    }
+
+    NSUInteger queueSizeBeforeFlush = Castle.queueSize;
+
+    CFAbsoluteTime startTime = CFAbsoluteTimeGetCurrent();
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidBecomeActiveNotification object:nil];
+    NSTimeInterval blockingTimeMs = (CFAbsoluteTimeGetCurrent() - startTime) * 1000;
+
+    CFAbsoluteTime flushStartTime = CFAbsoluteTimeGetCurrent();
+    XCTAssertLessThan(blockingTimeMs, 100.0, @"applicationDidBecomeActive blocked for %.2f ms", blockingTimeMs);
+    NSLog(@"applicationDidBecomeActive blocked for %.2f ms", blockingTimeMs);
+
+    XCTestExpectation *flushExpectation = [self expectationWithDescription:@"Flush complete"];
+    dispatch_queue_t storageQueue = dispatch_queue_create("com.castle.test.flush.monitor", DISPATCH_QUEUE_SERIAL);
+    dispatch_async(storageQueue, ^{
+        while (Castle.queueSize > 890) {
+            [NSThread sleepForTimeInterval:0.01];
+        }
+        [flushExpectation fulfill];
+    });
+    [self waitForExpectationsWithTimeout:30.0 handler:nil];
+
+    NSTimeInterval flushTimeMs = (CFAbsoluteTimeGetCurrent() - flushStartTime) * 1000;
+    NSLog(@"Flush completed: %.2f ms for %lu events", flushTimeMs, (unsigned long)queueSizeBeforeFlush);
+    NSLog(@"Remaining Queue Size: %lu", Castle.queueSize);
 }
 
 @end

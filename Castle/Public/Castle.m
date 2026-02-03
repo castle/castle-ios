@@ -368,6 +368,7 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
     }
     
     if (![Castle isSensorTrackingEnabled]) {
+        CASLog(@"SensorTracking disabled, no event queued!");
         return;
     }
 
@@ -516,21 +517,20 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 #pragma mark - Metadata
 
-+ (nullable NSString *)createRequestToken
++ (NSString *)createRequestToken
 {
     Castle *castle = [Castle sharedInstance];
 
-    // Try to get UUID if we don't have one
     if (castle.deviceUUID == nil) {
         castle.deviceUUID = [castle deviceIdentifier];
 
         if (castle.deviceUUID == nil) {
            CASLog(@"Cannot create request token: device UUID unavailable");
-            return nil;
+            return @"";
         }
     }
 
-    return [castle.highwind tokenWithUuid:castle.deviceUUID];
+    return [castle.highwind tokenWithUuid:castle.deviceUUID] ?: @"";
 }
 
 + (NSString *)userJwt

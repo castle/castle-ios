@@ -127,48 +127,6 @@
             "fixedbinaryorder": 0
           },
           {
-            "kind": "Var",
-            "name": "invalidUUID",
-            "printedName": "invalidUUID",
-            "children": [
-              {
-                "kind": "TypeFunc",
-                "name": "Function",
-                "printedName": "(Highwind.HighwindError.Type) -> Highwind.HighwindError",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "HighwindError",
-                    "printedName": "Highwind.HighwindError",
-                    "usr": "c:@M@Highwind@E@HighwindError"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Metatype",
-                    "printedName": "Highwind.HighwindError.Type",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "HighwindError",
-                        "printedName": "Highwind.HighwindError",
-                        "usr": "c:@M@Highwind@E@HighwindError"
-                      }
-                    ]
-                  }
-                ]
-              }
-            ],
-            "declKind": "EnumElement",
-            "usr": "c:@M@Highwind@E@HighwindError@HighwindErrorInvalidUUID",
-            "mangledName": "$s8Highwind0A5ErrorO11invalidUUIDyA2CmF",
-            "moduleName": "Highwind",
-            "declAttributes": [
-              "RawDocComment",
-              "ObjC"
-            ],
-            "fixedbinaryorder": 1
-          },
-          {
             "kind": "Constructor",
             "name": "init",
             "printedName": "init(rawValue:)",
@@ -388,19 +346,13 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(version:uuid:publishableKey:userAgent:adSupportBlock:sensorTracking:)",
+            "printedName": "init(version:publishableKey:userAgent:adSupportBlock:sensorTracking:)",
             "children": [
               {
                 "kind": "TypeNominal",
                 "name": "Highwind",
                 "printedName": "Highwind.Highwind",
                 "usr": "c:@M@Highwind@objc(cs)Highwind"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
               },
               {
                 "kind": "TypeNominal",
@@ -456,10 +408,10 @@
               }
             ],
             "declKind": "Constructor",
-            "usr": "c:@M@Highwind@objc(cs)Highwind(im)initWithVersion:uuid:publishableKey:userAgent:adSupportBlock:sensorTracking:error:",
-            "mangledName": "$s8HighwindAAC7version4uuid14publishableKey9userAgent14adSupportBlock14sensorTrackingABSS_S4SycSgSbtKcfc",
+            "usr": "c:@M@Highwind@objc(cs)Highwind(im)initWithVersion:publishableKey:userAgent:adSupportBlock:sensorTracking:error:",
+            "mangledName": "$s8HighwindAAC7version14publishableKey9userAgent14adSupportBlock14sensorTrackingABSS_S3SycSgSbtKcfc",
             "moduleName": "Highwind",
-            "objc_name": "initWithVersion:uuid:publishableKey:userAgent:adSupportBlock:sensorTracking:error:",
+            "objc_name": "initWithVersion:publishableKey:userAgent:adSupportBlock:sensorTracking:error:",
             "declAttributes": [
               "AccessControl",
               "ObjC",
@@ -471,19 +423,42 @@
           {
             "kind": "Function",
             "name": "token",
-            "printedName": "token()",
+            "printedName": "token(uuid:)",
             "children": [
               {
                 "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
               }
             ],
             "declKind": "Func",
-            "usr": "c:@M@Highwind@objc(cs)Highwind(im)token",
-            "mangledName": "$s8HighwindAAC5tokenSSyF",
+            "usr": "c:@M@Highwind@objc(cs)Highwind(im)tokenWithUuid:",
+            "mangledName": "$s8HighwindAAC5token4uuidSSSgAE_tF",
             "moduleName": "Highwind",
+            "objc_name": "tokenWithUuid:",
             "declAttributes": [
               "AccessControl",
               "ObjC",
@@ -799,13 +774,6 @@
       },
       {
         "kind": "Import",
-        "name": "CoreMotion",
-        "printedName": "CoreMotion",
-        "declKind": "Import",
-        "moduleName": "Highwind"
-      },
-      {
-        "kind": "Import",
         "name": "Foundation",
         "printedName": "Foundation",
         "declKind": "Import",
@@ -1112,43 +1080,36 @@
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Highwind.swift",
-      "kind": "IntegerLiteral",
-      "offset": 467,
-      "length": 11,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Highwind.swift",
       "kind": "BooleanLiteral",
-      "offset": 1081,
+      "offset": 1007,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Metric.swift",
       "kind": "IntegerLiteral",
-      "offset": 282,
+      "offset": 264,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Metric.swift",
       "kind": "FloatLiteral",
-      "offset": 313,
+      "offset": 295,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Metric.swift",
       "kind": "FloatLiteral",
-      "offset": 347,
+      "offset": 329,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Metric.swift",
       "kind": "FloatLiteral",
-      "offset": 434,
+      "offset": 416,
       "length": 3,
       "value": "0.0"
     },
@@ -1323,399 +1284,399 @@
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10150,
+      "offset": 10205,
       "length": 3,
       "value": "0x0"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10216,
+      "offset": 10271,
       "length": 3,
       "value": "0x1"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10269,
+      "offset": 10324,
       "length": 3,
       "value": "0x2"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10315,
+      "offset": 10370,
       "length": 3,
       "value": "0x3"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10361,
+      "offset": 10416,
       "length": 3,
       "value": "0x4"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10407,
+      "offset": 10462,
       "length": 3,
       "value": "0x5"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10455,
+      "offset": 10510,
       "length": 3,
       "value": "0x6"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10505,
+      "offset": 10560,
       "length": 3,
       "value": "0x7"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10550,
+      "offset": 10605,
       "length": 3,
       "value": "0x8"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10596,
+      "offset": 10651,
       "length": 3,
       "value": "0x9"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10644,
+      "offset": 10699,
       "length": 3,
       "value": "0xA"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10685,
+      "offset": 10740,
       "length": 3,
       "value": "0xB"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10727,
+      "offset": 10782,
       "length": 3,
       "value": "0xC"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10779,
+      "offset": 10834,
       "length": 3,
       "value": "0xD"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10837,
+      "offset": 10892,
       "length": 3,
       "value": "0xE"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 10881,
+      "offset": 10936,
       "length": 3,
       "value": "0xF"
-    },
-    {
-      "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
-      "kind": "IntegerLiteral",
-      "offset": 10931,
-      "length": 4,
-      "value": "0x11"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
       "offset": 10986,
       "length": 4,
+      "value": "0x11"
+    },
+    {
+      "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 11041,
+      "length": 4,
       "value": "0x12"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11045,
+      "offset": 11100,
       "length": 4,
       "value": "0x13"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11083,
+      "offset": 11138,
       "length": 4,
       "value": "0x14"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11139,
+      "offset": 11194,
       "length": 4,
       "value": "0x15"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11185,
+      "offset": 11240,
       "length": 4,
       "value": "0x16"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11231,
+      "offset": 11286,
       "length": 4,
       "value": "0x17"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11281,
+      "offset": 11336,
       "length": 4,
       "value": "0x18"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11343,
+      "offset": 11398,
       "length": 4,
       "value": "0x19"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11401,
+      "offset": 11456,
       "length": 4,
       "value": "0x1A"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11465,
+      "offset": 11520,
       "length": 4,
       "value": "0x1B"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11526,
+      "offset": 11581,
       "length": 4,
       "value": "0x1C"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11578,
+      "offset": 11633,
       "length": 4,
       "value": "0x1D"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11646,
+      "offset": 11701,
       "length": 4,
       "value": "0x1E"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 11694,
+      "offset": 11749,
       "length": 4,
       "value": "0x1F"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 12777,
+      "offset": 12832,
       "length": 3,
       "value": "0x0"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 12832,
+      "offset": 12887,
       "length": 3,
       "value": "0x1"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 12895,
+      "offset": 12950,
       "length": 3,
       "value": "0x2"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 12956,
+      "offset": 13011,
       "length": 3,
       "value": "0x3"
-    },
-    {
-      "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
-      "kind": "IntegerLiteral",
-      "offset": 13021,
-      "length": 3,
-      "value": "0x4"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
       "offset": 13076,
       "length": 3,
+      "value": "0x4"
+    },
+    {
+      "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 13131,
+      "length": 3,
       "value": "0x5"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13123,
+      "offset": 13178,
       "length": 3,
       "value": "0x6"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13180,
+      "offset": 13235,
       "length": 3,
       "value": "0x7"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13279,
+      "offset": 13334,
       "length": 3,
       "value": "0x8"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13342,
+      "offset": 13397,
       "length": 3,
       "value": "0x9"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13397,
+      "offset": 13452,
       "length": 3,
       "value": "0xA"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13458,
+      "offset": 13513,
       "length": 3,
       "value": "0xB"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13515,
+      "offset": 13570,
       "length": 3,
       "value": "0xC"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13570,
+      "offset": 13625,
       "length": 3,
       "value": "0xD"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13651,
+      "offset": 13706,
       "length": 3,
       "value": "0xE"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13736,
+      "offset": 13791,
       "length": 3,
       "value": "0xF"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13819,
+      "offset": 13874,
       "length": 4,
       "value": "0x10"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 13930,
+      "offset": 13985,
       "length": 4,
       "value": "0x11"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 14505,
+      "offset": 14560,
       "length": 3,
       "value": "0x0"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 14575,
+      "offset": 14630,
       "length": 3,
       "value": "0x1"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 14642,
+      "offset": 14697,
       "length": 3,
       "value": "0x2"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 14701,
+      "offset": 14756,
       "length": 3,
       "value": "0x3"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 14766,
+      "offset": 14821,
       "length": 3,
       "value": "0x4"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 14834,
+      "offset": 14889,
       "length": 3,
       "value": "0x5"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 14902,
+      "offset": 14957,
       "length": 3,
       "value": "0x6"
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Parameter.swift",
       "kind": "IntegerLiteral",
-      "offset": 14967,
+      "offset": 15022,
       "length": 3,
       "value": "0x7"
     },
@@ -2058,42 +2019,42 @@
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Generator.swift",
       "kind": "StringLiteral",
-      "offset": 1510,
+      "offset": 1474,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Generator.swift",
       "kind": "StringLiteral",
-      "offset": 1570,
+      "offset": 1534,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Generator.swift",
       "kind": "StringLiteral",
-      "offset": 1652,
+      "offset": 1616,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Generator.swift",
       "kind": "StringLiteral",
-      "offset": 1721,
+      "offset": 1685,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Generator.swift",
       "kind": "StringLiteral",
-      "offset": 1785,
+      "offset": 1749,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/knistelberger\/gitrepos\/highwind\/ios\/Highwind\/Generator.swift",
       "kind": "BooleanLiteral",
-      "offset": 2144,
+      "offset": 2051,
       "length": 4,
       "value": "true"
     }

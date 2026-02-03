@@ -183,9 +183,8 @@ static dispatch_queue_t CASEventStorageQueue(void) {
         
         // Flush queue if the number of events exceeds the flush limit
         if(self.eventQueue.count >= flushLimit) {
-            // very first event should be fired immediately
             CASLog(@"Event queue exceeded flush limit (%ld). Flushing events.", flushLimit);
-            [self flush];
+            [self flushInternal];
         }
     });
 }
@@ -206,52 +205,55 @@ static dispatch_queue_t CASEventStorageQueue(void) {
     }
     
     dispatch_async(CASEventStorageQueue(), ^{
-        if(self.task != nil) {
-            CASLog(@"Queue is already being flushed. Won't flush again.");
-            return;
-        }
-        
-        NSArray *batch = @[];
-        if (self.eventQueue.count >= CASMonitorMaxBatchSize) {
-            batch = [self.eventQueue subarrayWithRange:NSMakeRange(0, CASMonitorMaxBatchSize)];
-        } else {
-            batch = [NSArray arrayWithArray:self.eventQueue];
-        }
-        
-        CASLog(@"Flushing %ld of %ld queued events", batch.count, self.eventQueue.count);
-        
-        __block CASMonitor *monitorModel = [CASMonitor monitorWithEvents:batch];
-        
-        // Nil monitor model object means there's no events to flush
-        if(!monitorModel) {
-            return;
-        }
-        
-        self.task = [self.client dataTaskWithPath:@"monitor" postData:[monitorModel JSONData] completion:^(id responseObject, NSURLResponse *response, NSError *error) {
-            dispatch_async(CASEventStorageQueue(), ^{
-                if(error != nil) {
-                    CASLog(@"Flush failed with error: %@", error);
-                    self.task = nil;
-                    return;
-                }
-                
-                // Remove successfully flushed events from queue and persist
-                [self.eventQueue removeObjectsInArray:monitorModel.events];
-                [self persistQueue:self.eventQueue];
-                
-                self.task = nil;
-                
-                CASLog(@"Successfully flushed (%ld) events", monitorModel.events.count);
-                
-                if ([self eventQueueExceedsFlushLimit] && self.eventQueue.count > 0) {
-                    CASLog(@"Current event queue still exceeds flush limit. Flush again");
-                    [self flush];
-                }
-            });
-        }];
-        
-        [self.task resume];
+        [self flushInternal];
     });
+}
+
+- (void)flushInternal
+{
+    if(self.task != nil) {
+        CASLog(@"Queue is already being flushed. Won't flush again.");
+        return;
+    }
+
+    NSArray *batch = @[];
+    if (self.eventQueue.count >= CASMonitorMaxBatchSize) {
+        batch = [self.eventQueue subarrayWithRange:NSMakeRange(0, CASMonitorMaxBatchSize)];
+    } else {
+        batch = [NSArray arrayWithArray:self.eventQueue];
+    }
+
+    CASLog(@"Flushing %ld of %ld queued events", batch.count, self.eventQueue.count);
+
+    __block CASMonitor *monitorModel = [CASMonitor monitorWithEvents:batch];
+
+    if(!monitorModel) {
+        return;
+    }
+
+    self.task = [self.client dataTaskWithPath:@"monitor" postData:[monitorModel JSONData] completion:^(id responseObject, NSURLResponse *response, NSError *error) {
+        dispatch_async(CASEventStorageQueue(), ^{
+            if(error != nil) {
+                CASLog(@"Flush failed with error: %@", error);
+                self.task = nil;
+                return;
+            }
+
+            [self.eventQueue removeObjectsInArray:monitorModel.events];
+            [self persistQueue:self.eventQueue];
+
+            self.task = nil;
+
+            CASLog(@"Successfully flushed (%ld) events", monitorModel.events.count);
+
+            if ([self eventQueueExceedsFlushLimit] && self.eventQueue.count > 0) {
+                CASLog(@"Current event queue still exceeds flush limit. Flush again");
+                [self flushInternal];
+            }
+        });
+    }];
+
+    [self.task resume];
 }
 
 #pragma mark - Private
