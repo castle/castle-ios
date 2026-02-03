@@ -335,11 +335,6 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 + (void)customWithName:(NSString *)name properties:(NSDictionary *)properties
 {
-    if (![Castle isSensorTrackingEnabled]) {
-        CASLog(@"SensorTracking disabled, no event queued!");
-        return;
-    }
-    
     if(name.length == 0) {
         CASLog(@"No event name provided. Will cancel track event operation.");
         return;
@@ -350,6 +345,11 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
         return;
     }
     
+    if (![Castle isSensorTrackingEnabled]) {
+        CASLog(@"SensorTracking disabled, no event queued!");
+        return;
+    }
+
     Castle *castle = [Castle sharedInstance];
     CASCustom *event = [CASCustom eventWithName:name properties: properties];
     [castle.eventQueue queueEvent:event];
@@ -357,10 +357,6 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 + (void)screenWithName:(NSString *)name
 {
-    if (![Castle isSensorTrackingEnabled]) {
-        return;
-    }
-
     if(name.length == 0) {
         CASLog(@"No screen name provided. Will cancel track event operation.");
         return;
@@ -371,6 +367,10 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
         return;
     }
     
+    if (![Castle isSensorTrackingEnabled]) {
+        return;
+    }
+
     Castle *castle = [Castle sharedInstance];
     CASScreen *screen = [CASScreen eventWithName:name];
     [castle.eventQueue queueEvent:screen];
@@ -530,15 +530,7 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
         }
     }
 
-    NSLog(@"Creating request token with UUID: %@", castle.deviceUUID);
-
-    @try {
-        return [castle.highwind tokenWithUuid:castle.deviceUUID];
-    }
-    @catch (NSException *exception) {
-        NSLog(@"Exception creating request token: %@ - %@", exception.name, exception.reason);
-        return nil;
-    }
+    return [castle.highwind tokenWithUuid:castle.deviceUUID];
 }
 
 + (NSString *)userJwt

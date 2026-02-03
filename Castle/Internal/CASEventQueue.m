@@ -87,7 +87,7 @@ static dispatch_queue_t CASEventStorageQueue(void) {
 {
     // Migrate storage if neccessary
     [self migrateStorageIfNeccessary];
-    
+
     // Read queue from file
     NSArray *queue = [self readQueueFromFile:self.storagePath];
     if (queue == nil) {
@@ -107,36 +107,33 @@ static dispatch_queue_t CASEventStorageQueue(void) {
 
 - (void)persistQueue:(NSArray<CASEvent *> *)queue
 {
-    dispatch_async(CASEventStorageQueue(), ^{
-        // Migrate storage if neccessary
-        [self migrateStorageIfNeccessary];
-        
-        BOOL persisted = NO;
-        if (@available(iOS 11.0, *)) {
-            NSError *error = nil;
-            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:queue requiringSecureCoding:YES error:&error];
-            if(data != nil && error == nil) {
-                persisted = [data writeToFile:self.storagePath atomically:YES];
-            }
-        } else {
+    [self migrateStorageIfNeccessary];
+
+    BOOL persisted = NO;
+    if (@available(iOS 11.0, *)) {
+        NSError *error = nil;
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:queue requiringSecureCoding:YES error:&error];
+        if(data != nil && error == nil) {
+            persisted = [data writeToFile:self.storagePath atomically:YES];
+        }
+    } else {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-            persisted = [NSKeyedArchiver archiveRootObject:queue toFile:self.storagePath];
+        persisted = [NSKeyedArchiver archiveRootObject:queue toFile:self.storagePath];
 #pragma clang diagnostic pop
-        }
-        
-        if(persisted) {
-            CASLog(@"%ld events written to: %@", queue.count, self.storagePath);
-        } else {
-            CASLog(@"WARNING! Event queue couldn't be persisted (%@)", self.storagePath);
-        }
-        
-        NSError *error = nil;
-        NSURL *fileURL = [NSURL fileURLWithPath:self.storagePath];
-        if(![fileURL setResourceValue:@YES forKey:NSURLIsExcludedFromBackupKey error:&error]) {
-            CASLog(@"Failed to exclude event queue data (%@) from iCloud backup. Error: %@", self.storagePath, error);
-        }
-    });
+    }
+
+    if(persisted) {
+        CASLog(@"%ld events written to: %@", queue.count, self.storagePath);
+    } else {
+        CASLog(@"WARNING! Event queue couldn't be persisted (%@)", self.storagePath);
+    }
+
+    NSError *error = nil;
+    NSURL *fileURL = [NSURL fileURLWithPath:self.storagePath];
+    if(![fileURL setResourceValue:@YES forKey:NSURLIsExcludedFromBackupKey error:&error]) {
+        CASLog(@"Failed to exclude event queue data (%@) from iCloud backup. Error: %@", self.storagePath, error);
+    }
 }
 
 - (void)clearQueue
