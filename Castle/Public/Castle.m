@@ -525,7 +525,7 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
         castle.deviceUUID = [castle deviceIdentifier];
 
         if (castle.deviceUUID == nil) {
-           CASLog(@"Cannot create request token: device UUID unavailable");
+            CASLog(@"Cannot create request token: device UUID unavailable");
             return @"";
         }
     }

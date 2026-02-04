@@ -564,8 +564,6 @@
     XCTAssertThrows([Castle customWithName: @"Custom event"]);
     XCTAssertThrows([Castle userJwt]);
     XCTAssertThrows([Castle setUserJwt: @"invalid_jwt_token_string"]);
-    //XCTAssertThrows([Castle queueSize]);
-    //XCTAssertThrows([Castle flush]);
     XCTAssertThrows([Castle flushIfNeeded:[NSURL URLWithString: @"https://google.com/"]]);
     XCTAssertThrows([Castle isAllowlistURL:[NSURL URLWithString: @"https://google.com/"]]);
     XCTAssertThrows([Castle baseURL]);

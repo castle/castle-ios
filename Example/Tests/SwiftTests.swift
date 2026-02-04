@@ -498,8 +498,6 @@ class SwiftTests: XCTestCase {
         XCTAssertNotNil(tryBlock { Castle.custom(name: "Custom event") })
         XCTAssertNotNil(tryBlock { Castle.userJwt() })
         XCTAssertNotNil(tryBlock { Castle.userJwt("invalid_jwt_token_string") })
-        // XCTAssertNotNil(tryBlock { Castle.queueSize() })
-        // XCTAssertNotNil(tryBlock { Castle.flush() })
         XCTAssertNotNil(tryBlock { Castle.flushIfNeeded(URL(string: "https://google.com/")!) })
         XCTAssertNotNil(tryBlock { Castle.isAllowlistURL(URL(string: "https://google.com/")!) })
         XCTAssertNotNil(tryBlock { Castle.baseURL() })
