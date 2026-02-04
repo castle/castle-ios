@@ -22,6 +22,7 @@ class SwiftTests: XCTestCase {
         configuration.baseURLAllowList = baseURLAllowList
         
         Castle.configure(configuration)
+        Castle.userJwt("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVjMjQ0ZjMwLTM0MzItNGJiYy04OGYxLTFlM2ZjMDFiYzFmZSIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInJlZ2lzdGVyZWRfYXQiOiIyMDIyLTAxLTAxVDA5OjA2OjE0LjgwM1oifQ.eAwehcXZDBBrJClaE0bkO9XAr4U3vqKUpyZ-d3SxnH0")
     }
 
     override func tearDown() {
@@ -136,10 +137,10 @@ class SwiftTests: XCTestCase {
         XCTAssertNotNil(tryBlock { Castle.configure(withPublishableKey: "ab_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA") })
     }
     
-    func testHighwindNilUUID() {
+    func testHighwindInvalidUUID() {
         Castle.reset()
         
-        // Swizzle device identifier to simulate [[UIDevice currentDevice] identifierForVendor] returning nil
+        // Swizzle device identifier to return an invalid UUID string
         Castle.enableSwizzle(true)
         
         let publishableKey = "pk_CTsfAeRTqxGgA7HHxqpEESvjfPp4QAKA"
@@ -147,23 +148,22 @@ class SwiftTests: XCTestCase {
         Castle.configure(withPublishableKey: publishableKey)
         Castle.userJwt(jwt)
         
-        let count = Castle.queueSize()
-        XCTAssertEqual(count, 0)
+        // Clear cached deviceUUID to force re-fetching via swizzled method
+        Castle.clearDeviceUUID()
         
-        // Tracking a custom event with the device identifier being nil should not add the event to the queue
-        Castle.custom(name: "custom event")
-        
-        let newCount = Castle.queueSize()
-        XCTAssertEqual(newCount, 0)
+        // createRequestToken should return empty string when deviceIdentifier returns an invalid UUID
+        let token = Castle.createRequestToken()
+        XCTAssertEqual(token, "")
         
         // Disable swizzle, deviceIdentifier should now return a valid UUID
         Castle.enableSwizzle(false)
         
-        // Track another event, Highwind instance should now be initialized (deviceIdentifier returned non-null UUID)
-        Castle.custom(name: "custom event")
+        // Clear cached deviceUUID again to get valid UUID
+        Castle.clearDeviceUUID()
         
-        let finalCount = Castle.queueSize()
-        XCTAssertGreaterThan(finalCount, 0)
+        // Token should now be valid (non-empty)
+        let validToken = Castle.createRequestToken()
+        XCTAssertGreaterThan(validToken.count, 0)
     }
 
     func testDeviceIdentifier() throws {
@@ -499,8 +499,6 @@ class SwiftTests: XCTestCase {
         XCTAssertNotNil(tryBlock { Castle.custom(name: "Custom event") })
         XCTAssertNotNil(tryBlock { Castle.userJwt() })
         XCTAssertNotNil(tryBlock { Castle.userJwt("invalid_jwt_token_string") })
-        XCTAssertNotNil(tryBlock { Castle.queueSize() })
-        XCTAssertNotNil(tryBlock { Castle.flush() })
         XCTAssertNotNil(tryBlock { Castle.flushIfNeeded(URL(string: "https://google.com/")!) })
         XCTAssertNotNil(tryBlock { Castle.isAllowlistURL(URL(string: "https://google.com/")!) })
         XCTAssertNotNil(tryBlock { Castle.baseURL() })

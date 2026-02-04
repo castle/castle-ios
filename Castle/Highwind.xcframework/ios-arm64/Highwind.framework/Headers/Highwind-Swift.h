@@ -312,18 +312,20 @@ SWIFT_CLASS("_TtC8Highwind8Highwind")
 /// Create a new instance of Highwind
 /// \param version SDK version (1.x.x)
 ///
-/// \param uuid UUID string
+/// \param publishableKey Castle publishable key
 ///
 /// \param userAgent User Agent string
 ///
 /// \param sensorTracking Enable or disable sensor tracking
 ///
-- (nullable instancetype)initWithVersion:(NSString * _Nonnull)version uuid:(NSString * _Nonnull)uuid publishableKey:(NSString * _Nonnull)publishableKey userAgent:(NSString * _Nonnull)userAgent adSupportBlock:(NSString * _Nonnull (^ _Nullable)(void))adSupportBlock sensorTracking:(BOOL)sensorTracking error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithVersion:(NSString * _Nonnull)version publishableKey:(NSString * _Nonnull)publishableKey userAgent:(NSString * _Nonnull)userAgent adSupportBlock:(NSString * _Nonnull (^ _Nullable)(void))adSupportBlock sensorTracking:(BOOL)sensorTracking error:(NSError * _Nullable * _Nullable)error OBJC_DESIGNATED_INITIALIZER;
 /// Get client token string
+/// \param uuid UUID string
+///
 ///
 /// returns:
 /// Client token string
-- (NSString * _Nonnull)token SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nullable)tokenWithUuid:(NSString * _Nullable)uuid SWIFT_WARN_UNUSED_RESULT;
 /// Encode Payload
 /// \param publishableKey publishable key
 ///
@@ -375,8 +377,6 @@ SWIFT_CLASS("_TtC8Highwind8Highwind")
 typedef SWIFT_ENUM(NSInteger, HighwindError, open) {
 /// Error thrown when initializing with an invalid publishable key
   HighwindErrorInvalidPublishableKey = 0,
-/// Error thrown when initializing with an invalid uuid
-  HighwindErrorInvalidUUID = 1,
 };
 static NSString * _Nonnull const HighwindErrorDomain = @"Highwind.HighwindError";
 

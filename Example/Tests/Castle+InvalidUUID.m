@@ -7,6 +7,9 @@
 //
 
 #import "Castle+InvalidUUID.h"
+
+#if DEBUG
+
 #import <Castle/CASUtils.h>
 #import <Castle/Castle+Util.h>
 
@@ -61,12 +64,23 @@ NSString const *swizzleKey = @"castle.invalidUUID.swizzle.key";
     [self sharedInstance].swizzle = enabled;
 }
 
++ (void)clearDeviceUUID
+{
+    [[self sharedInstance] setValue:nil forKey:@"deviceUUID"];
+}
+
 - (nullable NSString *)ca_deviceIdentifier
 {
     if(self.swizzle) {
+        return @"invalid-uuid";
+    }
+    NSString *uuid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    if (uuid == nil) {
         return nil;
     }
-    return [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    return [uuid stringByReplacingOccurrencesOfString:@"-" withString:@""];
 }
 
 @end
+
+#endif

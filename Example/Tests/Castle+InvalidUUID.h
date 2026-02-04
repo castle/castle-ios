@@ -8,6 +8,8 @@
 
 #import <Castle/Castle.h>
 
+#if DEBUG
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Castle (InvalidUUID)
@@ -15,7 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL swizzle;
 
 + (void)enableSwizzle:(BOOL)enabled;
++ (void)clearDeviceUUID;
 
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif
