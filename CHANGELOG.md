@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.2.0 (2026-02-04)
+- [#161](https://github.com/castle/castle-ios/pull/161) Uuid init move to Token generation, flush rework, new enableQueue flag
+
 ## 3.1.11 (2026-01-13) 
 - [#159](https://github.com/castle/castle-ios/pull/159) Add SensorTracking enabling option.
 - [#158](https://github.com/castle/castle-ios/pull/158) Simplify JWT Usage.
