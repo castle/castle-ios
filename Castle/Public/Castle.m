@@ -45,6 +45,7 @@ static NSString *CastleConfigurationCastleAPIPath = @"v1/";
     configuration.enableAdvertisingTracking = YES;
     configuration.enableApplicationLifecycleTracking = YES;
     configuration.enableSensorTracking = YES;
+    configuration.enableEventQueue = YES;
     return configuration;
 }
 
@@ -148,8 +149,7 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
         castle.userJwt = storedJwt;
     }
     
-    // Initialize event queue only if sensor tracking is enabled
-    if (configuration.enableSensorTracking) {
+    if (configuration.enableEventQueue) {
         castle.eventQueue = [[CASEventQueue alloc] init];
     }
     
@@ -318,12 +318,20 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 + (BOOL)isSensorTrackingEnabled
 {
-    // SDK isn't ready if it hasn't been configured
     if (![self isReady]) {
         return NO;
     }
 
     return _sharedClient.configuration.enableSensorTracking;
+}
+
++ (BOOL)isEventQueueEnabled
+{
+    if (![self isReady]) {
+        return NO;
+    }
+
+    return _sharedClient.configuration.isEventQueueEnabled;
 }
 
 #pragma mark - Tracking
@@ -345,8 +353,7 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
         return;
     }
     
-    if (![Castle isSensorTrackingEnabled]) {
-        CASLog(@"SensorTracking disabled, no event queued!");
+    if (![Castle isEventQueueEnabled]) {
         return;
     }
 
@@ -367,8 +374,7 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
         return;
     }
     
-    if (![Castle isSensorTrackingEnabled]) {
-        CASLog(@"SensorTracking disabled, no event queued!");
+    if (![Castle isEventQueueEnabled]) {
         return;
     }
 
@@ -393,7 +399,7 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 + (void)flush
 {
-    if (![Castle isConfigured] || ![Castle isSensorTrackingEnabled]) {
+    if (![Castle isEventQueueEnabled]) {
         return;
     }
 
@@ -445,7 +451,7 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
         return;
     }
 
-    if (!_configuration.enableSensorTracking) {
+    if (![Castle isEventQueueEnabled]) {
         return;
     }
 
@@ -555,7 +561,7 @@ static dispatch_queue_t CASUserDefaultsQueue(void) {
 
 + (NSUInteger)queueSize
 {
-    if (![Castle isConfigured] || ![Castle isSensorTrackingEnabled]) {
+    if (![Castle isEventQueueEnabled]) {
         return 0;
     }
     

@@ -84,6 +84,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, getter=isSensorTrackingEnabled) BOOL enableSensorTracking;
 
 /**
+ Whether events should be automatically queued and flushed. `YES` by default.
+ When disabled, use `createRequestToken` to manually generate tokens.
+ */
+@property (nonatomic, assign, getter=isEventQueueEnabled) BOOL enableEventQueue;
+
+/**
  Default configuration with provided publishable key
 
  @param publishableKey Castle publishable key
