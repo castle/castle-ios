@@ -1,39 +1,17 @@
-// swift-tools-version:5.3
-// The swift-tools-version declares the minimum version of Swift required to build this package.
+// swift-tools-version: 5.9
 import PackageDescription
 
 let package = Package(
-    name: "Castle",
-    platforms: [
-        .iOS(.v12)
-    ],
-    products: [
-        .library(
-            name: "Castle",
-            targets: ["Castle", "Highwind", "GeoZip"]),
-    ],
-    dependencies: [],
-    targets: [
-        .target(
-            name: "Castle",
-            dependencies: ["Highwind", "GeoZip"],
-            path: "Castle/",
-            exclude: ["Info.plist", "Highwind.xcframework", "GeoZip.xcframework"],
-            resources: [.copy("PrivacyInfo.xcprivacy")],
-            publicHeadersPath: "Public",
-            cSettings: [
-                .headerSearchPath("Public"),
-                .headerSearchPath("Internal"),
-                .define("NS_BLOCK_ASSERTIONS", to: "1", .when(configuration: .release))
-            ]
-        ),
-        .binaryTarget(
-            name: "Highwind",
-            path: "Castle/Highwind.xcframework"
-        ),
-        .binaryTarget(
-            name: "GeoZip",
-            path: "Castle/GeoZip.xcframework"
-        )
-    ]
+  name: "CastleSDK",
+  platforms: [.iOS(.v13)],
+  products: [
+      .library(name: "CastleSDK", targets: ["CastleSDK"]),
+  ],
+  targets: [
+      .binaryTarget(
+          name: "CastleSDK",
+          url: "https://github.com/castle/castle-ios/releases/download/4.0.0/Castle.xcframework.zip",
+          checksum: "0b5e96bfa5c461d032bdb7f5509a8c9e41152cc0fb92d33ed624d783df2770a7"
+      )
+  ]
 )
