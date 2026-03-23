@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.0 (2026-03-23)
+- castle-ios was rewritten to Swift, Highwind and GeoZip got merged into it. It is now a private repository and castle-ios is used as release proxy.
+- It contains small breaking changes, see jazzy documentation for details.
+
 ## 3.2.0 (2026-02-04)
 - [#161](https://github.com/castle/castle-ios/pull/161) Uuid init move to Token generation, flush rework, new enableQueue flag
 
