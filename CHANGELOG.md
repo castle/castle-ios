@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.1.0 (2026-04-30)
+- Improved runtime information collection
+
 ## 4.0.0 (2026-03-23)
 - castle-ios was rewritten to Swift, Highwind and GeoZip got merged into it. It is now a private repository and castle-ios is used as release proxy.
 - It contains small breaking changes, see jazzy documentation for details.
