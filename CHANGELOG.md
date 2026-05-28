@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.1.1 (2026-05-28)
+- Disable debugger feature
+
 ## 4.1.0 (2026-04-30)
 - Improved runtime information collection
 
