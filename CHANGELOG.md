@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.1.2 (2026-07-23)
+- Internal improvements
+
 ## 4.1.1 (2026-05-28)
 - Disable debugger feature
 

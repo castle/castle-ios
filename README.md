@@ -25,7 +25,7 @@ Add Castle as a dependency by adding it to the `dependencies` value of your `Pac
 
 ```
 dependencies: [
-    .package(url: "https://github.com/castle/castle-ios.git", .upToNextMajor(from: "4.1.1"))
+    .package(url: "https://github.com/castle/castle-ios.git", .upToNextMajor(from: "4.1.2"))
 ]
 ```
 
