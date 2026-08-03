@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.2.0 (2026-08-03)
+- Improved information collection
+- Internal improvements
+
 ## 4.1.2 (2026-07-23)
 - Internal improvements
 
