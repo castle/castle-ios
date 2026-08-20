@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.3.0 (2026-08-20)
+- Touch signal collection
+- Configuration for enable/disable touch tracking
+
 ## 4.2.0 (2026-08-03)
 - Improved information collection
 - Internal improvements
