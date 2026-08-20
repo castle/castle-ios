@@ -13,7 +13,7 @@
 - iOS 13.0+
 
 ## Compiled with
-- Xcode 26.2 (swiftlang-6.2.3.3.20 clang-1700.6.3.2)
+- Xcode 26.6 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)
 
 ## Installation
 
@@ -25,7 +25,7 @@ Add Castle as a dependency by adding it to the `dependencies` value of your `Pac
 
 ```
 dependencies: [
-    .package(url: "https://github.com/castle/castle-ios.git", .upToNextMajor(from: "4.2.0"))
+    .package(url: "https://github.com/castle/castle-ios.git", .upToNextMajor(from: "4.3.0"))
 ]
 ```
 
