@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.3.1 (2026-09-08)
+- Fix encoding issue of Touch events
+
 ## 4.3.0 (2026-08-20)
 - Touch signal collection
 - Configuration for enable/disable touch tracking
