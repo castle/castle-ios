@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.3.2 (2026-09-23)
+- Move location initialization to background thread
+
 ## 4.3.1 (2026-09-08)
 - Fix encoding issue of Touch events
 
