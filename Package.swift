@@ -10,8 +10,8 @@ let package = Package(
   targets: [
       .binaryTarget(
           name: "CastleSDK",
-          url: "https://github.com/castle/castle-ios/releases/download/4.3.2/Castle.xcframework.zip",
-          checksum: "cde3ef5a4c8a05aec7e4ba0db46b8f0cf3015433f75e91367ad4dd49fde04fd9"
+          url: "https://github.com/castle/castle-ios/releases/download/4.3.3/Castle.xcframework.zip",
+          checksum: "ba384125519e771af8b190b6e85909e3ada048d3c6e80bc332a07f61a439aedc"
       )
   ]
 )
